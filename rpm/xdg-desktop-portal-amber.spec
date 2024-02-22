@@ -2,17 +2,16 @@ Name:       xdg-desktop-portal-amber
 Summary:    XDG Desktop Portal for Sailfish OS
 Version:    1.0.0
 Release:    0
-Group:      Applications
-#TODO:
 License:    LGPLv2+ and LGPLv3+
 #URL:        https://invent.kde.org/plasma/xdg-desktop-portal-kde
 Source0:    %{name}-%{version}.tar.bz2
+BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)
-BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  cmake
+Requires:   %{name}-sailfishos-config
 
 %description
 %{summary}.
@@ -29,9 +28,15 @@ Links:
 %endif
 
 
+%package sailfishos-config
+Summary: User session environment configuration for %{name}
+
+%description sailfishos-config
+%{summary}.
+
+
 %package devel
 Summary:    Header files and library symbolic links for %{name}
-Group:      Development
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -55,15 +60,13 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_libexecdir}/*
-%{_localstatedir}/lib/environment/*.conf
-%{_userunitdir}/*
 %{_datadir}/dbus-1/*
-%{_datadir}/%{name}
-# >> files
-# << files
+%{_datadir}/xdg-desktop-portal/portals/amber.portal
+%{_datadir}/applications/*.desktop
+
+%files sailfishos-config
+%{_localstatedir}/lib/environment/*/*.conf
 
 %files devel
 %defattr(-,root,root,-)
-%{_datadir}/pkgconfig/*pc
-# >> files devel
-# << files devel
+#%%{_datadir}/pkgconfig/*pc

@@ -55,6 +55,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_libexecdir}/*
+%{_localstatedir}/lib/environment/*.conf
 %{_userunitdir}/*
 %{_datadir}/dbus-1/*
 %{_datadir}/%{name}

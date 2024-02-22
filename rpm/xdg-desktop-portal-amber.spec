@@ -31,6 +31,7 @@ Links:
 
 %package sailfishos-config
 Summary: User session environment configuration for %{name}
+BuildArch: noarch
 
 %description sailfishos-config
 %{summary}.

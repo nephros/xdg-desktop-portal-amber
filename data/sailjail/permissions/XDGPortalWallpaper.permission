@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportalwallpaper
+# x-sailjail-description = XDG Wallpaper Portal
+# x-sailjail-translation-key-long-description = permission-la-xdgportalwallpaper
+# x-sailjail-long-description = Use XDG Desktop Wallpaper Portal
+
+# allow access to the specific Portal
+dbus-user.talk org.freedesktop.portal.Wallpaper
+dbus-user.call org.freedesktop.portal.Wallpaper.SetWallpaperURI
+
+# Allow talking to the broker bus
+include /etc/sailjail/permissions/XDGPortal.permission

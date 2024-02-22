@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportaltemplate
+# x-sailjail-description = XDG Template Portal
+# x-sailjail-translation-key-long-description = permission-la-xdgportaltemplate_description
+# x-sailjail-long-description = Use XDG Desktop Portal Template
+
+# allow access to the specific Portal
+dbus-user.talk org.freedesktop.portal.Desktop.Template
+dbus-user.call org.freedesktop.portal.Desktop.Template=org.freedesktop.portal.Desktop.Template.*@/org/freedesktop/portal/desktop/template
+
+#
+# Allow talking to the broker bus
+include /etc/sailjail/permissions/XDGPortal.permission

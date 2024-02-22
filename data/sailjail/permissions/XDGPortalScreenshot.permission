@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportalscreenshot
+# x-sailjail-description = XDG Screenshot Portal
+# x-sailjail-translation-key-long-description = permission-la-xdgportalscreenshot_description
+# x-sailjail-long-description = Use XDG Desktop Screenshot Portal
+
+# allow access to the specific Portal
+dbus-user.talk org.freedesktop.portal.Screenshot
+dbus-user.call org.freedesktop.portal.Screenshot.Screenshot
+dbus-user.call org.freedesktop.portal.Screenshot.PickColor
+
+# Allow retrieving the screenshot via Document portal
+include /etc/sailjail/permissions/XDGPortalDocument.permission
+
+# Allow talking to the broker bus
+include /etc/sailjail/permissions/XDGPortal.permission

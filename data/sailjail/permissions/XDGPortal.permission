@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportal
+# x-sailjail-description = XDG Portal Base
+# x-sailjail-translation-key-long-description = permission-la-xdgportal_description
+# x-sailjail-long-description = Base Permission to use XDG Desktop Portals
+
+# Allow talking to the broker bus
+dbus-user.talk org.freedesktop.portal.Desktop
+dbus-user.broadcast org.freedesktop.portal.Desktop=org.freedesktop.portal.Desktop
+dbus-user.call org.freedesktop.portal.Desktop=org.freedesktop.portal.Desktop.*@/org/freedesktop/portal/desktop
+
+# Sessions
+dbus-user.broadcast org.freedesktop.portal.Session.*
+dbus-user.call org.freedesktop.portal.Session.Close
+
+# Requests and Responses
+dbus-user.broadcast org.freedesktop.portal.Request.*
+dbus-user.call org.freedesktop.portal.Request.Close

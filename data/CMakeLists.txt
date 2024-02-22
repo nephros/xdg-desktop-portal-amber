@@ -7,3 +7,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.am
 
 install(FILES 51-jolla-ui-xdg.conf DESTINATION "${CMAKE_INSTALL_FULL_LOCALSTATEDIR}/lib/environment/nemo/")
 install(FILES portals.conf DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal")
+
+add_subdirectory(sailjail)

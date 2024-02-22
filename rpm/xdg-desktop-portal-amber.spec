@@ -65,7 +65,8 @@ rm -rf %{buildroot}
 %{_datadir}/applications/*.desktop
 
 %files sailfishos-config
-%{_localstatedir}/lib/environment/*/*.conf
+%config %{_localstatedir}/lib/environment/*/*.conf
+%config %{_datadir}/xdg-desktop-portal/portals.conf
 
 %files devel
 %defattr(-,root,root,-)

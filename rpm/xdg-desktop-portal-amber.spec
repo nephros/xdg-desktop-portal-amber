@@ -4,7 +4,7 @@ Version:    1.0.0
 Release:    0
 Group:      Applications
 #TODO:
-#License:    BSD 2-Clause and LGPLv2+ and LGPLv2.1 and LGPLv3 and GPLv2+
+License:    LGPLv2+ and LGPLv3+
 #URL:        https://invent.kde.org/plasma/xdg-desktop-portal-kde
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig(systemd)

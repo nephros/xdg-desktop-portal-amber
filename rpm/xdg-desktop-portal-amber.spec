@@ -62,8 +62,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{_libexecdir}/*
-%{_datadir}/dbus-1/*
+%{_libexecdir}/xdg-desktop-portal-amber
+%{_datadir}/dbus-1/services/*.service
 %{_datadir}/xdg-desktop-portal/portals/amber.portal
 %{_datadir}/applications/*.desktop
 

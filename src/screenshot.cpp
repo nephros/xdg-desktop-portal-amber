@@ -11,7 +11,6 @@
 #include <QLoggingCategory>
 #include <QStandardPaths>
 #include <QDateTime>
-#include <QStringLiteral>
 #include <QColor>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdg-amber-screenshot")

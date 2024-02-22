@@ -3,10 +3,10 @@ Summary:    XDG Desktop Portal for Sailfish OS
 Version:    1.0.0
 Release:    0
 Group:      Applications
-//TODO:
+#TODO:
 #License:    BSD 2-Clause and LGPLv2+ and LGPLv2.1 and LGPLv3 and GPLv2+
 #URL:        https://invent.kde.org/plasma/xdg-desktop-portal-kde
-Source0:    %{url}/-/archive/v%{version}/%{name}-v%{version}.tar.bz2
+Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig
@@ -38,7 +38,7 @@ Requires:   %{name} = %{version}-%{release}
 %{summary}.
 
 %prep
-%setup -q -n %{name}-v%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 

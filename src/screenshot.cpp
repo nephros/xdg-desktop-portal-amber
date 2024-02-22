@@ -89,8 +89,13 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
     }
     qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Failed";
     */
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Not implemented.";
-    return 1;
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Not implemented. Returning white.";
+    ColorRGB color;
+    color.red = 1.0;
+    color.green = 1.0;
+    color.blue = 1.0;
+    results.insert(QStringLiteral("color"), QVariant::fromValue<ScreenshotPortal::ColorRGB>(color));
+    return 0;
 }
 
 uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,

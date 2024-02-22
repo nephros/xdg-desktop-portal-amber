@@ -30,32 +30,15 @@
  *
  * END_COMMON_COPYRIGHT_HEADER */
 
-#include <QCoreApplication>
-#include <QDBusConnection>
-#include <QLoggingCategory>
-
 #include "desktopportal.h"
+#include "screenshot.h"
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber")
-
-int main(int argc, char *argv[])
+namespace Amber
 {
-    QCoreApplication app{argc, argv};
-    app.setApplicationName(QStringLiteral("xdg-desktop-portal-amber"));
-
-    QDBusConnection sessionBus = QDBusConnection::sessionBus();
-
-    if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.amber"))) {
-        const auto desktopPortal = new Amber::DesktopPortal{&app};
-        if (sessionBus.registerObject(QStringLiteral("/org/freedesktop/portal/desktop"), desktopPortal, QDBusConnection::ExportAdaptors)) {
-            qCDebug(XdgDesktopPortalAmber) << "Desktop portal registered successfully";
-        } else {
-            qCDebug(XdgDesktopPortalAmber) << "Failed to register desktop portal";
-        }
-    } else {
-        qCDebug(XdgDesktopPortalAmber) << "Failed to register org.freedesktop.impl.portal.desktop.amber service";
-        return 1;
+    DesktopPortal::DesktopPortal(QObject *parent)
+        : QObject(parent)
+        , m_screenshotPtl{new ScreenshotPortal{this}}
+    {
     }
-
-    return app.exec();
 }
+

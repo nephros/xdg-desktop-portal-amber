@@ -13,10 +13,10 @@
 #include <QDateTime>
 #include <QColor>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdg-amber-screenshot")
-Q_DECLARE_METATYPE(ScreenshotPortal::ColorRGB)
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberScreenshot, "xdg-amber-screenshot")
+Q_DECLARE_METATYPE(Amber::ScreenshotPortal::ColorRGB)
 
-QDBusArgument &operator<<(QDBusArgument &arg, const ScreenshotPortal::ColorRGB &color)
+QDBusArgument &operator<<(QDBusArgument &arg, const Amber::ScreenshotPortal::ColorRGB &color)
 {
     arg.beginStructure();
     arg << color.red << color.green << color.blue;
@@ -24,7 +24,7 @@ QDBusArgument &operator<<(QDBusArgument &arg, const ScreenshotPortal::ColorRGB &
     return arg;
 }
 
-const QDBusArgument &operator>>(const QDBusArgument &arg, ScreenshotPortal::ColorRGB &color)
+const QDBusArgument &operator>>(const QDBusArgument &arg, Amber::ScreenshotPortal::ColorRGB &color)
 {
     double red, green, blue;
     arg.beginStructure();
@@ -54,12 +54,14 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, QColor &color)
     color = QColor::fromRgba(rgba);
     return argument;
 }
+
+namespace Amber {
 ScreenshotPortal::ScreenshotPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qDBusRegisterMetaType<QColor>();
     qDBusRegisterMetaType<ColorRGB>();
-    qCDebug(XdgDesktopPortalAmber) << "Screenshot and ColorPicker init";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot and ColorPicker init";
 }
 
 uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
@@ -68,7 +70,8 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
                                  const QVariantMap &options,
                                  QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Start ColorPicker";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Start ColorPicker";
+    // Fixme: we do have a color Picker in Silica, but no standalone app to show it.
     /*
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
                                                       QStringLiteral("/ColorPicker"),
@@ -84,22 +87,21 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
         results.insert(QStringLiteral("color"), QVariant::fromValue<ScreenshotPortal::ColorRGB>(color));
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmber) << "ColorPicker Failed";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Failed";
     */
-    qCDebug(XdgDesktopPortalAmber) << "ColorPicker Not implemented.";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Not implemented.";
     return 1;
 }
 
-// TODO: maybe need update
 uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
                                   const QString &app_id,
                                   const QString &parent_window,
                                   const QVariantMap &options,
                                   QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Start screenshot";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Start screenshot";
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmber) << "Screenshot options not implemented.";
+        qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot options not implemented.";
     }
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.lipstick"),
                                                       QStringLiteral("/org/nemomobile/lipstick/screenshot"),
@@ -107,8 +109,7 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
                                                       QStringLiteral("saveScreenshot"));
     QList<QVariant> args;
     // TODO: L10N (?)
-    QString filepath = QDir::homeDir()
-            + QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)
+    QString filepath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)
             + QStringLiteral("/Screenshot-")
             + QDateTime::currentDateTime().toString(Qt::ISODate)
             + QStringLiteral(".png");
@@ -118,10 +119,11 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-        qCDebug(XdgDesktopPortalAmber) << "Success" << QString("Filepath is %1").arg(filepath);
+        qCDebug(XdgDesktopPortalAmberScreenshot) << "Success" << QString("Filepath is %1").arg(filepath);
         results.insert(QStringLiteral("uri"), QUrl::fromLocalFile(filepath).toString(QUrl::FullyEncoded));
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmber) << "Screenshot failed";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot failed";
     return 1;
 }
+} // namespace Amber

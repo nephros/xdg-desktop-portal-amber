@@ -9,6 +9,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  cmake
 Requires:   %{name}-sailfishos-config

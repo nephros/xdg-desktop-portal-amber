@@ -13,8 +13,8 @@ include(GNUInstallDirs)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
+    Gui
     DBus
-	Widgets
 )
 
 add_subdirectory(data)

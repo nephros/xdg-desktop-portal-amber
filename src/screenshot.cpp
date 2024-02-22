@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2021 - 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2024 Sailfish OS Community
 //
 // SPDX-License-Identifier: LGPL-3.0-or-later
 

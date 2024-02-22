@@ -38,6 +38,7 @@
 namespace Amber
 {
     class ScreenshotPortal;
+    class WallpaperPortal;
 
     class DesktopPortal : public QObject, public QDBusContext
     {
@@ -47,5 +48,6 @@ namespace Amber
 
     private:
         ScreenshotPortal *m_screenshotPtl;
+        WallpaperPortal *m_wallpaperPtl;
     };
 }

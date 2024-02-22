@@ -32,12 +32,14 @@
 
 #include "desktopportal.h"
 #include "screenshot.h"
+#include "wallpaper.h"
 
 namespace Amber
 {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
         , m_screenshotPtl{new ScreenshotPortal{this}}
+        , m_wallpaperPtl{new WallpaperPortal{this}}
     {
     }
 }

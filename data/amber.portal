@@ -1,0 +1,4 @@
+[portal]
+DBusName=org.freedesktop.impl.portal.desktop.amber
+Interfaces=org.freedesktop.impl.portal.ScreenShot
+UseIn=X-Meego;X-SailfishOS;

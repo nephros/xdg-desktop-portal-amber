@@ -8,12 +8,13 @@ Legend:
  - Usefulness (0-5): capability or function makes sense on a mobile OS
 
 
-### Required
+### Required or builtin
 
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
 |  Request          | shared, internal to portals     |      no         |     no         |     ++          | required   |
 |  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |
+|  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |
 
 
 ### Should be provided:
@@ -44,7 +45,6 @@ Notification is probably a good candidate for PoC by SailfishOS upstream.
 |  Inhibit          | inhibit suspending, idling, ... |  yes            | wakelocks, Amber, MCE |          |            |
 |  Input Capture    | Capture input                   |  ???            |                |                 |            |
 |  Lockdown         | Disable Portals                 |  yes            | MDM, Settings, SJail | +++       |            |
-|  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |
 |  Remote Desktop   | remote controlling desktop      |  no             |                |                 |  ++        |
 |  ScreenCast       | stream desktop/app              |  partial        | Lipstick, Mozilla |  ++++        |  ++++      |
 |  Secret           | retrieve an app secret          |  yes            | Qt/QML         |                 |            |

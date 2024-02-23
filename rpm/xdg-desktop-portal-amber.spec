@@ -69,7 +69,7 @@ rm -rf %{buildroot}
 
 %files sailfishos-config
 %config %{_localstatedir}/lib/environment/*/*.conf
-%config %{_datadir}/xdg-desktop-portal/portals.conf
+%config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
 
 %files devel

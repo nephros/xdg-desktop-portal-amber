@@ -1,0 +1,11 @@
+[Unit]
+Description=Portal service for Sailfish OS
+PartOf=graphical-session.target
+After=lipstick.service
+
+[Service]
+ExecStart=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-amber
+BusName=org.freedesktop.impl.portal.desktop.amber
+Slice=session.slice
+# Auto restart is off as we are DBus activated
+Restart=no

@@ -64,8 +64,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_libexecdir}/xdg-desktop-portal-amber
 %{_datadir}/dbus-1/services/*.service
+%{_userunitdir}/%{name}.service
 %{_datadir}/xdg-desktop-portal/portals/amber.portal
-%{_datadir}/applications/*.desktop
+# what is this installed for??
+%exclude %{_datadir}/applications/*.desktop
 
 %files sailfishos-config
 %config %{_localstatedir}/lib/environment/*/*.conf

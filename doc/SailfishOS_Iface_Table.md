@@ -37,7 +37,6 @@ Notification is probably a good candidate for PoC by SailfishOS upstream.
 |  Account          | obtaining user information      |  yes            | Settings, Secrets |              |            |
 |  App Chooser      | choosing an application         |  yes            |                |                 |            |
 |  Background       | apps running in the background  |  somewhat       |                |                 |            |
-|  Clipboard        | clipboard access                |  yes            |                |                 |            |
 |  Dynamic Launcher | app installation                |  yes            | DBus           |                 |            |
 |  Email            | sending an email                |  yes            | App, DBus      |                 |            |
 |  File Chooser     | file chooser dialog             |  no             | (not standalone) |               |            |
@@ -45,8 +44,6 @@ Notification is probably a good candidate for PoC by SailfishOS upstream.
 |  Inhibit          | inhibit suspending, idling, ... |  yes            | wakelocks, Amber, MCE |          |            |
 |  Input Capture    | Capture input                   |  ???            |                |                 |            |
 |  Lockdown         | Disable Portals                 |  yes            | MDM, Settings, SJail | +++       |            |
-|  Remote Desktop   | remote controlling desktop      |  no             |                |                 |  ++        |
-|  ScreenCast       | stream desktop/app              |  partial        | Lipstick, Mozilla |  ++++        |  ++++      |
 |  Secret           | retrieve an app secret          |  yes            | Qt/QML         |                 |            |
 
 
@@ -61,3 +58,13 @@ Notification is probably a good candidate for PoC by SailfishOS upstream.
 There is exactly one printing app in SFOS, if a printing interface is needed it may either implement XDP, or its own.
 
 Access to interface colors is possible natively via toolkit. Although this might prove useful for e.g. Kirigami.
+
+----
+
+These depend on Pipewire to be functional:
+
+| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
+| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
+|  Clipboard        | clipboard access                |  yes            |                |                 |            |
+|  Remote Desktop   | remote controlling desktop      |  no             |                |                 |  ++        |
+|  ScreenCast       | stream desktop/app              |  partial        | Lipstick, Mozilla |  ++++        |  ++++      |

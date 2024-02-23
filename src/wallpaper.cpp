@@ -11,7 +11,7 @@
 #include <QUrl>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberWallpaper, "xdg-amber-wallpaper")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberWallpaper, "xdp-amber-wallpaper")
 
 namespace Amber {
 WallpaperPortal::WallpaperPortal(QObject *parent)

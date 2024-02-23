@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QColor>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberScreenshot, "xdg-amber-screenshot")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberScreenshot, "xdp-amber-screenshot")
 Q_DECLARE_METATYPE(Amber::ScreenshotPortal::ColorRGB)
 
 QDBusArgument &operator<<(QDBusArgument &arg, const Amber::ScreenshotPortal::ColorRGB &color)

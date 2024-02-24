@@ -5,8 +5,8 @@ configure_file(xdg-desktop-portal-pre.service.in xdg-desktop-portal-pre.service 
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.amber.service DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/dbus-1/services")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.amber.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-amber.service                  DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-amber-pre.service              DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-amber.service  DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-pre.service    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
 
 install(FILES amber.portal DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal/portals/")
 install(FILES xdg-desktop.conf DESTINATION "${CMAKE_INSTALL_FULL_LOCALSTATEDIR}/lib/environment/amber/")

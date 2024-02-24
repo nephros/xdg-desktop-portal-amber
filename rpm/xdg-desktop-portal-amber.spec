@@ -70,7 +70,7 @@ rm -rf %{buildroot}
 %exclude %{_datadir}/applications/*.desktop
 
 %files sailfishos-config
-%config %{_localstatedir}/lib/environment/*/*.conf
+%config %{_localstatedir}/lib/environment/amber/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
 

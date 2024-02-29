@@ -47,7 +47,7 @@ namespace Amber
         ~DesktopPortal() override;
 
     private:
-        ScreenshotPortal *const m_screenshotPortal = nullptr;
-        WallpaperPortal *const m_wallpaperPortal = nullptr;
+        ScreenshotPortal *const m_screenshot = nullptr;
+        WallpaperPortal *const m_wallpaper = nullptr;
     };
 }

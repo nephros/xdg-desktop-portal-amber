@@ -38,9 +38,15 @@ namespace Amber
 {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
-        , m_screenshotPtl{new ScreenshotPortal{this}}
-        , m_wallpaperPtl{new WallpaperPortal{this}}
+        , m_screenshotPortal{new ScreenshotPortal{this}}
+        , m_wallpaperPortal{new WallpaperPortal{this}}
     {
+        m_screenshotPortal = new ScreenshotPortal(this);
+        m_wallpaperPortal = new WallpaperPortal(this);
+
     }
 }
 
+DesktopPortal::~DesktopPortal()
+{
+}

@@ -47,7 +47,7 @@ namespace Amber
         explicit DesktopPortal(QObject *parent = nullptr);
 
     private:
-        ScreenshotPortal *m_screenshotPtl;
-        WallpaperPortal *m_wallpaperPtl;
+        ScreenshotPortal *const m_screenshotPortal = nullptr;
+        WallpaperPortal *const m_wallpaperPortal = nullptr;
     };
 }

@@ -12,6 +12,9 @@
 
 #include "access.h"
 
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
+
+namespace Amber {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -21,7 +24,6 @@ AccessPortal::~AccessPortal()
 {
 }
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
 
 uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QString &app_id,
@@ -85,3 +87,4 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberAccess) << "Access failed";
     return 1;
 }
+} // namespace Amber

@@ -1,5 +1,6 @@
 set(SRCS
     desktopportal.cpp
+    access.cpp
     screenshot.cpp
     wallpaper.cpp
     main.cpp

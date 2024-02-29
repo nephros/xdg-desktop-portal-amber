@@ -31,6 +31,7 @@
  * END_COMMON_COPYRIGHT_HEADER */
 
 #include "desktopportal.h"
+#include "access.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -38,9 +39,11 @@ namespace Amber
 {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
+        , m_access(new AccessPortal(this))
         , m_screenshot(new ScreenshotPortal(this))
         , m_wallpaper(new WallpaperPortal(this))
     {
+        //m_access = new AccessPortal(this);
         //m_screenshot = new ScreenshotPortal(this);
         //m_wallpaper = new WallpaperPortal(this);
 

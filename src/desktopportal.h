@@ -34,6 +34,7 @@
 
 #include <QDBusContext>
 #include <QObject>
+#include "access.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -47,6 +48,7 @@ namespace Amber
         ~DesktopPortal() override;
 
     private:
+        AccessPortal *const m_access;
         ScreenshotPortal *const m_screenshot = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };

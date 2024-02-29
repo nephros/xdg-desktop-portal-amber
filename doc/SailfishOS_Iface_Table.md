@@ -20,6 +20,7 @@ Legend:
 ### Should be provided:
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
+|  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |            |
 |  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |     +++         |  ++++      |
 |  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |     +           |  +++       |
 |  Screenshot       |                                 |  yes            | DBus           |     +           |            |
@@ -27,13 +28,13 @@ Legend:
 **Notes:**
 Wallpaper and Screenshot will be implemented by Community effort as PoC for XDP.
 Notification is probably a good candidate for PoC by SailfishOS upstream.
+Apparently Access is required for the Screenshot interface to be registered correctly?
 
 
 ### May be provided/Undecided:
 
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
-|  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |            |
 |  Account          | obtaining user information      |  yes            | Settings, Secrets |              |            |
 |  App Chooser      | choosing an application         |  yes            |                |                 |            |
 |  Background       | apps running in the background  |  somewhat       |                |                 |            |

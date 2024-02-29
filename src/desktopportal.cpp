@@ -41,8 +41,8 @@ namespace Amber
         , m_screenshot(new ScreenshotPortal(this))
         , m_wallpaper(new WallpaperPortal(this))
     {
-        m_screenshot = new ScreenshotPortal(this);
-        m_wallpaper = new WallpaperPortal(this);
+        //m_screenshot = new ScreenshotPortal(this);
+        //m_wallpaper = new WallpaperPortal(this);
 
     }
     DesktopPortal::~DesktopPortal()

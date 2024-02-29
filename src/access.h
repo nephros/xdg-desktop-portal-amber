@@ -15,6 +15,7 @@
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
 
+namespace Amber {
 class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -33,5 +34,5 @@ public Q_SLOTS:
                       const QVariantMap &options,
                       QVariantMap &results);
 };
-
+}
 #endif // XDG_DESKTOP_PORTAL_AMBER_ACCESS_H

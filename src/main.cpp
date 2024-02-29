@@ -38,8 +38,8 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber")
 
-const char* dbusName   = QStringLiteral("org.freedesktop.impl.portal.desktop.amber");
-const char* dbusObject = QStringLiteral("/org/freedesktop/portal/desktop");
+const char* dbusName   = "org.freedesktop.impl.portal.desktop.amber";
+const char* dbusObject = "/org/freedesktop/portal/desktop";
 
 int main(int argc, char *argv[])
 {

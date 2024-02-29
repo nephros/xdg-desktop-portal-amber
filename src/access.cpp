@@ -11,7 +11,6 @@
  */
 
 #include "access.h"
-#include "request.h"
 
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)

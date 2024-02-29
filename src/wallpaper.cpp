@@ -37,7 +37,7 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     if (!options.isEmpty()) {
         qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper options not supported.";
     }
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "Asking Ambience daemon to set wallpaper";
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "Asking Ambience daemon to set wallpaper";
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.ambienced"),
                                                       QStringLiteral("/com/jolla/ambienced"),
                                                       QStringLiteral("com.jolla.ambienced"),

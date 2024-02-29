@@ -38,22 +38,28 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber")
 
+const char* dbusName   = QStringLiteral("org.freedesktop.impl.portal.desktop.amber");
+const char* dbusObject = QStringLiteral("/org/freedesktop/portal/desktop");
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app{argc, argv};
     app.setApplicationName(QStringLiteral("xdg-desktop-portal-amber"));
 
+
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
 
-    if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.amber"))) {
+    qCDebug(XdgDesktopPortalAmber) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
+    if (sessionBus.registerService(dbusName)) {
         const auto desktopPortal = new Amber::DesktopPortal{&app};
-        if (sessionBus.registerObject(QStringLiteral("/org/freedesktop/portal/desktop"), desktopPortal, QDBusConnection::ExportAdaptors)) {
-            qCDebug(XdgDesktopPortalAmber) << "Desktop portal registered successfully";
+        qCDebug(XdgDesktopPortalAmber) << "Desktop portal bus registered successfully";
+        if (sessionBus.registerObject(dbusObject, desktopPortal, QDBusConnection::ExportAdaptors)) {
+            qCDebug(XdgDesktopPortalAmber) << "Desktop portal object registered successfully";
         } else {
-            qCDebug(XdgDesktopPortalAmber) << "Failed to register desktop portal";
+            qCDebug(XdgDesktopPortalAmber) << "Failed to register object";
         }
     } else {
-        qCDebug(XdgDesktopPortalAmber) << "Failed to register org.freedesktop.impl.portal.desktop.amber service";
+        qCDebug(XdgDesktopPortalAmber) << "Failed to register service.";
         return 1;
     }
 

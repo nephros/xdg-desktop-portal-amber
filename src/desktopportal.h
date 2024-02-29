@@ -34,17 +34,17 @@
 
 #include <QDBusContext>
 #include <QObject>
+#include "screenshot.h"
+#include "wallpaper.h"
 
 namespace Amber
 {
-    class ScreenshotPortal;
-    class WallpaperPortal;
-
     class DesktopPortal : public QObject, public QDBusContext
     {
         Q_OBJECT
     public:
         explicit DesktopPortal(QObject *parent = nullptr);
+        ~DesktopPortal() override;
 
     private:
         ScreenshotPortal *const m_screenshotPortal = nullptr;

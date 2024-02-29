@@ -45,8 +45,8 @@ namespace Amber
         m_wallpaperPortal = new WallpaperPortal(this);
 
     }
+    DesktopPortal::~DesktopPortal()
+    {
+    }
 }
 
-DesktopPortal::~DesktopPortal()
-{
-}

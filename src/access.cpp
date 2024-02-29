@@ -12,6 +12,11 @@
 
 #include "access.h"
 
+#include <QDBusMetaType>
+#include <QDBusInterface>
+#include <QDBusPendingReply>
+#include <QLoggingCategory>
+
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
 
 namespace Amber {

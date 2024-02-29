@@ -17,7 +17,7 @@ namespace Amber {
 WallpaperPortal::WallpaperPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper init";
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "Desktop portal service: Wallpaper";
 }
 
 uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
@@ -27,10 +27,17 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
                                   const QVariantMap &options,
                                   uint &result)
 {
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Start screenshot";
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper called with parameters:";
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "    uri: " << uri;
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "    options: " << options;
+
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper options not implemented.";
+        qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper options not supported.";
     }
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Asking Ambience daemon to set wallpaper";
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.ambienced"),
                                                       QStringLiteral("/com/jolla/ambienced"),
                                                       QStringLiteral("com.jolla.ambienced"),

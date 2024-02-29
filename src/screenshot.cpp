@@ -1,3 +1,4 @@
+// SPDX-FileCopyrightText: 2018 Red Hat Inc
 // SPDX-FileCopyrightText: 2021 - 2022 UnionTech Software Technology Co., Ltd.
 // SPDX-FileCopyrightText: 2024 Sailfish OS Community
 //
@@ -62,7 +63,8 @@ ScreenshotPortal::ScreenshotPortal(QObject *parent)
 {
     qDBusRegisterMetaType<QColor>();
     qDBusRegisterMetaType<ColorRGB>();
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot and ColorPicker init";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Desktop portal service: Screenshot";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Desktop portal service: ColorPicker";
 }
 
 uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
@@ -90,7 +92,7 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
     }
     qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Failed";
     */
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker Not implemented. Returning white.";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "ColorPicker not implemented. Returning white.";
     ColorRGB color;
     color.red = 1.0;
     color.green = 1.0;
@@ -105,10 +107,17 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
                                   const QVariantMap &options,
                                   QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "Start screenshot";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot called with parameters:";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "    options: " << options;
+
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot options not implemented.";
+        qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot options not supported.";
     }
+
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Asking Lipstick for a screenshot";
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.lipstick"),
                                                       QStringLiteral("/org/nemomobile/lipstick/screenshot"),
                                                       QStringLiteral("org.nemomobile.lipstick"),
@@ -125,7 +134,7 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-        qCDebug(XdgDesktopPortalAmberScreenshot) << "Success" << QString("Filepath is %1").arg(filepath);
+        qCDebug(XdgDesktopPortalAmberScreenshot) << "Success:" << QString("Filepath is %1").arg(filepath);
         results.insert(QStringLiteral("uri"), QUrl::fromLocalFile(filepath).toString(QUrl::FullyEncoded));
         return 0;
     }

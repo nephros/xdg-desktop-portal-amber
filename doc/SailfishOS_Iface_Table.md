@@ -16,6 +16,8 @@ Legend:
 |  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |
 |  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |
 
+**Notes:**
+Permission store is similar to SailfishOS MDM policy framework.
 
 ### Should be provided:
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |

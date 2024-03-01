@@ -6,7 +6,7 @@
 
 // Sailfish MDM
 #include <libsailfishmdm/mdm-sysinfo.h>
-#include <libsailfishmdm/policyvalue.h> 
+#include <libsailfishpolicy/policyvalue.h>
 
 #include <QDBusMetaType>
 #include <QDBusInterface>

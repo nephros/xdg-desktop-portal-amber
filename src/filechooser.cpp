@@ -75,7 +75,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
             qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
             return 0;
     }
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
 }
 } // namespace Amber

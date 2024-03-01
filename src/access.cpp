@@ -90,7 +90,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
             qCDebug(XdgDesktopPortalAmberAccess) << "Success";
             return 0;
     }
-    qCDebug(XdgDesktopPortalAmberAccess) << "Access failed";
+    qCDebug(XdgDesktopPortalAmberAccess) << "Access failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
 }
 } // namespace Amber

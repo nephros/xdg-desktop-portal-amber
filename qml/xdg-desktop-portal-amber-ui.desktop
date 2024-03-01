@@ -2,12 +2,14 @@
 Type=Application
 Name=XDG Desktop File Chooser
 Exec=/usr/bin/xdg-desktop-portal-amber-ui
-X-Maemo-Service=org.freedesktop.impl.portal.desktop.amber
+X-Maemo-Service=org.freedesktop.impl.portal.desktop.amber.ui
 X-Maemo-Method=org.freedesktop.impl.portal.desktop.amber.ui.openFilePicker
-X-Maemo-Object-Path=/org/freedesktop/impl/portal/desktop/amber
+X-Maemo-Object-Path=/org/freedesktop/impl/portal/desktop/amber/ui
 NoDisplay=true
+X-DBusActivatable=true
 
 [X-Sailjail]
 Permissions=UserDirs;RemovableMedia;MediaIndexing
 OrganizationName=org.freedesktop.portal.desktop.amber
-ApplicationName=dialogs
+ApplicationName=ui
+ExecDBus=/usr/bin/xdg-desktop-portal-amber-ui --prestart

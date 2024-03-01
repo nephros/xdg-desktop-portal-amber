@@ -53,6 +53,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     */
 
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Asking Lipstick daemon to show a dialog";
+    /*
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.windowprompt"),
@@ -60,14 +61,20 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                     QStringLiteral("com.jolla.windowprompt"),
                     //QStringLiteral("newPermissionPrompt"));
                     QStringLiteral("showTermsPrompt"));
-                    //
-    // TODO choices
-    Q_UNUSED(results);
 
     QList<QVariant> args;
     //promptConfig
     args.append(QStringLiteral("/usr/share/lipstick-xdg-desktop-portal-amber/FilePickerDialog.qml"));
     msg.setArguments(args);
+    */
+    // TODO choices
+    Q_UNUSED(results);
+
+    QDBusMessage msg = QDBusMessage::createMethodCall(
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("openFilePicker");
 
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();

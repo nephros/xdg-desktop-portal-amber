@@ -65,7 +65,7 @@ Requires:   %{name} = %{version}-%{release}
 %install
 rm -rf %{buildroot}
 %make_install
-
+desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
 %defattr(-,root,root,-)
@@ -83,7 +83,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
 
 %files qml
-%{_datadir}/lipstick-%{name}/*.qml
+%{_bindir}/%{name}-ui
+%{_datadir}/%{name}/*.qml
+%{_datadir}/applications/*.desktop
 
 %files devel
 %defattr(-,root,root,-)

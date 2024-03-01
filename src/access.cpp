@@ -23,6 +23,7 @@ namespace Amber {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
+    qCDebug(XdgDesktopPortalAmberAccess) << "Desktop portal service: Access";
 }
 
 AccessPortal::~AccessPortal()

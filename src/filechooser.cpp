@@ -66,7 +66,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     QList<QVariant> args;
     //promptConfig
-    args.append(QStringLiteral("xdg-portal-amber/FilePickerDialog.qml"));
+    args.append(QStringLiteral("/usr/share/lipstick-xdg-desktop-portal-amber/FilePickerDialog.qml"));
     msg.setArguments(args);
 
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);

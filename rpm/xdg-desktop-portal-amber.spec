@@ -83,7 +83,7 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
 
 %files qml
-%{_datadir}/lipstick-windowprompt/%{name}/*.qml
+%{_datadir}/lipstick-%{name}/*.qml
 
 %files devel
 %defattr(-,root,root,-)

@@ -41,6 +41,7 @@ uint PermissionStorePortal::List(const QString &table, QStringList &results)
     }
 
     if (!results.isEmpty()) {
+        qCDebug(XdgDesktopPortalAmberPermissionStore) << "Returning:" << results;
         return 0;
     }
 

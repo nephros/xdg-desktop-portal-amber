@@ -11,13 +11,13 @@
 #include <QUrl>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberWallpaper, "xdp-amber-wallpaper")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber-wallpaper")
 
 namespace Amber {
 WallpaperPortal::WallpaperPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Desktop portal service: Wallpaper";
+    qCDebug(XdgDesktopPortalAmber) << "Desktop portal service: Wallpaper";
 }
 
 uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
@@ -27,24 +27,24 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
                                   const QVariantMap &options,
                                   uint &result)
 {
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper called with parameters:";
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "    uri: " << uri;
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "    options: " << options;
+    qCDebug(XdgDesktopPortalAmber) << "Wallpaper called with parameters:";
+    qCDebug(XdgDesktopPortalAmber) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmber) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmber) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmber) << "    uri: " << uri;
+    qCDebug(XdgDesktopPortalAmber) << "    options: " << options;
 
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper options not supported.";
+        qCDebug(XdgDesktopPortalAmber) << "Wallpaper options not supported.";
     }
     if (options.contains(QStringLiteral("show-preview"))) {
         if (options.value(QStringLiteral("show-preview")).toBool())
-            qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to show a preview";
+            qCDebug(XdgDesktopPortalAmber) << "Was asked to show a preview";
     }
     if (options.contains(QStringLiteral("set-on"))) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to set wallpaper for" << options.value(QStringLiteral("set-on")).toString();
+        qCDebug(XdgDesktopPortalAmber) << "Was asked to set wallpaper for" << options.value(QStringLiteral("set-on")).toString();
     }
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Asking Ambience daemon to set wallpaper";
+    qCDebug(XdgDesktopPortalAmber) << "Asking Ambience daemon to set wallpaper";
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.ambienced"),
                                                       QStringLiteral("/com/jolla/ambienced"),
                                                       QStringLiteral("com.jolla.ambienced"),
@@ -56,11 +56,11 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Success";
+        qCDebug(XdgDesktopPortalAmber) << "Success";
         result = 0;
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper failed";
+    qCDebug(XdgDesktopPortalAmber) << "Wallpaper failed";
     result = 1;
     return 1;
 }

@@ -22,6 +22,10 @@ PermissionStorePortal::PermissionStorePortal(QObject *parent)
     qCDebug(XdgDesktopPortalAmberPermissionStore) << "Desktop portal service: PermissionStore";
 }
 
+PermissionStorePortal::~PermissionStorePortal()
+{
+}
+
 uint PermissionStorePortal::List(const QString &table, QStringList &results)
 {
     qCDebug(XdgDesktopPortalAmberPermissionStore) << "Store called with parameters:";

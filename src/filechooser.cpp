@@ -14,7 +14,7 @@
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-access")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
 
 namespace Amber {
 FileChooserPortal::FileChooserPortal(QObject *parent)

@@ -34,9 +34,13 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberWallpaper) << "    uri: " << uri;
     qCDebug(XdgDesktopPortalAmberWallpaper) << "    options: " << options;
 
-    if (options.contains(QStringLiteral("set-on"))) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to set wallpaper for" << options.value(QStringLiteral("set-on")).toString();
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "This Wallpaper option is not supported.";
+    if (options.contains(QStringLiteral("set-on"))) { // background, lockscreen or both.
+        if (!options.value(QStringLiteral("set-on")).toString().compare(QStringLiteral("background"), Qt::CaseInsensitive)) {
+            qCDebug(XdgDesktopPortalAmberWallpaper) << "Setting wallpaper for Lock Screen is not supported.";
+        }
+        if (options.value(QStringLiteral("set-on")).toString().compare(QStringLiteral("lockscreen"), Qt::CaseInsensitive)) {
+            return 1;
+        }
     }
 
     QDBusMessage msg;

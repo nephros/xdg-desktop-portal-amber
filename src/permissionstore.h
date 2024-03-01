@@ -24,7 +24,44 @@ public:
 
     uint version() const { return 1; }
 public Q_SLOTS:
+
     uint List( const QString &table, QStringList &results);
+    void Lookup( const QString &table,
+                 const QString &id,
+                 QList<QVariantMap> &permissions,
+                 QVariant &data
+                 );
+    uint GetPermission( const QString &table,
+                 const QString &id,
+                 const QString &app,
+                 QStringList &permissions
+                 );
+    void Set( const QString &table,
+                 const bool &create,
+                 const QString &id,
+                 const QList<QVariantMap> &permissions,
+                 const QVariant &data
+                 );
+    void SetValue( const QString &table,
+                 const bool &create,
+                 const QString &id,
+                 const QVariant &data
+                 );
+    void SetPermission( const QString &table,
+                 const bool &create,
+                 const QString &id,
+                 const QString &app,
+                 const QStringList &permissions
+                 );
+    /* added in version 2 of the interface:
+    uint DeletePermission( const QString &table,
+                 const QString &id,
+                 const QString &app,
+                 );
+    */
+    void Delete( const QString &table,
+                 const QString &id
+               );
 
 signals:
     void Changed( const QString &table,

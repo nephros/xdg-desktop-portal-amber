@@ -51,4 +51,68 @@ uint PermissionStorePortal::List(const QString &table, QStringList &results)
 
     return 1;
 }
+
+void PermissionStorePortal::Lookup( const QString &table,
+             const QString &id,
+             QList<QVariantMap> &permissions,
+             QVariant &data
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+}
+uint PermissionStorePortal::GetPermission( const QString &table,
+             const QString &id,
+             const QString &app,
+             QStringList &permissions
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+    return 1;
+}
+
+void PermissionStorePortal::Set( const QString &table,
+             const bool &create,
+             const QString &id,
+             const QList<QVariantMap> &permissions,
+             const QVariant &data
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+}
+
+void PermissionStorePortal::SetValue( const QString &table,
+             const bool &create,
+             const QString &id,
+             const QVariant &data
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+}
+
+void PermissionStorePortal::SetPermission( const QString &table,
+             const bool &create,
+             const QString &id,
+             const QString &app,
+             const QStringList &permissions
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+}
+
+/* added in version 2 of the interface:
+uint PermissionStorePortal::DeletePermission( const QString &table,
+             const QString &id,
+             const QString &app,
+             )
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+    return 1;
+}
+*/
+
+void PermissionStorePortal::Delete( const QString &table, const QString &id)
+{
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "This method is not implemented";
+}
+
 } // namespace Amber

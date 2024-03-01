@@ -60,7 +60,7 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
         result = 0;
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper failed";
+    qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper failed:" << pcall.error().name() << pcall.error().message();
     result = 1;
     return 1;
 }

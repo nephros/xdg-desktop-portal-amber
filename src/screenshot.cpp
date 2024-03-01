@@ -140,7 +140,7 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
         results.insert(QStringLiteral("uri"), QUrl::fromLocalFile(filepath).toString(QUrl::FullyEncoded));
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot failed";
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Screenshot failed:" << pcall.error().name() << pcall.error().message();
     return 1;
 }
 } // namespace Amber

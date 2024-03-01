@@ -34,6 +34,10 @@
 #include <QDBusConnection>
 #include <QLoggingCategory>
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <grp.h>
+
 #include "desktopportal.h"
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber")
@@ -46,6 +50,11 @@ int main(int argc, char *argv[])
     QCoreApplication app{argc, argv};
     app.setApplicationName(QStringLiteral("xdg-desktop-portal-amber"));
 
+    // determine GID, check prvileged group:
+    struct group *grp = getgrnam("privileged"); /* don't free, see getgrnam() for details */
+    if ( getgid() != grp->gr_gid ) {
+        qCWarning(XdgDesktopPortalAmber) << "Not running privileged, some features will not work.";
+    }
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
 

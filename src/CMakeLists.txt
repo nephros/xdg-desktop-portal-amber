@@ -1,6 +1,7 @@
 set(SRCS
     desktopportal.cpp
     access.cpp
+    filechooser.cpp
     permissionstore.cpp
     screenshot.cpp
     wallpaper.cpp

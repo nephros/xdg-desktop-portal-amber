@@ -69,7 +69,8 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 
 %files
 %defattr(-,root,root,-)
-%{_libexecdir}/xdg-desktop-portal-amber
+# must be privileged to show Dialogs via Access and windowprompt:
+%attr(2755,root,privileged) %{_libexecdir}/xdg-desktop-portal-amber
 %{_datadir}/dbus-1/services/*.service
 %{_userunitdir}/%{name}.service
 %{_datadir}/xdg-desktop-portal/portals/amber.portal

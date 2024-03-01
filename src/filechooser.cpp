@@ -83,7 +83,7 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &parent_window,
                       const QString &title,
                       const QVariantMap &options,
-                      QVariantMap &results);
+                      QVariantMap &results)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFiles called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
@@ -104,7 +104,7 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &parent_window,
                       const QString &title,
                       const QVariantMap &options,
-                      QVariantMap &results);
+                      QVariantMap &results)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFile called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();

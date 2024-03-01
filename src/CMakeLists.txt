@@ -1,13 +1,18 @@
 set(SRCS
     desktopportal.cpp
     access.cpp
+    permissionstore.cpp
     screenshot.cpp
     wallpaper.cpp
     main.cpp
 )
 
+include(FindPkgConfig)
+pkg_search_module(MDM REQUIRED sailfishmdm)
+
 include_directories(
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+    ${MDM_INCLUDE_DIRS}
 )
 
 add_executable(xdg-desktop-portal-amber ${SRCS})
@@ -19,6 +24,7 @@ target_link_libraries(xdg-desktop-portal-amber
     Qt5::Core
     Qt5::Gui
     Qt5::DBus
+    ${MDM_LIBRARIES}
 )
 
 install(TARGETS xdg-desktop-portal-amber DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})

@@ -35,6 +35,7 @@
 #include <QDBusContext>
 #include <QObject>
 #include "access.h"
+#include "permissionstore.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -49,6 +50,7 @@ namespace Amber
 
     private:
         AccessPortal *const m_access;
+        PermissionStorePortal *const m_permissions;
         ScreenshotPortal *const m_screenshot = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };

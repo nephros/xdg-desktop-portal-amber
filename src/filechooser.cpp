@@ -64,9 +64,9 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // TODO choices
     Q_UNUSED(results);
 
-    QList<QVariant> args;
+    QVariantMap args;
 	//promptConfig
-    args.append(QStringLiteral("{ \"componentName\": \"xdg-portal-amber/FilePickerDialog.qml\" }"));
+    args.insert(QStringLiteral("componentName"), QStringLiteral("xdg-portal-amber/FilePickerDialog.qml"));
     msg.setArguments(args);
 
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);

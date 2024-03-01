@@ -118,7 +118,8 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
     }
 
     qCDebug(XdgDesktopPortalAmberScreenshot) << "Asking Lipstick for a screenshot";
-    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.lipstick"),
+    //QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.lipstick"),
+    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.nemomobile.lipstick"),
                                                       QStringLiteral("/org/nemomobile/lipstick/screenshot"),
                                                       QStringLiteral("org.nemomobile.lipstick"),
                                                       QStringLiteral("saveScreenshot"));
@@ -131,6 +132,7 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
     args.append(filepath);
     msg.setArguments(args);
 
+    qCDebug(XdgDesktopPortalAmberScreenshot) << "Proposed path is"<< filepath;
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {

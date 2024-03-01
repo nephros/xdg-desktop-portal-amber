@@ -35,7 +35,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QVariantMap &options,
                                 QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooserDialog called with parameters:";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.OpenFile called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
@@ -76,6 +76,47 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
             return 0;
     }
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
+    return 1;
+}
+uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
+                      const QString &app_id,
+                      const QString &parent_window,
+                      const QString &title,
+                      const QVariantMap &options,
+                      QVariantMap &results);
+{
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFiles called with parameters:";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    if (!options.isEmpty()) {
+            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
+    }
+    Q_UNUSED(results);
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
+    return 1;
+
+}
+uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
+                      const QString &app_id,
+                      const QString &parent_window,
+                      const QString &title,
+                      const QVariantMap &options,
+                      QVariantMap &results);
+{
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFile called with parameters:";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    if (!options.isEmpty()) {
+            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
+    }
+    Q_UNUSED(results);
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
     return 1;
 }
 } // namespace Amber

@@ -28,7 +28,6 @@ public Q_SLOTS:
                       const QString &title,
                       const QVariantMap &options,
                       QVariantMap &results);
-/*
     uint SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
@@ -41,7 +40,6 @@ public Q_SLOTS:
                       const QString &title,
                       const QVariantMap &options,
                       QVariantMap &results);
-*/
 };
 }
 #endif // XDG_DESKTOP_PORTAL_AMBER_FILECHOOSER_H

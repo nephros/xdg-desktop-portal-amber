@@ -13,13 +13,13 @@
 #include <QMetaEnum>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber-permissionstore")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberPermissionStore, "xdp-amber-permissionstore")
 
 namespace Amber {
 PermissionStorePortal::PermissionStorePortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Desktop portal service: PermissionStore";
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "Desktop portal service: PermissionStore";
 }
 
 PermissionStorePortal::~PermissionStorePortal()
@@ -28,16 +28,16 @@ PermissionStorePortal::~PermissionStorePortal()
 
 uint PermissionStorePortal::List(const QString &table, QStringList &results)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Store called with parameters:";
-    qCDebug(XdgDesktopPortalAmber) << "    table: " << table;
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "Store called with parameters:";
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "    table: " << table;
 
     if (table.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmber) << "Empty table!";
+        qCDebug(XdgDesktopPortalAmberPermissionStore) << "Empty table!";
         results.append("");
         return 0;
     }
 
-    qCDebug(XdgDesktopPortalAmber) << "Asking MDM for list";
+    qCDebug(XdgDesktopPortalAmberPermissionStore) << "Asking MDM for list";
     QMetaEnum metaEnum = QMetaEnum::fromType<Sailfish::PolicyValue::PolicyType>();
 
     for (int i=0; i < metaEnum.keyCount(); ++i) {
@@ -45,7 +45,7 @@ uint PermissionStorePortal::List(const QString &table, QStringList &results)
     }
 
     if (!results.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmber) << "Returning:" << results;
+        qCDebug(XdgDesktopPortalAmberPermissionStore) << "Returning:" << results;
         return 0;
     }
 

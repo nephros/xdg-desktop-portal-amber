@@ -17,13 +17,13 @@
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber-access")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
 
 namespace Amber {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Desktop portal service: Access";
+    qCDebug(XdgDesktopPortalAmberAccess) << "Desktop portal service: Access";
 }
 
 AccessPortal::~AccessPortal()
@@ -40,19 +40,19 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QVariantMap &options,
                                 QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmber) << "AccessDialog called with parameters:";
-    qCDebug(XdgDesktopPortalAmber) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmber) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmber) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmber) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmber) << "    subtitle: " << subtitle;
-    qCDebug(XdgDesktopPortalAmber) << "    body: " << body;
-    qCDebug(XdgDesktopPortalAmber) << "    options: " << options;
+    qCDebug(XdgDesktopPortalAmberAccess) << "AccessDialog called with parameters:";
+    qCDebug(XdgDesktopPortalAmberAccess) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberAccess) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberAccess) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberAccess) << "    title: " << title;
+    qCDebug(XdgDesktopPortalAmberAccess) << "    subtitle: " << subtitle;
+    qCDebug(XdgDesktopPortalAmberAccess) << "    body: " << body;
+    qCDebug(XdgDesktopPortalAmberAccess) << "    options: " << options;
 
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmber) << "Access dialog options not supported.";
+            qCDebug(XdgDesktopPortalAmberAccess) << "Access dialog options not supported.";
     }
-    qCDebug(XdgDesktopPortalAmber) << "Asking Lipstick daemon to show a dialog";
+    qCDebug(XdgDesktopPortalAmberAccess) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.windowprompt"),
                     QStringLiteral("/com/jolla/windowprompt"),
@@ -87,10 +87,10 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-            qCDebug(XdgDesktopPortalAmber) << "Success";
+            qCDebug(XdgDesktopPortalAmberAccess) << "Success";
             return 0;
     }
-    qCDebug(XdgDesktopPortalAmber) << "Access failed";
+    qCDebug(XdgDesktopPortalAmberAccess) << "Access failed";
     return 1;
 }
 } // namespace Amber

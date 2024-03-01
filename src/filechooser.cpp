@@ -14,13 +14,13 @@
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber-filechooser")
+Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
 
 namespace Amber {
 FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmber) << "Desktop portal service: FileChooser";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Desktop portal service: FileChooser";
 }
 
 FileChooserPortal::~FileChooserPortal()
@@ -35,15 +35,15 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QVariantMap &options,
                                 QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmber) << "FileChooserDialog called with parameters:";
-    qCDebug(XdgDesktopPortalAmber) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmber) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmber) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmber) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmber) << "    options: " << options;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooserDialog called with parameters:";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
 
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmber) << "FileChooser dialog options not supported.";
+            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
     }
     /*
        <method name="showTermsPrompt">
@@ -52,7 +52,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
        </method>
     */
 
-    qCDebug(XdgDesktopPortalAmber) << "Asking Lipstick daemon to show a dialog";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.windowprompt"),
@@ -72,10 +72,10 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-            qCDebug(XdgDesktopPortalAmber) << "Success";
+            qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
             return 0;
     }
-    qCDebug(XdgDesktopPortalAmber) << "FileChooser failed";
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
     return 1;
 }
 } // namespace Amber

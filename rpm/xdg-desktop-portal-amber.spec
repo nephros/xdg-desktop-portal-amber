@@ -39,6 +39,13 @@ BuildArch: noarch
 %description sailfishos-config
 %{summary}.
 
+%package qml
+Summary: UI components for %{name}
+BuildArch: noarch
+
+%description qml
+%{summary}.
+
 
 %package devel
 Summary:    Header files and library symbolic links for %{name}
@@ -76,6 +83,9 @@ rm -rf %{buildroot}
 %config %{_localstatedir}/lib/environment/amber/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
+
+%files qml
+%{_datadir}/lipstick-windowprompt/%{name}/*.qml
 
 %files devel
 %defattr(-,root,root,-)

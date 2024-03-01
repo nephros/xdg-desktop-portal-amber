@@ -36,7 +36,6 @@
 #include <QObject>
 #include "access.h"
 #include "filechooser.h"
-#include "permissionstore.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -52,7 +51,6 @@ namespace Amber
     private:
         AccessPortal *const m_access;
         FileChooserPortal *const m_filechooser;
-        PermissionStorePortal *const m_permissions;
         ScreenshotPortal *const m_screenshot = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };

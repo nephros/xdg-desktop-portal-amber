@@ -33,7 +33,6 @@
 #include "desktopportal.h"
 #include "access.h"
 #include "filechooser.h"
-#include "permissionstore.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -43,7 +42,6 @@ namespace Amber
         : QObject(parent)
         , m_access(new AccessPortal(this))
         , m_filechooser(new FileChooserPortal(this))
-        , m_permissions(new PermissionStorePortal(this))
         , m_screenshot(new ScreenshotPortal(this))
         , m_wallpaper(new WallpaperPortal(this))
     {

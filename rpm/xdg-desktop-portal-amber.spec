@@ -11,8 +11,6 @@ BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Gui)
 BuildRequires:  pkgconfig(Qt5DBus)
-BuildRequires:  pkgconfig(sailfishmdm)
-BuildRequires:  pkgconfig(sailfishpolicy)
 BuildRequires:  cmake
 Requires:   %{name}-sailfishos-config
 Requires:   xdg-desktop-portal

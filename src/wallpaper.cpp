@@ -34,21 +34,30 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberWallpaper) << "    uri: " << uri;
     qCDebug(XdgDesktopPortalAmberWallpaper) << "    options: " << options;
 
-    if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalAmberWallpaper) << "Wallpaper options not supported.";
-    }
-    if (options.contains(QStringLiteral("show-preview"))) {
-        if (options.value(QStringLiteral("show-preview")).toBool())
-            qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to show a preview";
-    }
     if (options.contains(QStringLiteral("set-on"))) {
         qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to set wallpaper for" << options.value(QStringLiteral("set-on")).toString();
+        qCDebug(XdgDesktopPortalAmberWallpaper) << "This Wallpaper option is not supported.";
     }
-    qCDebug(XdgDesktopPortalAmberWallpaper) << "Asking Ambience daemon to set wallpaper";
-    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.ambienced"),
-                                                      QStringLiteral("/com/jolla/ambienced"),
-                                                      QStringLiteral("com.jolla.ambienced"),
-                                                      QStringLiteral("createAmbience"));
+
+    QDBusMessage msg;
+    if (options.contains(QStringLiteral("show-preview"))) {
+        if (options.value(QStringLiteral("show-preview")).toBool()) {
+            qCDebug(XdgDesktopPortalAmberWallpaper) << "Was asked to show a preview, opening Gallery to create an Ambience";
+            msg = QDBusMessage::createMethodCall(
+                    QStringLiteral("com.jolla.gallery"),
+                    QStringLiteral("/com/jolla/gallery/ui"),
+                    QStringLiteral("com.jolla.gallery.ui"),
+                    QStringLiteral("openFile"));
+        } else {
+            qCDebug(XdgDesktopPortalAmberWallpaper) << "Asking Ambience daemon to set wallpaper";
+            msg = QDBusMessage::createMethodCall(
+                    QStringLiteral("com.jolla.ambienced"),
+                    QStringLiteral("/com/jolla/ambienced"),
+                    QStringLiteral("com.jolla.ambienced"),
+                    QStringLiteral("setAmbience"));
+        }
+    }
+
     QList<QVariant> args;
     args.append(uri);
     msg.setArguments(args);

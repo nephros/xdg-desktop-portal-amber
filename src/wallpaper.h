@@ -15,11 +15,13 @@ namespace Amber {
     {
         Q_OBJECT
         Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Wallpaper")
+        Q_PROPERTY(uint version READ version CONSTANT)
 
     public:
         explicit WallpaperPortal(QObject *parent);
         ~WallpaperPortal() = default;
 
+        uint version() const { return 1; }
     public slots:
         uint SetWallpaperURI(const QDBusObjectPath &handle,
                         const QString &app_id,

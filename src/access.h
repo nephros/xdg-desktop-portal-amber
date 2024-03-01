@@ -20,6 +20,7 @@ class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Access")
+
 public:
     explicit AccessPortal(QObject *parent);
     ~AccessPortal() override;

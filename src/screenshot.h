@@ -15,8 +15,11 @@ namespace Amber {
     {
         Q_OBJECT
         Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Screenshot")
+        Q_PROPERTY(uint version READ version CONSTANT)
 
     public:
+        uint version() const { return 2; }
+
         struct ColorRGB
         {
             double red;

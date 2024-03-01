@@ -17,10 +17,12 @@ class PermissionStorePortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.PermissionStore")
+    Q_PROPERTY(uint version READ version CONSTANT)
 public:
     explicit PermissionStorePortal(QObject *parent);
     ~PermissionStorePortal() override;
 
+    uint version() const { return 1; }
 public Q_SLOTS:
     uint List( const QString &table, QStringList &results);
 

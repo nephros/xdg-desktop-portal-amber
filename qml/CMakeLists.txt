@@ -24,3 +24,4 @@ install(TARGETS xdg-desktop-portal-amber-ui DESTINATION ${CMAKE_INSTALL_FULL_BIN
 install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
 install(FILES xdg-desktop-portal-amber-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
 install(FILES xdg-desktop-portal-amber-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
+install(FILES org.freedesktop.impl.portal.desktop.amber.ui.service DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/dbus-1/services")

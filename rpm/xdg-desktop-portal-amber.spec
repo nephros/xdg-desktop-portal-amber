@@ -72,6 +72,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 # must be privileged to show Dialogs via Access and windowprompt:
 %attr(2755,root,privileged) %{_libexecdir}/xdg-desktop-portal-amber
 %{_datadir}/dbus-1/services/*.service
+%exclude %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
 %{_userunitdir}/%{name}.service
 %{_datadir}/xdg-desktop-portal/portals/amber.portal
 # what is this installed for??
@@ -87,6 +88,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %{_bindir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
 %{_datadir}/applications/*.desktop
+%{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
 
 %files devel
 %defattr(-,root,root,-)

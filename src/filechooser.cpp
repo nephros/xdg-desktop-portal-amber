@@ -74,7 +74,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("openFilePicker");
+                    QStringLiteral("openFilePicker")
+                    );
 
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();

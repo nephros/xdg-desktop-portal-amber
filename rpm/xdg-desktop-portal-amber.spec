@@ -40,7 +40,6 @@ BuildArch: noarch
 
 %package qml
 Summary: UI components for %{name}
-BuildArch: noarch
 
 %description qml
 %{summary}.

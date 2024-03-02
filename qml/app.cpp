@@ -1,7 +1,8 @@
+#include <QtQuick>
+#include <QDBusConnection>
 #include <sailfishapp.h>
 
 int main(int argc, char **argv) {
-
 
     QGuiApplication* app = SailfishApp::application(argc, argv);
     bool prestart = app->arguments().contains(QStringLiteral("--prestart"));

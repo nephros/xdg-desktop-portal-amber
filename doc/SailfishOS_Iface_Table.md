@@ -23,14 +23,31 @@ Permission store is similar to SailfishOS MDM policy framework.
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
 |  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |            |
-|  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |     +++         |  ++++      |
-|  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |     +           |  +++       |
-|  Screenshot       |                                 |  yes            | DBus           |     +           |            |
+|  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |   +++           |  ++++      |
+|  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |   +             |  +++       |
+|  Screenshot       |                                 |  yes            | DBus           |   +             |            |
+|  Email            | sending an email                |  yes            | App, DBus      |                 |            |
 
 **Notes:**
-Wallpaper and Screenshot will be implemented by Community effort as PoC for XDP.
-Notification is probably a good candidate for PoC by SailfishOS upstream.
+Email, Wallpaper and Screenshot will be implemented by Community effort as PoC for XDP.
+Notification is probably a good candidate for PoC by SailfishOS upstream (Jolla).
 Apparently Access is required for the Screenshot interface to be registered correctly?
+
+#### Email:
+Implemented, works.
+Unfortunately, the Email app lacks an interface to specify *both* a list of
+attachments *and* recipients, subject, body.
+Attachments can be done via Share API, email via Email app dbus interface, but not both.
+
+This was noted in another context here:
+https://forum.sailfishos.org/t/13762
+
+A patch by nephros exists imlementing the interface mentioned above.
+
+Hackishly, one can construct a multipart MIME message and give it as the body, but this is not
+possible to do fully compliant with the standard, and is unreliable.  
+Also i needs a lot of email-specific processing in the sending application.
+Recerse [Zawinskis Law](https://www.catb.org/jargon/html/Z/Zawinskis-Law.html).
 
 #### Access:
 Is required by Screenshot and uses/updates/reads PermissionStore.
@@ -58,7 +75,6 @@ interactively (by opening in Gallery)
 |  App Chooser      | choosing an application         |  yes            |                |                 |            |
 |  Background       | apps running in the background  |  somewhat       |                |                 |            |
 |  Dynamic Launcher | app installation                |  yes            | DBus           |                 |            |
-|  Email            | sending an email                |  yes            | App, DBus      |                 |            |
 |  File Chooser     | file chooser dialog             |  no             | (not standalone) |               |            |
 |  Inhibit          | inhibit suspending, idling, ... |  yes            | wakelocks, Amber, MCE |          |            |
 |  Input Capture    | Capture input                   |  ???            |                |                 |            |

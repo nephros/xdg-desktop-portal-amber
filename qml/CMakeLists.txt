@@ -22,4 +22,5 @@ target_link_libraries(xdg-desktop-portal-amber-ui
 install(TARGETS xdg-desktop-portal-amber-ui DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
 
 install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+install(FILES xdg-desktop-portal-amber-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
 install(FILES xdg-desktop-portal-amber-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")

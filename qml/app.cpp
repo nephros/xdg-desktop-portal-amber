@@ -2,9 +2,10 @@
 
 int main(int argc, char **argv) {
 
-    bool prestart = QCoreApplication::arguments().contains(QStringLiteral("--prestart"));
 
-    //return SailfishApp::main(argc, argv);
+    QGuiApplication* app = SailfishApp::application(argc, argv);
+    bool prestart = app->arguments().contains(QStringLiteral("--prestart"));
+
     QQuickView* view = SailfishApp::createView();
     view->setSource(SailfishApp::pathToMainQml());
 

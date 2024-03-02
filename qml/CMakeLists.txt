@@ -10,11 +10,13 @@ include(FindPkgConfig)
 pkg_search_module(SailfishApp REQUIRED sailfishapp)
 
 include_directories(
+    ${Qt5Core_INCLUDE_DIRS}
     ${SailfishApp_INCLUDE_DIRS}
 )
 
 target_link_libraries(xdg-desktop-portal-amber-ui
-    SailfishApp_LIBRARIES
+    Qt5::Core
+    ${SailfishApp_LIBRARIES}
 )
 
 install(TARGETS xdg-desktop-portal-amber-ui DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})

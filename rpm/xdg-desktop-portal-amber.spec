@@ -86,7 +86,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 
 %files qml
 %{_bindir}/%{name}-ui
-%{_datadir}/%{name}/*.qml
+%{_datadir}/%{name}/qml/*.qml
 %{_datadir}/applications/*.desktop
 
 %files devel

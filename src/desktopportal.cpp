@@ -32,6 +32,7 @@
 
 #include "desktopportal.h"
 #include "access.h"
+#include "email.h"
 #include "filechooser.h"
 #include "screenshot.h"
 #include "wallpaper.h"
@@ -41,6 +42,7 @@ namespace Amber
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
         , m_access(new AccessPortal(this))
+        , m_email(new EmailPortal(this))
         , m_filechooser(new FileChooserPortal(this))
         , m_screenshot(new ScreenshotPortal(this))
         , m_wallpaper(new WallpaperPortal(this))

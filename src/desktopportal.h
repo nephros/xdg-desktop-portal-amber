@@ -35,6 +35,7 @@
 #include <QDBusContext>
 #include <QObject>
 #include "access.h"
+#include "email.h"
 #include "filechooser.h"
 #include "screenshot.h"
 #include "wallpaper.h"
@@ -50,7 +51,8 @@ namespace Amber
 
     private:
         AccessPortal *const m_access;
-        FileChooserPortal *const m_filechooser;
+        EmailPortal *const m_email = nullptr;
+        FileChooserPortal *const m_filechooser = nullptr;
         ScreenshotPortal *const m_screenshot = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };

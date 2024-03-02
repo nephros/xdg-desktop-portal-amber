@@ -10,6 +10,7 @@ BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Gui)
+BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  cmake

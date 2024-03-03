@@ -23,9 +23,6 @@ ApplicationWindow { id: root
         iface: "org.freedesktop.impl.portal.desktop.amber.ui"
         path: "/org/freedesktop/impl/portal/desktop/amber/ui"
 
-        function openFilePicker(handle) {
-            openFilePicker(handle, "{}")
-        }
         function openFilePicker(handle, options) {
             console.log("Was asked for a file open dialog, using options", options)
             var dialogOptions = {}

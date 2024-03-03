@@ -28,8 +28,9 @@ ApplicationWindow { id: root
         }
         function openFilePicker(handle, options) {
             console.log("Was asked for a file open dialog, using options", options)
+            var dialogOptions = {}
             try {
-                var dialogOptions = JSON.parse(options)
+                dialogOptions = JSON.parse(options)
             } catch (e) {
                 console.log("Parsing options failed:", e)
             }
@@ -40,7 +41,7 @@ ApplicationWindow { id: root
                     responseInterface.response(2, null) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     return
                 }
-                _filePickerDialog = comp.createObject(root)
+                _filePickerDialog = comp.createObject(root, { "options": dialogOptions } )
                 console.log("FilePickerDialog.qml created.")
 
                 _filePickerDialog.done.connect(function(result, data) {

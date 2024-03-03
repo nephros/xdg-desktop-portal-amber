@@ -16,6 +16,34 @@ import Sailfish.Pickers 1.0
 SystemDialog {
     id: page
 
+
+    /*  https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+
+        accept_label (s)
+        The label for the accept button. Mnemonic underlines are allowed.
+
+        modal (b)
+        Whether to make the dialog modal. Default is yes.
+
+        multiple (b)
+        Whether to allow selection of multiple files. Default is no.
+
+        directory (b)
+        Whether to select for folders instead of files. Default is to select files.
+
+        filters (a(sa(us)))
+        A list of serialized file filters. See org.freedesktop.portal.FileChooser.OpenFile for details.
+
+        current_filter ((sa(us)))
+        Request that this filter be set by default at dialog creation. See org.freedesktop.portal.FileChooser.OpenFile for details.
+
+        choices (a(ssa(ss)s))
+        A list of serialized combo boxes. See org.freedesktop.portal.FileChooser.OpenFile for details.
+
+        current_folder (ay)
+        A suggested folder to open the files from. See org.freedesktop.portal.FileChooser.OpenFile for details.
+        */
+    property var options
     property string selectedFile
     property bool windowVisible: visibility != Window.Hidden
                                  && visibility != Window.Minimized

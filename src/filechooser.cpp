@@ -77,6 +77,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                     QStringLiteral("openFilePicker")
                     );
 
+    // pass the handle so we can respond from the dialog
+    QList<QVariant> args;
+    args.append(handle.path());
+    msg.setArguments(args);
+
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {

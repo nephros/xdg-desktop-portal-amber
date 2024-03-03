@@ -1,3 +1,11 @@
+/*
+* SPDX-License-Identifier: Apache-2.0
+*
+* SPDX-FileCopyrightText: 2024~ Sailfish OS Community
+* Authors:
+*   Peter G. <sailfish@nephros.org>
+*
+*/
 #include <QtQuick>
 #include <QDBusConnection>
 #include <sailfishapp.h>

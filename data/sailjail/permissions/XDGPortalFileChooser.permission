@@ -1,0 +1,26 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportalfilechooser
+# x-sailjail-description = XDG FileChooser Portal
+# x-sailjail-translation-key-long-description = permission-la-xdgportalfilechooser_description
+# x-sailjail-long-description = Use XDG Desktop FileChooser Portal
+
+# allow access to the specific Portal
+dbus-user.talk org.freedesktop.portal.FileChooser
+dbus-user.call org.freedesktop.portal.FileChooser.OpenFile
+dbus-user.call org.freedesktop.portal.FileChooser.OpenFiles
+dbus-user.call org.freedesktop.portal.FileChooser.SaveFile
+
+
+# Allow showing UI:
+include /etc/sailjail/permissions/AppLaunch.permission
+
+dbus-user.talk org.freedesktop.impl.portal.desktop.amber.ui
+dbus-user.call org.freedesktop.impl.portal.desktop.amber.ui.openFilePicker
+
+# Allow retrieving files via Document portal
+include /etc/sailjail/permissions/XDGPortalDocument.permission
+
+# Allow talking to the broker bus
+include /etc/sailjail/permissions/XDGPortal.permission

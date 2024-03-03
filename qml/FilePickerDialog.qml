@@ -82,6 +82,7 @@ SystemDialog {
 
             }
             SilicaListView { id: view
+                clip: true
                 height: page.height - header.height - buttons.height
                 width: parent.width
                 model: page.model

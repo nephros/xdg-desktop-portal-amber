@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+
+# x-sailjail-translation-catalog = sailjail-permissions
+# x-sailjail-translation-key-description = permission-la-xdgportalemail
+# x-sailjail-description = XDG Email Portal
+# x-sailjail-translation-key-long-description = permission-la-xdgportalemail_description
+# x-sailjail-long-description = Use XDG Desktop Email Portal
+
+# allow access to the specific Portal
+dbus-user.talk org.freedesktop.portal.Email
+dbus-user.call org.freedesktop.portal.Email.ComposeEmail
+
+# Allow retrieving the screenshot via Document portal
+include /etc/sailjail/permissions/XDGPortalDocument.permission
+
+include /etc/sailjail/permissions/Email.permission
+
+# Allow talking to the broker bus
+include /etc/sailjail/permissions/XDGPortal.permission

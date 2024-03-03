@@ -54,8 +54,12 @@ ApplicationWindow { id: root
 
                 _filePickerDialog.done.connect(function(result, data) {
                     console.log("FilePickerDialog done:", result, data)
+                    // for now, we only support a single file uri
+                    var a = []
+                    a.push(data)
                     var resp = responseInterface.createObject(root, { "path": handle })
-                    resp.emitSignal("Response", { "response": result ? 0 : 1, "results": [ data ] })
+                    resp.emitSignal("Response", { "response": result ? 0 : 1, "uris": a })
+                    //resp.emitSignal("Response", { "response": result ? 0 : 1, "uris": [ data ] })
                     _filePickerDialog.destroy()
                     resp.destroy();
                 })

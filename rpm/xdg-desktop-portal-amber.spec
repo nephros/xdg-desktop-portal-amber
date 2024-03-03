@@ -34,6 +34,7 @@ Links:
 
 %package sailfishos-config
 Summary: User session environment configuration for %{name}
+License: CC-BY-SA-4.0
 BuildArch: noarch
 
 %description sailfishos-config
@@ -41,6 +42,7 @@ BuildArch: noarch
 
 %package qml
 Summary: UI components for %{name}
+License: Apache-2.0
 
 %description qml
 %{summary}.

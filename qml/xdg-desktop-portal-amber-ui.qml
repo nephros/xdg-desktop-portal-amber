@@ -35,7 +35,9 @@ ApplicationWindow { id: root
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
-                    responseInterface.response(2, null) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    var resp = responseInterface.createObject(root, { "path": handle })
+                    resp.emitSignal("Response", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    resp.destroy();
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "options": dialogOptions } )
@@ -43,8 +45,10 @@ ApplicationWindow { id: root
 
                 _filePickerDialog.done.connect(function(result, data) {
                     console.log("FilePickerDialog done:", result, data)
-                    var rif = responseInterface.createObject(root, { "path": handle })
-                    rif.emitSignal("Response", { "response": result ? 0 : 1, "results": [ data ] })
+                    var resp = responseInterface.createObject(root, { "path": handle })
+                    resp.emitSignal("Response", { "response": result ? 0 : 1, "results": [ data ] })
+                    _filePickerDialog.destroy()
+                    resp.destroy();
                 })
                 console.log("Activating.")
                 root._finishPicker()

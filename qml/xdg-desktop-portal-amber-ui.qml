@@ -28,15 +28,16 @@ ApplicationWindow { id: root
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
-                    responseInterface.response(1, null)
+                    responseInterface.response(2, null) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     return
                 }
                 _filePickerDialog = comp.createObject(root)
                 console.log("FilePickerDialog.qml created.")
 
-                _filePickerDialog.done.connect(function(data) {
-                    responseInterface.path=handle
-                    responseInterface.response(!_filePickerDialog.dismissed, data)
+                _filePickerDialog.done.connect(function(result, data) {
+                    console.log("FilePickerDialog done:", result, data)
+                    var rif = responseInterface.createObject(root, { "path": handle })
+                    rif.emitSignal("Response", { "response": result ? 0 : 1, "results": [ data ] })
                 })
                 console.log("Activating.")
                 root._finishPicker()
@@ -55,10 +56,11 @@ ApplicationWindow { id: root
         return false
     }
 
-    DBusInterface {
+    Component {
         id: responseInterface
-        service: "org.freedesktop.portal.desktop"
-        iface: "org.freedesktop.portal.Request"
-        signal response(int response, var results)
+        DBusAdaptor {
+            service: "org.freedesktop.portal.desktop"
+            iface: "org.freedesktop.portal.Request"
+        }
     }
 }

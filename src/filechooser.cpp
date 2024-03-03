@@ -75,6 +75,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QList<QVariant> args;
     args.append(handle.path());
 
+    args.append(title);
     // just pass the options as-is, we can possibly deal with it in the UI:
     QString jopts = QJsonDocument(QJsonObject::fromVariantMap(options)).toJson();
     args.append(jopts);

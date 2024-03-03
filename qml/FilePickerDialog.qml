@@ -16,7 +16,6 @@ import Sailfish.Pickers 1.0
 SystemDialog {
     id: page
 
-
     /*  https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
 
         accept_label (s)
@@ -43,6 +42,7 @@ SystemDialog {
         current_folder (ay)
         A suggested folder to open the files from. See org.freedesktop.portal.FileChooser.OpenFile for details.
         */
+    property string title
     property var options
     property string selectedFile
     property bool windowVisible: visibility != Window.Hidden
@@ -78,7 +78,7 @@ SystemDialog {
                 //% "Select location"
                 //    title: qsTrId("components_pickers-he-select_location")
                 //% "Select document"
-                title: qsTrId("components_pickers-he-select_document")
+                title: page.title ? page.title : qsTrId("components_pickers-he-select_document")
 
             }
             SilicaListView { id: view

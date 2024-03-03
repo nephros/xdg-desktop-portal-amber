@@ -22,8 +22,17 @@ ApplicationWindow { id: root
         service: "org.freedesktop.impl.portal.desktop.amber.ui"
         iface: "org.freedesktop.impl.portal.desktop.amber.ui"
         path: "/org/freedesktop/impl/portal/desktop/amber/ui"
+        xml: [
+             '<interface name="org.freedesktop.impl.portal.desktop.amber.ui">',
+             '<method name="openFilePicker">',
+             '   <arg type="s" name="handle" direction="in"/>',
+             '   <arg type="s" name="title" direction="in"/>',
+             '   <arg type="s" name="options" direction="in"/>',
+             '</method>',
+             '</interface>',
+        ].join('\n')
 
-        function openFilePicker(handle, options) {
+        function openFilePicker(handle, title, options) {
             console.log("Was asked for a file open dialog, using options", options)
             var dialogOptions = {}
             try {
@@ -40,7 +49,7 @@ ApplicationWindow { id: root
                     resp.destroy();
                     return
                 }
-                _filePickerDialog = comp.createObject(root, { "options": dialogOptions } )
+                _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
                 console.log("FilePickerDialog.qml created.")
 
                 _filePickerDialog.done.connect(function(result, data) {

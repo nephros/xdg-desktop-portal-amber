@@ -81,7 +81,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     msg.setArguments(args);
 
-    QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
+    QDBusPendingReply<> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";

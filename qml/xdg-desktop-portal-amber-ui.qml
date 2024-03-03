@@ -24,6 +24,15 @@ ApplicationWindow { id: root
         path: "/org/freedesktop/impl/portal/desktop/amber/ui"
 
         function openFilePicker(handle) {
+            openFilePicker(handle, "{}")
+        }
+        function openFilePicker(handle, options) {
+            console.log("Was asked for a file open dialog, using options", options)
+            try {
+                var dialogOptions = JSON.parse(options)
+            } catch (e) {
+                console.log("Parsing options failed:", e)
+            }
             if (!_filePickerDialog) {
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {

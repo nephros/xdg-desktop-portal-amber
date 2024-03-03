@@ -12,6 +12,8 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
@@ -42,18 +44,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
 
-    if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
-    }
     /*
-       <method name="showTermsPrompt">
-       <arg direction="in" type="a{sv}" name="promptConfig"/>
-       <annotation value="QVariantMap" name="org.qtproject.QtDBus.QtTypeName.In0"/>
-       </method>
-    */
-
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Asking Lipstick daemon to show a dialog";
-    /*
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.windowprompt"),
@@ -67,9 +59,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     args.append(QStringLiteral("/usr/share/lipstick-xdg-desktop-portal-amber/FilePickerDialog.qml"));
     msg.setArguments(args);
     */
+
     // TODO choices
     Q_UNUSED(results);
 
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
@@ -80,6 +74,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // pass the handle so we can respond from the dialog
     QList<QVariant> args;
     args.append(handle.path());
+
+    // just pass the options as-is, we can possibly deal with it in the UI:
+    QString jopts = QJsonDocument(QJsonObject::fromVariantMap(options)).toJson();
+    args.append(jopts);
+
     msg.setArguments(args);
 
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
@@ -91,6 +90,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
 }
+
 uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,

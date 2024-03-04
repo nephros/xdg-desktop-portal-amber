@@ -17,11 +17,15 @@ class FileChooserPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.FileChooser")
+    Q_PROPERTY(uint version READ version CONSTANT)
 public:
     explicit FileChooserPortal(QObject *parent);
     ~FileChooserPortal() override;
 
 public Q_SLOTS:
+    // TODO:
+    //version 3 must support opening directories instead of files through options(["directory=true"])
+    uint version() const { return 2; }
     uint OpenFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,

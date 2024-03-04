@@ -63,7 +63,7 @@ public Q_SLOTS:
     void setupPickerResponse();
 
 private:
-    bool m_responseHandled = false;
+    bool m_responseHandled;
     PickerResponse m_callResponseCode;
     QVariantMap m_callResult;
 

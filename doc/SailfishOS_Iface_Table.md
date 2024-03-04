@@ -27,11 +27,12 @@ Permission store is similar to SailfishOS MDM policy framework.
 |  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |   +             |  +++       |
 |  Screenshot       |                                 |  yes            | DBus           |   +             |            |
 |  Email            | sending an email                |  yes            | App, DBus      |                 |            |
+|  File Chooser     | file chooser dialog             |  no             | (not standalone) |               |            |
 
 **Notes:**
-Email, Wallpaper and Screenshot will be implemented by Community effort as PoC for XDP.
-Notification is probably a good candidate for PoC by SailfishOS upstream (Jolla).
-Apparently Access is required for the Screenshot interface to be registered correctly?
+*Email*, *Wallpaper* and *Screenshot* will be implemented by Community effort as PoC for XDP.
+*Notification* is probably a good candidate for PoC by SailfishOS upstream (Jolla).
+Apparently *Access* is required for the *Screenshot* interface to be registered correctly?
 
 #### Email:
 Implemented, works.
@@ -47,25 +48,37 @@ A patch by nephros exists imlementing the interface mentioned above.
 Hackishly, one can construct a multipart MIME message and give it as the body, but this is not
 possible to do fully compliant with the standard, and is unreliable.  
 Also i needs a lot of email-specific processing in the sending application.
-Recerse [Zawinskis Law](https://www.catb.org/jargon/html/Z/Zawinskis-Law.html).
+Reverse [Zawinskis Law](https://www.catb.org/jargon/html/Z/Zawinskis-Law.html).
 
 #### Access:
-Is required by Screenshot and uses/updates/reads PermissionStore.
+Is required by *Screenshot* and uses/updates/reads *PermissionStore*.
 
-Can be implemented using windowprompt.
+Can be implemented using `windowprompt`.
 
-This works as a PoC using the showInfoWindow method. However, that window does
+This works as a PoC using the `showInfoWindow` method. However, that window does
 not have yes/no choices, and no response. Access dialogs ask for permission,
 and want to present choices.
-newPermissionDialog could be used if adapted but is sailjail-specific at the moment.
+`newPermissionDialog` could be used if adapted but is sailjail-specific at the moment.
 
 Maybe security prompt would be better. Or polkit rules, which show confirmation prompts already.
 
-Also, windowprompt wants the calling app to be privileged or it will not show dialogs.
+Also, `windowprompt` wants the calling app to be privileged or it will not show dialogs.
 
 #### Wallpaper
 Setting a wallpaper image works in the PoC non-interativey (via ambienced), and
 interactively (by opening in Gallery)
+
+#### File Chooser
+While it may not immediately seem obvious, providing this Portal is useful for
+"ported" apps like those using Kirigami or KDE/Plasma in general.
+
+These apps can be configured to use a Portal for file choosers instead of their
+native picker dialogs, which often are not usable under SFOS.
+
+The problem is that there is no functionality to present the existing
+`Sailfish.Pickers` components as standalone dialogs.  
+Therefore, a helper app was implemented to do that. It is based on
+`SystemDialog` and existing dialogs like Network or Bluetooth device selection.
 
 ### May be provided/Undecided:
 
@@ -75,7 +88,6 @@ interactively (by opening in Gallery)
 |  App Chooser      | choosing an application         |  yes            |                |                 |            |
 |  Background       | apps running in the background  |  somewhat       |                |                 |            |
 |  Dynamic Launcher | app installation                |  yes            | DBus           |                 |            |
-|  File Chooser     | file chooser dialog             |  no             | (not standalone) |               |            |
 |  Inhibit          | inhibit suspending, idling, ... |  yes            | wakelocks, Amber, MCE |          |            |
 |  Input Capture    | Capture input                   |  ???            |                |                 |            |
 |  Lockdown         | Disable Portals                 |  yes            | MDM, Settings, SJail | +++       |            |

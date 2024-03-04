@@ -30,7 +30,6 @@ ApplicationWindow { id: root
              '   <arg type="s" name="options" direction="in"/>',
              '</method>',
              '<signal name="pickerDone">',
-             '  <signal name="Response">',
              '    <arg type="u" name="response"/>',
              '    <arg type="s" name="results"/>',
              //'    <arg type="a{sv}" name="results"/>',

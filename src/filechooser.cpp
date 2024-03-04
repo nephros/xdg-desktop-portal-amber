@@ -61,9 +61,24 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     */
 
     // TODO choices
-    Q_UNUSED(results);
+    //Q_UNUSED(results);
+
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
+    if(!QDBusConnection::connect(
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("pickerDone")
+                    this,
+                    handlePickerResponse
+                    )) {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
+    } else {
+        m_responseHandled = false;
+    }
 
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
+
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
@@ -84,12 +99,23 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     QDBusPendingReply<> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
+
+    while (!m_responseHandled) {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+    }
+
+    results = m_callResults;
+    return m_callResponseCode;
+    /*
     if (pcall.isValid()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
             return 0;
     }
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
+    */
+
 }
 
 uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
@@ -132,5 +158,13 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     Q_UNUSED(results);
     qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
     return 1;
+}
+bool FileChooserPortal::handlePickerResponse(
+                        const uint &code,
+                        const QVariantMap &results)
+{
+        m_callResult = results;
+        m_callResponseCode = code;
+        m_responseHandled = true;
 }
 } // namespace Amber

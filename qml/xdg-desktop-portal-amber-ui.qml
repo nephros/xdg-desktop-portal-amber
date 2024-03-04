@@ -29,6 +29,12 @@ ApplicationWindow { id: root
              '   <arg type="s" name="title" direction="in"/>',
              '   <arg type="s" name="options" direction="in"/>',
              '</method>',
+             '<signal name="pickerDone">',
+             '  <signal name="Response">',
+             '    <arg type="u" name="response"/>',
+             '    <arg type="a{sv}" name="results"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
+             '  </signal>',
              '</interface>',
         ].join('\n')
 
@@ -45,6 +51,7 @@ ApplicationWindow { id: root
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
                     var resp = responseInterface.createObject(root, { "path": handle })
+                    emitSignal("pickerDone", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     resp.emitSignal("Response", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     resp.destroy();
                     return
@@ -96,9 +103,11 @@ ApplicationWindow { id: root
                     const code = result ? 0 : 1
 
                     const payload = [ code, asv ]
-                    console.log("Emitting:\n", JSON.stringify(payload,null,2))
+                    // Important: this is read by the calling process:
+                    console.log("### Results:\n", JSON.stringify(payload,null,null))
 
                     var resp = responseInterface.createObject(root, { "path": handle })
+                    emitSignal("pickerDone", payload)
                     resp.emitSignal("Response", payload)
                     _filePickerDialog.destroy()
                     resp.destroy();

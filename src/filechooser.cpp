@@ -67,7 +67,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     //Q_UNUSED(results);
 
     // clean up from last time:
-    m_callResult = QVariantMap();
+    m_callResult = QVariantList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = false;
 

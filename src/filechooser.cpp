@@ -164,6 +164,7 @@ void FileChooserPortal::handlePickerResponse(
     m_callResponseCode = static_cast<PickerResponse>(code);
     m_responseHandled = true;
 }
+
 void FileChooserPortal::setupPickerResponse()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
@@ -182,6 +183,7 @@ void FileChooserPortal::setupPickerResponse()
     }
 }
 void FileChooserPortal::waitForPickerResponse()
+{
     // loop until we got the signal
     while (!m_responseHandled) {
         QCoreApplication::processEvents();

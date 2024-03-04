@@ -18,9 +18,18 @@ class FileChooserPortal : public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.FileChooser")
     Q_PROPERTY(uint version READ version CONSTANT)
+
 public:
     explicit FileChooserPortal(QObject *parent);
     ~FileChooserPortal() override;
+
+    enum PickerResponse : uint
+    {
+        Accepted = 0,
+        Cancelled = 1,
+        Other = 2
+    };
+    Q_ENUM(PickerResponse)
 
 public Q_SLOTS:
     // TODO:
@@ -44,6 +53,20 @@ public Q_SLOTS:
                       const QString &title,
                       const QVariantMap &options,
                       QVariantMap &results);
+    void handlePickerError();
+    void handlePickerResponse(
+         const int &code,
+         const QString &result
+         //const QVariantMap &results
+     );
+    void waitForPickerResponse();
+    void setupPickerResponse();
+
+private:
+    bool m_responseHandled;
+    PickerResponse m_callResponseCode;
+    QVariantMap m_callResult;
+
 };
 }
 #endif // XDG_DESKTOP_PORTAL_AMBER_FILECHOOSER_H

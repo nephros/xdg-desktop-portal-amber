@@ -52,17 +52,58 @@ ApplicationWindow { id: root
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
                 console.log("FilePickerDialog.qml created.")
 
-                _filePickerDialog.done.connect(function(result, data) {
+                /* Example for a correct response:
+                   signal time=1709492498.046692 sender=:1.5 -> destination=:1.618 serial=8010 path=/org/freedesktop/portal/desktop/request/1_618/qt3378739430; interface=org.freedesktop.portal.Request; member=Response
+                      uint32 0
+                      array [
+                         dict entry(
+                            string "current_filter"
+                            variant struct {
+                              string "All Files "
+                              array [
+                                 struct {
+                                    uint32 0
+                                    string "*"
+                                 }
+                              ]
+                            }
+                         )
+                         dict entry(
+                            string "uris"
+                            variant array [
+                              string "file:///home/piggz/gts2_auth.txt"
+                            ]
+                         )
+                      ]
+                */
+                    _filePickerDialog.done.connect(function(result, data) {
                     console.log("FilePickerDialog done:", result, data)
-                    // for now, we only support a single file uri
-                    var a = []
-                    a.push(data)
+
+                    // construct the response payload:
+                        // [
+                        //      uris (as)
+                        //      choices (a(ss))
+                        //      current_filter ((sa(us)))
+                        // ]
+                    // for now, we only support a single file uri and no filters:
+                    var asv = []
+                    asv.push( { "current_filter": [ "All Files ", [ { 0: "*" } ] ] })
+                    const uris = []
+                    if ( typeof data === "string") { uris.push( data ) }
+                    if ( typeof data === "object") { data.forEach(function(p) { uris.push(p) }) }
+                    asv.push( { "uris": uris } )
+
+                    const code = result ? 0 : 1
+
+                    const payload = [ code, asv ]
+                    console.log("Emitting:\n", JSON.stringify(payload,null,2))
+
                     var resp = responseInterface.createObject(root, { "path": handle })
-                    resp.emitSignal("Response", { "response": result ? 0 : 1, "uris": a })
-                    //resp.emitSignal("Response", { "response": result ? 0 : 1, "uris": [ data ] })
+                    resp.emitSignal("Response", payload)
                     _filePickerDialog.destroy()
                     resp.destroy();
-                })
+                }) // end function(result,data)
+
                 console.log("Activating.")
                 root._finishPicker()
             }
@@ -83,8 +124,16 @@ ApplicationWindow { id: root
     Component {
         id: responseInterface
         DBusAdaptor {
-            service: "org.freedesktop.portal.desktop"
-            iface: "org.freedesktop.portal.Request"
+            //service: "org.freedesktop.portal.Desktop"
+            //iface: "org.freedesktop.portal.Request"
+            service: "org.freedesktop.impl.portal.FileChooser"
+            iface: "org.freedesktop.impl.portal.Request"
+            Component.onCompleted: console.log("Created", service, iface, path)
+            xml: [
+                '<interface name="org.freedesktop.impl.portal.Request">',
+                '    <method name="Close"></method>',
+                '</interface>'
+            ].join("\n")
         }
     }
 }

@@ -25,6 +25,7 @@ FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Desktop portal service: FileChooser";
+    m_responseHandled = false;
 }
 
 FileChooserPortal::~FileChooserPortal()
@@ -185,7 +186,6 @@ void FileChooserPortal::setupPickerResponse()
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
     } else {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Successfully set up signal listener";
-        m_responseHandled = false;
     }
 }
 void FileChooserPortal::waitForPickerResponse()

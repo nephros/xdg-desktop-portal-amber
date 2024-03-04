@@ -169,19 +169,18 @@ void FileChooserPortal::handlePickerResponse(
 
 void FileChooserPortal::setupPickerResponse()
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
     if(!QDBusConnection::sessionBus().connect(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("pickerDone"),
                     this,
-                    SLOT(handlePickerResponse(uint code, QString callResult))
-                    //SLOT(handlePickerResponse(uint code, QVariantMap callResults))
+                    SLOT(handlePickerResponse(uint, QString))
                     ))
     {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
     } else {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Successfully set up signal listener";
         m_responseHandled = false;
     }
 }

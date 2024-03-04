@@ -66,6 +66,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // TODO choices
     //Q_UNUSED(results);
 
+    // clean up from last time:
+    m_callResult = QVariantMap();
+    m_callResponseCode = PickerResponse::Other;
+    m_responseHandled = false;
+
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(

@@ -72,7 +72,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("pickerDone"),
                     this,
-                    handlePickerResponse
+                    SLOT(handlePickerResponse(uint code, QVariantMap callResults))
                     )) {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
     } else {

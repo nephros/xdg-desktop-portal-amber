@@ -161,7 +161,7 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
     return 1;
 }
-bool FileChooserPortal::handlePickerResponse(
+void FileChooserPortal::handlePickerResponse(
                         const uint &code,
                         const QVariantMap &results)
 {

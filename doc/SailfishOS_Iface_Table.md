@@ -87,22 +87,22 @@ letting both the Browser, and other users of *FileChooser* use it.
 
 ### May be provided/Undecided:
 
-| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
-| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
-|  Account          | obtaining user information      |  yes            | Settings, Secrets |              |            |
-|  App Chooser      | choosing an application         |  yes            |                |                 |            |
-|  Background       | apps running in the background  |  somewhat       |                |                 |            |
-|  Dynamic Launcher | app installation                |  yes            | DBus           |                 |            |
-|  Inhibit          | inhibit suspending, idling, ... |  yes            | wakelocks, Amber, MCE |          |            |
-|  Input Capture    | Capture input                   |  ???            |                |                 |            |
-|  Lockdown         | Disable Portals                 |  yes            | MDM, Settings, SJail | +++       |            |
-|  Secret           | retrieve an app secret          |  yes            | Qt/QML         |                 |            |
+| Backend Name      | Description                          | SFOS capability | SFOS interface | est. complexity | Usefulness |
+| ----------------- | ------------------------------------ | :-------------: | -------------- | :-------------: | :--------: |
+|  Account          | obtaining user information           |  yes            | Settings, Secrets |              |            |
+|  Dynamic Launcher | app installation                     |  yes            | DBus           |                 |            |
+|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |          | +++        |
+|  Input Capture    | Capture input                        |  ???            |                |                 |            |
+|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++       | +++        |
+|  Secret           | retrieve an app secret               |  yes            | Qt/QML         |                 | +          |
 
 
 ### Out-of-Scope/Not Feasible/Not useful
 
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
+|  App Chooser      | choosing an application         |  yes            |                |                 |            |
+|  Background       | apps running in the background  |  somewhat       |                |                 |            |
 |  Settings         | read-only access to UI colors   |  yes            | DConf, Qt/QML  |   +             |  +         |
 |  Print            |                                 |  no/3rd party   |                |                 |            |
 |  Global Shortcuts | ??? hotkeys ???                 |  no             |                |                 |            |

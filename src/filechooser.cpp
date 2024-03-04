@@ -166,15 +166,13 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
 void FileChooserPortal::handlePickerError()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";
-    m_callResult = QVariantMap();
+    m_callResult = QVariantList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
 }
 void FileChooserPortal::handlePickerResponse(
                         const int &code,
                         const QVariantList &result)
-                        //const QString &result)
-                        //const QVariantMap &results)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received:" << code << result;
     m_callResult = result;

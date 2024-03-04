@@ -57,9 +57,6 @@ public Q_SLOTS:
     void handlePickerResponse(
          const int &code,
          const QVariantList &result
-         //const QStringList &result
-         //const QString &result
-         //const QVariantMap &results
      );
     void waitForPickerResponse();
     void setupPickerResponse();
@@ -67,7 +64,7 @@ public Q_SLOTS:
 private:
     bool m_responseHandled;
     PickerResponse m_callResponseCode;
-    QVariantMap m_callResult;
+    QVariantList m_callResult;
 
 };
 }

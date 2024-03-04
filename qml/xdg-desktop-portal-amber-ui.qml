@@ -31,9 +31,11 @@ ApplicationWindow { id: root
              '</method>',
              '<signal name="pickerDone">',
              '    <arg type="i" name="response" direction="out"/>',
-             '    <arg type="s" name="results" direction="out"/>',
+             //'    <arg type="s" name="results" direction="out"/>',
+             '    <arg type="a{s}" name="results" direction="out"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
-             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
+             //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QStringList"/>',
              //'    <arg type="a{sv}" name="results"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
              '  </signal>',
@@ -102,9 +104,8 @@ ApplicationWindow { id: root
                     const code = result ? 0 : 1
 
                     //const payload = [ code, asv ]
-                    const payload = [ code, data ]
-                    // Important: this is read by the calling process:
-                    console.log("### Results:\n", JSON.stringify(payload,null,null))
+                    //const payload = [ code, data ]
+                    const payload = [ code, uris ]
 
                     emitSignal("pickerDone", payload)
                     _filePickerDialog.destroy()

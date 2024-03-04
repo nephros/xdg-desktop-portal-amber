@@ -50,10 +50,10 @@ ApplicationWindow { id: root
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
-                    var resp = responseInterface.createObject(root, { "path": handle })
                     emitSignal("pickerDone", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
-                    resp.emitSignal("Response", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
-                    resp.destroy();
+                    //var resp = responseInterface.createObject(root, { "path": handle })
+                    //resp.emitSignal("Response", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    //resp.destroy();
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
@@ -106,11 +106,11 @@ ApplicationWindow { id: root
                     // Important: this is read by the calling process:
                     console.log("### Results:\n", JSON.stringify(payload,null,null))
 
-                    var resp = responseInterface.createObject(root, { "path": handle })
                     emitSignal("pickerDone", payload)
-                    resp.emitSignal("Response", payload)
+                    //var resp = responseInterface.createObject(root, { "path": handle })
+                    //resp.emitSignal("Response", payload)
+                    //resp.destroy();
                     _filePickerDialog.destroy()
-                    resp.destroy();
                 }) // end function(result,data)
 
                 console.log("Activating.")
@@ -130,6 +130,7 @@ ApplicationWindow { id: root
         return false
     }
 
+    /*
     Component {
         id: responseInterface
         DBusAdaptor {
@@ -145,4 +146,5 @@ ApplicationWindow { id: root
             ].join("\n")
         }
     }
+    */
 }

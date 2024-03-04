@@ -53,9 +53,6 @@ ApplicationWindow { id: root
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
                     emitSignal("pickerDone", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
-                    //var resp = responseInterface.createObject(root, { "path": handle })
-                    //resp.emitSignal("Response", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
-                    //resp.destroy();
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
@@ -110,9 +107,6 @@ ApplicationWindow { id: root
                     console.log("### Results:\n", JSON.stringify(payload,null,null))
 
                     emitSignal("pickerDone", payload)
-                    //var resp = responseInterface.createObject(root, { "path": handle })
-                    //resp.emitSignal("Response", payload)
-                    //resp.destroy();
                     _filePickerDialog.destroy()
                 }) // end function(result,data)
 
@@ -132,22 +126,4 @@ ApplicationWindow { id: root
         }
         return false
     }
-
-    /*
-    Component {
-        id: responseInterface
-        DBusAdaptor {
-            //service: "org.freedesktop.portal.Desktop"
-            //iface: "org.freedesktop.portal.Request"
-            service: "org.freedesktop.impl.portal.FileChooser"
-            iface: "org.freedesktop.impl.portal.Request"
-            Component.onCompleted: console.log("Created", service, iface, path)
-            xml: [
-                '<interface name="org.freedesktop.impl.portal.Request">',
-                '    <method name="Close"></method>',
-                '</interface>'
-            ].join("\n")
-        }
-    }
-    */
 }

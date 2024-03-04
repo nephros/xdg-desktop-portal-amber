@@ -15,6 +15,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLoggingCategory>
+#include <QThread>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
 
@@ -68,7 +69,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("pickerDone")
+                    QStringLiteral("pickerDone"),
                     this,
                     handlePickerResponse
                     )) {
@@ -105,7 +106,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         QThread::msleep(250);
     }
 
-    results = m_callResults;
+    results = m_callResult;
     return m_callResponseCode;
     /*
     if (pcall.isValid()) {

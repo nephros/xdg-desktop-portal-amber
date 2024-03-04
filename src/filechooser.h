@@ -45,16 +45,15 @@ public Q_SLOTS:
                       const QString &title,
                       const QVariantMap &options,
                       QVariantMap &results);
+    void handlePickerResponse(
+         const uint &code,
+         const QVariantMap &results
+     );
+
 private:
     bool m_responseHandled = false;
     uint m_callResponseCode = 2;
     QVariantMap m_callResult;
-
-private Q_SLOTS:
-     bool handlePickerResponse(
-         const uint &code,
-         const QVariantMap &results
-     );
 
 };
 }

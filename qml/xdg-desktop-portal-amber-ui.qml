@@ -31,11 +31,13 @@ ApplicationWindow { id: root
              '</method>',
              '<signal name="pickerDone">',
              '    <arg type="i" name="response" direction="out"/>',
-             '    <arg type="s" name="results" direction="out"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
-             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
+             //'    <arg type="s" name="results" direction="out"/>',
+             //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
              //'    <arg type="a{sv}" name="results"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
+             '    <arg type="av" name="results"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantList"/>',
              '  </signal>',
              '</interface>',
         ].join('\n')
@@ -52,7 +54,7 @@ ApplicationWindow { id: root
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
-                    emitSignal("pickerDone", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    emitSignal("pickerDone", [ 2, [ "" ] ]) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
@@ -92,21 +94,12 @@ ApplicationWindow { id: root
                         //      current_filter ((sa(us)))
                         // ]
                     // for now, we only support a single file uri and no filters:
-                    var asv = []
-                    asv.push( { "current_filter": [ "All Files ", [ { 0: "*" } ] ] })
                     const uris = []
-                    if ( typeof data === "string") { uris.push( data ) }
+                    if ( typeof data === "string") { uris = [ data ] }
                     if ( typeof data === "object") { data.forEach(function(p) { uris.push(p) }) }
-                    asv.push( { "uris": uris } )
-
                     const code = result ? 0 : 1
 
-                    //const payload = [ code, asv ]
-                    const payload = [ code, data ]
-                    // Important: this is read by the calling process:
-                    console.log("### Results:\n", JSON.stringify(payload,null,null))
-
-                    emitSignal("pickerDone", payload)
+                    emitSignal("pickerDone", [ code, uris ] )
                     _filePickerDialog.destroy()
                 }) // end function(result,data)
 

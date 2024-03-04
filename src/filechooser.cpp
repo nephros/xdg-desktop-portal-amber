@@ -65,20 +65,6 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // TODO choices
     //Q_UNUSED(results);
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
-    if(!QDBusConnection::connect(
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("pickerDone"),
-                    this,
-                    SLOT(handlePickerResponse(uint code, QVariantMap callResults))
-                    )) {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
-    } else {
-        m_responseHandled = false;
-    }
-
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
@@ -99,25 +85,19 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     msg.setArguments(args);
 
-    QDBusPendingReply<> pcall = QDBusConnection::sessionBus().call(msg);
+    QDBusPendingReply<> pcall = QDBusConnection::sessionBus().callWithCallback(
+                    msg,
+                    this,
+                    SLOT(waitForPickerResponse()),
+                    SLOT(pickerError());
     pcall.waitForFinished();
-
-    while (!m_responseHandled) {
-        QCoreApplication::processEvents();
-        QThread::msleep(250);
+    if (m_callResponseCode != PickerResponse.Other) {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
+    } else {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
     }
-
     results = m_callResult;
-    return m_callResponseCode;
-    /*
-    if (pcall.isValid()) {
-            qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
-            return 0;
-    }
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
-    return 1;
-    */
-
+    return (uint)m_callResponseCode;
 }
 
 uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
@@ -161,12 +141,41 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
     return 1;
 }
+void FileChooserPortal::handlePickerError()
+{
+        m_callResult = QVariantMap();
+        m_callResponseCode = PickerResponse.Other;
+        m_responseHandled = true;
+}
 void FileChooserPortal::handlePickerResponse(
                         const uint &code,
                         const QVariantMap &results)
 {
         m_callResult = results;
-        m_callResponseCode = code;
+        m_callResponseCode = static_cast<PickerResponse>(code)
         m_responseHandled = true;
+}
+void FileChooserPortal::waitForPickerResponse()
+{
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
+    if(!QDBusConnection::connect(
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("pickerDone"),
+                    this,
+                    SLOT(handlePickerResponse(uint code, QVariantMap callResults))
+                    )) {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
+    } else {
+        m_responseHandled = false;
+    }
+
+    // loop until we got the signal
+    while (!m_responseHandled) {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+    }
+
 }
 } // namespace Amber

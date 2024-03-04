@@ -23,6 +23,14 @@ public:
     explicit FileChooserPortal(QObject *parent);
     ~FileChooserPortal() override;
 
+    enum PickerResponse : uint
+    {
+        Accepted = 0,
+        Cancelled = 1,
+        Other = 2
+    };
+    Q_ENUM(PickerResponse)
+
 public Q_SLOTS:
     // TODO:
     //version 3 must support opening directories instead of files through options(["directory=true"])
@@ -49,10 +57,11 @@ public Q_SLOTS:
          const uint &code,
          const QVariantMap &results
      );
+    void waitForPickerResponse();
 
 private:
     bool m_responseHandled = false;
-    uint m_callResponseCode = 2;
+    PickerResponse m_callResponseCode;
     QVariantMap m_callResult;
 
 };

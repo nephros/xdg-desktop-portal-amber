@@ -55,7 +55,7 @@ public Q_SLOTS:
                       QVariantMap &results);
     void handlePickerError();
     void handlePickerResponse(
-         const uint &code,
+         const int &code,
          const QString &result
          //const QVariantMap &results
      );

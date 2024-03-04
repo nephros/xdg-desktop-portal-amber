@@ -59,6 +59,7 @@ public Q_SLOTS:
          const QVariantMap &results
      );
     void waitForPickerResponse();
+    void setupPickerResponse();
 
 private:
     bool m_responseHandled = false;

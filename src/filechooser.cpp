@@ -85,11 +85,19 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     msg.setArguments(args);
 
+    // the call will cause the UI to show, but will not wait for user
+    // selection.
+    // So we set up a signal handler in setupPickerResponse, and continue
+    // when we have received the signal.
     QDBusConnection::sessionBus().callWithCallback(
                     msg, this,
-                    SLOT(waitForPickerResponse()),
+                    SLOT(setupPickerResponse()),
                     SLOT(handlePickerError())
                     );
+
+    // busy loop ;)
+    waitForPickerResponse();
+
     if (m_callResponseCode != PickerResponse::Other) {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
     } else {
@@ -156,7 +164,7 @@ void FileChooserPortal::handlePickerResponse(
     m_callResponseCode = static_cast<PickerResponse>(code);
     m_responseHandled = true;
 }
-void FileChooserPortal::waitForPickerResponse()
+void FileChooserPortal::setupPickerResponse()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
     if(!QDBusConnection::sessionBus().connect(
@@ -172,7 +180,8 @@ void FileChooserPortal::waitForPickerResponse()
     } else {
         m_responseHandled = false;
     }
-
+}
+void FileChooserPortal::waitForPickerResponse()
     // loop until we got the signal
     while (!m_responseHandled) {
         QCoreApplication::processEvents();

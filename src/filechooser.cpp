@@ -110,7 +110,14 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
     }
     // TODO: more properties in results map, like current_filter, choices, etc
-    results = m_callResult;
+    // uris (as)
+    results.insert(QStringLiteral("uris"), m_callResult);
+    // choices (a(ss))
+    //results.insert(QStringLiteral("choices"), );
+    // current_filter ((sa(us)))
+    //results.insert(QStringLiteral("current_filter"), );
+    // writable (b)
+    //results.insert(QStringLiteral("writable"), );
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << results;
     return (uint)m_callResponseCode;
 }
@@ -170,7 +177,7 @@ void FileChooserPortal::handlePickerResponse(
                         //const QVariantMap &results)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received:" << code << result;
-    m_callResult.insert("uris", result);
+    m_callResult = result;
     m_callResponseCode = static_cast<PickerResponse>(code);
     m_responseHandled = true;
 }

@@ -109,7 +109,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     } else {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
     }
-    results.append("uris", m_callResult);
+    results.insert("uris", m_callResult);
     return (uint)m_callResponseCode;
 }
 

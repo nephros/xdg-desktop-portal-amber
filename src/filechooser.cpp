@@ -88,7 +88,7 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QDBusConnection::sessionBus().callWithCallback(
                     msg, this,
                     SLOT(waitForPickerResponse()),
-                    SLOT(pickerError())
+                    SLOT(handlePickerError())
                     );
     if (m_callResponseCode != PickerResponse::Other) {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
@@ -142,17 +142,19 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
 }
 void FileChooserPortal::handlePickerError()
 {
-        m_callResult = QVariantMap();
-        m_callResponseCode = PickerResponse::Other;
-        m_responseHandled = true;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";
+    m_callResult = QVariantMap();
+    m_callResponseCode = PickerResponse::Other;
+    m_responseHandled = true;
 }
 void FileChooserPortal::handlePickerResponse(
                         const uint &code,
                         const QVariantMap &results)
 {
-        m_callResult = results;
-        m_callResponseCode = static_cast<PickerResponse>(code);
-        m_responseHandled = true;
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received.";
+    m_callResult = results;
+    m_callResponseCode = static_cast<PickerResponse>(code);
+    m_responseHandled = true;
 }
 void FileChooserPortal::waitForPickerResponse()
 {
@@ -164,7 +166,8 @@ void FileChooserPortal::waitForPickerResponse()
                     QStringLiteral("pickerDone"),
                     this,
                     SLOT(handlePickerResponse(uint code, QVariantMap callResults))
-                    )) {
+                    ))
+    {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
     } else {
         m_responseHandled = false;
@@ -174,7 +177,8 @@ void FileChooserPortal::waitForPickerResponse()
     while (!m_responseHandled) {
         QCoreApplication::processEvents();
         QThread::msleep(250);
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Waiting for Picker...";
     }
-
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "OK, Picker done.";
 }
 } // namespace Amber

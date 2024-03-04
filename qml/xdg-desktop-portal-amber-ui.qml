@@ -36,8 +36,8 @@ ApplicationWindow { id: root
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
              //'    <arg type="a{sv}" name="results"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
-             '    <arg type="as" name="results"/>',
-             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QStringList"/>',
+             '    <arg type="av" name="results"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantList"/>',
              '  </signal>',
              '</interface>',
         ].join('\n')

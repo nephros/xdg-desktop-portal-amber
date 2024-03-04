@@ -169,7 +169,11 @@ void FileChooserPortal::handlePickerResponse(
 
 void FileChooserPortal::setupPickerResponse()
 {
-    if(!QDBusConnection::sessionBus().connect(
+    QDBusConnection conn = QDBusConnection::connectToBus(QDBusConnection::SessionBus, QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"));
+    if(!conn.isConnected()) {
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not connect to Bus to set up signal listener";
+    }
+    if(!conn.connect(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),

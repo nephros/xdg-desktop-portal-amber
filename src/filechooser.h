@@ -53,6 +53,7 @@ public Q_SLOTS:
                       const QString &title,
                       const QVariantMap &options,
                       QVariantMap &results);
+    void handlePickerError();
     void handlePickerResponse(
          const uint &code,
          const QVariantMap &results

@@ -85,16 +85,15 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     msg.setArguments(args);
 
-    QDBusPendingReply<> pcall = QDBusConnection::sessionBus().callWithCallback(
-                    msg,
-                    this,
+    QDBusConnection::sessionBus().callWithCallback(
+                    msg, this,
                     SLOT(waitForPickerResponse()),
-                    SLOT(pickerError());
-    pcall.waitForFinished();
-    if (m_callResponseCode != PickerResponse.Other) {
+                    SLOT(pickerError())
+                    );
+    if (m_callResponseCode != PickerResponse::Other) {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
     } else {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed:" << pcall.error().name() << pcall.error().message() ;
+        qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
     }
     results = m_callResult;
     return (uint)m_callResponseCode;
@@ -144,7 +143,7 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
 void FileChooserPortal::handlePickerError()
 {
         m_callResult = QVariantMap();
-        m_callResponseCode = PickerResponse.Other;
+        m_callResponseCode = PickerResponse::Other;
         m_responseHandled = true;
 }
 void FileChooserPortal::handlePickerResponse(
@@ -152,13 +151,13 @@ void FileChooserPortal::handlePickerResponse(
                         const QVariantMap &results)
 {
         m_callResult = results;
-        m_callResponseCode = static_cast<PickerResponse>(code)
+        m_callResponseCode = static_cast<PickerResponse>(code);
         m_responseHandled = true;
 }
 void FileChooserPortal::waitForPickerResponse()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Preparing signal receiver";
-    if(!QDBusConnection::connect(
+    if(!QDBusConnection::sessionBus().connect(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),

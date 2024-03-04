@@ -32,7 +32,7 @@ ApplicationWindow { id: root
              '<signal name="pickerDone">',
              '    <arg type="i" name="response" direction="out"/>',
              //'    <arg type="s" name="results" direction="out"/>',
-             '    <arg type="a{s}" name="results" direction="out"/>',
+             '    <arg type="as" name="results" direction="out"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QStringList"/>',
@@ -94,17 +94,10 @@ ApplicationWindow { id: root
                         //      current_filter ((sa(us)))
                         // ]
                     // for now, we only support a single file uri and no filters:
-                    var asv = []
-                    asv.push( { "current_filter": [ "All Files ", [ { 0: "*" } ] ] })
                     const uris = []
-                    if ( typeof data === "string") { uris.push( data ) }
+                    if ( typeof data === "string") { uris = [ data ] }
                     if ( typeof data === "object") { data.forEach(function(p) { uris.push(p) }) }
-                    asv.push( { "uris": uris } )
-
                     const code = result ? 0 : 1
-
-                    //const payload = [ code, asv ]
-                    //const payload = [ code, data ]
                     const payload = [ code, uris ]
 
                     emitSignal("pickerDone", payload)

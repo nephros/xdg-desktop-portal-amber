@@ -181,7 +181,7 @@ void FileChooserPortal::setupPickerResponse()
                     QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("pickerDone"),
-                    QStringLiteral("ia{s}"),
+                    QStringLiteral("ias"),
                     this,
                     SLOT(handlePickerResponse(int, QStringList))
                     ))

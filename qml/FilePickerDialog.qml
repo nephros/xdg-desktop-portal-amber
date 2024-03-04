@@ -94,7 +94,7 @@ SystemDialog {
                             page.model.path = absolutePath
                         } else {
                             view.currentIndex = index
-                            page.selectedFile = Qt.resolvedUrl(absolutePath)
+                            page.selectedFile = Qt.resolvedUrl(absolutePath).toString()
                         }
                     }
                     contentHeight: content.height

@@ -18,6 +18,7 @@ ApplicationWindow { id: root
 
     cover: null
     property FilePickerDialog _filePickerDialog
+    property DBusInterface _request
     DBusAdaptor {
         service: "org.freedesktop.impl.portal.desktop.amber.ui"
         iface: "org.freedesktop.impl.portal.desktop.amber.ui"
@@ -44,6 +45,8 @@ ApplicationWindow { id: root
 
         function openFilePicker(handle, title, options) {
             console.log("Was asked for a file open dialog, using options", options)
+            // Create a dbus interface to listen for messages on the handle object:
+            _request = requestInterface.createObject(root, { "path": handle })
             var dialogOptions = {}
             try {
                 dialogOptions = JSON.parse(options)
@@ -55,6 +58,7 @@ ApplicationWindow { id: root
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
                     emitSignal("pickerDone", [ 2, [ "" ] ]) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    _request.destroy()
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
@@ -101,6 +105,7 @@ ApplicationWindow { id: root
 
                     emitSignal("pickerDone", [ code, uris ] )
                     _filePickerDialog.destroy()
+                    _request.destroy()
                 }) // end function(result,data)
 
                 console.log("Activating.")
@@ -118,5 +123,20 @@ ApplicationWindow { id: root
             return true
         }
         return false
+    }
+
+    Component { id: requestInterface
+        DBusInterface {
+            service: "org.freedesktop.impl.portal.desktop.amber"
+            iface: "org.freedesktop.impl.portal.Request"
+            signalsEnabled: true
+            function close() {
+                console.log("Received Close request.")
+                if (_filePickerDialog.windowVisible) {
+                    _filePickerDialog.lower()
+                }
+                _filePickerDialog.destroy()
+            }
+        }
     }
 }

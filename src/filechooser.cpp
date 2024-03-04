@@ -9,6 +9,7 @@
 
 #include "filechooser.h"
 
+#include <QCoreApplication>
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>

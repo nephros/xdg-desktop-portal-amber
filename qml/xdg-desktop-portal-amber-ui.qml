@@ -32,8 +32,9 @@ ApplicationWindow { id: root
              '<signal name="pickerDone">',
              '  <signal name="Response">',
              '    <arg type="u" name="response"/>',
-             '    <arg type="a{sv}" name="results"/>',
-             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
+             '    <arg type="s" name="results"/>',
+             //'    <arg type="a{sv}" name="results"/>',
+             //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
              '  </signal>',
              '</interface>',
         ].join('\n')
@@ -102,7 +103,8 @@ ApplicationWindow { id: root
 
                     const code = result ? 0 : 1
 
-                    const payload = [ code, asv ]
+                    //const payload = [ code, asv ]
+                    const payload = [ code, data ]
                     // Important: this is read by the calling process:
                     console.log("### Results:\n", JSON.stringify(payload,null,null))
 

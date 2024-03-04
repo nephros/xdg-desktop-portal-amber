@@ -157,10 +157,12 @@ void FileChooserPortal::handlePickerError()
 }
 void FileChooserPortal::handlePickerResponse(
                         const uint &code,
-                        const QVariantMap &results)
+                        const QString &result)
+                        //const QVariantMap &results)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received.";
-    m_callResult = results;
+    //m_callResult = results;
+    m_callResult.insert("uris", result);
     m_callResponseCode = static_cast<PickerResponse>(code);
     m_responseHandled = true;
 }
@@ -174,7 +176,8 @@ void FileChooserPortal::setupPickerResponse()
                     QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
                     QStringLiteral("pickerDone"),
                     this,
-                    SLOT(handlePickerResponse(uint code, QVariantMap callResults))
+                    SLOT(handlePickerResponse(uint code, QString callResult))
+                    //SLOT(handlePickerResponse(uint code, QVariantMap callResults))
                     ))
     {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";

@@ -96,7 +96,8 @@ ApplicationWindow { id: root
                     const code = result ? 0 : 1
 
                     const payload = [ code, asv ]
-                    console.log("Emitting:\n", JSON.stringify(payload,null,2))
+                    // Important: this is read by the calling process:
+                    console.log("### Results:\n", JSON.stringify(payload,null,null))
 
                     var resp = responseInterface.createObject(root, { "path": handle })
                     resp.emitSignal("Response", payload)

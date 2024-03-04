@@ -18,6 +18,10 @@ class FileChooserPortal : public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.FileChooser")
     Q_PROPERTY(uint version READ version CONSTANT)
+
+protected:
+    static const char* ui_helper;
+
 public:
     explicit FileChooserPortal(QObject *parent);
     ~FileChooserPortal() override;

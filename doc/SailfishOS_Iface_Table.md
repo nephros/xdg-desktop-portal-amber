@@ -80,6 +80,11 @@ The problem is that there is no functionality to present the existing
 Therefore, a helper app was implemented to do that. It is based on
 `SystemDialog` and existing dialogs like Network or Bluetooth device selection.
 
+Side note: Mozilla browsers can also use Portals for file pickers. Currently,
+the Sailfish Browser app uses its own purpose-built UI Dialog for Save actions.  
+Maybe the Save action dialog can be split out into a Portal application,
+letting both the Browser, and other users of *FileChooser* use it.
+
 ### May be provided/Undecided:
 
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |

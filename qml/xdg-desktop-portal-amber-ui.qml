@@ -32,6 +32,8 @@ ApplicationWindow { id: root
              '<signal name="pickerDone">',
              '    <arg type="u" name="response"/>',
              '    <arg type="s" name="results"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
              //'    <arg type="a{sv}" name="results"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
              '  </signal>',

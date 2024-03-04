@@ -31,13 +31,13 @@ ApplicationWindow { id: root
              '</method>',
              '<signal name="pickerDone">',
              '    <arg type="i" name="response" direction="out"/>',
-             //'    <arg type="s" name="results" direction="out"/>',
-             '    <arg type="as" name="results" direction="out"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
+             //'    <arg type="s" name="results" direction="out"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QString"/>',
-             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QStringList"/>',
              //'    <arg type="a{sv}" name="results"/>',
              //'    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>',
+             '    <arg type="as" name="results"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QStringList"/>',
              '  </signal>',
              '</interface>',
         ].join('\n')
@@ -54,7 +54,7 @@ ApplicationWindow { id: root
                 var comp = Qt.createComponent(Qt.resolvedUrl("FilePickerDialog.qml"))
                 if (comp.status == Component.Error) {
                     console.log("FilePickerDialog.qml error:", comp.errorString())
-                    emitSignal("pickerDone", { "response": 2, "results": [ ] }) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    emitSignal("pickerDone", [ 2, [ "" ] ]) // code 2 is "other" on org.freedesktop.portal.Request::Response
                     return
                 }
                 _filePickerDialog = comp.createObject(root, { "title": title, "options": dialogOptions } )
@@ -98,9 +98,8 @@ ApplicationWindow { id: root
                     if ( typeof data === "string") { uris = [ data ] }
                     if ( typeof data === "object") { data.forEach(function(p) { uris.push(p) }) }
                     const code = result ? 0 : 1
-                    const payload = [ code, uris ]
 
-                    emitSignal("pickerDone", payload)
+                    emitSignal("pickerDone", [ code, uris ] )
                     _filePickerDialog.destroy()
                 }) // end function(result,data)
 

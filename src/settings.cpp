@@ -89,7 +89,7 @@ void SettingsPortal::valueChanged(const QString &what)
 {
     if (what == CONFIG_SCHEME_KEY) {
         emit SettingsChanged(QStringLiteral(""), what, QVariant(getColorScheme()));
-    } else if (what == CONFIG_ACCENT_KEY
+    } else if (what == CONFIG_ACCENT_KEY) {
         emit SettingsChanged(QStringLiteral(""), what, QVariant(getAccentColor()));
     }
 }

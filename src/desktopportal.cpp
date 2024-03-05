@@ -34,6 +34,7 @@
 #include "access.h"
 #include "email.h"
 #include "filechooser.h"
+#include "settings.h"
 #include "screenshot.h"
 #include "wallpaper.h"
 
@@ -45,6 +46,7 @@ namespace Amber
         , m_email(new EmailPortal(this))
         , m_filechooser(new FileChooserPortal(this))
         , m_screenshot(new ScreenshotPortal(this))
+        , m_settings(new SettingsPortal(this))
         , m_wallpaper(new WallpaperPortal(this))
     {
         //m_access = new AccessPortal(this);

@@ -38,6 +38,7 @@
 #include "email.h"
 #include "filechooser.h"
 #include "screenshot.h"
+#include "settings.h"
 #include "wallpaper.h"
 
 namespace Amber
@@ -54,6 +55,7 @@ namespace Amber
         EmailPortal *const m_email = nullptr;
         FileChooserPortal *const m_filechooser = nullptr;
         ScreenshotPortal *const m_screenshot = nullptr;
+        SettingsPortal *const m_settings = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };
 }

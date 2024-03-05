@@ -21,6 +21,10 @@ class SettingsPortal : public QDBusAbstractAdaptor
 
     static const char* THEME_DCONF_SCHEME_KEY;
     static const char* THEME_DCONF_HIGHLIGHT_KEY;
+    static const char* NAMESPACE_OFDA_KEY;
+    static const char* CONFIG_ACCENT_KEY;
+    static const char* CONFIG_SCHEME_KEY;
+    static const char* CONFIG_CONTRAST_KEY;
 
 public:
     explicit SettingsPortal(QObject *parent);
@@ -48,15 +52,17 @@ public:
 
 public Q_SLOTS:
     void ReadAll(const QStringList &nss,
-                      QVariantMap &value);
+                       QVariantMap &value);
 
     void Read(const QString &ns,
-                    const QString &key,
+              const QString &key,
                     QVariant &value);
+    void valueChanged(const QString &what);
+
 signals:
     void SettingsChanged(const QString &ns,
-                    const QString &key,
-                    QVariant &value);
+                         const QString &key,
+                               QVariant &value);
 private:
 
     ColorScheme getColorScheme() const;

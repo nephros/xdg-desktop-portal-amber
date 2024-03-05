@@ -16,10 +16,15 @@
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 Q_DECLARE_METATYPE(Amber::SettingsPortal::ColorRGB)
 
-
 namespace Amber {
 const char* SettingsPortal::THEME_DCONF_SCHEME_KEY         = "/desktop/jolla/theme/colorScheme";
 const char* SettingsPortal::THEME_DCONF_HIGHLIGHT_KEY      = "/desktop/jolla/theme/color/highlight";
+
+const char* SettingsPortal::NAMESPACE_OFDA_KEY     = "org.freedesktop.appearance";
+
+const char* SettingsPortal::CONFIG_ACCENT_KEY      = "accent-color";
+const char* SettingsPortal::CONFIG_SCHEME_KEY      = "color-scheme";
+const char* SettingsPortal::CONFIG_CONTRAST_KEY    = "contrast";
 
 SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -27,8 +32,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
     , m_accentColorConfig(new MGConfItem(THEME_DCONF_HIGHLIGHT_KEY, this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
+    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
+    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
 }
 
 SettingsPortal::~SettingsPortal()
@@ -44,13 +49,13 @@ void SettingsPortal::ReadAll(const QStringList &nss,
     // TODO
     Q_UNUSED(nss);
 
-    QVariantMap ofa;
-    ofa.insert(QStringLiteral("color-scheme"), QVariant(getColorScheme()));
+    QVariantMap ofda;
     ColorRGB accent =  getAccentColor();
-    ofa.insert(QStringLiteral("accent-color"), QVariantList( { accent.red, accent.green, accent.blue }));
-    ofa.insert(QStringLiteral("contrast"), QVariant(getContrast()));
+    ofda.insert(CONFIG_SCHEME_KEY, QVariant(getColorScheme()));
+    ofda.insert(CONFIG_ACCENT_KEY, QVariantList( { accent.red, accent.green, accent.blue }));
+    ofda.insert(CONFIG_CONTRAST_KEY, QVariant(getContrast()));
 
-    value.insert(QStringLiteral("org.freedesktop.appearance"), ofa);
+    value.insert(NAMESPACE_OFDA_KEY, ofda);
 
     return;
 }
@@ -66,11 +71,11 @@ void SettingsPortal::Read(const QString &ns,
     // TODO
     Q_UNUSED(ns);
 
-    if (key == QStringLiteral("color-scheme")) {
+    if (key == CONFIG_SCHEME_KEY) {
         value = QVariant(getColorScheme());
-    } else if (key == QStringLiteral("contrast")) {
+    } else if (key == CONFIG_CONTRAST_KEY) {
         value = QVariant(getContrast());
-    } else if (key == QStringLiteral("accent-color")) {
+    } else if (key == CONFIG_ACCENT_KEY) {
         ColorRGB accent =  getAccentColor();
         value = QVariant::fromValue<SettingsPortal::ColorRGB>(accent);
     } else {
@@ -78,6 +83,15 @@ void SettingsPortal::Read(const QString &ns,
         value = QVariant();
     }
     return;
+}
+
+void SettingsPortal::valueChanged(const QString &what)
+{
+    if (what == CONFIG_SCHEME_KEY) {
+        emit SettingsChanged(QStringLiteral(""), what, QVariant(getColorScheme()));
+    } else if (what == CONFIG_ACCENT_KEY
+        emit SettingsChanged(QStringLiteral(""), what, QVariant(getAccentColor()));
+    }
 }
 
 SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const

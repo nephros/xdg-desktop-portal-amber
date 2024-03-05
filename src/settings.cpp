@@ -17,7 +17,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 Q_DECLARE_METATYPE(Amber::SettingsPortal::ColorRGB)
 
 namespace Amber {
-const char* SettingsPortal::THEME_DCONF_SCHEME_KEY         = "/desktop/jolla/theme/colorScheme";
+const char* SettingsPortal::THEME_DCONF_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
 const char* SettingsPortal::THEME_DCONF_HIGHLIGHT_KEY      = "/desktop/jolla/theme/color/highlight";
 
 const char* SettingsPortal::NAMESPACE_OFDA_KEY     = "org.freedesktop.appearance";

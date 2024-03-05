@@ -32,14 +32,14 @@ public:
 
     uint version() const { return 1; }
 
-    enum ThemeColorScheme : uint {
-      LightOnDark = 1,
-      DarkOnLight = 2,
+    enum ThemeColorScheme : int {
+      LightOnDark = 0,
+      DarkOnLight = 1,
     };
     Q_ENUM(ThemeColorScheme)
 
-    enum ColorScheme : uint {
-      None = 0,
+    enum ColorScheme : int {
+      None = -1,
       Dark = ThemeColorScheme::LightOnDark,
       Light = ThemeColorScheme::DarkOnLight
     };

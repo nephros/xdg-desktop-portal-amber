@@ -22,19 +22,15 @@ class SettingsPortal : public QDBusAbstractAdaptor
     static const char* THEME_DCONF_SCHEME_KEY;
     static const char* THEME_DCONF_HIGHLIGHT_KEY;
     static const char* NAMESPACE_OFDA_KEY;
+    static const char* CONFIG_ACCENT_KEY;
+    static const char* CONFIG_SCHEME_KEY;
+    static const char* CONFIG_CONTRAST_KEY;
 
 public:
     explicit SettingsPortal(QObject *parent);
     ~SettingsPortal() override;
 
     uint version() const { return 1; }
-
-    enum ConfigKeys {
-         Accent      = "accent-color",
-         Scheme      = "color-scheme",
-         Contrast    = "contrast",
-    };
-    Q_ENUM(ConfigKeys)
 
     enum ThemeColorScheme : int {
       LightOnDark = 0,

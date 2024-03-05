@@ -14,7 +14,6 @@
 #include <mlite5/MGConfItem>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
-Q_DECLARE_METATYPE(Amber::SettingsPortal::ColorRGB)
 
 namespace Amber {
 const char* SettingsPortal::THEME_DCONF_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
@@ -50,9 +49,8 @@ void SettingsPortal::ReadAll(const QStringList &nss,
     Q_UNUSED(nss);
 
     QVariantMap ofda;
-    ColorRGB accent =  getAccentColor();
     ofda.insert(CONFIG_SCHEME_KEY, QVariant(getColorScheme()));
-    ofda.insert(CONFIG_ACCENT_KEY, QVariantList( { accent.red, accent.green, accent.blue }));
+    ofda.insert(CONFIG_ACCENT_KEY, QVariantList(getAccentColor()));
     ofda.insert(CONFIG_CONTRAST_KEY, QVariant(getContrast()));
 
     value.insert(NAMESPACE_OFDA_KEY, ofda);
@@ -76,8 +74,7 @@ void SettingsPortal::Read(const QString &ns,
     } else if (key == CONFIG_CONTRAST_KEY) {
         value = QVariant(getContrast());
     } else if (key == CONFIG_ACCENT_KEY) {
-        ColorRGB accent =  getAccentColor();
-        value = QVariant::fromValue<SettingsPortal::ColorRGB>(accent);
+        value = QVariant(getAccentColor());
     } else {
         qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
         value = QVariant();
@@ -107,16 +104,17 @@ SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const
 
   return ret;
 }
-SettingsPortal::ColorRGB SettingsPortal::getAccentColor() const
+
+QList<double> SettingsPortal::getAccentColor() const
 {
-  ColorRGB ret = { 0.0, 0.0, 0.0 };
-  QColor set;
-  set.setNamedColor(m_accentColorConfig->value().toString());
-  if (set.isValid()) {
-    ret.red = set.redF();
-    ret.green = set.greenF();
-    ret.blue = set.blueF();
-  }
-  return ret;
+    QList<double> ret;
+    QColor set;
+    set.setNamedColor(m_accentColorConfig->value().toString());
+    if (set.isValid()) {
+            ret.insert(set.redF());
+            ret.insert(set.greenF());
+            ret.insert(set.blueF());
+    }
+    return ret;
 }
 } // namespace Amber

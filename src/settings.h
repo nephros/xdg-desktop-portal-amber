@@ -44,11 +44,6 @@ public:
       Light = ThemeColorScheme::DarkOnLight
     };
     Q_ENUM(ColorScheme)
-    struct ColorRGB {
-            double red;
-            double green;
-            double blue;
-    };
 
 public Q_SLOTS:
     void ReadAll(const QStringList &nss,
@@ -66,7 +61,7 @@ signals:
 private:
 
     ColorScheme getColorScheme() const;
-    ColorRGB getAccentColor() const;
+    QList<double> getAccentColor() const;
     // TODO: We alsways return "normal/no preference" contrast.
     uint getContrast() const { return 0; };
 

@@ -88,9 +88,9 @@ void SettingsPortal::Read(const QString &ns,
 void SettingsPortal::valueChanged(const QString &what)
 {
     if (what == CONFIG_SCHEME_KEY) {
-        emit SettingsChanged(QStringLiteral(""), what, QVariant(getColorScheme()));
+        emit SettingsChanged(NAMESPACE_OFDA_KEY, what, QVariant(getColorScheme()));
     } else if (what == CONFIG_ACCENT_KEY) {
-        emit SettingsChanged(QStringLiteral(""), what, QVariant(getAccentColor()));
+        emit SettingsChanged(NAMESPACE_OFDA_KEY, what, QVariant(getAccentColor()));
     }
 }
 

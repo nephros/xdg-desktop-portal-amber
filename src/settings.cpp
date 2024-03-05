@@ -22,9 +22,6 @@ const char* SettingsPortal::THEME_DCONF_HIGHLIGHT_KEY      = "/desktop/jolla/the
 
 const char* SettingsPortal::NAMESPACE_OFDA_KEY     = "org.freedesktop.appearance";
 
-const char* SettingsPortal::CONFIG_ACCENT_KEY      = "accent-color";
-const char* SettingsPortal::CONFIG_SCHEME_KEY      = "color-scheme";
-const char* SettingsPortal::CONFIG_CONTRAST_KEY    = "contrast";
 
 SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -32,8 +29,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
     , m_accentColorConfig(new MGConfItem(THEME_DCONF_HIGHLIGHT_KEY, this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
+    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(ConfigKeys::Scheme)));
+    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(ConfigKeys::Accent)));
 }
 
 SettingsPortal::~SettingsPortal()
@@ -51,9 +48,9 @@ void SettingsPortal::ReadAll(const QStringList &nss,
 
     QVariantMap ofda;
     ColorRGB accent =  getAccentColor();
-    ofda.insert(CONFIG_SCHEME_KEY, QVariant(getColorScheme()));
-    ofda.insert(CONFIG_ACCENT_KEY, QVariantList( { accent.red, accent.green, accent.blue }));
-    ofda.insert(CONFIG_CONTRAST_KEY, QVariant(getContrast()));
+    ofda.insert(ConfigKeys::Scheme, QVariant(getColorScheme()));
+    ofda.insert(ConfigKeys::Accent, QVariantList( { accent.red, accent.green, accent.blue }));
+    ofda.insert(ConfigKeys::Contrast, QVariant(getContrast()));
 
     value.insert(NAMESPACE_OFDA_KEY, ofda);
 
@@ -71,11 +68,11 @@ void SettingsPortal::Read(const QString &ns,
     // TODO
     Q_UNUSED(ns);
 
-    if (key == CONFIG_SCHEME_KEY) {
+    if (key == ConfigKeys::Scheme) {
         value = QVariant(getColorScheme());
-    } else if (key == CONFIG_CONTRAST_KEY) {
+    } else if (key == ConfigKeys::Contrast) {
         value = QVariant(getContrast());
-    } else if (key == CONFIG_ACCENT_KEY) {
+    } else if (key == ConfigKeys::Accent) {
         ColorRGB accent =  getAccentColor();
         value = QVariant::fromValue<SettingsPortal::ColorRGB>(accent);
     } else {
@@ -87,9 +84,9 @@ void SettingsPortal::Read(const QString &ns,
 
 void SettingsPortal::valueChanged(const QString &what)
 {
-    if (what == CONFIG_SCHEME_KEY) {
+    if (what == ConfigKeys::Scheme) {
         emit SettingsChanged(QStringLiteral(""), what, QVariant(getColorScheme()));
-    } else if (what == CONFIG_ACCENT_KEY
+    } else if (what == ConfigKeys::Accent
         emit SettingsChanged(QStringLiteral(""), what, QVariant(getAccentColor()));
     }
 }

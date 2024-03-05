@@ -62,7 +62,7 @@ public Q_SLOTS:
 signals:
     void SettingsChanged(const QString &ns,
                          const QString &key,
-                               QVariant &value);
+                         const QVariant &value);
 private:
 
     ColorScheme getColorScheme() const;

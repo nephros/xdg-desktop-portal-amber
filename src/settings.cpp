@@ -50,7 +50,7 @@ void SettingsPortal::ReadAll(const QStringList &nss,
 
     QVariantMap ofda;
     ofda.insert(CONFIG_SCHEME_KEY, QVariant(getColorScheme()));
-    ofda.insert(CONFIG_ACCENT_KEY, QVariantList(getAccentColor()));
+    ofda.insert(CONFIG_ACCENT_KEY, QVariant(getAccentColor()));
     ofda.insert(CONFIG_CONTRAST_KEY, QVariant(getContrast()));
 
     value.insert(NAMESPACE_OFDA_KEY, ofda);

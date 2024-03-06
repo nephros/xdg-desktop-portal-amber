@@ -20,12 +20,22 @@ class SettingsPortal : public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Settings")
     Q_PROPERTY(uint version READ version CONSTANT)
 
-    static const char* THEME_DCONF_SCHEME_KEY;
-    static const char* THEME_DCONF_HIGHLIGHT_KEY;
-    static const char* NAMESPACE_OFDA_KEY;
-    static const char* CONFIG_ACCENT_KEY;
-    static const char* CONFIG_SCHEME_KEY;
-    static const char* CONFIG_CONTRAST_KEY;
+    static const char* DCONF_SAILFISHOS_SCHEME_KEY;
+    static const char* DCONF_SAILFISHOS_HIGHLIGHT_KEY;
+    static const char* NAMESPACE_FDO;
+    static const char* CONFIG_FDO_ACCENT_KEY;
+    static const char* CONFIG_FDO_SCHEME_KEY;
+    static const char* CONFIG_FDO_CONTRAST_KEY;
+    // TODO: other namespaces, e.g.:
+    static const char* NAMESPACE_SAILFISHOS;
+    static const char* CONFIG_SAILFISHOS_THEME_SCHEME_KEY;
+    static const char* CONFIG_SAILFISHOS_THEME_PRIMARY_KEY;
+    static const char* CONFIG_SAILFISHOS_THEME_SECONDARY_KEY;
+    static const char* CONFIG_SAILFISHOS_THEME_HIGHLIGHT_KEY;
+    static const char* CONFIG_SAILFISHOS_THEME_SECONDARYHIGHLIGHT_KEY;
+    static const char* NAMESPACE_KDE;
+    static const char* NAMESPACE_KDE_GENERAL;
+    static const char* CONFIG_KDE_SCHEME_KEY;
 
 public:
     explicit SettingsPortal(QObject *parent);
@@ -47,18 +57,8 @@ public:
     Q_ENUM(ColorScheme)
 
 public Q_SLOTS:
-    QMap<QString, QMap<QString, QDBusVariant>> ReadAll(const QStringList &nss);
+    void ReadAll(const QStringList &nss);
     QDBusVariant Read(const QString &ns, const QString &key);
-/*
-    void ReadAll(const QStringList &nss,
-                       QVariantMap &value);
-
-    void Read(const QString &ns,
-              const QString &key,
-                    QVariant &value);
-
-*/
-
     void valueChanged(const char* &what);
 
 signals:

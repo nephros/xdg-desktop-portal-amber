@@ -33,8 +33,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
-    //QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
-    //QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
+    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
+    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
 
 }
 
@@ -50,14 +50,12 @@ QMap<QString, QMap<QString, QDBusVariant>> SettingsPortal::ReadAll(const QString
     // TODO
     Q_UNUSED(nss);
 
-    ColorRGB accent =  getAccentColor();
-
-    // “(a{sa{sv}})”
+    // on-the-fly construction of "(a{sa{sv}})"
     return {
         { NAMESPACE_OFDA_KEY, {
             { CONFIG_SCHEME_KEY,   QDBusVariant(getColorScheme()) },
             { CONFIG_ACCENT_KEY,   QDBusVariant(getContrast()) },
-            { CONFIG_CONTRAST_KEY, QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent)) }
+            { CONFIG_CONTRAST_KEY, QDBusVariant(QVariant(getAccentColor())) }
         }
         }
     };
@@ -78,8 +76,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     } else if (key == CONFIG_CONTRAST_KEY) {
         return QDBusVariant(getContrast());
     } else if (key == CONFIG_ACCENT_KEY) {
-        ColorRGB accent =  getAccentColor();
-        return QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent));
+        return QDBusVariant(QVariant(getAccentColor()));
     }
     qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
@@ -108,16 +105,12 @@ SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const
   return ret;
 }
 
-QList<double> SettingsPortal::getAccentColor() const
+QList<QVariant> SettingsPortal::getAccentColor() const
 {
-    QList<double> ret;
     QColor set;
     set.setNamedColor(m_accentColorConfig->value().toString());
     if (set.isValid()) {
-            ret.insert(set.redF());
-            ret.insert(set.greenF());
-            ret.insert(set.blueF());
+        return { QVariant(set.redF()), QVariant(set.greenF()), QVariant(set.blueF()) };
     }
-    return ret;
 }
 } // namespace Amber

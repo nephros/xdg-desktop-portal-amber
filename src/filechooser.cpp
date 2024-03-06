@@ -148,12 +148,32 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    /*
     if (!options.isEmpty()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
     }
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
+    */
+
+    // ugly hack copied over from KDE:
+    QObject *obj = QObject::parent();
+    if (!obj) {
+        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        return;
+    }
+    void *ptr = obj->qt_metacast("QDBusContext");
+    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
+    if (!q_ptr) {
+        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        return;
+    }
+    QDBusMessage message = q_ptr->message();
+
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "This method is not implemented";
+    QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
+    QDBusConnection::sessionBus().send(reply);
 
 }
+
 void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
@@ -166,11 +186,27 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    /*
     if (!options.isEmpty()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
     }
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
+    */
+
+    // ugly hack copied over from KDE:
+    QObject *obj = QObject::parent();
+    void *ptr = obj->qt_metacast("QDBusContext");
+    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
+    if (!q_ptr) {
+        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        return;
+    }
+    QDBusMessage message = q_ptr->message();
+
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "This method is not implemented";
+    QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
+    QDBusConnection::sessionBus().send(reply);
 }
+
 void FileChooserPortal::handlePickerError()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";

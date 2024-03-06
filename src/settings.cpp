@@ -63,8 +63,9 @@ void SettingsPortal::ReadAll(const QStringList &nss)
 
     QObject *qo = new QObject(this);
     QDBusMessage reply;
-    QDBusMessage message = qo->message();;
-    QDBusVariant result;
+    QDBusMessage message;
+    //QDBusVariant result;
+    QMap<QString, QMap<QString, QDBusVariant>> result;
 
     // FIXME: we should support a namespace list:
     if (nss.contains(NAMESPACE_FDO)) {

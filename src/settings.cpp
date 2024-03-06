@@ -51,8 +51,9 @@ SettingsPortal::SettingsPortal(QObject *parent)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
+    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
+    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
+    QObject::connect(m_sailfishThemeConfigGroup, SIGNAL(valueChanged(QString)), SLOT(valueChanged(char*)));
 
 }
 
@@ -95,7 +96,22 @@ void SettingsPortal::ReadAll(const QStringList &nss)
         reply = message.createReply(QVariant::fromValue(result));
     } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
         qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor! Namespace" << nss << "is not yet supported";
-        reply = message.createErrorReply(QDBusError::UnknownProperty, QStringLiteral("Ahoy Sailor! Namespace is not yet supported"));
+        result = {
+          { NAMESPACE_SAILFISHOS, {
+                  { CONFIG_SAILFISHOS_THEME_SCHEME_KEY, QDBusVariant(getColorScheme()) },
+                  { CONFIG_SAILFISHOS_THEME_PRIMARY_KEY,
+                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
+                  { CONFIG_SAILFISHOS_THEME_SECONDARY_KEY,
+                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondary"),"#b0ffffff", QMetaType::QString)) },
+                  { CONFIG_SAILFISHOS_THEME_SECONDARYHIGHLIGHT_KEY,
+                        // F76039 ia approx the color of the original J1 orange ToH
+                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
+                  { CONFIG_SAILFISHOS_THEME_HIGHLIGHT_KEY,
+                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
+                }
+          }
+        };
+        reply = message.createReply(QVariant::fromValue(result));
     } else {
         qCDebug(XdgDesktopPortalAmberSettings) << "Unknown namespace:" << nss;
         reply = message.createErrorReply(QDBusError::UnknownProperty, QStringLiteral("Namespace is not supported"));

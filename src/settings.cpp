@@ -54,10 +54,21 @@ SettingsPortal::SettingsPortal(QObject *parent)
     qDBusRegisterMetaType<QMap<QString, QMap<QString, QDBusVariant>>>();
     qDBusRegisterMetaType<QMap<QString,QDBusVariant>>();
 
+    /* TODO
     QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
     QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
-    QObject::connect(m_sailfishThemeConfigGroup, SIGNAL(valueChanged(QString)), SLOT(valueChanged(char*)));
-
+    */
+    QObject::connect(m_sailfishThemeConfigGroup, SIGNAL(valueChanged(QString)), SLOT(valueChanged(QString)));
+    // listen for ambience changes:
+    QDBusConnection::sessionBus().connect(
+                    QStringLiteral("com.jolla.ambienced"),
+                    QStringLiteral("/com/jolla/ambienced"),
+                    QStringLiteral("com.jolla.ambienced"),
+                    QStringLiteral("contentChanged"),
+                    QStringLiteral("i"),
+                    this,
+                    SLOT(ambienceChanged(int))
+                    );
 }
 
 SettingsPortal::~SettingsPortal()
@@ -143,12 +154,12 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
-void SettingsPortal::valueChanged(const char* &what)
+void SettingsPortal::valueChanged(const QString &what)
 {
     if (what == CONFIG_FDO_SCHEME_KEY) {
-        emit SettingsChanged(NAMESPACE_FDO, what, QVariant(getColorScheme()));
+        emit SettingChanged(NAMESPACE_FDO, what, QVariant(getColorScheme()));
     } else if (what == CONFIG_FDO_ACCENT_KEY) {
-        emit SettingsChanged(NAMESPACE_FDO, what, QVariant(getAccentColor()));
+        emit SettingChanged(NAMESPACE_FDO, what, QVariant(getAccentColor()));
     }
 }
 
@@ -174,5 +185,10 @@ QList<QVariant> SettingsPortal::getAccentColor() const
         return { QVariant(set.redF()), QVariant(set.greenF()), QVariant(set.blueF()) };
     }
     return QList<QVariant>();
+}
+
+void SettingsPortal::ambienceChanged(const int &i)
+{
+    emit SettingChanged(NAMESPACE_SAILFISHOS, QStringLiteral("ambience"), QVariant(i));
 }
 } // namespace Amber

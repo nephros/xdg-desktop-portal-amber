@@ -61,10 +61,11 @@ public:
 public Q_SLOTS:
     void ReadAll(const QStringList &nss);
     QDBusVariant Read(const QString &ns, const QString &key);
-    void valueChanged(const char* &what);
+    void valueChanged(const QString &what);
+    void ambienceChanged(const int &i);
 
 signals:
-    void SettingsChanged(const QString &ns,
+    void SettingChanged(const QString &ns,
                          const QString &key,
                          const QVariant &value);
 private:

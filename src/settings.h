@@ -47,8 +47,8 @@ public:
     };
 
 public Q_SLOTS:
-    QMap<QString, QMap<QString, QVariant>> ReadAll(const QStringList &nss);
-    QVariant Read(const QString &ns, const QString &key);
+    QMap<QString, QMap<QString, QDBusVariant>> ReadAll(const QStringList &nss);
+    QDBusVariant Read(const QString &ns, const QString &key);
 /*
     void ReadAll(const QStringList &nss,
                       QVariantMap &value);
@@ -66,6 +66,7 @@ private:
     ColorScheme getColorScheme() const;
     ColorRGB getAccentColor() const;
     // TODO: We alsways return "normal/no preference" contrast.
+    // FIXME: there s something about high contrast in lipstick somewhere...
     uint getContrast() const { return 0; };
 
     MGConfItem *m_schemeConfig;

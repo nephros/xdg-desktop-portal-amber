@@ -35,7 +35,7 @@ SettingsPortal::~SettingsPortal()
 {
 }
 
-QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList &nss)
+QMap<QString, QMap<QString, QDBusVariant>> SettingsPortal::ReadAll(const QStringList &nss)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespaces: " << nss;
@@ -44,7 +44,7 @@ QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList
     Q_UNUSED(nss);
 
     // “(a{sa{sv}})”
-    QMap<QString, QMap<QString, QVariant>> value;
+    QMap<QString, QMap<QString, QDBusVariant>> value;
     QVariantMap ofa;
     ofa.insert(QStringLiteral("color-scheme"), QVariant(getColorScheme()));
     ColorRGB accent =  getAccentColor();
@@ -57,7 +57,7 @@ QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList
     return value;
 }
 
-QVariant SettingsPortal::Read(const QString &ns,
+QDBusVariant SettingsPortal::Read(const QString &ns,
                               const QString &key)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";

@@ -110,16 +110,16 @@ SystemDialog {
                             sourceSize.width: height
                             sourceSize.height: height
                             anchors.verticalCenter: parent.verticalCenter
-                        }
-                        Loader {
-                            anchors.fill: icon
-                            anchors.centerIn: icon
-                            active: (/^image/.test(mimeType) ||  /^video/.test(mimeType)
-                            sourceComponent: Thumbnail {
-                                sourceSize.width: width
-                                sourceSize.height: height
-                                source: absolutePath
-                                fillMode: Thumbnail.PreserveAspectFit
+                            Loader {
+                                anchors.fill: icon
+                                anchors.centerIn: icon
+                                active: /^image/.test(mimeType) ||  /^video/.test(mimeType)
+                                sourceComponent: Thumbnail {
+                                    sourceSize.width: width
+                                    sourceSize.height: height
+                                    source: absolutePath
+                                    fillMode: Thumbnail.PreserveAspectFit
+                                }
                             }
                         }
                         Column {

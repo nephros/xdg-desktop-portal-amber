@@ -47,12 +47,16 @@ public:
     };
 
 public Q_SLOTS:
+    QMap<QString, QMap<QString, QVariant>> ReadAll(const QStringList &nss);
+    QVariant Read(const QString &ns);
+/*
     void ReadAll(const QStringList &nss,
                       QVariantMap &value);
 
     void Read(const QString &ns,
                     const QString &key,
                     QVariant &value);
+*/
 signals:
     void SettingsChanged(const QString &ns,
                     const QString &key,

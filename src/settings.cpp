@@ -8,6 +8,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusVariant>
 #include <QColor>
 #include <QLoggingCategory>
 

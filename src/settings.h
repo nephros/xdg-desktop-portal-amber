@@ -9,6 +9,7 @@
 #define XDG_DESKTOP_PORTAL_AMBER_SETTINGS_H
 
 #include <QDBusAbstractAdaptor>
+#include <QDBusVariant>
 
 #include <mlite5/MGConfItem>
 

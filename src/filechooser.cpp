@@ -158,8 +158,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QDBusArgument result;
     result.beginStructure();
     result << (uint)m_callResponseCode;
-    result << QMap<QString, QVariantList>{
-        { QStringLiteral("uris"), m_callResult }
+    result << QMap<QString, QVariant>{
+        { QStringLiteral("uris"), QVariant::fromValue(m_callResult) }
     };
     result.endStructure();
     reply = message.createReply(QVariant::fromValue(result));

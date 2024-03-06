@@ -143,13 +143,25 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QDBusMessage message = q_ptr->message();
 
     reply.setDelayedReply(true);
-    QMap<QString, QVariantList> result;
+    //“(ua{sv})”
+    /*
+    QMap<uint, QMap<QString, QDBusVariant>> result;
     result = {
+        (uint)m_callResponseCode, {
             // { (QStringLiteral("current_filter"), }
             // { (QStringLiteral("choices"), }
             // { (QStringLiteral("writable"), }
-            { QStringLiteral("uris"), m_callResult },
+          { QStringLiteral("uris"), QDBusVariant(QVariant(m_callResult)) },
+        }
     };
+    */
+    QDBusArgument result;
+    result.beginStructure();
+    result << (uint)m_callResponseCode;
+    result << QMap<QString, QVariantList>{
+        { QStringLiteral("uris"), m_callResult }
+    };
+    result.endStructure();
     reply = message.createReply(QVariant::fromValue(result));
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << reply.arguments();
     QDBusConnection::sessionBus().send(reply);

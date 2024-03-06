@@ -35,7 +35,7 @@ SettingsPortal::~SettingsPortal()
 {
 }
 
-QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList &nss) {
+QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList &nss)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespaces: " << nss;
@@ -58,7 +58,7 @@ QMap<QString, QMap<QString, QVariant>> SettingsPortal::ReadAll(const QStringList
 }
 
 QVariant SettingsPortal::Read(const QString &ns,
-                          const QString &key);
+                              const QString &key)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespace: " << ns;

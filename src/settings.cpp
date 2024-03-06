@@ -51,6 +51,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
+    qDBusRegisterMetaType<QMap<QString, QMap<QString, QDBusVariant>>>();
+
     QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
     QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
     QObject::connect(m_sailfishThemeConfigGroup, SIGNAL(valueChanged(QString)), SLOT(valueChanged(char*)));
@@ -170,5 +172,6 @@ QList<QVariant> SettingsPortal::getAccentColor() const
     if (set.isValid()) {
         return { QVariant(set.redF()), QVariant(set.greenF()), QVariant(set.blueF()) };
     }
+    return QList<QVariant>();
 }
 } // namespace Amber

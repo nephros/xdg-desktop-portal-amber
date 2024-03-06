@@ -44,18 +44,18 @@ QMap<QString, QMap<QString, QDBusVariant>> SettingsPortal::ReadAll(const QString
     // TODO
     Q_UNUSED(nss);
 
-    // “(a{sa{sv}})”
-    QMap<QString, QMap<QString, QDBusVariant>> value;
-    QVariantMap ofa;
-    ofa.insert(QStringLiteral("color-scheme"), QVariant(getColorScheme()));
     ColorRGB accent =  getAccentColor();
-    ofa.insert(QStringLiteral("accent-color"), QVariantList( { accent.red, accent.green, accent.blue }));
-    ofa.insert(QStringLiteral("contrast"), QVariant(getContrast()));
 
-    value.insert(QStringLiteral("org.freedesktop.appearance"), ofa);
+    // “(a{sa{sv}})”
+    return {
+        { QStringLiteral("org.freedesktop.appearance"), {
+            { QStringLiteral("color-scheme"), QDBusVariant(getColorScheme()) },
+            { QStringLiteral("contrast"), QDBusVariant(getContrast()) },
+            { QStringLiteral("accent-color"), QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent)) }
+        }
+        }
+    };
 
-    qCDebug(XdgDesktopPortalAmberSettings) << "Returning:" << value;
-    return value;
 }
 
 QDBusVariant SettingsPortal::Read(const QString &ns,
@@ -64,23 +64,20 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespace: " << ns;
     qCDebug(XdgDesktopPortalAmberSettings) << "          key: " << key;
-    QVariant value;
 
     // TODO
     Q_UNUSED(ns);
 
     if (key == QStringLiteral("color-scheme")) {
-        value = QVariant(getColorScheme());
+        return QDBusVariant(getColorScheme());
     } else if (key == QStringLiteral("contrast")) {
-        value = QVariant(getContrast());
+        return QDBusVariant(getContrast());
     } else if (key == QStringLiteral("accent-color")) {
         ColorRGB accent =  getAccentColor();
-        value = QVariant::fromValue<SettingsPortal::ColorRGB>(accent);
-    } else {
-        qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
-        value = QVariant();
+        return QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent));
     }
-    return value;
+    qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
+    return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
 SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const

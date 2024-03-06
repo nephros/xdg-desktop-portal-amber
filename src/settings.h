@@ -59,7 +59,7 @@ public Q_SLOTS:
 
 */
 
-    void valueChanged(const QString &what);
+    void valueChanged(const char* &what);
 
 signals:
     void SettingsChanged(const QString &ns,

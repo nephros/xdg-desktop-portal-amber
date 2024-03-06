@@ -82,7 +82,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
-void SettingsPortal::valueChanged(const QString &what)
+void SettingsPortal::valueChanged(const char* &what)
 {
     if (what == CONFIG_SCHEME_KEY) {
         emit SettingsChanged(NAMESPACE_OFDA_KEY, what, QVariant(getColorScheme()));

@@ -12,6 +12,7 @@ import Nemo.FileManager 1.0
 import Sailfish.Silica 1.0
 import Sailfish.Lipstick 1.0
 import Sailfish.Pickers 1.0
+import Nemo.Thumbnailer 1.0
 
 SystemDialog {
     id: page
@@ -109,6 +110,17 @@ SystemDialog {
                             sourceSize.width: height
                             sourceSize.height: height
                             anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Loader {
+                            anchors.fill: icon
+                            anchors.centerIn: icon
+                            active: (/^image/.test(mimeType) ||  /^video/.test(mimeType)
+                            sourceComponent: Thumbnail {
+                                sourceSize.width: width
+                                sourceSize.height: height
+                                source: absolutePath
+                                fillMode: Thumbnail.PreserveAspectFit
+                            }
                         }
                         Column {
                             width: parent.width - icon.width

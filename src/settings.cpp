@@ -13,12 +13,14 @@
 #include <QLoggingCategory>
 
 #include <mlite5/MGConfItem>
+#include <mlite5/MDConfGroup>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 
 namespace Amber {
 const char* SettingsPortal::DCONF_SAILFISHOS_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
 const char* SettingsPortal::DCONF_SAILFISHOS_HIGHLIGHT_KEY      = "/desktop/jolla/theme/color/highlight";
+const char* SettingsPortal::DCONF_SAILFISHOS_THEME_GROUP        = "/desktop/jolla/theme/color";
 
 const char* SettingsPortal::NAMESPACE_FDO     = "org.freedesktop.appearance";
 
@@ -28,8 +30,8 @@ const char* SettingsPortal::CONFIG_FDO_CONTRAST_KEY    = "contrast";
 
 // TODO: other namespaces, e.g.:
 // naming things is hard.
-// org.sailfishos.desktop? com.jolla.lipstick? com.jolla.ambienced? org.merproject? com.nokia.meego.harmattan?
-const char* SettingsPortal::NAMESPACE_SAILFISHOS = "org.sailfishos.desktop";
+// org.sailfishos.desktop? com.jolla.lipstick? com.jolla.ambienced? org.merproject? com.nokia.meego-harmattan?
+const char* SettingsPortal::NAMESPACE_SAILFISHOS                    = "org.sailfishos.desktop";
 const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_SCHEME_KEY      = "color-scheme";
 const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_PRIMARY_KEY     = "primary-color";
 const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_SECONDARY_KEY   = "secondary-color";
@@ -44,6 +46,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
     , m_schemeConfig(new MGConfItem(DCONF_SAILFISHOS_SCHEME_KEY, this))
     , m_accentColorConfig(new MGConfItem(DCONF_SAILFISHOS_HIGHLIGHT_KEY, this))
+    , m_sailfishThemeConfigGroup(new MDConfGroup(DCONF_SAILFISHOS_THEME_GROUP, this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 

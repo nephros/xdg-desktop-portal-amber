@@ -12,6 +12,7 @@
 #include <QDBusVariant>
 
 #include <mlite5/MGConfItem>
+#include <mlite5/MDConfGroup>
 
 namespace Amber {
 class SettingsPortal : public QDBusAbstractAdaptor
@@ -22,6 +23,7 @@ class SettingsPortal : public QDBusAbstractAdaptor
 
     static const char* DCONF_SAILFISHOS_SCHEME_KEY;
     static const char* DCONF_SAILFISHOS_HIGHLIGHT_KEY;
+    static const char* DCONF_SAILFISHOS_THEME_GROUP;
     static const char* NAMESPACE_FDO;
     static const char* CONFIG_FDO_ACCENT_KEY;
     static const char* CONFIG_FDO_SCHEME_KEY;
@@ -73,8 +75,9 @@ private:
     // FIXME: there s something about high contrast in lipstick somewhere...
     uint getContrast() const { return 0; };
 
-    MGConfItem *m_schemeConfig;
-    MGConfItem *m_accentColorConfig;
+    MGConfItem  *m_schemeConfig;
+    MGConfItem  *m_accentColorConfig;
+    MDConfGroup *m_sailfishThemeConfigGroup;
 
 };
 }

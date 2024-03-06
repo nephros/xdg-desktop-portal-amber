@@ -39,8 +39,8 @@ public Q_SLOTS:
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options,
-                      QVariantMap &results);
+                      const QVariantMap &options
+                      );
     uint SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,

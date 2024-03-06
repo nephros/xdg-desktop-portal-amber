@@ -39,8 +39,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &app_id,
                                 const QString &parent_window,
                                 const QString &title,
-                                const QVariantMap &options,
-                                QVariantMap &results)
+                                const QVariantMap &options
+                                )
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.OpenFile called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();

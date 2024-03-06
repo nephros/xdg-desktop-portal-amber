@@ -64,7 +64,7 @@ public Q_SLOTS:
 private:
     bool m_responseHandled;
     PickerResponse m_callResponseCode;
-    QVariantList m_callResult;
+    QStringList m_callResult;
 
 };
 }

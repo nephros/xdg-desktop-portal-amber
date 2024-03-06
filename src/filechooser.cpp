@@ -54,7 +54,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     //Q_UNUSED(results);
 
     // clean up from last time:
-    m_callResult = QVariantList();
+    m_callResult = QStringList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = false;
 
@@ -174,7 +174,7 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
 void FileChooserPortal::handlePickerError()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";
-    m_callResult = QVariantList();
+    m_callResult = QStringList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
 }
@@ -183,7 +183,9 @@ void FileChooserPortal::handlePickerResponse(
                         const QVariantList &result)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received:" << code << result;
-    m_callResult = result;
+    foreach(QVariant v, result) {
+      m_callResult << v.toString();
+    }
     m_callResponseCode = static_cast<PickerResponse>(code);
     m_responseHandled = true;
 }

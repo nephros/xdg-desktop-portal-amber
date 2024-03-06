@@ -13,6 +13,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusVariant>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLoggingCategory>
@@ -71,6 +72,9 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = false;
 
+    QObject *pHandle = new QObject(this);
+    QDBusConnection::sessionBus().registerObject(handle.path(), pHandle, QDBusConnection::ExportScriptableContents);
+
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
@@ -111,14 +115,30 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     }
     // TODO: more properties in results map, like current_filter, choices, etc
     // uris (as)
-    results.insert(QStringLiteral("uris"), m_callResult);
+    //results.insert(QStringLiteral("uris"), m_callResult);
     // choices (a(ss))
     //results.insert(QStringLiteral("choices"), );
     // current_filter ((sa(us)))
     //results.insert(QStringLiteral("current_filter"), );
     // writable (b)
     //results.insert(QStringLiteral("writable"), );
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << results;
+    //qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << results;
+    QDBusMessage reply;
+    reply.setDelayedReply(true);
+    reply.setArguments({
+        (uint)m_callResponseCode,
+        QVariantMap {
+            { QStringLiteral("uris"), m_callResult },
+            // { (QStringLiteral("current_filter"), }
+            // { (QStringLiteral("choices"), }
+            // { (QStringLiteral("writable"), }
+        }
+    });
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << reply.arguments();
+    QDBusConnection::sessionBus().send(reply);
+
+    pHandle->deleteLater();
+
     return (uint)m_callResponseCode;
 }
 

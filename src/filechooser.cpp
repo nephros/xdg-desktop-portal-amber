@@ -26,6 +26,8 @@ namespace Amber {
 FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
+    qDBusRegisterMetaType<QMap<QString, QVariantList>>();
+
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Desktop portal service: FileChooser";
     m_responseHandled = false;
 }
@@ -140,17 +142,15 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QDBusMessage reply;
     QDBusMessage message = q_ptr->message();
 
-    //reply = message.createReply();
     reply.setDelayedReply(true);
-    reply.setArguments({
-        (uint)m_callResponseCode,
-        QVariantMap {
-            { QStringLiteral("uris"), m_callResult },
+    QMap<QString, QVariantList> result;
+    result = {
             // { (QStringLiteral("current_filter"), }
             // { (QStringLiteral("choices"), }
             // { (QStringLiteral("writable"), }
-        }
-    });
+            { QStringLiteral("uris"), m_callResult },
+    };
+    reply = message.createReply(QVariant::fromValue(result));
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << reply.arguments();
     QDBusConnection::sessionBus().send(reply);
 

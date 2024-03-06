@@ -35,24 +35,24 @@ public Q_SLOTS:
     // TODO:
     //version 3 must support opening directories instead of files through options(["directory=true"])
     uint version() const { return 2; }
-    uint OpenFile(const QDBusObjectPath &handle,
+    void OpenFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
                       const QVariantMap &options
                       );
-    uint SaveFile(const QDBusObjectPath &handle,
+    void SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options,
-                      QVariantMap &results);
-    uint SaveFiles(const QDBusObjectPath &handle,
+                      const QVariantMap &options
+                      );
+    void SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options,
-                      QVariantMap &results);
+                      const QVariantMap &options
+                      );
     void handlePickerError();
     void handlePickerResponse(
          const int &code,

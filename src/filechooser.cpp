@@ -37,12 +37,11 @@ FileChooserPortal::~FileChooserPortal()
 }
 
 
-uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
+void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &app_id,
                                 const QString &parent_window,
                                 const QString &title,
-                                const QVariantMap &options
-                                )
+                                const QVariantMap &options)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.OpenFile called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
@@ -105,13 +104,13 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QObject *obj = QObject::parent();
     if (!obj) {
         qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
-        return 2;
+        return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
         qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
-        return 2;
+        return;
     }
     QDBusMessage reply;
     QDBusMessage message = q_ptr->message();
@@ -135,15 +134,13 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     pHandle->deleteLater();
 
-    return (uint)m_callResponseCode;
 }
 
-uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
+void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options,
-                      QVariantMap &results)
+                      const QVariantMap &options)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFiles called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
@@ -154,17 +151,14 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     if (!options.isEmpty()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
     }
-    Q_UNUSED(results);
     qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
-    return 1;
 
 }
-uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
+void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options,
-                      QVariantMap &results)
+                      const QVariantMap &options)
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFile called with parameters:";
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
@@ -175,9 +169,7 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     if (!options.isEmpty()) {
             qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
     }
-    Q_UNUSED(results);
     qCDebug(XdgDesktopPortalAmberFileChooser) << "This dialog is not implemented.";
-    return 1;
 }
 void FileChooserPortal::handlePickerError()
 {

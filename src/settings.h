@@ -48,7 +48,7 @@ public:
 
 public Q_SLOTS:
     QMap<QString, QMap<QString, QVariant>> ReadAll(const QStringList &nss);
-    QVariant Read(const QString &ns);
+    QVariant Read(const QString &ns, const QString &key);
 /*
     void ReadAll(const QStringList &nss,
                       QVariantMap &value);

@@ -27,8 +27,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
     , m_accentColorConfig(new MGConfItem(THEME_DCONF_HIGHLIGHT_KEY, this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
+    //QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
+    //QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SIGNAL(SettingsChanged()));
 }
 
 SettingsPortal::~SettingsPortal()

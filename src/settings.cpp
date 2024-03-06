@@ -8,6 +8,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusContext>
 #include <QDBusVariant>
 #include <QColor>
 #include <QLoggingCategory>
@@ -64,10 +65,20 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespaces: " << nss;
 
-    QObject *qo = new QObject(this);
+    // ugly hack copied over from KDE:
+    QObject *obj = QObject::parent();
+    if (!obj) {
+        qCWarning(XdgDesktopPortalAmberSettings) << "Failed to get dbus context for reply";
+        return;
+    }
+    void *ptr = obj->qt_metacast("QDBusContext");
+    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
+    if (!q_ptr) {
+        qCWarning(XdgDesktopPortalAmberSettings) << "Failed to get dbus context for reply";
+        return;
+    }
     QDBusMessage reply;
-    QDBusMessage message;
-    //QDBusVariant result;
+    QDBusMessage message = q_ptr->message();
     QMap<QString, QMap<QString, QDBusVariant>> result;
 
     // FIXME: we should support a namespace list:

@@ -98,7 +98,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
         };
         reply = message.createReply(QVariant::fromValue(result));
     } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
-        qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor! Namespace" << nss << "is not yet supported";
+        qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
         result = {
           { NAMESPACE_SAILFISHOS, {
                   { CONFIG_SAILFISHOS_THEME_SCHEME_KEY, QDBusVariant(getColorScheme()) },

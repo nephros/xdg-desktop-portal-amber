@@ -8,6 +8,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusVariant>
 #include <QColor>
 #include <QLoggingCategory>
 
@@ -31,16 +32,17 @@ SettingsPortal::SettingsPortal(QObject *parent)
     , m_accentColorConfig(new MGConfItem(THEME_DCONF_HIGHLIGHT_KEY, this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
+
+    //QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_SCHEME_KEY)));
+    //QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(CONFIG_ACCENT_KEY)));
+
 }
 
 SettingsPortal::~SettingsPortal()
 {
 }
 
-void SettingsPortal::ReadAll(const QStringList &nss,
-                                   QVariantMap &value)
+QMap<QString, QMap<QString, QDBusVariant>> SettingsPortal::ReadAll(const QStringList &nss)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespaces: " << nss;
@@ -48,19 +50,21 @@ void SettingsPortal::ReadAll(const QStringList &nss,
     // TODO
     Q_UNUSED(nss);
 
-    QVariantMap ofda;
-    ofda.insert(CONFIG_SCHEME_KEY, QVariant(getColorScheme()));
-    ofda.insert(CONFIG_ACCENT_KEY, QVariant(getAccentColor()));
-    ofda.insert(CONFIG_CONTRAST_KEY, QVariant(getContrast()));
+    ColorRGB accent =  getAccentColor();
 
-    value.insert(NAMESPACE_OFDA_KEY, ofda);
-
-    return;
+    // “(a{sa{sv}})”
+    return {
+        { NAMESPACE_OFDA_KEY, {
+            { CONFIG_SCHEME_KEY,   QDBusVariant(getColorScheme()) },
+            { CONFIG_ACCENT_KEY,   QDBusVariant(getContrast()) },
+            { CONFIG_CONTRAST_KEY, QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent)) }
+        }
+        }
+    };
 }
 
-void SettingsPortal::Read(const QString &ns,
-                          const QString &key,
-                                QVariant &value)
+QDBusVariant SettingsPortal::Read(const QString &ns,
+                              const QString &key)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
     qCDebug(XdgDesktopPortalAmberSettings) << "    namespace: " << ns;
@@ -70,16 +74,15 @@ void SettingsPortal::Read(const QString &ns,
     Q_UNUSED(ns);
 
     if (key == CONFIG_SCHEME_KEY) {
-        value = QVariant(getColorScheme());
+        return QDBusVariant(getColorScheme());
     } else if (key == CONFIG_CONTRAST_KEY) {
-        value = QVariant(getContrast());
+        return QDBusVariant(getContrast());
     } else if (key == CONFIG_ACCENT_KEY) {
-        value = QVariant(getAccentColor());
-    } else {
-        qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
-        value = QVariant();
+        ColorRGB accent =  getAccentColor();
+        return QDBusVariant(QVariant::fromValue<SettingsPortal::ColorRGB>(accent));
     }
-    return;
+    qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
+    return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
 void SettingsPortal::valueChanged(const QString &what)

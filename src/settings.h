@@ -9,6 +9,7 @@
 #define XDG_DESKTOP_PORTAL_AMBER_SETTINGS_H
 
 #include <QDBusAbstractAdaptor>
+#include <QDBusVariant>
 
 #include <mlite5/MGConfItem>
 
@@ -46,12 +47,18 @@ public:
     Q_ENUM(ColorScheme)
 
 public Q_SLOTS:
+    QMap<QString, QMap<QString, QDBusVariant>> ReadAll(const QStringList &nss);
+    QDBusVariant Read(const QString &ns, const QString &key);
+/*
     void ReadAll(const QStringList &nss,
                        QVariantMap &value);
 
     void Read(const QString &ns,
               const QString &key,
                     QVariant &value);
+
+*/
+
     void valueChanged(const QString &what);
 
 signals:
@@ -63,6 +70,7 @@ private:
     ColorScheme getColorScheme() const;
     QList<double> getAccentColor() const;
     // TODO: We alsways return "normal/no preference" contrast.
+    // FIXME: there s something about high contrast in lipstick somewhere...
     uint getContrast() const { return 0; };
 
     MGConfItem *m_schemeConfig;

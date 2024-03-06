@@ -95,7 +95,14 @@ letting both the Browser, and other users of *FileChooser* use it.
 |  Input Capture    | Capture input                        |  ???            |                |                 |            |
 |  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++       | +++        |
 |  Secret           | retrieve an app secret               |  yes            | Qt/QML         |                 | +          |
+|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML  |   ++            | +          |
 
+**Notes:**
+Settings: While this is not very useful through the default
+"org.freedesktop.appearance" namespace, it supports requesting custom
+namespaces.  
+This means we could implement e.g. the namespace from KDE/Plasma/Kirigami, allowing such apps to access SFOS Theme colors etc.
+Doing that could avoid or assist having to implement a custom theme for Kirigami or QQuickControls.
 
 ### Out-of-Scope/Not Feasible/Not useful
 
@@ -103,14 +110,12 @@ letting both the Browser, and other users of *FileChooser* use it.
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
 |  App Chooser      | choosing an application         |  yes            |                |                 |            |
 |  Background       | apps running in the background  |  somewhat       |                |                 |            |
-|  Settings         | read-only access to UI colors   |  yes            | DConf, Qt/QML  |   +             |  +         |
 |  Print            |                                 |  no/3rd party   |                |                 |            |
 |  Global Shortcuts | ??? hotkeys ???                 |  no             |                |                 |            |
 
 **Notes:**
 There is exactly one printing app in SFOS, if a printing interface is needed it may either implement XDP, or its own.
 
-Access to interface colors is possible natively via toolkit. Although this might prove useful for e.g. Kirigami.
 
 ----
 

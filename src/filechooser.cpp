@@ -162,8 +162,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         { QStringLiteral("uris"), QVariant::fromValue(m_callResult) }
     };
     result.endStructure();
-    reply = message.createReply(QVariant::fromValue(result));
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << reply.arguments();
+    reply = message.createReply();
+    qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << reply.arguments();
     QDBusConnection::sessionBus().send(reply);
 
     pHandle->deleteLater();

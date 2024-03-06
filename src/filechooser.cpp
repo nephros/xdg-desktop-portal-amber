@@ -51,22 +51,6 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
 
-    /*
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Asking Lipstick daemon to show a dialog";
-    // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
-    QDBusMessage msg = QDBusMessage::createMethodCall(
-                    QStringLiteral("com.jolla.windowprompt"),
-                    QStringLiteral("/com/jolla/windowprompt"),
-                    QStringLiteral("com.jolla.windowprompt"),
-                    //QStringLiteral("newPermissionPrompt"));
-                    QStringLiteral("showTermsPrompt"));
-
-    QList<QVariant> args;
-    //promptConfig
-    args.append(QStringLiteral("/usr/share/lipstick-xdg-desktop-portal-amber/FilePickerDialog.qml"));
-    msg.setArguments(args);
-    */
-
     // TODO choices
     //Q_UNUSED(results);
 
@@ -116,16 +100,6 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     } else {
         qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
     }
-    // TODO: more properties in results map, like current_filter, choices, etc
-    // uris (as)
-    //results.insert(QStringLiteral("uris"), m_callResult);
-    // choices (a(ss))
-    //results.insert(QStringLiteral("choices"), );
-    // current_filter ((sa(us)))
-    //results.insert(QStringLiteral("current_filter"), );
-    // writable (b)
-    //results.insert(QStringLiteral("writable"), );
-    //qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << results;
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
@@ -144,27 +118,12 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     reply.setDelayedReply(true);
     //“(ua{sv})”
-    /*
-    QMap<uint, QMap<QString, QDBusVariant>> result;
-    result = {
-        (uint)m_callResponseCode, {
-            // { (QStringLiteral("current_filter"), }
-            // { (QStringLiteral("choices"), }
-            // { (QStringLiteral("writable"), }
-          { QStringLiteral("uris"), QDBusVariant(QVariant(m_callResult)) },
-        }
-    };
-    */
-    /*
-    QDBusArgument result;
-    result.beginStructure();
-    result << (uint)m_callResponseCode;
-    result << QMap<QString, QVariant>{
-        { QStringLiteral("uris"), QVariant::fromValue(m_callResult) }
-    };
-    result.endStructure();
-    */
     reply = message.createReply(QVariant());
+    // TODO: more properties in results map, like current_filter, choices, etc
+    // uris (as)
+    // choices (a(ss))
+    // current_filter ((sa(us)))
+    // writable (b)
     reply.setArguments({
         (uint)m_callResponseCode, QVariantMap {
             {"uris",  QVariant::fromValue(m_callResult) }

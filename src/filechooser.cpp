@@ -13,6 +13,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusContext>
 #include <QDBusVariant>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -123,7 +124,23 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // writable (b)
     //results.insert(QStringLiteral("writable"), );
     //qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << m_callResponseCode << results;
+
+    // ugly hack copied over from KDE:
+    QObject *obj = QObject::parent();
+    if (!obj) {
+        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        return 2;
+    }
+    void *ptr = obj->qt_metacast("QDBusContext");
+    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
+    if (!q_ptr) {
+        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        return 2;
+    }
     QDBusMessage reply;
+    QDBusMessage message = q_ptr->message();
+
+    //reply = message.createReply();
     reply.setDelayedReply(true);
     reply.setArguments({
         (uint)m_callResponseCode,

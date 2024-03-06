@@ -50,8 +50,8 @@ SettingsPortal::SettingsPortal(QObject *parent)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
-    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
-    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
+    QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), this, SLOT(valueChanged(char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
+    QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), this, SLOT(valueChanged(char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
 
 }
 

@@ -18,6 +18,12 @@ BuildRequires:  cmake
 Requires:   %{name}-sailfishos-config
 Requires:   xdg-desktop-portal
 
+# for documentation:
+BuildRequires:  qt5-qmake
+BuildRequires:  qt5-tools
+BuildRequires:  qt5-qttools-qthelp-devel
+BuildRequires:  sailfish-qdoc-template
+
 %description
 %{summary}.
 %if "%{?vendor}" == "chum"
@@ -56,6 +62,14 @@ Requires:   %{name} = %{version}-%{release}
 %description devel
 %{summary}.
 
+
+%package doc
+Summary:    Documentation for %{name}
+License:    GFDL
+
+%description devel
+%{summary}.
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -65,11 +79,20 @@ Requires:   %{name} = %{version}-%{release}
 
 %make_build
 
+pushd doc
+# ignore build failures for doc
+%qmake5 ||:
+%make_build ||:
+popd
 
 %install
 rm -rf %{buildroot}
 %make_install
 desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
+
+install -m 644 doc/html/*.html %{buildroot}/%{_docdir}/%{name}/
+install -m 644 doc/html/%{name}.index %{buildroot}/%{_docdir}/%{name}/
+install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 
 %files
 %defattr(-,root,root,-)
@@ -97,3 +120,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %files devel
 %defattr(-,root,root,-)
 #%%{_datadir}/pkgconfig/*pc
+
+%files doc
+%defattr(-,root,root,-)
+%{_docdir}/%{name}/*

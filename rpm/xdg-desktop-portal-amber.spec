@@ -80,6 +80,7 @@ License:    GFDL
 
 pushd doc
 # ignore build failures for doc
+export QDOC_SHOW_INTERNAL=true
 %qmake5 ||:
 %make_build ||:
 popd

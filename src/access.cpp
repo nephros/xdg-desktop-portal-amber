@@ -31,6 +31,16 @@ AccessPortal::~AccessPortal()
 }
 
 
+/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
+    Presents the user with a prompt they can accept or deny, and several other options.
+
+    \a title, \a subtitle, and \a body can be used to configure the dialog appearance.
+
+     See the \l{XDG Desktop Portal Specification} for possible values of \a options.
+    See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, \a results.
+
+    \warning The implementation of triggering the UI is incomplete. It serves as proof-of-concept only.
+*/
 uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QString &app_id,
                                 const QString &parent_window,

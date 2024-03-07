@@ -13,6 +13,10 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberWallpaper, "xdp-amber-wallpaper")
 
+/*! \property Amber::WallpaperPortal::version
+    \brief Contains the backend implementation version
+*/
+
 namespace Amber {
 WallpaperPortal::WallpaperPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -20,6 +24,17 @@ WallpaperPortal::WallpaperPortal(QObject *parent)
     qCDebug(XdgDesktopPortalAmberWallpaper) << "Desktop portal service: Wallpaper";
 }
 
+/*!  \fn uint Amber::WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &uri, const QVariantMap &options, uint &result)
+
+     \brief Creates an Ambience from the image given by \a uri
+
+     If the \c show-preview key is \c true in \a options, opens the Ambience Editor of the Gallery app.
+     If the \c show-preview key is unset or \c false in \a options, 
+
+     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, \a result.
+
+     \note The \c set-on option is supported, but the \c lockscreen value is ignored.
+*/
 uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
                                   const QString &app_id,
                                   const QString &parent_window,

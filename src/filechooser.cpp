@@ -22,6 +22,21 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
 
+/*! \property Amber::FileChooserPortal::version
+    \brief Contains the backend implementation version
+*/
+/*! \enum Amber::FileChooserPortal::PickerResponse
+
+    Possible return values of a dialog interaction. The values correspond to the \a response poperties of the calls in this class.
+
+    \value  Accepted
+        The dialog has been accepted
+    \value  Cancelled
+        The dialog has been cancelled
+    \value  Other
+        Something else has happened (e.g. a timeout)
+*/
+
 namespace Amber {
 FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -37,6 +52,12 @@ FileChooserPortal::~FileChooserPortal()
 }
 
 
+/*!  \fn void Amber::FileChooserPortal::OpenFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+
+     Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
+     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
+     See the \l{XDG Desktop Portal Specification} for possible \a options.
+*/
 void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &app_id,
                                 const QString &parent_window,
@@ -49,9 +70,6 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
     qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
-
-    // TODO choices
-    //Q_UNUSED(results);
 
     // clean up from last time:
     m_callResult = QStringList();
@@ -207,6 +225,13 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     QDBusConnection::sessionBus().send(reply);
 }
 
+/*! \fn void Amber::FileChooserPortal::handlePickerError()
+
+    Receives the results from the picker Dialog.
+
+    \sa uidoc
+    \internal
+*/
 void FileChooserPortal::handlePickerError()
 {
     qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";
@@ -214,6 +239,19 @@ void FileChooserPortal::handlePickerError()
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
 }
+/*! \fn void Amber::FileChooserPortal::handlePickerResponse( const int &code, const QVariantList &result)
+
+    Receives the results from the picker Dialog. \a code corresponds to the
+    dialog response options, \a result ia an array of string variants listing the
+    selected file(s) or directories.
+
+    \note \a result is a QVariantList mainly because the Nemo.DBus plugin
+    prefers to marshal most things as Variants. If you use the results in a DBus
+    reply, make sure to transform it into e.g. a simple QStringList before sending.
+
+    \sa uidoc, Amber::FileChooserPortal::PickerResponse, Nemo.DBus
+    \internal
+*/
 void FileChooserPortal::handlePickerResponse(
                         const int &code,
                         const QVariantList &result)
@@ -226,6 +264,14 @@ void FileChooserPortal::handlePickerResponse(
     m_responseHandled = true;
 }
 
+/*! \fn void Amber::FileChooserPortal::setupPickerResponse()
+
+    After the GUI has been launched, listens for the \c pickerDone signal, and
+    calls FileChooserPortal::handlePickerResponse with the response.
+
+    \sa uidoc, handlePickerResponse
+    \internal
+*/
 void FileChooserPortal::setupPickerResponse()
 {
     if(!QDBusConnection::sessionBus().connect(
@@ -243,6 +289,12 @@ void FileChooserPortal::setupPickerResponse()
         qCDebug(XdgDesktopPortalAmberFileChooser) << "Successfully set up signal listener";
     }
 }
+/*! \fn void Amber::FileChooserPortal::waitForPickerResponse()
+    Since launching the GUI via D-Bus is asynchronous (or rather, returns
+    immediately), we have to wait for a Done signal to arrive from the application.
+
+    \internal
+*/
 void FileChooserPortal::waitForPickerResponse()
 {
     // loop until we got the signal

@@ -1,0 +1,55 @@
+/*!
+\page settings-namespaces.html
+\title Settings Namespaces
+\target SettingsPortalNamespaces
+
+The following namespaces are supported:
+
+    \table
+    \header
+        \li Namespace
+        \li Description
+        \li Keys
+    \row
+        \li \c org.freedesktop.appearance
+        \li Default XDP namespace
+        \li
+            \list
+                \li \c color-scheme
+                \li \c accent-color
+                \li \c contrast
+            \endlist
+    \row
+        \li \c org.sailfishos.desktop
+        \li Sailfish OS Ambience and Lipstick namespace
+        \li
+            \list
+                \li \c color-scheme
+                \li \c primary-color
+                \li \c secondary-color
+                \li \c highlight-color
+                \li \c secondary-highlight-color
+            \endlist
+    \endtable
+
+The following namespaces are planned:
+
+    \table
+    \header
+        \li Namespace
+        \li Description
+        \li Keys
+    \row
+        \li \c org.kde.kdeglobals
+        \li KDE Settings namespace
+        \li
+    \row
+        \li \c org.kde.kdeglobals.General
+        \li General KDE Settings namespace
+        \li
+            \list
+                \li \c ColorScheme
+            \endlist
+    \endtable
+
+*/

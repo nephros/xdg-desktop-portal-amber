@@ -22,6 +22,15 @@ EmailPortal::~EmailPortal()
 {
 }
 
+/*! \fn uint Amber::EmailPortal::ComposeEmail(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
+
+     Opens the EMail application to create a new email.
+
+     See the \l{XDG Desktop Portal Specification} for possible values of \a options.
+     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, \a results.
+
+     \note Due to a limitation of Sailfish OS, attachments are currently not supported.
+*/
 uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
                                   const QString &app_id,
                                   const QString &parent_window,

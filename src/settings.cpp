@@ -18,8 +18,21 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 
-/*! \namespace Amber
-    \brief Contains backend implementations of the XDG Desktop Portal specifications for Sailfish OS.
+/*! \property Amber::SettingsPortal::version
+    \brief Contains the backend implementation version
+*/
+/*! \enum Amber::SettingsPortal::ColorScheme
+    \value Light 
+    \value Dark 
+    \value None 
+    \sa Amber::SettingsPortal::ThemeColorScheme, Sailfish::Silica::Theme
+    \internal
+*/
+/*! \enum Amber::SettingsPortal::ThemeColorScheme
+    \value DarkOnLight
+    \value LightOnDark
+    \sa Amber::SettingsPortal::ColorScheme, Sailfish::Silica::Theme
+    \internal
 */
 namespace Amber {
 const char* SettingsPortal::DCONF_SAILFISHOS_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
@@ -46,12 +59,6 @@ const char* SettingsPortal::NAMESPACE_KDE             = "org.kde.kdeglobals";
 const char* SettingsPortal::NAMESPACE_KDE_GENERAL     = "org.kde.kdeglobals.General";
 const char* SettingsPortal::CONFIG_KDE_SCHEME_KEY     = "ColorScheme";
 
-/*! \class SettingsPortal::SettingsPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Settings
-
-    Features restrieving the properties from the \c org.freedesktop.appearance namespace
-    as well as a custom namespace called \c org.sailfishos.desktop
-*/
 SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
     , m_schemeConfig(new MGConfItem(DCONF_SAILFISHOS_SCHEME_KEY, this))
@@ -84,6 +91,12 @@ SettingsPortal::~SettingsPortal()
 {
 }
 
+/*! \fn Amber::SettingsPortal::ReadAll(const QStringList &nss)
+
+    Implements \c org.freedesktop.impl.portal.Settings.ReadAll
+
+    \a nss specifies the a list of namespaces. See the class description for supported namespaces.
+*/
 void SettingsPortal::ReadAll(const QStringList &nss)
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Settings called with parameters:";
@@ -142,6 +155,9 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     QDBusConnection::sessionBus().send(reply);
 }
 
+/*! \fn QDBusVariant Amber::SettingsPortal::Read(const QString &ns, const QString &key)
+    Reads and returns a single value, specified by \a key, from namespace \a ns
+*/
 QDBusVariant SettingsPortal::Read(const QString &ns,
                               const QString &key)
 {
@@ -163,6 +179,22 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
+/*! \fn void Amber::SettingsPortal::SettingChanged(const QString &ns, const QString &key, const QVariant &value)
+
+    Emitted when any of the supported values have changed.
+    \a ns, \a key, \a value are namespace, key within that namespace, and value that has changed.
+
+    \note emitting this signal is mandaroty for the XDP namespace. It may or
+    may not be emitted in the same way for other namespaces.
+
+    \sa SettingsPortalNamespaces
+*/
+/*! \fn void Amber::SettingsPortal::valueChanged(const QString &what)
+    Slot to receive change signals, and do something about that.
+
+    \sa SettingsPortal::SettingChanged
+    \internal
+*/
 void SettingsPortal::valueChanged(const QString &what)
 {
     if (what == CONFIG_FDO_SCHEME_KEY) {
@@ -196,6 +228,12 @@ QList<QVariant> SettingsPortal::getAccentColor() const
     return QList<QVariant>();
 }
 
+/*! \fn void Amber::SettingsPortal::ambienceChanged(const int &i)
+    Slot to receive change signals from ambienced, and do something about that.
+
+    \sa com.jolla.ambienced.contentChanged
+    \internal
+*/
 void SettingsPortal::ambienceChanged(const int &i)
 {
     emit SettingChanged(NAMESPACE_SAILFISHOS, QStringLiteral("ambience"), QVariant(i));

@@ -38,6 +38,48 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
+/*! \namespace Amber
+    \brief Contains backend implementations of the XDG Desktop Portal specification for Sailfish OS.
+
+    See \l {XDG Desktop Portal Specification} for details.
+*/
+
+/*! \class Amber::AccessPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Access
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+/*! \class Amber::EmailPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Email
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+/*! \class Amber::FileChooserPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.FileChooser
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+/*! \class Amber::ScreenshotPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Screenshot
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+/*! \class Amber::SettingsPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Settings
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+
+    Features restrieving the properties from the \c org.freedesktop.appearance namespace
+    as well as a custom namespace called \c org.sailfishos.desktop, and optionally others.
+
+    See \l{SettingsPortalNamespaces}{Supported Namespaces} for details.
+*/
+/*! \class Amber::WallpaperPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Wallpaper
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+
 namespace Amber
 {
     DesktopPortal::DesktopPortal(QObject *parent)

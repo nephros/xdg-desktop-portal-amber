@@ -1,7 +1,28 @@
 /*!
+\qmlmodule org.freedesktop.impl.portal.desktop.amber.ui 1.0
+\title org.freedesktop.impl.portal.desktop.amber.ui QML Types
+
+This module includes the following types:
+
+*/
+/*!
 \page ui.html
 \title XDG Desktop Portal Amber QML UI
+\target uidoc
 
 \generatelist{qmltypes}
+*/
 
+/*! \externalpage https://dbus.freedesktop.org/doc/dbus-daemon.1.html
+    \title D-Bus Documentation
+*/
+/*! \externalpage https://flatpak.github.io/xdg-desktop-portal/docs/
+    \title XDG Desktop Portal Specification
+*/
+/*! \externalpage https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html
+    \title XDG Desktop Portal Backend Specification
+*/
+/*! \externalpage https://sailfishos.org/develop/docs/nemo-qml-plugin-dbus/
+    \title Nemo QML Plugin D-Bus
+    \target Nemo.DBus
 */

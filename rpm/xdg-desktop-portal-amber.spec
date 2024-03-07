@@ -3,7 +3,6 @@ Summary:    XDG Desktop Portal for Sailfish OS
 Version:    1.0.0
 Release:    0
 License:    LGPLv2+ and LGPLv3+
-#URL:        https://invent.kde.org/plasma/xdg-desktop-portal-kde
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(systemd)
@@ -103,7 +102,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %{_userunitdir}/%{name}.service
 %{_datadir}/xdg-desktop-portal/portals/amber.portal
 # what is this installed for??
-%exclude %{_datadir}/applications/*.desktop
+%{_datadir}/applications/org.freedesktop.impl.portal.desktop.amber.desktop
 
 %files sailfishos-config
 %{_userunitdir}/xdg-desktop-portal-pre.service
@@ -114,7 +113,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %files qml
 %{_bindir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
-%{_datadir}/applications/*.desktop
+%{_datadir}/applications/org.freedesktop.impl.portal.desktop.amber.ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
 
 %files devel

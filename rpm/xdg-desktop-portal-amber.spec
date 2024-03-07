@@ -113,7 +113,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %files qml
 %{_bindir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
-%{_datadir}/applications/org.freedesktop.impl.portal.desktop.amber.ui.desktop
+%{_datadir}/applications/xdg-desktop-portal-amber-ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
 
 %files devel

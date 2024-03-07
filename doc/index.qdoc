@@ -6,11 +6,28 @@ This module includes the following types:
 
 */
 /*!
+\page index.html
+\title XDG Desktop Portal Amber
+\target uidoc
+
+This includes the following Classes:
+
+\generatelist annotatedclasses
+
+This includes the following QML Types:
+
+\generatelist{qmltypes}
+
+*/
+
+/*!
 \page ui.html
 \title XDG Desktop Portal Amber QML UI
 \target uidoc
 
-\generatelist{qmltypes}
+\brief A dbus-activated system application showing various UI components depending on wher it has been called from.
+
+\generatelist{uitypes}
 */
 
 /*! \externalpage https://dbus.freedesktop.org/doc/dbus-daemon.1.html

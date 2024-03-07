@@ -154,6 +154,14 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
 }
 
+/*!  \fn void Amber::FileChooserPortal::SaveFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+
+     Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
+     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
+     See the \l{XDG Desktop Portal Specification} for possible \a options.
+
+     \warning This currently does nothing.
+*/
 void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
@@ -192,6 +200,14 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
 
 }
 
+/*!  \fn void Amber::FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+
+     Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
+     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
+     See the \l{XDG Desktop Portal Specification} for possible \a options.
+
+     \warning This currently does nothing.
+*/
 void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,

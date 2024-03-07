@@ -46,6 +46,8 @@ SystemDialog {
     property string title
     property var options
     property string selectedFile
+    property bool wantDirectory: ( !!options && (options.directory == true))
+    property bool wantMulti: ( !!options && (options.multiple == true))
     property bool windowVisible: visibility != Window.Hidden
                                  && visibility != Window.Minimized
     function init() {
@@ -92,10 +94,22 @@ SystemDialog {
                     highlighted: down || menuOpen || selected
                     onClicked: {
                         if (isDir) {
+                            // navigate
                             page.model.path = absolutePath
                         } else {
+                            // do nothing for files if we want dirs
+                            if (page.wantDirectory) return
+                            // select
                             view.currentIndex = index
                             page.selectedFile = Qt.resolvedUrl(absolutePath).toString()
+                        }
+                    }
+                    menu: ContextMenu {
+                        enabled: (wantDirectory && isDir)
+                        MenuItem {
+                            //% "Select"
+                            text: qsTrId("components-he-dialog_select")
+                            onClicked: page.selectedFile = Qt.resolvedUrl(absolutePath).toString()
                         }
                     }
                     contentHeight: content.height

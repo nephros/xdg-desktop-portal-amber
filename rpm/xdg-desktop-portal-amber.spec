@@ -66,7 +66,7 @@ Requires:   %{name} = %{version}-%{release}
 Summary:    Documentation for %{name}
 License:    GFDL
 
-%description devel
+%description doc
 %{summary}.
 
 %prep

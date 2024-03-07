@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- FilePickerDialog.qml -->
+  <title>FilePickerDialog QML Type | XDG Desktop Portal Amber 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li><a href="index.html">XDG Desktop Portal Amber</a></li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">FilePickerDialog QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$FilePickerDialog-brief -->
+<p>XDG Desktop File Picker <a href="#details">More...</a></p>
+<!-- @@@FilePickerDialog -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr></table></div><ul>
+<li><a href="qml-filepickerdialog-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#model-prop">model</a></b></b> : FileModel</li>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#options-prop">options</a></b></b> : var</li>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#selectedFile-prop">selectedFile</a></b></b> : string</li>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#title-prop">title</a></b></b> : string</li>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#wantDirectory-prop">wantDirectory</a></b></b> : bool</li>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#wantMulti-prop">wantMulti</a></b></b> : bool</li>
+</ul>
+<a name="signals"></a>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-filepickerdialog.html#done-signal">done</a></b></b>(bool <i>accepted</i>, string <i>selectedFile</i>)</li>
+</ul>
+<!-- $$$FilePickerDialog-description -->
+<a name="details"></a>
+<h2 id="details">Detailed Description</h2>
+</p>
+<!-- @@@FilePickerDialog -->
+<h2>Property Documentation</h2>
+<!-- $$$model -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="model-prop">
+<td class="tblQmlPropNode"><p>
+<a name="model-prop"></a><span class="name">model</span> : <span class="type">FileModel</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The model representing the contents of the file system</p>
+<p><b>See also </b>Nemo::FileManager.</p>
+</div></div><!-- @@@model -->
+<br/>
+<!-- $$$options -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="options-prop">
+<td class="tblQmlPropNode"><p>
+<a name="options-prop"></a><span class="name">options</span> : <span class="type">var</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>*</p>
+<ul>
+<li>accept_label (s) The label for the accept button. Mnemonic underlines are allowed.</li>
+<li>modal (b) Whether to make the dialog modal. Default is yes.</li>
+<li>multiple (b) Whether to allow selection of multiple files. Default is no.</li>
+<li>directory (b) Whether to select for folders instead of files. Default is to select files.</li>
+<li>filters (a(sa(us))) A list of serialized file filters. See org.freedesktop.portal.FileChooser.OpenFile for details.</li>
+<li>current_filter ((sa(us))) Request that this filter be set by default at dialog creation. See org.freedesktop.portal.FileChooser.OpenFile for details.</li>
+<li>choices (a(ssa(ss)s)) A list of serialized combo boxes. See org.freedesktop.portal.FileChooser.OpenFile for details.</li>
+<li>current_folder (ay) A suggested folder to open the files from. See org.freedesktop.portal.FileChooser.OpenFile for details.</li>
+</ul>
+<p><b>See also </b><a href="amber-filechooserportal.html">Amber::FileChooserPortal</a> and <a href="https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html">https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html</a>.</p>
+</div></div><!-- @@@options -->
+<br/>
+<!-- $$$selectedFile -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="selectedFile-prop">
+<td class="tblQmlPropNode"><p>
+<a name="selectedFile-prop"></a><span class="name">selectedFile</span> : <span class="type">string</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The picked file name will be held here after selection by the user</p>
+</div></div><!-- @@@selectedFile -->
+<br/>
+<!-- $$$title -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="title-prop">
+<td class="tblQmlPropNode"><p>
+<a name="title-prop"></a><span class="name">title</span> : <span class="type">string</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The dialog title.</p>
+</div></div><!-- @@@title -->
+<br/>
+<!-- $$$wantDirectory -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wantDirectory-prop">
+<td class="tblQmlPropNode"><p>
+<a name="wantDirectory-prop"></a><span class="name">wantDirectory</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p><code>true</code> if the dialog should allow directories as result.</p>
+</div></div><!-- @@@wantDirectory -->
+<br/>
+<!-- $$$wantMulti -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="wantMulti-prop">
+<td class="tblQmlPropNode"><p>
+<a name="wantMulti-prop"></a><span class="name">wantMulti</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p><code>true</code> if the dialog should allow selecting multiple files/directories.</p>
+</div></div><!-- @@@wantMulti -->
+<br/>
+<h2>Signal Documentation</h2>
+<!-- $$$done -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="done-signal">
+<td class="tblQmlFuncNode"><p>
+<a name="done-signal"></a><span class="name">done</span>(<span class="type">bool</span> <i>accepted</i>, <span class="type">string</span> <i>selectedFile</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"></div></div><!-- @@@done -->
+<br/>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

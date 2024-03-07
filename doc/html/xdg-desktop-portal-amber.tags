@@ -253,4 +253,12 @@
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;uri, const QVariantMap &amp;options, uint &amp;result)</arglist>
         </member>
     </compound>
+    <compound kind="class">
+        <name>FilePickerDialog</name>
+        <filename>qml-filepickerdialog.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>xdg-desktop-portal-amber-ui</name>
+        <filename>qml-xdg-desktop-portal-amber-ui.html</filename>
+    </compound>
 </tagfile>

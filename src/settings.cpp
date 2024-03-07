@@ -103,7 +103,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
           { NAMESPACE_FDO, {
                   { CONFIG_FDO_SCHEME_KEY,   QDBusVariant(getColorScheme()) },
                   { CONFIG_FDO_CONTRAST_KEY, QDBusVariant(getContrast()) },
-                  { CONFIG_FDO_ACCESS_KEY,   QDBusVariant(QVariant(getAccentColor())) }
+                  { CONFIG_FDO_ACCENT_KEY,   QDBusVariant(QVariant(getAccentColor())) }
                 }
           }
         };

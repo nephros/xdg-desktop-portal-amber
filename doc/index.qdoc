@@ -5,16 +5,25 @@
 This module includes the following types:
 
 */
+
 /*!
 \page index.html
 \title XDG Desktop Portal Amber
 \target uidoc
 
-This includes the following Classes:
+A backend implementation of \l{http://github.com/flatpak/xdg-desktop-portal}{XDG Desktop Portals} for Sailfish OS.
+
+\section2 Building
+\section2 Installing
+\section2 Testing
+
+\section1 Reference
+
+C++ Classes:
 
 \generatelist annotatedclasses
 
-This includes the following QML Types:
+QML Types:
 
 \generatelist{qmltypes}
 

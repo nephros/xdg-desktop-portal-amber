@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- desktopportal.cpp -->
+  <title>WallpaperPortal Class | XDG Desktop Portal Amber 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li>XDG Desktop Portal Amber</li>
+<li>WallpaperPortal</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">WallpaperPortal Class</h1>
+<span class="small-subtitle">(<a href="amber-wallpaperportal.html">Amber::WallpaperPortal</a>)<br/></span>
+<!-- $$$WallpaperPortal-brief -->
+<p>Implementation of <code>org.freedesktop.impl.portal.Wallpaper</code> <a href="#details">More...</a></p>
+<!-- @@@WallpaperPortal -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;WallpaperPortal&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="amber-wallpaperportal-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><a href="amber-wallpaperportal.html#version-prop">version</a></b> : const uint</li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="amber-wallpaperportal.html#WallpaperPortal">WallpaperPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="amber-wallpaperportal.html#dtor.WallpaperPortal">~WallpaperPortal</a></b>() = default</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="amber-wallpaperportal.html#version-prop">version</a></b>() const</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="amber-wallpaperportal.html#SetWallpaperURI">SetWallpaperURI</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>uri</i>, const QVariantMap &amp;<i>options</i>, uint &amp;<i>result</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$WallpaperPortal-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Implementation of <code>org.freedesktop.impl.portal.Wallpaper</code></p>
+<p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
+</div>
+<!-- @@@WallpaperPortal -->
+<div class="prop">
+<h2>Property Documentation</h2>
+<!-- $$$version-prop$$$version -->
+<h3 class="fn" id="version-prop"><a name="version-prop"></a><span class="name">version</span> : const <span class="type">uint</span></h3>
+<p>This property contains the backend implementation version.</p>
+<p><b>Access functions:</b></p>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft topAlign rightAlign"> uint </td><td class="memItemRight bottomAlign"><span class="name"><b>version</b></span>() const</td></tr>
+</table></div>
+<!-- @@@version -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$WallpaperPortal[overload1]$$$WallpaperPortalQObject* -->
+<h3 class="fn" id="WallpaperPortal"><a name="WallpaperPortal"></a>WallpaperPortal::<span class="name">WallpaperPortal</span>(<span class="type">QObject</span> *<i>parent</i>)</h3>
+<p>Default constructs an instance of WallpaperPortal.</p><!-- @@@WallpaperPortal -->
+<!-- $$$~WallpaperPortal[overload1]$$$~WallpaperPortal -->
+<h3 class="fn" id="dtor.WallpaperPortal"><a name="dtor.WallpaperPortal"></a><code>[default] </code>WallpaperPortal::<span class="name">~WallpaperPortal</span>()</h3>
+<p>Destroys the instance of WallpaperPortal.</p><!-- @@@~WallpaperPortal -->
+<!-- $$$SetWallpaperURI[overload1]$$$SetWallpaperURIconstQDBusObjectPath&constQString&constQString&constQString&constQVariantMap&uint& -->
+<h3 class="fn" id="SetWallpaperURI"><a name="SetWallpaperURI"></a><code>[slot] </code><span class="type">uint</span> WallpaperPortal::<span class="name">SetWallpaperURI</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QString</span> &amp;<i>uri</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, <span class="type">uint</span> &amp;<i>result</i>)</h3>
+<p>Creates an Ambience from the image given by <i>uri</i></p>
+<p>If the <code>show-preview</code> key is <code>true</code> in <i>options</i>, opens the Ambience Editor of the Gallery app. If the <code>show-preview</code> key is unset or <code>false</code> in <i>options</i>,</p>
+<p>See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>, <i>result</i>.</p>
+<p><b>Note: </b>The <code>set-on</code> option is supported, but the <code>lockscreen</code> value is ignored.</p><!-- @@@SetWallpaperURI -->
+</div>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

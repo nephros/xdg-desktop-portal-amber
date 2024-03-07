@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tagfile>
+    <compound kind="namespace">
+        <name>Amber</name>
+        <filename>amber.html</filename>
+        <class>Amber::AccessPortal</class>
+        <class>Amber::DesktopPortal</class>
+        <class>Amber::EmailPortal</class>
+        <class>Amber::FileChooserPortal</class>
+        <class>Amber::ScreenshotPortal</class>
+        <class>Amber::SettingsPortal</class>
+        <class>Amber::WallpaperPortal</class>
+    </compound>
+    <compound kind="class">
+        <name>Amber::AccessPortal</name>
+        <filename>amber-accessportal.html</filename>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>AccessPortal</name>
+            <anchorfile>amber-accessportal.html</anchorfile>
+            <anchor>AccessPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>AccessDialog</name>
+            <anchorfile>amber-accessportal.html</anchorfile>
+            <anchor>AccessDialog</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QString &amp;subtitle, const QString &amp;body, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::DesktopPortal</name>
+        <filename>amber-desktopportal.html</filename>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>DesktopPortal</name>
+            <anchorfile>amber-desktopportal.html</anchorfile>
+            <anchor>DesktopPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::EmailPortal</name>
+        <filename>amber-emailportal.html</filename>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>EmailPortal</name>
+            <anchorfile>amber-emailportal.html</anchorfile>
+            <anchor>EmailPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>ComposeEmail</name>
+            <anchorfile>amber-emailportal.html</anchorfile>
+            <anchor>ComposeEmail</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::FileChooserPortal</name>
+        <filename>amber-filechooserportal.html</filename>
+        <member kind="property" type="uint">
+            <name>version</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>FileChooserPortal</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>FileChooserPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="enum">
+            <name>PickerResponse</name>
+            <anchor>PickerResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Accepted">
+            <anchor>PickerResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Cancelled">
+            <anchor>PickerResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Other">
+            <anchor>PickerResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>version</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>OpenFile</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>OpenFile</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>SaveFile</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>SaveFile</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>SaveFiles</name>
+            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchor>SaveFiles</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::ScreenshotPortal</name>
+        <filename>amber-screenshotportal.html</filename>
+        <member kind="property" type="uint">
+            <name>version</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>version</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <class>Amber::ScreenshotPortal::ColorRGB</class>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>ScreenshotPortal</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>ScreenshotPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>~ScreenshotPortal</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>dtor.ScreenshotPortal</anchor>
+            <arglist>() = default</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>PickColor</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>PickColor</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>Screenshot</name>
+            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchor>Screenshot</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::ScreenshotPortal::ColorRGB</name>
+        <filename>amber-screenshotportal-colorrgb.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>Amber::SettingsPortal</name>
+        <filename>amber-settingsportal.html</filename>
+        <member kind="property" type="uint">
+            <name>version</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>SettingsPortal</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>SettingsPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>version</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>ReadAll</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>ReadAll</anchor>
+            <arglist>(const QStringList &amp;nss)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>QDBusVariant</type>
+            <name>Read</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>Read</anchor>
+            <arglist>(const QString &amp;ns, const QString &amp;key)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>SettingChanged</name>
+            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchor>SettingChanged</anchor>
+            <arglist>(const QString &amp;ns, const QString &amp;key, const QVariant &amp;value)</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::WallpaperPortal</name>
+        <filename>amber-wallpaperportal.html</filename>
+        <member kind="property" type="uint">
+            <name>version</name>
+            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>WallpaperPortal</name>
+            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchor>WallpaperPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>~WallpaperPortal</name>
+            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchor>dtor.WallpaperPortal</anchor>
+            <arglist>() = default</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>version</name>
+            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchor>version-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>uint</type>
+            <name>SetWallpaperURI</name>
+            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchor>SetWallpaperURI</anchor>
+            <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;uri, const QVariantMap &amp;options, uint &amp;result)</arglist>
+        </member>
+    </compound>
+</tagfile>

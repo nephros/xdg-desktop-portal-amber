@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- desktopportal.cpp -->
+  <title>SettingsPortal Class | XDG Desktop Portal Amber 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li>XDG Desktop Portal Amber</li>
+<li>SettingsPortal</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">SettingsPortal Class</h1>
+<span class="small-subtitle">(<a href="amber-settingsportal.html">Amber::SettingsPortal</a>)<br/></span>
+<!-- $$$SettingsPortal-brief -->
+<p>Implementation of <code>org.freedesktop.impl.portal.Settings</code> <a href="#details">More...</a></p>
+<!-- @@@SettingsPortal -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;SettingsPortal&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="amber-settingsportal-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><a href="amber-settingsportal.html#version-prop">version</a></b> : const uint</li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#SettingsPortal">SettingsPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#version-prop">version</a></b>() const</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>)</td></tr>
+</table></div>
+<a name="signals"></a>
+<h2 id="signals">Signals</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#SettingChanged">SettingChanged</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>, const QVariant &amp;<i>value</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$SettingsPortal-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Implementation of <code>org.freedesktop.impl.portal.Settings</code></p>
+<p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
+<p>Features restrieving the properties from the <code>org.freedesktop.appearance</code> namespace as well as a custom namespace called <code>org.sailfishos.desktop</code>, and optionally others.</p>
+<p>See <a href="settings-namespaces.html#settingsportalnamespaces">Supported Namespaces</a> for details.</p>
+</div>
+<!-- @@@SettingsPortal -->
+<div class="prop">
+<h2>Property Documentation</h2>
+<!-- $$$version-prop$$$version -->
+<h3 class="fn" id="version-prop"><a name="version-prop"></a><span class="name">version</span> : const <span class="type">uint</span></h3>
+<p>This property contains the backend implementation version.</p>
+<p><b>Access functions:</b></p>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft topAlign rightAlign"> uint </td><td class="memItemRight bottomAlign"><span class="name"><b>version</b></span>() const</td></tr>
+</table></div>
+<!-- @@@version -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$SettingsPortal[overload1]$$$SettingsPortalQObject* -->
+<h3 class="fn" id="SettingsPortal"><a name="SettingsPortal"></a>SettingsPortal::<span class="name">SettingsPortal</span>(<span class="type">QObject</span> *<i>parent</i>)</h3>
+<p>Default constructs an instance of SettingsPortal.</p><!-- @@@SettingsPortal -->
+<!-- $$$Read[overload1]$$$ReadconstQString&constQString& -->
+<h3 class="fn" id="Read"><a name="Read"></a><code>[slot] </code><span class="type">QDBusVariant</span> SettingsPortal::<span class="name">Read</span>(const <span class="type">QString</span> &amp;<i>ns</i>, const <span class="type">QString</span> &amp;<i>key</i>)</h3>
+<p>Reads and returns a single value, specified by <i>key</i>, from namespace <i>ns</i></p>
+<!-- @@@Read -->
+<!-- $$$ReadAll[overload1]$$$ReadAllconstQStringList& -->
+<h3 class="fn" id="ReadAll"><a name="ReadAll"></a><code>[slot] </code><span class="type">void</span> SettingsPortal::<span class="name">ReadAll</span>(const <span class="type">QStringList</span> &amp;<i>nss</i>)</h3>
+<p>Implements <code>org.freedesktop.impl.portal.Settings.ReadAll</code></p>
+<p><i>nss</i> specifies the a list of namespaces. See the class description for supported namespaces.</p>
+<!-- @@@ReadAll -->
+<!-- $$$SettingChanged[overload1]$$$SettingChangedconstQString&constQString&constQVariant& -->
+<h3 class="fn" id="SettingChanged"><a name="SettingChanged"></a><code>[signal] </code><span class="type">void</span> SettingsPortal::<span class="name">SettingChanged</span>(const <span class="type">QString</span> &amp;<i>ns</i>, const <span class="type">QString</span> &amp;<i>key</i>, const <span class="type">QVariant</span> &amp;<i>value</i>)</h3>
+<p>Emitted when any of the supported values have changed. <i>ns</i>, <i>key</i>, <i>value</i> are namespace, key within that namespace, and value that has changed.</p>
+<p><b>Note: </b>emitting this signal is mandaroty for the XDP namespace. It may or may not be emitted in the same way for other namespaces.</p><p><b>See also </b><a href="settings-namespaces.html#settingsportalnamespaces">SettingsPortalNamespaces</a>.</p>
+<!-- @@@SettingChanged -->
+</div>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

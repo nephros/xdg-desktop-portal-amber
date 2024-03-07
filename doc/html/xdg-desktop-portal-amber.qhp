@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>org.freedesktop.impl.portal.desktop.amber.ui.1.0</namespace>
+    <virtualFolder>xdg-desktop-portal-amber</virtualFolder>
+    <filterSection>
+        <toc>
+            <section ref="ui.html" title="XDG Desktop Portal Amber QML UI">
+                <section ref="" title="">
+                    <section ref="amber.html" title="Amber"/>
+                    <section ref="amber-accessportal.html" title="Amber::AccessPortal Class Reference">
+                        <section ref="amber-accessportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-desktopportal.html" title="Amber::DesktopPortal Class Reference">
+                        <section ref="amber-desktopportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-emailportal.html" title="Amber::EmailPortal Class Reference">
+                        <section ref="amber-emailportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-filechooserportal.html" title="Amber::FileChooserPortal Class Reference">
+                        <section ref="amber-filechooserportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-screenshotportal.html" title="Amber::ScreenshotPortal Class Reference">
+                        <section ref="amber-screenshotportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-screenshotportal-colorrgb.html" title="ScreenshotPortal::ColorRGB Class Reference">
+                        <section ref="amber-screenshotportal-colorrgb-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-settingsportal.html" title="Amber::SettingsPortal Class Reference">
+                        <section ref="amber-settingsportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="amber-wallpaperportal.html" title="Amber::WallpaperPortal Class Reference">
+                        <section ref="amber-wallpaperportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="https-dbus-freedesktop-org-doc-dbus-daemon-1.html" title="D-Bus Documentation"/>
+                    <section ref="https-sailfishos-org-develop-docs-nemo-qml-plugin-dbus.html" title="Nemo QML Plugin D-Bus"/>
+                    <section ref="settings-namespaces.html" title="Settings Namespaces"/>
+                    <section ref="ui.html" title="XDG Desktop Portal Amber QML UI"/>
+                    <section ref="https-flatpak-github-io-xdg-desktop-portal-docs-impl-dbus-interfaces.html" title="XDG Desktop Portal Backend Specification"/>
+                    <section ref="https-flatpak-github-io-xdg-desktop-portal-docs.html" title="XDG Desktop Portal Specification"/>
+                    <section ref="org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html" title="org.freedesktop.impl.portal.desktop.amber.ui QML Types"/>
+                </section>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="AccessDialog" id="AccessPortal::AccessDialog" ref="amber-accessportal.html#AccessDialog"/>
+            <keyword name="AccessPortal" id="Amber::AccessPortal" ref="amber-accessportal.html"/>
+            <keyword name="Amber" id="Amber" ref="amber.html"/>
+            <keyword name="ColorRGB" id="ScreenshotPortal::ColorRGB" ref="amber-screenshotportal-colorrgb.html"/>
+            <keyword name="ComposeEmail" id="EmailPortal::ComposeEmail" ref="amber-emailportal.html#ComposeEmail"/>
+            <keyword name="DesktopPortal" id="Amber::DesktopPortal" ref="amber-desktopportal.html"/>
+            <keyword name="EmailPortal" id="Amber::EmailPortal" ref="amber-emailportal.html"/>
+            <keyword name="FileChooserPortal" id="Amber::FileChooserPortal" ref="amber-filechooserportal.html"/>
+            <keyword name="FileChooserPortal::Accepted" id="FileChooserPortal::Accepted" ref="amber-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::Cancelled" id="FileChooserPortal::Cancelled" ref="amber-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::Other" id="FileChooserPortal::Other" ref="amber-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::PickerResponse" id="FileChooserPortal::PickerResponse" ref="amber-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="OpenFile" id="FileChooserPortal::OpenFile" ref="amber-filechooserportal.html#OpenFile"/>
+            <keyword name="PickColor" id="ScreenshotPortal::PickColor" ref="amber-screenshotportal.html#PickColor"/>
+            <keyword name="Read" id="SettingsPortal::Read" ref="amber-settingsportal.html#Read"/>
+            <keyword name="ReadAll" id="SettingsPortal::ReadAll" ref="amber-settingsportal.html#ReadAll"/>
+            <keyword name="SaveFile" id="FileChooserPortal::SaveFile" ref="amber-filechooserportal.html#SaveFile"/>
+            <keyword name="SaveFiles" id="FileChooserPortal::SaveFiles" ref="amber-filechooserportal.html#SaveFiles"/>
+            <keyword name="Screenshot" id="ScreenshotPortal::Screenshot" ref="amber-screenshotportal.html#Screenshot"/>
+            <keyword name="ScreenshotPortal" id="Amber::ScreenshotPortal" ref="amber-screenshotportal.html"/>
+            <keyword name="SetWallpaperURI" id="WallpaperPortal::SetWallpaperURI" ref="amber-wallpaperportal.html#SetWallpaperURI"/>
+            <keyword name="SettingChanged" id="SettingsPortal::SettingChanged" ref="amber-settingsportal.html#SettingChanged"/>
+            <keyword name="Settings Namespaces" id="Settings Namespaces" ref="settings-namespaces.html"/>
+            <keyword name="SettingsPortal" id="Amber::SettingsPortal" ref="amber-settingsportal.html"/>
+            <keyword name="WallpaperPortal" id="Amber::WallpaperPortal" ref="amber-wallpaperportal.html"/>
+            <keyword name="XDG Desktop Portal Amber QML UI" id="XDG Desktop Portal Amber QML UI" ref="ui.html"/>
+            <keyword name="blue" id="ColorRGB::blue" ref="amber-screenshotportal-colorrgb.html#blue-var"/>
+            <keyword name="green" id="ColorRGB::green" ref="amber-screenshotportal-colorrgb.html#green-var"/>
+            <keyword name="org.freedesktop.impl.portal.desktop.amber.ui" id="org.freedesktop.impl.portal.desktop.amber.ui" ref="org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html"/>
+            <keyword name="red" id="ColorRGB::red" ref="amber-screenshotportal-colorrgb.html#red-var"/>
+            <keyword name="version" id="FileChooserPortal::version" ref="amber-filechooserportal.html#version-prop"/>
+            <keyword name="version" id="FileChooserPortal::version" ref="amber-filechooserportal.html#version-prop"/>
+            <keyword name="version" id="ScreenshotPortal::version" ref="amber-screenshotportal.html#version-prop"/>
+            <keyword name="version" id="ScreenshotPortal::version" ref="amber-screenshotportal.html#version-prop"/>
+            <keyword name="version" id="SettingsPortal::version" ref="amber-settingsportal.html#version-prop"/>
+            <keyword name="version" id="SettingsPortal::version" ref="amber-settingsportal.html#version-prop"/>
+            <keyword name="version" id="WallpaperPortal::version" ref="amber-wallpaperportal.html#version-prop"/>
+            <keyword name="version" id="WallpaperPortal::version" ref="amber-wallpaperportal.html#version-prop"/>
+            <keyword name="~ScreenshotPortal" id="ScreenshotPortal::~ScreenshotPortal" ref="amber-screenshotportal.html#dtor.ScreenshotPortal"/>
+            <keyword name="~WallpaperPortal" id="WallpaperPortal::~WallpaperPortal" ref="amber-wallpaperportal.html#dtor.WallpaperPortal"/>
+        </keywords>
+        <files>
+            <file>amber-accessportal-members.html</file>
+            <file>amber-accessportal.html</file>
+            <file>amber-desktopportal-members.html</file>
+            <file>amber-desktopportal.html</file>
+            <file>amber-emailportal-members.html</file>
+            <file>amber-emailportal.html</file>
+            <file>amber-filechooserportal-members.html</file>
+            <file>amber-filechooserportal.html</file>
+            <file>amber-screenshotportal-colorrgb-members.html</file>
+            <file>amber-screenshotportal-colorrgb.html</file>
+            <file>amber-screenshotportal-members.html</file>
+            <file>amber-screenshotportal.html</file>
+            <file>amber-settingsportal-members.html</file>
+            <file>amber-settingsportal.html</file>
+            <file>amber-wallpaperportal-members.html</file>
+            <file>amber-wallpaperportal.html</file>
+            <file>amber.html</file>
+            <file>images/breadcrumb.png</file>
+            <file>images/bullet_dn.png</file>
+            <file>images/bullet_gt.png</file>
+            <file>images/bullet_sq.png</file>
+            <file>images/bullet_up.png</file>
+            <file>org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html</file>
+            <file>settings-namespaces.html</file>
+            <file>style/offline.css</file>
+            <file>ui.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

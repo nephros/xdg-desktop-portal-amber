@@ -18,6 +18,9 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 
+/*! \namespace Amber
+    \brief Contains backend implementations of the XDG Desktop Portal specifications for Sailfish OS.
+*/
 namespace Amber {
 const char* SettingsPortal::DCONF_SAILFISHOS_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
 const char* SettingsPortal::DCONF_SAILFISHOS_HIGHLIGHT_KEY      = "/desktop/jolla/theme/color/highlight";
@@ -43,6 +46,12 @@ const char* SettingsPortal::NAMESPACE_KDE             = "org.kde.kdeglobals";
 const char* SettingsPortal::NAMESPACE_KDE_GENERAL     = "org.kde.kdeglobals.General";
 const char* SettingsPortal::CONFIG_KDE_SCHEME_KEY     = "ColorScheme";
 
+/*! \class SettingsPortal::SettingsPortal
+    \brief Implementation of \c org.freedesktop.impl.portal.Settings
+
+    Features restrieving the properties from the \c org.freedesktop.appearance namespace
+    as well as a custom namespace called \c org.sailfishos.desktop
+*/
 SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
     , m_schemeConfig(new MGConfItem(DCONF_SAILFISHOS_SCHEME_KEY, this))

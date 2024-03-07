@@ -14,10 +14,28 @@ import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0
 
+/*! \qmlmodule XDG Desktop Portal Amber QML UI
+*/
+
+/*! \qmltype xdg-desktop-portal-amber-ui
+    \brief XDG Desktop FileChooser UI
+    \ingroup uitypes
+    \inqmlmodule XDG Desktop Portal Amber QML UI
+*/
 ApplicationWindow { id: root
 
     cover: null
+    /*! \qmlproperty FilePickerDialog xdg-desktop-portal-amber-ui::_filePickerDialog
+       Holds the instance of the picker dialog launched.
+       \sa FilePickerDialog
+       \internal
+    */
     property FilePickerDialog _filePickerDialog
+    /*! \qmlproperty Nemo::DBus::DBusInterface xdg-desktop-portal-amber-ui::_request
+        Holds the instance of the picker dialog launched.
+        \sa Nemo::DBus
+        \internal
+    */
     property DBusInterface _request
     DBusAdaptor {
         service: "org.freedesktop.impl.portal.desktop.amber.ui"
@@ -115,6 +133,9 @@ ApplicationWindow { id: root
         }
     }
 
+    /*! Finishes dynamic creation of Picker
+       \internal
+    */
     function _finishPicker() {
         if (_filePickerDialog) {
             if (_filePickerDialog.windowVisible) {

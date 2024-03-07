@@ -14,48 +14,74 @@ import Sailfish.Lipstick 1.0
 import Sailfish.Pickers 1.0
 import Nemo.Thumbnailer 1.0
 
+/*! \qmltype FilePickerDialog
+    \brief XDG Desktop File Picker
+    \ingroup uitypes
+*/
+
 SystemDialog {
     id: page
 
-    /*  https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+    /*! The dialog title. */
+    property string title
+    /*! \qmlproperty var FilePickerDialog::options
+     *
+        \sa Amber::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
 
-        accept_label (s)
+        \list
+        \li accept_label (s)
         The label for the accept button. Mnemonic underlines are allowed.
 
-        modal (b)
+        \li modal (b)
         Whether to make the dialog modal. Default is yes.
 
-        multiple (b)
+        \li multiple (b)
         Whether to allow selection of multiple files. Default is no.
 
-        directory (b)
+        \li directory (b)
         Whether to select for folders instead of files. Default is to select files.
 
-        filters (a(sa(us)))
+        \li filters (a(sa(us)))
         A list of serialized file filters. See org.freedesktop.portal.FileChooser.OpenFile for details.
 
-        current_filter ((sa(us)))
+        \li current_filter ((sa(us)))
         Request that this filter be set by default at dialog creation. See org.freedesktop.portal.FileChooser.OpenFile for details.
 
-        choices (a(ssa(ss)s))
+        \li choices (a(ssa(ss)s))
         A list of serialized combo boxes. See org.freedesktop.portal.FileChooser.OpenFile for details.
 
-        current_folder (ay)
+        \li current_folder (ay)
         A suggested folder to open the files from. See org.freedesktop.portal.FileChooser.OpenFile for details.
-        */
-    property string title
+        \endlist
+    */
     property var options
+    /*! The picked file name will be held here after selection by the user */
     property string selectedFile
+    /*! \c true if the dialog should allow directories as result. */
     property bool wantDirectory: ( !!options && (options.directory == true))
+    /*! \c true if the dialog should allow selecting multiple files/directories. */
     property bool wantMulti: ( !!options && (options.multiple == true))
+    /*! \c true if the dialog is currently shown.
+        \internal
+    */
     property bool windowVisible: visibility != Window.Hidden
                                  && visibility != Window.Minimized
+    /*! Raises/shows the widow when called.
+       \internal
+    */
     function init() {
         raise()
         show()
     }
 
+    /*! \qmlsignal FilePickerDialog::done(bool accepted, string selectedFile)
+     */
     signal done(bool accepted, string selectedFile)
+    /*! \qmlproperty FileModel FilePickerDialog::model
+
+        The model representing the contents of the file system
+        \sa Nemo::FileManager
+     */
     property FileModel model: FileModel {
         id: fileModel
         active: page.status === PageStatus.Active

@@ -89,6 +89,7 @@ rm -rf %{buildroot}
 %make_install
 desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
 
+install -d %{buildroot}/%{_docdir}/%{name}/
 install -m 644 doc/html/*.html %{buildroot}/%{_docdir}/%{name}/
 install -m 644 doc/html/%{name}.index %{buildroot}/%{_docdir}/%{name}/
 install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/

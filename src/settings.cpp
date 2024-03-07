@@ -125,7 +125,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
           { NAMESPACE_FDO, {
                   { CONFIG_FDO_SCHEME_KEY,   QDBusVariant(getColorScheme()) },
                   { CONFIG_FDO_CONTRAST_KEY, QDBusVariant(getContrast()) },
-                  { CONFIG_FDO_ACCENT_KEY,   QDBusVariant(QVariant(getAccentColor())) }
+                  { CONFIG_FDO_ACCENT_KEY,   QDBusVariant(getAccentColor()) }
                 }
           }
         };
@@ -173,7 +173,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     } else if (key == CONFIG_FDO_CONTRAST_KEY) {
         return QDBusVariant(getContrast());
     } else if (key == CONFIG_FDO_ACCENT_KEY) {
-        return QDBusVariant(QVariant(getAccentColor()));
+        return QDBusVariant(QVariant::fromValue(getAccentColor()));
     }
     qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
@@ -218,14 +218,14 @@ SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const
   return ret;
 }
 
-QList<QVariant> SettingsPortal::getAccentColor() const
+QVariant SettingsPortal::getAccentColor() const
 {
-    QColor set;
-    set.setNamedColor(m_accentColorConfig->value().toString());
-    if (set.isValid()) {
-        return { QVariant(set.redF()), QVariant(set.greenF()), QVariant(set.blueF()) };
+    QColor accent;
+    accent.setNamedColor(m_accentColorConfig->value().toString());
+    if (accent.isValid()) {
+        return QVariant({ accent.redF(), accent.greenF(), accent.blueF() });
     }
-    return QList<QVariant>();
+    return QVariant();
 }
 
 /*! \fn void Amber::SettingsPortal::ambienceChanged(const int &i)

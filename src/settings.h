@@ -71,7 +71,7 @@ signals:
 private:
 
     ColorScheme getColorScheme() const;
-    QList<QVariant> getAccentColor() const;
+    QVariant getAccentColor() const;
     // TODO: We alsways return "normal/no preference" contrast.
     // FIXME: there s something about high contrast in lipstick somewhere...
     uint getContrast() const { return 0; };

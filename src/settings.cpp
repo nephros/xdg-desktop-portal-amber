@@ -137,23 +137,22 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     for (auto i = SupportedNameSpaces.begin(), end = SupportedNameSpaces.end(); i != end; ++i) {
 
         if (!nss.contains(*i)) { continue; };
+        QMap<QString, QDBusVariant>> part;
 
         if (nss.contains(NAMESPACE_FDO)) {
             // on-the-fly construction of "(a{sa{sv}})"
-            result = {
-                { NAMESPACE_FDO,
+            part = { NAMESPACE_FDO,
                   {
                        { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
                        { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
                        { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
                   }
-                }
             };
-            reply = message.createReply(QVariant::fromValue(result));
+            result.insert(part);
+            //reply = message.createReply(QVariant::fromValue(result));
         } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
             qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
-            result = {
-                { NAMESPACE_SAILFISHOS, {
+            part = { NAMESPACE_SAILFISHOS, {
                         { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
                         { SailfishConfKey.primary,
                             QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
@@ -165,13 +164,16 @@ void SettingsPortal::ReadAll(const QStringList &nss)
                         { SailfishConfKey.highlight,
                             QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
                     }
-                }
             };
-            reply = message.createReply(QVariant::fromValue(result));
+            result.insert(part);
+            //reply = message.createReply(QVariant::fromValue(result));
         }
     }
-    if (!message.isValid())
+    if (!result.isEmpty()) {
+        reply = message.createReply(QVariant::fromValue(result));
+    } else {
         reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Error"));
+    }
     qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);
 }

@@ -15,12 +15,14 @@
 
 namespace Amber {
 
+using XDPResultPart = QMap<QString, QDBusVariant>;
 // a{sa{sv}}
-using XDPResultMap =  QMap<QString, QMap<QString, QDBusVariant>>;
+using XDPResultMap =  QMap<QString, XDPResultPart>;
 // sa{sv}
 // using Shortcut = QPair<QString, QVariantMap>;
 // a(sa{sv})
 //using Shortcuts = QList<Shortcut>;
 }
 
+Q_DECLARE_METATYPE(Amber::XDPResultPart);
 Q_DECLARE_METATYPE(Amber::XDPResultMap);

@@ -80,6 +80,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
     qDBusRegisterMetaType<XDPResultMap>();
+    qDBusRegisterMetaType<XDPResultPart>();
     qDBusRegisterMetaType<QMap<QString, QDBusVariant>>();
 
     /* TODO
@@ -131,28 +132,27 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     }
     QDBusMessage reply;
     QDBusMessage message = q_ptr->message();
-    Amber::XDPResultMap result;
+    XDPResultMap result;
 
     // FIXME: we should support a namespace list:
     for (auto i = SupportedNameSpaces.begin(), end = SupportedNameSpaces.end(); i != end; ++i) {
 
         if (!nss.contains(*i)) { continue; };
-        QMap<QString, QDBusVariant>> part;
 
         if (nss.contains(NAMESPACE_FDO)) {
             // on-the-fly construction of "(a{sa{sv}})"
-            part = { NAMESPACE_FDO,
-                  {
-                       { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
-                       { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
-                       { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
-                  }
-            };
-            result.insert(part);
-            //reply = message.createReply(QVariant::fromValue(result));
+            result.insert(NAMESPACE_FDO, {
+                {
+                   { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
+                   { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
+                   { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
+                }
+            }
+            );
         } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
             qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
-            part = { NAMESPACE_SAILFISHOS, {
+            result.insert(NAMESPACE_SAILFISHOS, {
+                {
                         { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
                         { SailfishConfKey.primary,
                             QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
@@ -163,9 +163,9 @@ void SettingsPortal::ReadAll(const QStringList &nss)
                             QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
                         { SailfishConfKey.highlight,
                             QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
-                    }
-            };
-            result.insert(part);
+                }
+            }
+            );
             //reply = message.createReply(QVariant::fromValue(result));
         }
     }
@@ -174,7 +174,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     } else {
         reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Error"));
     }
-    qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
+//    qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);
 }
 

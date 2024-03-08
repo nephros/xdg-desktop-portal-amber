@@ -140,7 +140,8 @@ void SettingsPortal::ReadAll(const QStringList &nss)
 
       if (nss.contains(NAMESPACE_FDO)) {
         // on-the-fly construction of "(a{sa{sv}})"
-        result.insert( {
+        //result.insert( {
+        result = {
             { NAMESPACE_FDO,
               {
                    { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
@@ -148,11 +149,12 @@ void SettingsPortal::ReadAll(const QStringList &nss)
                    { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
               }
             }
-        });
+        };
         reply = message.createReply(QVariant::fromValue(result));
       } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
         qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
-        result.insert( {
+        //result.insert( {
+        result = {
             { NAMESPACE_SAILFISHOS, {
                     { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
                     { SailfishConfKey.primary,
@@ -166,7 +168,8 @@ void SettingsPortal::ReadAll(const QStringList &nss)
                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
                 }
             }
-        });
+        //});
+        };
         reply = message.createReply(QVariant::fromValue(result));
       } else {
         qCDebug(XdgDesktopPortalAmberSettings) << "Unknown namespace:" << nss;

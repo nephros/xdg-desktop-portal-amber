@@ -10,6 +10,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusVariant>
+#include <QStringList>
 
 #include <mlite5/MGConfItem>
 #include <mlite5/MDConfGroup>
@@ -21,60 +22,55 @@ class SettingsPortal : public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Settings")
     Q_PROPERTY(uint version READ version CONSTANT)
 
-    static const char* DCONF_SAILFISHOS_SCHEME_KEY;
-    static const char* DCONF_SAILFISHOS_HIGHLIGHT_KEY;
-    static const char* DCONF_SAILFISHOS_THEME_GROUP;
-    static const char* NAMESPACE_FDO;
-    static const char* CONFIG_FDO_ACCENT_KEY;
-    static const char* CONFIG_FDO_SCHEME_KEY;
-    static const char* CONFIG_FDO_CONTRAST_KEY;
-    // TODO: other namespaces, e.g.:
-    static const char* NAMESPACE_SAILFISHOS;
-    static const char* CONFIG_SAILFISHOS_THEME_SCHEME_KEY;
-    static const char* CONFIG_SAILFISHOS_THEME_PRIMARY_KEY;
-    static const char* CONFIG_SAILFISHOS_THEME_SECONDARY_KEY;
-    static const char* CONFIG_SAILFISHOS_THEME_HIGHLIGHT_KEY;
-    static const char* CONFIG_SAILFISHOS_THEME_SECONDARYHIGHLIGHT_KEY;
-    static const char* NAMESPACE_KDE;
-    static const char* NAMESPACE_KDE_GENERAL;
-    static const char* CONFIG_KDE_SCHEME_KEY;
-
 public:
     explicit SettingsPortal(QObject *parent);
     ~SettingsPortal() override;
 
     uint version() const { return 1; }
 
-    enum ThemeColorScheme : int {
-      LightOnDark = 0,
-      DarkOnLight = 1,
-    };
-    Q_ENUM(ThemeColorScheme)
-
-    enum ColorScheme : int {
+    enum FDOColorScheme : int {
       None = -1,
-      Dark = ThemeColorScheme::LightOnDark,
-      Light = ThemeColorScheme::DarkOnLight
+      Dark = 0,
+      Light = 1,
     };
-    Q_ENUM(ColorScheme)
+    Q_ENUM(FDOColorScheme)
+
+    struct FDOConfKeys {
+        const char* accent;
+        const char* scheme;
+        const char* contrast;
+    };
+    const FDOConfKeys FDOSettingsKey = {"accent-color", "color-scheme", "contrast"};
 
 public Q_SLOTS:
     void ReadAll(const QStringList &nss);
     QDBusVariant Read(const QString &ns, const QString &key);
-    void valueChanged(const QString &what);
+    void valueChanged(const QString &key);
     void ambienceChanged(const int &i);
 
 signals:
     void SettingChanged(const QString &ns,
                          const QString &key,
                          const QVariant &value);
-private:
+protected:
+    static const QStringList SupportedNameSpaces;
 
-    ColorScheme getColorScheme() const;
-    QVariant getAccentColor() const;
-    // TODO: We alsways return "normal/no preference" contrast.
-    // FIXME: there s something about high contrast in lipstick somewhere...
-    uint getContrast() const { return 0; };
+private:
+    struct FDOValues {
+        int scheme;
+        double accent[3];
+        uint contrast;
+    };
+    FDOValues m_fdoValue;
+
+    int getColorScheme() const      { return m_fdoValue.scheme; };
+    QVariant getAccentColor() const { return QVariant( m_fdoValue.accent ); };
+    uint getContrast() const        { return m_fdoValue.contrast; };
+
+    void readColorScheme();
+    void readAccentColor();
+    void readContrast() { m_fdoValue.contrast = 0; };
+    void update() { readColorScheme(); readAccentColor(); readContrast(); }
 
     MGConfItem  *m_schemeConfig;
     MGConfItem  *m_accentColorConfig;

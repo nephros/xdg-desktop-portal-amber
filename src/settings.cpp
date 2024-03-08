@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #include "settings.h"
+#include "xdptypes.h"
 
 #include <QDBusMetaType>
 #include <QDBusInterface>
@@ -21,59 +22,71 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 /*! \property Amber::SettingsPortal::version
     \brief Contains the backend implementation version
 */
-/*! \enum Amber::SettingsPortal::ColorScheme
-    \value Light 
-    \value Dark 
-    \value None 
-    \sa Amber::SettingsPortal::ThemeColorScheme, Sailfish::Silica::Theme
-    \internal
-*/
-/*! \enum Amber::SettingsPortal::ThemeColorScheme
-    \value DarkOnLight
-    \value LightOnDark
-    \sa Amber::SettingsPortal::ColorScheme, Sailfish::Silica::Theme
-    \internal
-*/
-namespace Amber {
-const char* SettingsPortal::DCONF_SAILFISHOS_SCHEME_KEY         = "/desktop/jolla/theme/color_scheme";
-const char* SettingsPortal::DCONF_SAILFISHOS_HIGHLIGHT_KEY      = "/desktop/jolla/theme/color/highlight";
-const char* SettingsPortal::DCONF_SAILFISHOS_THEME_GROUP        = "/desktop/jolla/theme/color";
 
-const char* SettingsPortal::NAMESPACE_FDO     = "org.freedesktop.appearance";
+static const QMap<QString, QString> SailfishDconf = {
+  { QStringLiteral("scheme_key"),    QStringLiteral("/desktop/jolla/theme/color_scheme") },
+  { QStringLiteral("highlight_key"), QStringLiteral("/desktop/jolla/theme/color/highlight") },
+  { QStringLiteral("theme_group"),   QStringLiteral("/desktop/jolla/theme/color") },
+};
 
-const char* SettingsPortal::CONFIG_FDO_ACCENT_KEY      = "accent-color";
-const char* SettingsPortal::CONFIG_FDO_SCHEME_KEY      = "color-scheme";
-const char* SettingsPortal::CONFIG_FDO_CONTRAST_KEY    = "contrast";
+static const char* NAMESPACE_FDO     = "org.freedesktop.appearance";
+
+// Custom namespace support.
+//  -- naming things is hard.
+//  -- org.sailfishos.desktop? com.jolla.lipstick? com.jolla.ambienced? "Mozilla/5.0 (org.sailfishos.desktop) com.jolla.lipsick/1.0 (like com.nokia.meego-harmattan)"?
+static const char* NAMESPACE_SAILFISHOS = "org.sailfishos.desktop";
+
+struct SailfishConfKeys {
+    const char* scheme;
+    const char* primary;
+    const char* secondary;
+    const char* highlight;
+    const char* secondaryHighlight;
+};
+static const SailfishConfKeys SailfishConfKey  = {
+    "color-scheme",
+    "primary-color",
+    "secondary-color",
+    "highlight-color",
+    "secondary-highlight-color",
+};
 
 // TODO: other namespaces, e.g.:
-// naming things is hard.
-// org.sailfishos.desktop? com.jolla.lipstick? com.jolla.ambienced? org.merproject? com.nokia.meego-harmattan?
-const char* SettingsPortal::NAMESPACE_SAILFISHOS                    = "org.sailfishos.desktop";
-const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_SCHEME_KEY      = "color-scheme";
-const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_PRIMARY_KEY     = "primary-color";
-const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_SECONDARY_KEY   = "secondary-color";
-const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_HIGHLIGHT_KEY   = "highlight-color";
-const char* SettingsPortal::CONFIG_SAILFISHOS_THEME_SECONDARYHIGHLIGHT_KEY = "secondary-highlight-color";
-// perpare to fake KDE Settings
-const char* SettingsPortal::NAMESPACE_KDE             = "org.kde.kdeglobals";
-const char* SettingsPortal::NAMESPACE_KDE_GENERAL     = "org.kde.kdeglobals.General";
-const char* SettingsPortal::CONFIG_KDE_SCHEME_KEY     = "ColorScheme";
+// prepare to fake KDE Settings
+static const char* NAMESPACE_KDE             = "org.kde.kdeglobals";
+static const char* NAMESPACE_KDE_GENERAL     = "org.kde.kdeglobals.General";
+static const char* CONFIG_KDE_SCHEME_KEY     = "ColorScheme";
+
+
+namespace Amber {
+enum SailfishColorScheme : uint {
+      LightOnDark = 0, // dark wallpaper, light fonts
+      DarkOnLight = 1, // light wallpaper, dark fonts
+};
+
+static const QMap<SailfishColorScheme, SettingsPortal::FDOColorScheme> ColorSchemeMap = {
+  { SailfishColorScheme::LightOnDark, SettingsPortal::FDOColorScheme::Light },
+  { SailfishColorScheme::DarkOnLight, SettingsPortal::FDOColorScheme::Dark }
+};
+
+const QStringList SettingsPortal::SupportedNameSpaces = { NAMESPACE_FDO, NAMESPACE_SAILFISHOS, NAMESPACE_KDE_GENERAL };
 
 SettingsPortal::SettingsPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
-    , m_schemeConfig(new MGConfItem(DCONF_SAILFISHOS_SCHEME_KEY, this))
-    , m_accentColorConfig(new MGConfItem(DCONF_SAILFISHOS_HIGHLIGHT_KEY, this))
-    , m_sailfishThemeConfigGroup(new MDConfGroup(DCONF_SAILFISHOS_THEME_GROUP, this))
+    , m_schemeConfig(new MGConfItem(SailfishDconf.value("scheme_key"), this))
+    , m_accentColorConfig(new MGConfItem(SailfishDconf.value("highlight_key"), this))
+    , m_sailfishThemeConfigGroup(new MDConfGroup(SailfishDconf.value("theme_group"), this))
 {
     qCDebug(XdgDesktopPortalAmberSettings) << "Desktop portal service: Settings";
 
-    qDBusRegisterMetaType<QMap<QString, QMap<QString, QDBusVariant>>>();
-    qDBusRegisterMetaType<QMap<QString,QDBusVariant>>();
+    qDBusRegisterMetaType<XDPResultMap>();
+    qDBusRegisterMetaType<QMap<QString, QDBusVariant>>();
 
     /* TODO
     QObject::connect(m_schemeConfig,      SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_SCHEME_KEY)));
     QObject::connect(m_accentColorConfig, SIGNAL(valueChanged()), SLOT(valueChanged(const char* what=SettingsPortal::CONFIG_FDO_ACCENT_KEY)));
     */
+    // listen for dconf changes:
     QObject::connect(m_sailfishThemeConfigGroup, SIGNAL(valueChanged(QString)), SLOT(valueChanged(QString)));
     // listen for ambience changes:
     QDBusConnection::sessionBus().connect(
@@ -85,12 +98,14 @@ SettingsPortal::SettingsPortal(QObject *parent)
                     this,
                     SLOT(ambienceChanged(int))
                     );
+
+    m_fdoValue = { -1, {0.0,0.0,0.0}, 0, };
+
 }
 
 SettingsPortal::~SettingsPortal()
 {
 }
-
 /*! \fn Amber::SettingsPortal::ReadAll(const QStringList &nss)
 
     Implements \c org.freedesktop.impl.portal.Settings.ReadAll
@@ -116,41 +131,47 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     }
     QDBusMessage reply;
     QDBusMessage message = q_ptr->message();
-    QMap<QString, QMap<QString, QDBusVariant>> result;
+    Amber::XDPResultMap result;
 
     // FIXME: we should support a namespace list:
-    if (nss.contains(NAMESPACE_FDO)) {
+    for (auto i = SupportedNameSpaces.begin(), end = SupportedNameSpaces.end(); i != end; ++i) {
+
+      if (!nss.contains(*i)) { continue; };
+
+      if (nss.contains(NAMESPACE_FDO)) {
         // on-the-fly construction of "(a{sa{sv}})"
-        result = {
-          { NAMESPACE_FDO, {
-                  { CONFIG_FDO_SCHEME_KEY,   QDBusVariant(getColorScheme()) },
-                  { CONFIG_FDO_CONTRAST_KEY, QDBusVariant(getContrast()) },
-                  { CONFIG_FDO_ACCENT_KEY,   QDBusVariant(getAccentColor()) }
-                }
-          }
-        };
+        result.insert( {
+            { NAMESPACE_FDO,
+              {
+                   { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
+                   { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
+                   { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
+              }
+            }
+        });
         reply = message.createReply(QVariant::fromValue(result));
-    } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
+      } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
         qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
-        result = {
-          { NAMESPACE_SAILFISHOS, {
-                  { CONFIG_SAILFISHOS_THEME_SCHEME_KEY, QDBusVariant(getColorScheme()) },
-                  { CONFIG_SAILFISHOS_THEME_PRIMARY_KEY,
-                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
-                  { CONFIG_SAILFISHOS_THEME_SECONDARY_KEY,
-                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondary"),"#b0ffffff", QMetaType::QString)) },
-                  { CONFIG_SAILFISHOS_THEME_SECONDARYHIGHLIGHT_KEY,
+        result.insert( {
+            { NAMESPACE_SAILFISHOS, {
+                    { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
+                    { SailfishConfKey.primary,
+                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
+                    { SailfishConfKey.secondary,
+                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondary"),"#b0ffffff", QMetaType::QString)) },
+                    { SailfishConfKey.secondaryHighlight,
                         // F76039 ia approx the color of the original J1 orange ToH
-                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
-                  { CONFIG_SAILFISHOS_THEME_HIGHLIGHT_KEY,
-                         QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
+                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
+                    { SailfishConfKey.highlight,
+                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
                 }
-          }
-        };
+            }
+        });
         reply = message.createReply(QVariant::fromValue(result));
-    } else {
+      } else {
         qCDebug(XdgDesktopPortalAmberSettings) << "Unknown namespace:" << nss;
         reply = message.createErrorReply(QDBusError::UnknownProperty, QStringLiteral("Namespace is not supported"));
+      }
     }
     QDBusConnection::sessionBus().send(reply);
 }
@@ -168,12 +189,12 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     // TODO
     Q_UNUSED(ns);
 
-    if (key == CONFIG_FDO_SCHEME_KEY) {
+    if (key == FDOSettingsKey.scheme) {
         return QDBusVariant(getColorScheme());
-    } else if (key == CONFIG_FDO_CONTRAST_KEY) {
+    } else if (key == FDOSettingsKey.contrast) {
         return QDBusVariant(getContrast());
-    } else if (key == CONFIG_FDO_ACCENT_KEY) {
-        return QDBusVariant(QVariant::fromValue(getAccentColor()));
+    } else if (key == FDOSettingsKey.accent) {
+        return QDBusVariant(getAccentColor());
     }
     qCDebug(XdgDesktopPortalAmberSettings) << "Unsupported key: " << key;
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
@@ -195,37 +216,34 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     \sa SettingsPortal::SettingChanged
     \internal
 */
-void SettingsPortal::valueChanged(const QString &what)
+void SettingsPortal::valueChanged(const QString &key)
 {
-    if (what == CONFIG_FDO_SCHEME_KEY) {
-        emit SettingChanged(NAMESPACE_FDO, what, QVariant(getColorScheme()));
-    } else if (what == CONFIG_FDO_ACCENT_KEY) {
-        emit SettingChanged(NAMESPACE_FDO, what, QVariant(getAccentColor()));
+    if (key == FDOSettingsKey.scheme) {
+        emit SettingChanged(NAMESPACE_FDO, key, QVariant(getColorScheme()));
+    } else if (key == FDOSettingsKey.accent) {
+        emit SettingChanged(NAMESPACE_FDO, key, getAccentColor());
     }
 }
 
-SettingsPortal::ColorScheme SettingsPortal::getColorScheme() const
+void SettingsPortal::readColorScheme()
 {
 
-  ColorScheme ret = ColorScheme::None;
-  uint set = m_schemeConfig->value().toUInt();
-
-  if ( set == (uint) ThemeColorScheme::DarkOnLight )
-    ret = ColorScheme::Dark;
-  if ( set == (uint) ThemeColorScheme::LightOnDark )
-    ret = ColorScheme::Light;
-
-  return ret;
+  SailfishColorScheme scheme = static_cast<SailfishColorScheme>(m_schemeConfig->value().toInt());
+  m_fdoValue.scheme = (int) ColorSchemeMap.value(
+      scheme,
+      FDOColorScheme::None
+  );
 }
 
-QVariant SettingsPortal::getAccentColor() const
+void SettingsPortal::readAccentColor()
 {
     QColor accent;
     accent.setNamedColor(m_accentColorConfig->value().toString());
     if (accent.isValid()) {
-        return QVariant({ accent.redF(), accent.greenF(), accent.blueF() });
+        m_fdoValue.accent[0] = accent.redF();
+        m_fdoValue.accent[1] = accent.greenF();
+        m_fdoValue.accent[2] = accent.blueF();
     }
-    return QVariant();
 }
 
 /*! \fn void Amber::SettingsPortal::ambienceChanged(const int &i)
@@ -236,6 +254,13 @@ QVariant SettingsPortal::getAccentColor() const
 */
 void SettingsPortal::ambienceChanged(const int &i)
 {
+    qCDebug(XdgDesktopPortalAmberSettings) << "Ambience change signalled, reloading";
     emit SettingChanged(NAMESPACE_SAILFISHOS, QStringLiteral("ambience"), QVariant(i));
+    update();
+    emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.accent,   getAccentColor());
+    emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.scheme,   QVariant(getColorScheme()));
+    emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.contrast, QVariant(getContrast()));
 }
+
+
 } // namespace Amber

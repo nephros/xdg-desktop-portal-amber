@@ -136,46 +136,43 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     // FIXME: we should support a namespace list:
     for (auto i = SupportedNameSpaces.begin(), end = SupportedNameSpaces.end(); i != end; ++i) {
 
-      if (!nss.contains(*i)) { continue; };
+        if (!nss.contains(*i)) { continue; };
 
-      if (nss.contains(NAMESPACE_FDO)) {
-        // on-the-fly construction of "(a{sa{sv}})"
-        //result.insert( {
-        result = {
-            { NAMESPACE_FDO,
-              {
-                   { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
-                   { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
-                   { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
-              }
-            }
-        };
-        reply = message.createReply(QVariant::fromValue(result));
-      } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
-        qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
-        //result.insert( {
-        result = {
-            { NAMESPACE_SAILFISHOS, {
-                    { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
-                    { SailfishConfKey.primary,
-                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
-                    { SailfishConfKey.secondary,
-                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondary"),"#b0ffffff", QMetaType::QString)) },
-                    { SailfishConfKey.secondaryHighlight,
-                        // F76039 ia approx the color of the original J1 orange ToH
-                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
-                    { SailfishConfKey.highlight,
-                        QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
+        if (nss.contains(NAMESPACE_FDO)) {
+            // on-the-fly construction of "(a{sa{sv}})"
+            result = {
+                { NAMESPACE_FDO,
+                  {
+                       { FDOSettingsKey.scheme,   QDBusVariant(getColorScheme()) },
+                       { FDOSettingsKey.contrast, QDBusVariant(getContrast()) },
+                       { FDOSettingsKey.accent,   QDBusVariant(getAccentColor()) }
+                  }
                 }
-            }
-        //});
-        };
-        reply = message.createReply(QVariant::fromValue(result));
-      } else {
-        qCDebug(XdgDesktopPortalAmberSettings) << "Unknown namespace:" << nss;
-        reply = message.createErrorReply(QDBusError::UnknownProperty, QStringLiteral("Namespace is not supported"));
-      }
+            };
+            reply = message.createReply(QVariant::fromValue(result));
+        } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
+            qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
+            result = {
+                { NAMESPACE_SAILFISHOS, {
+                        { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
+                        { SailfishConfKey.primary,
+                            QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("primary"),"#ffffffff", QMetaType::QString)) },
+                        { SailfishConfKey.secondary,
+                            QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondary"),"#b0ffffff", QMetaType::QString)) },
+                        { SailfishConfKey.secondaryHighlight,
+                            // F76039 ia approx the color of the original J1 orange ToH
+                            QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("highlight"),"#F76039", QMetaType::QString)) },
+                        { SailfishConfKey.highlight,
+                            QDBusVariant(m_sailfishThemeConfigGroup->value(QStringLiteral("secondaryHighlight"),"#943922", QMetaType::QString)) }
+                    }
+                }
+            };
+            reply = message.createReply(QVariant::fromValue(result));
+        }
     }
+    if (!message.isValid())
+        reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Error"));
+    qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);
 }
 

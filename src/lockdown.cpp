@@ -34,7 +34,7 @@ bool LockdownPortal::getMute() const
             QStringLiteral("com.nokia.profiled"),
             QStringLiteral("/com/nokia/profiled"),
             QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("get_profile"),
+            QStringLiteral("get_profile")
             );
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
 
@@ -49,7 +49,7 @@ void LockdownPortal::setMute(const bool &silent) const
             QStringLiteral("com.nokia.profiled"),
             QStringLiteral("/com/nokia/profiled"),
             QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("set_profile"),
+            QStringLiteral("set_profile")
             );
 
     QString profile;

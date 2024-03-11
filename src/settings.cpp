@@ -134,12 +134,11 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     QDBusMessage message = q_ptr->message();
     XDPResultMap result;
 
-    // FIXME: we should support a namespace list:
-    for (auto i = SupportedNameSpaces.begin(), end = SupportedNameSpaces.end(); i != end; ++i) {
+    for (auto i = nss.begin(), end = nss.end(); i != end; ++i) {
+        if (!SupporteNamespaces.contains(*i)) // skip unknown
+            continue;
 
-        if (!nss.contains(*i)) { continue; };
-
-        if (nss.contains(NAMESPACE_FDO)) {
+        if (*i == NAMESPACE_FDO) {
             // on-the-fly construction of "(a{sa{sv}})"
             result.insert(NAMESPACE_FDO, {
                 {
@@ -149,7 +148,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
                 }
             }
             );
-        } else if (nss.contains(NAMESPACE_SAILFISHOS)) {
+        } else if (*i == NAMESPACE_SAILFISHOS) {
             qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
             result.insert(NAMESPACE_SAILFISHOS, {
                 {
@@ -172,7 +171,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     if (!result.isEmpty()) {
         reply = message.createReply(QVariant::fromValue(result));
     } else {
-        reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Error"));
+        reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Namespace."));
     }
 //    qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);

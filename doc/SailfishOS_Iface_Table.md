@@ -1,5 +1,29 @@
 ## XDG Desktop Portal interface lookup table
 
+### XDP frontend services
+
+This tble lists the interfaces provided by xdg-desktop-portal without any backend implementations
+
+Not strictly relevant to the Amber backend implementation, but given here for completeness.
+
+| Frontend interface                         | Description                  | tested | working | SFOS Capability |
+| ------------------------------------------ | ---------------------------- | :----: | :-----: | : ------------: |
+| org.freedesktop.portal.Device              | Asks for access to cam/mic   | no     |         | yes             |
+| org.freedesktop.portal.GameMode            | com.feralinteractive.GameMode| no     |         | no              |
+| org.freedesktop.portal.MemoryMonitor       | low system memory            | no     |         | yes             |
+| org.freedesktop.portal.NetworkMonitor      | network status information   | no     |         | yes             |
+| org.freedesktop.portal.PowerProfileMonitor | lookup power saving mode     | yes    |   no    | yes             |
+| org.freedesktop.portal.ProxyResolver       | Looks up http proxy          | no     |         | yes             |
+| org.freedesktop.portal.Realtime            | org.freedesktop.RealtimeKit1 | yes    |   no    | no              |
+| org.freedesktop.portal.Trash               | send files to the trashcan   | no     |         | no              |
+
+**Notes:**
+The spec sais something like this for most of these:
+> It is not a portal in the strict sense, since it does not involve user
+> interaction. Applications are expected to use this interface indirectly, via
+> a library API such as the GLib XXXMonitor interface.
+
+
 Legend:
 
  - SFOS capability: SFOS has a matching or similar function

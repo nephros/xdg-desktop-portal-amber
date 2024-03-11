@@ -1,4 +1,4 @@
-### Intallation
+### Installation
 
 Curently, these steps are necessary for testing:
 
@@ -9,6 +9,12 @@ Curently, these steps are necessary for testing:
 	- xdg-desktop-portal-amber-qml
 	- xdg-desktop-portal-amber-sailfishos-config
 
+These packages provide:
+
+	- xdg-desktop-portal: the Portals frontend services by Flatpak
+	- xdg-desktop-portal-amber: Portal backend implementation services
+	- xdg-desktop-portal-amber-qml: UI component for e.g. the FileChooser dialogs
+	- xdg-desktop-portal-amber-sailfishos-config: Any config files needed to glue everything together.
 
 ### Running
 

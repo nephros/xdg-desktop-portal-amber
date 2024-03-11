@@ -1,5 +1,5 @@
 [portal]
 DBusName=org.freedesktop.impl.portal.desktop.amber
-Interfaces=org.freedesktop.impl.portal.Access;org.freedesktop.impl.portal.Email;org.freedesktop.impl.portal.FileChooser;org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.Settings;org.freedesktop.impl.portal.Wallpaper
+Interfaces=org.freedesktop.impl.portal.Access;org.freedesktop.impl.portal.Email;org.freedesktop.impl.portal.FileChooser;org.freedesktop.impl.portal.Lockdown;org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.Settings;org.freedesktop.impl.portal.Wallpaper
 # this key is deprecated. So lets use some legacy names here just to annoy some Jollyboys:
 UseIn=SailfishOS;Lipstick;X-SailfishOS;X-Lipstick;X-Nemo;X-Meego

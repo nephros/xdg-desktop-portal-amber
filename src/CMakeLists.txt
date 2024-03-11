@@ -3,6 +3,7 @@ set(SRCS
     access.cpp
     email.cpp
     filechooser.cpp
+    lockdown.cpp
     screenshot.cpp
     settings.cpp
     wallpaper.cpp

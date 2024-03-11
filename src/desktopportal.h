@@ -37,6 +37,7 @@
 #include "access.h"
 #include "email.h"
 #include "filechooser.h"
+#include "lockdown.h"
 #include "screenshot.h"
 #include "settings.h"
 #include "wallpaper.h"
@@ -54,6 +55,7 @@ namespace Amber
         AccessPortal *const m_access;
         EmailPortal *const m_email = nullptr;
         FileChooserPortal *const m_filechooser = nullptr;
+        LockdownPortal *const m_lockdown = nullptr;
         ScreenshotPortal *const m_screenshot = nullptr;
         SettingsPortal *const m_settings = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;

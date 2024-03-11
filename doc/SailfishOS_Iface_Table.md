@@ -111,15 +111,15 @@ letting both the Browser, and other users of *FileChooser* use it.
 
 ### May be provided/Undecided:
 
-| Backend Name      | Description                          | SFOS capability | SFOS interface | est. complexity | Usefulness |
-| ----------------- | ------------------------------------ | :-------------: | -------------- | :-------------: | :--------: |
-|  Account          | obtaining user information           |  yes            | Settings, Secrets |              |            |
-|  Dynamic Launcher | app installation                     |  yes            | DBus           |                 |            |
-|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |          | +++        |
-|  Input Capture    | Capture input                        |  ???            |                |                 |            |
-|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++       | +++        |
-|  Secret           | retrieve an app secret               |  yes            | Qt/QML         |                 | +          |
-|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML  |   ++            | +          |
+| Backend Name      | Description                          | SFOS capability | SFOS interface    | est. complexity | Usefulness |
+| ----------------- | ------------------------------------ | :-------------: | --------------    | :-------------: | :--------: |
+|  Account          | obtaining user information           |  yes            | Settings, Secrets |                 |            |
+|  Dynamic Launcher | .desktop file installation           |  yes            |                   |                 | +          |
+|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |             | +++        |
+|  Input Capture    | Capture input                        |  ???            |                   |                 |            |
+|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++          | +++        |
+|  Secret           | retrieve an app secret               |  yes            | Qt/QML            |                 | +          |
+|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML     |   ++            | +          |
 
 **Notes:**
 Settings: While this is not very useful through the default
@@ -127,6 +127,10 @@ Settings: While this is not very useful through the default
 namespaces.  
 This means we could implement e.g. the namespace from KDE/Plasma/Kirigami, allowing such apps to access SFOS Theme colors etc.
 Doing that could avoid or assist having to implement a custom theme for Kirigami or QQuickControls.
+
+DynamicLauncher: This describes "installing" (i.e. creating) local .desktop
+files, e.g. to launch a web address. Implemented in Sailfish Browser. May be
+useful.
 
 ### Out-of-Scope/Not Feasible/Not useful
 

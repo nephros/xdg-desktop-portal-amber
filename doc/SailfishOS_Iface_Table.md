@@ -10,24 +10,24 @@ Legend:
 
 ### Required or builtin
 
-| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
-| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
-|  Request          | shared, internal to portals     |      no         |     no         |     ++          | required   |
-|  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |
-|  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |
+| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation |
+| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | : -----------------: |
+|  Request          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
+|  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
+|  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |                      |
 
 **Notes:**
 Permission store is similar to SailfishOS MDM policy framework.
 
 ### Should be provided:
-| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness |
-| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: |
-|  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |            |
-|  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |   +++           |  ++++      |
-|  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |   +             |  +++       |
-|  Screenshot       |                                 |  yes            | DBus           |   +             |            |
-|  Email            | sending an email                |  yes            | App, DBus      |                 |            |
-|  File Chooser     | file chooser dialog             |  no             | (not standalone) |               |            |
+| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation status    |
+| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | :----------------------------: |
+|  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |  required  |  partial, Jolla changes needed |
+|  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |   +++           |  ++++      |  not started                   |
+|  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |   +             |  +++       |  experimental                  |
+|  Screenshot       |                                 |  yes            | DBus           |   +             |            |  experimental                  |
+|  Email            | sending an email                |  yes            | App, DBus      |                 |            |  partial                       |
+|  File Chooser     | file chooser dialog             |  no             | (not standalone) | ++            |  +++       |  experimental                  |
 
 **Notes:**
 *Email*, *Wallpaper* and *Screenshot* will be implemented by Community effort as PoC for XDP.
@@ -43,7 +43,7 @@ Attachments can be done via Share API, email via Email app dbus interface, but n
 This was noted in another context here:
 https://forum.sailfishos.org/t/13762
 
-A patch by nephros exists imlementing the interface mentioned above.
+A patch by nephros exists implementing the interface mentioned above.
 
 Hackishly, one can construct a multipart MIME message and give it as the body, but this is not
 possible to do fully compliant with the standard, and is unreliable.  
@@ -114,7 +114,7 @@ Doing that could avoid or assist having to implement a custom theme for Kirigami
 |  Global Shortcuts | ??? hotkeys ???                 |  no             |                |                 |            |
 
 **Notes:**
-There is exactly one printing app in SFOS, if a printing interface is needed it may either implement XDP, or its own.
+The only two printing apps in SFOS are SeaPrint, and Sailfish Browser.
 
 
 ----

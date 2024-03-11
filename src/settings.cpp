@@ -135,7 +135,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     XDPResultMap result;
 
     for (auto i = nss.begin(), end = nss.end(); i != end; ++i) {
-        if (!SupporteNamespaces.contains(*i)) // skip unknown
+        if (!SupportedNameSpaces.contains(*i)) // skip unknown
             continue;
 
         if (*i == NAMESPACE_FDO) {

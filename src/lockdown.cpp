@@ -52,12 +52,13 @@ void LockdownPortal::setMute(const bool &silent) const
             QStringLiteral("set_profile")
             );
 
-    QString profile;
+    QList<QVariant> args;
     if (silent) {
-        msg.setArguments(PROFILE_MUTED_NAME);
+        args.append(PROFILE_MUTED_NAME);
     } else {
-        msg.setArguments(PROFILE_UNMUTED_NAME);
+        args.append(PROFILE_UNMUTED_NAME);
     }
+    msg.setArguments(args);
     QDBusConnection::sessionBus().call(msg);
 }
 

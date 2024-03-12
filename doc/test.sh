@@ -31,6 +31,11 @@ gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/f
 9)
 gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Settings.Read "org.freedesktop.appearance" "accent-color"
 ;;
+10)
+busctl --user  get-property org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.Lockdown disable-location
+busctl --user  get-property org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.Lockdown disable_location
+busctl --user  get-property org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location
+;;
 
 *)
 busctl --user  introspect org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop

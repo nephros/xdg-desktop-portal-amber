@@ -38,6 +38,7 @@ bool LockdownPortal::getMute() const
             );
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
 
+    pcall.waitForFinished();
     if (pcall.isValid()) {
         return (pcall.value() == PROFILE_MUTED_NAME);
     }
@@ -59,7 +60,7 @@ void LockdownPortal::setMute(const bool &silent) const
         args.append(PROFILE_UNMUTED_NAME);
     }
     msg.setArguments(args);
-    QDBusConnection::sessionBus().call(msg);
+    QDBusConnection::sessionBus().call(msg, QDBus::NoBlock);
 }
 
 }

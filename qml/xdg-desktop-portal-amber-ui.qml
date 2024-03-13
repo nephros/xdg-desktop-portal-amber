@@ -18,16 +18,26 @@ import Nemo.DBus 2.0
 */
 
 /*! \qmltype xdg-desktop-portal-amber-ui
-    \brief XDG Desktop FileChooser UI
+    \brief XDG Desktop UI Manager
     \ingroup uitypes
-    \inqmlmodule XDG Desktop Portal Amber QML UI
+    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
+
+    This application manages the display of various UI dialogs for XDG Desktop Portal Amber.
+
+    It can be activated using the D-Bus session bus at:
+
+    \list
+    \li Service:     \c org.freedesktop.impl.portal.desktop.amber.ui
+    \li Path:        \c /org/freedesktop/impl/portal/desktop/amber/ui
+    \li Interface:   \c org.freedesktop.impl.portal.desktop.amber.ui
+    \endlist
 */
 ApplicationWindow { id: root
 
     cover: null
     /*! \qmlproperty ConfirmationDialog xdg-desktop-portal-amber-ui::_confirmationDialog
        Holds the instance of the picker dialog launched.
-       \sa FilePickerDialog
+       \sa ConfirmationDialog
        \internal
     */
     property ConfirmationDialog _confirmationDialog

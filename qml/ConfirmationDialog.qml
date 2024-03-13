@@ -15,6 +15,16 @@ import Sailfish.Lipstick 1.0
     \brief XDG Desktop Access UI
     \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
     \ingroup uitypes
+
+    A simple dialog presenting an \c Accept and \c Deny button under some contextual information.
+
+    Several aspects of this can be controlled through the
+    ConfirmationDialog::dialogInfo and  ConfirmationDialog::options properties
+
+    This is used as UI for the \l
+    {Amber::AccessPortal::AccessDialog}{AccessDialog} method of the \c
+    org.freedesktop.impl.portal.Access Portal.
+
 */
 
 SystemDialog { id: dialog
@@ -36,7 +46,7 @@ SystemDialog { id: dialog
     }
     /*! \qmlproperty var ConfirmationDialog::options
      *
-        \sa Amber::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+        \sa https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
     */
     property var options
 

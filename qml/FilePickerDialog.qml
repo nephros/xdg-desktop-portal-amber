@@ -18,6 +18,16 @@ import Nemo.Thumbnailer 1.0
     \brief XDG Desktop File Picker
     \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
     \ingroup uitypes
+
+    Presents a system-level dialog incorporating a file picker.
+
+    Depending on configuration, may allow selection of a single file, multiple files, or a directory.
+
+    This is the UI for the interactive methods of the \c
+    org.freedesktop.impl.portal.FileChooser Portal
+
+    \sa Amber::FileChooserPortal
+
 */
 
 SystemDialog {

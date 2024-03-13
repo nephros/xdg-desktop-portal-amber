@@ -9,7 +9,6 @@
 import QtQuick 2.2
 import QtQuick.Window 2.1 as QtQuick
 import Sailfish.Silica 1.0
-import Sailfish.FileManager 1.0
 import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0

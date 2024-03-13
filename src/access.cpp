@@ -12,10 +12,14 @@
 
 #include "access.h"
 
+#include <QCoreApplication>
+#include <QThread>
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
 
@@ -24,6 +28,7 @@ AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qCDebug(XdgDesktopPortalAmberAccess) << "Desktop portal service: Access";
+    m_responseHandled = false;
 }
 
 AccessPortal::~AccessPortal()
@@ -31,15 +36,18 @@ AccessPortal::~AccessPortal()
 }
 
 
-/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
+/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options)
     Presents the user with a prompt they can accept or deny, and several other options.
 
     \a title, \a subtitle, and \a body can be used to configure the dialog appearance.
 
-     See the \l{XDG Desktop Portal Specification} for possible values of \a options.
+    See the \l{XDG Desktop Portal Specification} for possible values of \a options.
     See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, \a results.
 
-    \warning The implementation of triggering the UI is incomplete. It serves as proof-of-concept only.
+    \warning The implementation of triggering the UI is incomplete. It serves
+    as proof-of-concept only. Specifically, some options like \c modal, or \c
+    choices are not handled.
+
 */
 uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QString &app_id,
@@ -48,7 +56,8 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QString &subtitle,
                                 const QString &body,
                                 const QVariantMap &options,
-                                QVariantMap &results)
+                                QVariantMap &results
+                                )
 {
     qCDebug(XdgDesktopPortalAmberAccess) << "AccessDialog called with parameters:";
     qCDebug(XdgDesktopPortalAmberAccess) << "    handle: " << handle.path();
@@ -59,9 +68,11 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalAmberAccess) << "    body: " << body;
     qCDebug(XdgDesktopPortalAmberAccess) << "    options: " << options;
 
-    if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmberAccess) << "Access dialog options not supported.";
+    if (options.contains(QStringLiteral("choices")) || options.contains(QStringLiteral("modal"))) {
+            qCDebug(XdgDesktopPortalAmberAccess) << "Some Access dialog options are not supported.";
     }
+
+    /*
     qCDebug(XdgDesktopPortalAmberAccess) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.windowprompt"),
@@ -72,6 +83,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                     //
     // TODO choices
     Q_UNUSED(results);
+    */
 
     /*
     <method name="newPermissionPrompt">
@@ -88,19 +100,97 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     </method>
     */
 
+    qCDebug(XdgDesktopPortalAmberAccess) << "Trying to show a dialog";
+
+    QDBusMessage msg = QDBusMessage::createMethodCall(
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("confirmationDialog")
+                    );
+
+
     QList<QVariant> args;
+    args.append(handle.path());
     args.append(title);
     args.append(subtitle);
     args.append(body);
+    // just pass the options as-is, we can possibly deal with it in the UI:
+    QString jopts = QJsonDocument(QJsonObject::fromVariantMap(options)).toJson();
+    args.append(jopts);
+
     msg.setArguments(args);
 
-    QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
-    pcall.waitForFinished();
-    if (pcall.isValid()) {
-            qCDebug(XdgDesktopPortalAmberAccess) << "Success";
-            return 0;
+    // the call will cause the UI to show, but will not wait for user
+    // selection.
+    // So we set up a signal handler and continue when we have received the
+    // signal.
+    QDBusConnection::sessionBus().callWithCallback(
+                    msg, this,
+                    SLOT(setupDialogResponse()),
+                    SLOT(handleDialogError())
+                    );
+
+    // busy loop ;)
+    waitForDialogResponse();
+
+    if (m_callResponseCode != DialogResponse::Other) {
+        qCDebug(XdgDesktopPortalAmberAccess) << "Success";
+    } else {
+        qCDebug(XdgDesktopPortalAmberAccess) << "Dialog failed";
     }
-    qCDebug(XdgDesktopPortalAmberAccess) << "Access failed:" << pcall.error().name() << pcall.error().message() ;
-    return 1;
+
+    // Just respond with empty list
+    // choices (a(ss)) -> QVariant(QList<QStringaList>)
+    // results: a{sv}, QVariantMap -> QMap<QString, QVariant>.
+    QList<QStringList> choices = {
+        {
+            { "", "" },
+            { "", "" }
+        }
+    };
+    results.insert("choices", QVariant::fromValue(choices));
+    return (uint)m_callResponseCode;
+}
+
+void AccessPortal::handleDialogError()
+{
+    qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response Error.";
+    m_callResponseCode = DialogResponse::Other;
+    m_responseHandled = true;
+}
+void AccessPortal::handleDialogResponse( const int &code )
+{
+    qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response received:" << code;
+    m_callResponseCode = static_cast<DialogResponse>(code);
+    m_responseHandled = true;
+}
+
+void AccessPortal::setupDialogResponse()
+{
+    if(!QDBusConnection::sessionBus().connect(
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("confirmationDone"),
+                    QStringLiteral("i"),
+                    this,
+                    SLOT(handleDialogResponse(int))
+                    ))
+    {
+        qCDebug(XdgDesktopPortalAmberAccess) << "Could not set up signal listener";
+    } else {
+        qCDebug(XdgDesktopPortalAmberAccess) << "Successfully set up signal listener";
+    }
+}
+void AccessPortal::waitForDialogResponse()
+{
+    // loop until we got the signal
+    while (!m_responseHandled) {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+        qCDebug(XdgDesktopPortalAmberAccess) << "Waiting for Dialog...";
+    }
+    qCDebug(XdgDesktopPortalAmberAccess) << "OK, Dialog done.";
 }
 } // namespace Amber

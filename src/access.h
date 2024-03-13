@@ -25,6 +25,14 @@ public:
     explicit AccessPortal(QObject *parent);
     ~AccessPortal() override;
 
+    enum DialogResponse : uint
+    {
+        Accepted = 0,
+        Cancelled = 1,
+        Other = 2
+    };
+    Q_ENUM(DialogResponse)
+
 public Q_SLOTS:
     uint AccessDialog(const QDBusObjectPath &handle,
                       const QString &app_id,
@@ -34,6 +42,14 @@ public Q_SLOTS:
                       const QString &body,
                       const QVariantMap &options,
                       QVariantMap &results);
+    void handleDialogError();
+    void handleDialogResponse( const int &code);
+    void waitForDialogResponse();
+    void setupDialogResponse();
+
+private:
+    bool m_responseHandled;
+    DialogResponse m_callResponseCode;
 };
 }
 #endif // XDG_DESKTOP_PORTAL_AMBER_ACCESS_H

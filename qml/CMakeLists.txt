@@ -28,9 +28,16 @@ target_link_libraries(xdg-desktop-portal-amber-ui
     ${SailfishApp_LIBRARIES}
 )
 
+set(QMLFILES
+    FilePickerDialog.qml
+    ConfirmationDialog.qml
+    xdg-desktop-portal-amber-ui.qml
+)
 install(TARGETS xdg-desktop-portal-amber-ui DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
 
-install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
-install(FILES xdg-desktop-portal-amber-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+install(FILES ${QMLFILES} DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+#install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+#install(FILES ConfirmationDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+#install(FILES xdg-desktop-portal-amber-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
 install(FILES xdg-desktop-portal-amber-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
 install(FILES org.freedesktop.impl.portal.desktop.amber.ui.service DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/dbus-1/services")

@@ -37,11 +37,7 @@ ApplicationWindow { id: root
        \internal
     */
     property FilePickerDialog _filePickerDialog
-    /*! \qmlproperty Nemo::DBus::DBusInterface xdg-desktop-portal-amber-ui::_request
-        Holds the instance of the picker dialog launched.
-        \sa Nemo::DBus
-        \internal
-    */
+
     /*! \qmlmethod iconHintToUrl(hint)
         Maps XDP icon hints to an url of an available icon from Silica.
     */
@@ -57,6 +53,11 @@ ApplicationWindow { id: root
         }
         return url;
     }
+    /*! \qmlproperty DBusInterface xdg-desktop-portal-amber-ui::_request
+        Holds the instance of the picker dialog launched.
+        \sa Nemo::DBus
+        \internal
+    */
     property DBusInterface _request
     DBusAdaptor {
         service: "org.freedesktop.impl.portal.desktop.amber.ui"
@@ -225,6 +226,9 @@ ApplicationWindow { id: root
         return false
     }
 
+    /*! Finishes dynamic creation of Confirmation
+       \internal
+    */
     function _finishDialog() {
         if (_confirmationDialog) {
             if (_confirmationDialog.windowVisible) {

@@ -23,6 +23,18 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
 
+/*! \enum Amber::AccessPortal::DialogResponse
+
+    Possible return values of a dialog interaction. The values correspond to the \a response poperties of the calls in this class.
+
+    \value  Accepted
+        The dialog has been accepted
+    \value  Cancelled
+        The dialog has been cancelled
+    \value  Other
+        Something else has happened (e.g. a timeout)
+*/
+
 namespace Amber {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -36,7 +48,7 @@ AccessPortal::~AccessPortal()
 }
 
 
-/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options)
+/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
     Presents the user with a prompt they can accept or deny, and several other options.
 
     \a title, \a subtitle, and \a body can be used to configure the dialog appearance.
@@ -152,13 +164,27 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     results.insert("choices", QVariant::fromValue(choices));
     return (uint)m_callResponseCode;
 }
+/*! \fn void Amber::AccessPortal::handleDialogError()
 
+    Receives the results from the Dialog.
+
+    \sa uidoc
+    \internal
+*/
 void AccessPortal::handleDialogError()
 {
     qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response Error.";
     m_callResponseCode = DialogResponse::Other;
     m_responseHandled = true;
 }
+/*! \fn void Amber::AccessPortal::handleDialogResponse( const int &code)
+
+    Receives the results from the Dialog. \a code corresponds to the
+    dialog response options.
+
+    \sa uidoc, Amber::AccessPortal::DialogResponse, Nemo.DBus
+    \internal
+*/
 void AccessPortal::handleDialogResponse( const int &code )
 {
     qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response received:" << code;
@@ -166,6 +192,14 @@ void AccessPortal::handleDialogResponse( const int &code )
     m_responseHandled = true;
 }
 
+/*! \fn void Amber::AccessPortal::setupDialogResponse()
+
+    After the GUI has been launched, listens for the \c dialogDone signal, and
+    calls AccessPortal::handleDialogResponse with the response.
+
+    \sa uidoc, handleDialogResponse
+    \internal
+*/
 void AccessPortal::setupDialogResponse()
 {
     if(!QDBusConnection::sessionBus().connect(
@@ -183,6 +217,12 @@ void AccessPortal::setupDialogResponse()
         qCDebug(XdgDesktopPortalAmberAccess) << "Successfully set up signal listener";
     }
 }
+/*! \fn void Amber::AccessPortal::waitForDialogResponse()
+    Since launching the GUI via D-Bus is asynchronous (or rather, returns
+    immediately), we have to wait for a Done signal to arrive from the application.
+
+    \internal
+*/
 void AccessPortal::waitForDialogResponse()
 {
     // loop until we got the signal

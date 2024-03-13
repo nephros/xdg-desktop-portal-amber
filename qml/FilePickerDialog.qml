@@ -16,6 +16,7 @@ import Nemo.Thumbnailer 1.0
 
 /*! \qmltype FilePickerDialog
     \brief XDG Desktop File Picker
+    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
     \ingroup uitypes
 */
 

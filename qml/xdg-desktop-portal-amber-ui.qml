@@ -13,7 +13,8 @@ import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0
 
-/*! \qmlmodule XDG Desktop Portal Amber QML UI
+/*! \qmlmodule org.freedesktop.impl.portal.desktop.amber.ui
+    \brief XDG Desktop Portal Amber QML UI
 */
 
 /*! \qmltype xdg-desktop-portal-amber-ui

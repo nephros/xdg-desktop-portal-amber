@@ -13,6 +13,7 @@ import Sailfish.Lipstick 1.0
 
 /*! \qmltype ConfirmationDialog
     \brief XDG Desktop Access UI
+    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
     \ingroup uitypes
 */
 

@@ -9,7 +9,6 @@ This module includes the following types:
 /*!
 \page index.html
 \title XDG Desktop Portal Amber
-\target uidoc
 
 A backend implementation of \l{http://github.com/flatpak/xdg-desktop-portal}{XDG Desktop Portals} for Sailfish OS.
 
@@ -81,18 +80,8 @@ C++ Classes:
 
 QML Types:
 
-\generatelist{qmltypes}
+\generatelist{qmltypesbymodule org.freedesktop.impl.portal.desktop.amber.ui}
 
-*/
-
-/*!
-\page ui.html
-\title XDG Desktop Portal Amber QML UI
-\target uidoc
-
-\brief A dbus-activated system application showing various UI components depending on wher it has been called from.
-
-\generatelist{uitypes}
 */
 
 /*! \externalpage https://dbus.freedesktop.org/doc/dbus-daemon.1.html

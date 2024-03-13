@@ -72,6 +72,19 @@ SystemDialog {
     function init() {
         raise()
         show()
+        autoCloseTimer.restart()
+    }
+
+    Timer {
+        id: autoCloseTimer
+        interval: 115000
+        onTriggered: {
+            console.log("Dialog shown too long without response, closing")
+            if (windowVisible) {
+                lower()
+                page.done(2, null)
+            }
+        }
     }
 
     /*! \qmlsignal FilePickerDialog::done(bool accepted, string selectedFile)

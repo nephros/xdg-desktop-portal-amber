@@ -23,6 +23,28 @@ SystemDialog { id: dialog
         "denyLabel": "",
         "iconHint": ""
     }
+    property bool windowVisible: visibility != Window.Hidden
+                                 && visibility != Window.Minimized
+    /*! Raises/shows the widow when called.
+       \internal
+    */
+    function init() {
+        raise()
+        show()
+        autoCloseTimer.restart()
+    }
+
+    Timer {
+        id: autoCloseTimer
+        interval: 115000
+        onTriggered: {
+            console.log("Dialog shown too long without response, closing")
+            if (windowVisible) {
+                lower()
+                dialog.done(2)
+            }
+        }
+    }
 
     property int result: 2 // neither confirm nor deny
     title: dialogInfo.name

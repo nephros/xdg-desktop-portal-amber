@@ -117,7 +117,7 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, and \a results.
      See the \l{XDG Desktop Portal Specification} for possible \a options.
 
-    \sa org.nemomobile.lipstick.saveScreenshot
+    To take the screenshot, \c org.nemomobile.lipstick.saveScreenshot is called via D-Bus.
 */
 uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
                                   const QString &app_id,

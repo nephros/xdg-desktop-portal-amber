@@ -93,8 +93,7 @@ SystemDialog {
     /*! \qmlproperty FileModel FilePickerDialog::model
 
         The model representing the contents of the file system
-        \sa Nemo::FileManager
-     */
+    */
     property FileModel model: FileModel {
         id: fileModel
         active: page.status === PageStatus.Active

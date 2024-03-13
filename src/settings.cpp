@@ -22,6 +22,16 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalAmberSettings, "xdp-amber-settings")
 /*! \property Amber::SettingsPortal::version
     \brief Contains the backend implementation version
 */
+/*! \enum Amber::SettingsPortal::FDOColorScheme
+
+   Possible values for \c org.freedesktop.appearance \c color-scheme
+    \value None
+        No preference
+    \value Dark
+        Prefer dark appearance
+    \value Light
+        Prefer light appearance
+*/
 
 static const QMap<QString, QString> SailfishDconf = {
   { QStringLiteral("scheme_key"),    QStringLiteral("/desktop/jolla/theme/color_scheme") },

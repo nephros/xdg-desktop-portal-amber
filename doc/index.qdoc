@@ -12,61 +12,9 @@ This module includes the following types:
 
 A backend implementation of \l{http://github.com/flatpak/xdg-desktop-portal}{XDG Desktop Portals} for Sailfish OS.
 
-\section2 Implementation Status
-
 For an overview of the status of the project, see the
 \l{https://github.com/nephros/xdg-desktop-portal-amber/blob/poc/doc/SailfishOS_Iface_Table.md}{Interface Table}
 in the source repository.
-
-\section2 Building
-Since this is intended to be used on Sailfish OS only, building is SFOS-specific. The source repo is set up to be used with the \c tar_git service on \l{Community OBS}.
-Just create your project and package, and add the following \c{_service} file:
-
-\badcode
-<services>
-  <service name="tar_git">
-  <param name="url">https://github.com/nephros/xdg-desktop-portal-amber.git</param>
-  <param name="branch"></param>
-  <param name="revision"></param>
-  <param name="token"/>
-  <param name="debian">N</param>
-  <param name="dumb">N</param>
-</service>
-</services>
-\endcode
-
-If you don't have OBS, you will probably have to modify the \c{.spec} file in the \c{rpm/} subdirectory.
-
-Generally you will need the following dependencies:
-
-\list
-\li \c{pkgconfig}
-\li \c{pkgconfig(systemd)}
-\li \c{pkgconfig(dbus-1)}
-\li \c{pkgconfig(Qt5Core)}
-\li \c{pkgconfig(Qt5Gui)}
-\li \c{pkgconfig(Qt5DBus)}
-\li \c{pkgconfig(mlite5)}
-\li \c{cmake}
-\endlist
-
-
-To build the UI, you will also need
-\list
-\li \c{pkgconfig(Qt5Quick)}
-\li \c{pkgconfig(sailfishapp)}
-\li \c{qmake}
-\endlist
-
-Then run something like
-
-\badcode
-cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -DINCLUDE_INSTALL_DIR:PATH=/usr/include -DLIB_INSTALL_DIR:PATH=lib -DSYSCONF_INSTALL_DIR:PATH=/etc -DSHARE_INSTALL_PREFIX:PATH=/usr/share -DCMAKE_SKIP_RPATH:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON
-makea/usr/bin/make -O -j6 V=1 VERBOSE=1
-\endcode
-
-\section2 Installing
-\section2 Testing
 
 For brief instructions on how to install and test, see the
 \l{https://github.com/nephros/xdg-desktop-portal-amber/blob/poc/doc/README_Testing.md}{Testing README}

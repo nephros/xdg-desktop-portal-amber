@@ -4,7 +4,7 @@
     <virtualFolder>xdg-desktop-portal-amber</virtualFolder>
     <filterSection>
         <toc>
-            <section ref="ui.html" title="XDG Desktop Portal Amber QML UI">
+            <section ref="index.html" title="XDG Desktop Portal Amber QML UI">
                 <section ref="" title="">
                     <section ref="amber.html" title="Amber"/>
                     <section ref="amber-accessportal.html" title="Amber::AccessPortal Class Reference">
@@ -39,18 +39,20 @@
                     </section>
                     <section ref="https-build-sailfishos-org.html" title="Community OBS"/>
                     <section ref="https-dbus-freedesktop-org-doc-dbus-daemon-1.html" title="D-Bus Documentation"/>
-                    <section ref="qml-filepickerdialog.html" title="FilePickerDialog Type Reference">
-                        <section ref="qml-filepickerdialog-members.html" title="List of all members"/>
-                    </section>
                     <section ref="https-sailfishos-org-develop-docs-nemo-qml-plugin-dbus.html" title="Nemo QML Plugin D-Bus"/>
                     <section ref="settings-namespaces.html" title="Settings Namespaces"/>
                     <section ref="index.html" title="XDG Desktop Portal Amber"/>
-                    <section ref="ui.html" title="XDG Desktop Portal Amber QML UI"/>
                     <section ref="https-flatpak-github-io-xdg-desktop-portal-docs-impl-dbus-interfaces.html" title="XDG Desktop Portal Backend Specification"/>
                     <section ref="https-flatpak-github-io-xdg-desktop-portal-docs.html" title="XDG Desktop Portal Specification"/>
                     <section ref="org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html" title="org.freedesktop.impl.portal.desktop.amber.ui QML Types"/>
-                    <section ref="qml-xdg-desktop-portal-amber-ui.html" title="xdg-desktop-portal-amber-ui Type Reference">
-                        <section ref="qml-xdg-desktop-portal-amber-ui-members.html" title="List of all members"/>
+                    <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html" title="ConfirmationDialog Type Reference">
+                        <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html" title="FilePickerDialog Type Reference">
+                        <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html" title="xdg-desktop-portal-amber-ui Type Reference">
+                        <section ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui-members.html" title="List of all members"/>
                     </section>
                 </section>
             </section>
@@ -65,6 +67,7 @@
             <keyword name="Amber" id="Amber" ref="amber.html"/>
             <keyword name="ColorRGB" id="ScreenshotPortal::ColorRGB" ref="amber-screenshotportal-colorrgb.html"/>
             <keyword name="ComposeEmail" id="EmailPortal::ComposeEmail" ref="amber-emailportal.html#ComposeEmail"/>
+            <keyword name="ConfirmationDialog" id="QML.ConfirmationDialog" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html"/>
             <keyword name="DesktopPortal" id="Amber::DesktopPortal" ref="amber-desktopportal.html"/>
             <keyword name="EmailPortal" id="Amber::EmailPortal" ref="amber-emailportal.html"/>
             <keyword name="FDOConfKeys" id="SettingsPortal::FDOConfKeys" ref="amber-settingsportal-fdoconfkeys.html"/>
@@ -74,7 +77,7 @@
             <keyword name="FileChooserPortal::Cancelled" id="FileChooserPortal::Cancelled" ref="amber-filechooserportal.html#PickerResponse-enum"/>
             <keyword name="FileChooserPortal::Other" id="FileChooserPortal::Other" ref="amber-filechooserportal.html#PickerResponse-enum"/>
             <keyword name="FileChooserPortal::PickerResponse" id="FileChooserPortal::PickerResponse" ref="amber-filechooserportal.html#PickerResponse-enum"/>
-            <keyword name="FilePickerDialog" id="QML.FilePickerDialog" ref="qml-filepickerdialog.html"/>
+            <keyword name="FilePickerDialog" id="QML.FilePickerDialog" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html"/>
             <keyword name="LockdownPortal" id="Amber::LockdownPortal" ref="amber-lockdownportal.html"/>
             <keyword name="OpenFile" id="FileChooserPortal::OpenFile" ref="amber-filechooserportal.html#OpenFile"/>
             <keyword name="PickColor" id="ScreenshotPortal::PickColor" ref="amber-screenshotportal.html#PickColor"/>
@@ -95,26 +98,27 @@
             <keyword name="SupportedNameSpaces" id="SettingsPortal::SupportedNameSpaces" ref="amber-settingsportal.html#SupportedNameSpaces-var"/>
             <keyword name="WallpaperPortal" id="Amber::WallpaperPortal" ref="amber-wallpaperportal.html"/>
             <keyword name="XDG Desktop Portal Amber" id="XDG Desktop Portal Amber" ref="index.html"/>
-            <keyword name="XDG Desktop Portal Amber QML UI" id="XDG Desktop Portal Amber QML UI" ref="ui.html"/>
             <keyword name="accent" id="FDOConfKeys::accent" ref="amber-settingsportal-fdoconfkeys.html#accent-var"/>
             <keyword name="blue" id="ColorRGB::blue" ref="amber-screenshotportal-colorrgb.html#blue-var"/>
             <keyword name="contrast" id="FDOConfKeys::contrast" ref="amber-settingsportal-fdoconfkeys.html#contrast-var"/>
             <keyword name="disable_location" id="LockdownPortal::disable_location" ref="amber-lockdownportal.html#disable_location-prop"/>
             <keyword name="disable_sound_output" id="LockdownPortal::disable_sound_output" ref="amber-lockdownportal.html#disable_sound_output-prop"/>
-            <keyword name="done" id="FilePickerDialog::done" ref="qml-filepickerdialog.html#done-signal"/>
+            <keyword name="done" id="ConfirmationDialog::done" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html#done-signal"/>
+            <keyword name="done" id="FilePickerDialog::done" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#done-signal"/>
             <keyword name="getGPS" id="LockdownPortal::getGPS" ref="amber-lockdownportal.html#disable_location-prop"/>
             <keyword name="getMute" id="LockdownPortal::getMute" ref="amber-lockdownportal.html#disable_sound_output-prop"/>
             <keyword name="green" id="ColorRGB::green" ref="amber-screenshotportal-colorrgb.html#green-var"/>
-            <keyword name="iconHintToUrl" id="xdg-desktop-portal-amber-ui::iconHintToUrl" ref="qml-xdg-desktop-portal-amber-ui.html#iconHintToUrl-method"/>
-            <keyword name="model" id="FilePickerDialog::model" ref="qml-filepickerdialog.html#model-prop"/>
-            <keyword name="options" id="FilePickerDialog::options" ref="qml-filepickerdialog.html#options-prop"/>
+            <keyword name="iconHintToUrl" id="xdg-desktop-portal-amber-ui::iconHintToUrl" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html#iconHintToUrl-method"/>
+            <keyword name="model" id="FilePickerDialog::model" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#model-prop"/>
+            <keyword name="options" id="ConfirmationDialog::options" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html#options-prop"/>
+            <keyword name="options" id="FilePickerDialog::options" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#options-prop"/>
             <keyword name="org.freedesktop.impl.portal.desktop.amber.ui" id="org.freedesktop.impl.portal.desktop.amber.ui" ref="org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html"/>
             <keyword name="red" id="ColorRGB::red" ref="amber-screenshotportal-colorrgb.html#red-var"/>
             <keyword name="scheme" id="FDOConfKeys::scheme" ref="amber-settingsportal-fdoconfkeys.html#scheme-var"/>
-            <keyword name="selectedFile" id="FilePickerDialog::selectedFile" ref="qml-filepickerdialog.html#selectedFile-prop"/>
+            <keyword name="selectedFile" id="FilePickerDialog::selectedFile" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#selectedFile-prop"/>
             <keyword name="setGPS" id="LockdownPortal::setGPS" ref="amber-lockdownportal.html#disable_location-prop"/>
             <keyword name="setMute" id="LockdownPortal::setMute" ref="amber-lockdownportal.html#disable_sound_output-prop"/>
-            <keyword name="title" id="FilePickerDialog::title" ref="qml-filepickerdialog.html#title-prop"/>
+            <keyword name="title" id="FilePickerDialog::title" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#title-prop"/>
             <keyword name="version" id="FileChooserPortal::version" ref="amber-filechooserportal.html#version-prop"/>
             <keyword name="version" id="FileChooserPortal::version" ref="amber-filechooserportal.html#version-prop"/>
             <keyword name="version" id="ScreenshotPortal::version" ref="amber-screenshotportal.html#version-prop"/>
@@ -123,9 +127,9 @@
             <keyword name="version" id="SettingsPortal::version" ref="amber-settingsportal.html#version-prop"/>
             <keyword name="version" id="WallpaperPortal::version" ref="amber-wallpaperportal.html#version-prop"/>
             <keyword name="version" id="WallpaperPortal::version" ref="amber-wallpaperportal.html#version-prop"/>
-            <keyword name="wantDirectory" id="FilePickerDialog::wantDirectory" ref="qml-filepickerdialog.html#wantDirectory-prop"/>
-            <keyword name="wantMulti" id="FilePickerDialog::wantMulti" ref="qml-filepickerdialog.html#wantMulti-prop"/>
-            <keyword name="xdg-desktop-portal-amber-ui" id="QML.xdg-desktop-portal-amber-ui" ref="qml-xdg-desktop-portal-amber-ui.html"/>
+            <keyword name="wantDirectory" id="FilePickerDialog::wantDirectory" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#wantDirectory-prop"/>
+            <keyword name="wantMulti" id="FilePickerDialog::wantMulti" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html#wantMulti-prop"/>
+            <keyword name="xdg-desktop-portal-amber-ui" id="QML.xdg-desktop-portal-amber-ui" ref="qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html"/>
             <keyword name="~ScreenshotPortal" id="ScreenshotPortal::~ScreenshotPortal" ref="amber-screenshotportal.html#dtor.ScreenshotPortal"/>
             <keyword name="~WallpaperPortal" id="WallpaperPortal::~WallpaperPortal" ref="amber-wallpaperportal.html#dtor.WallpaperPortal"/>
         </keywords>
@@ -158,13 +162,14 @@
             <file>images/bullet_up.png</file>
             <file>index.html</file>
             <file>org-freedesktop-impl-portal-desktop-amber-ui-qmlmodule.html</file>
-            <file>qml-filepickerdialog-members.html</file>
-            <file>qml-filepickerdialog.html</file>
-            <file>qml-xdg-desktop-portal-amber-ui-members.html</file>
-            <file>qml-xdg-desktop-portal-amber-ui.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog-members.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog-members.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui-members.html</file>
+            <file>qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html</file>
             <file>settings-namespaces.html</file>
             <file>style/offline.css</file>
-            <file>ui.html</file>
         </files>
     </filterSection>
 </QtHelpProject>

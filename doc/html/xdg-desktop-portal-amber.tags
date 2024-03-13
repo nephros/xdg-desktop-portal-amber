@@ -345,11 +345,15 @@
         </member>
     </compound>
     <compound kind="class">
-        <name>FilePickerDialog</name>
-        <filename>qml-filepickerdialog.html</filename>
+        <name>org.freedesktop.impl.portal.desktop.amber.ui.ConfirmationDialog</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html</filename>
     </compound>
     <compound kind="class">
-        <name>xdg-desktop-portal-amber-ui</name>
-        <filename>qml-xdg-desktop-portal-amber-ui.html</filename>
+        <name>org.freedesktop.impl.portal.desktop.amber.ui.FilePickerDialog</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html</filename>
+    </compound>
+    <compound kind="class">
+        <name>org.freedesktop.impl.portal.desktop.amber.ui.xdg-desktop-portal-amber-ui</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html</filename>
     </compound>
 </tagfile>

@@ -24,6 +24,7 @@
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
 <li class="level1"><a href="#public-functions">Public Functions</a></li>
 <li class="level1"><a href="#public-slots">Public Slots</a></li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
@@ -40,6 +41,11 @@
 </td></tr></table></div><ul>
 <li><a href="amber-accessportal-members.html">List of all members, including inherited members</a></li>
 </ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="amber-accessportal.html#DialogResponse-enum">DialogResponse</a></b> { Accepted, Cancelled, Other }</td></tr>
+</table></div>
 <a name="public-functions"></a>
 <h2 id="public-functions">Public Functions</h2>
 <div class="table"><table class="alignedsummary">
@@ -58,6 +64,18 @@
 <p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
 </div>
 <!-- @@@AccessPortal -->
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$DialogResponse$$$Accepted$$$Cancelled$$$Other -->
+<h3 class="fn" id="DialogResponse-enum"><a name="DialogResponse-enum"></a>enum AccessPortal::<span class="name">DialogResponse</span></h3>
+<p>Possible return values of a dialog interaction. The values correspond to the <i>response</i> poperties of the calls in this class.</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>Amber::AccessPortal::Accepted</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">The dialog has been accepted</td></tr>
+<tr><td class="topAlign"><code>Amber::AccessPortal::Cancelled</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">The dialog has been cancelled</td></tr>
+<tr><td class="topAlign"><code>Amber::AccessPortal::Other</code></td><td class="topAlign tblval"><code>2</code></td><td class="topAlign">Something else has happened (e.g&#x2e; a timeout)</td></tr>
+</table></div>
+<!-- @@@DialogResponse -->
+</div>
 <div class="func">
 <h2>Member Function Documentation</h2>
 <!-- $$$AccessPortal[overload1]$$$AccessPortalQObject* -->
@@ -68,7 +86,7 @@
 <p>Presents the user with a prompt they can accept or deny, and several other options.</p>
 <p><i>title</i>, <i>subtitle</i>, and <i>body</i> can be used to configure the dialog appearance.</p>
 <p>See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible values of <i>options</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>, <i>results</i>.</p>
-<p><b>Warning:</b> The implementation of triggering the UI is incomplete. It serves as proof-of-concept only.</p>
+<p><b>Warning:</b> The implementation of triggering the UI is incomplete. It serves as proof-of-concept only. Specifically, some options like <code>modal</code>, or <code>choices</code> are not handled.</p>
 <!-- @@@AccessDialog -->
 </div>
 </div>

@@ -7,6 +7,7 @@
         <class>Amber::DesktopPortal</class>
         <class>Amber::EmailPortal</class>
         <class>Amber::FileChooserPortal</class>
+        <class>Amber::LockdownPortal</class>
         <class>Amber::ScreenshotPortal</class>
         <class>Amber::SettingsPortal</class>
         <class>Amber::WallpaperPortal</class>
@@ -20,6 +21,23 @@
             <anchorfile>amber-accessportal.html</anchorfile>
             <anchor>AccessPortal</anchor>
             <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="enum">
+            <name>DialogResponse</name>
+            <anchor>DialogResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Accepted">
+            <anchor>DialogResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Cancelled">
+            <anchor>DialogResponse-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Other">
+            <anchor>DialogResponse-enum</anchor>
+            <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
@@ -121,6 +139,57 @@
         </member>
     </compound>
     <compound kind="class">
+        <name>Amber::LockdownPortal</name>
+        <filename>amber-lockdownportal.html</filename>
+        <member kind="property" type="bool">
+            <name>disable_location</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_location-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="property" type="bool">
+            <name>disable_sound_output</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_sound_output-prop</anchor>
+            <arglist></arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type></type>
+            <name>LockdownPortal</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>LockdownPortal</anchor>
+            <arglist>(QObject *parent)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>bool</type>
+            <name>getGPS</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_location-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>setGPS</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_location-prop</anchor>
+            <arglist>(const bool &amp;off) const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>bool</type>
+            <name>getMute</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_sound_output-prop</anchor>
+            <arglist>() const</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>setMute</name>
+            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchor>disable_sound_output-prop</anchor>
+            <arglist>(const bool &amp;silent) const</arglist>
+        </member>
+    </compound>
+    <compound kind="class">
         <name>Amber::ScreenshotPortal</name>
         <filename>amber-screenshotportal.html</filename>
         <member kind="property" type="uint">
@@ -193,6 +262,24 @@
             <anchor>version-prop</anchor>
             <arglist>() const</arglist>
         </member>
+        <member kind="enum">
+            <name>FDOColorScheme</name>
+            <anchor>FDOColorScheme-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="None">
+            <anchor>FDOColorScheme-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Dark">
+            <anchor>FDOColorScheme-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <member name="Light">
+            <anchor>FDOColorScheme-enum</anchor>
+            <arglist></arglist>
+        </member>
+        <class>Amber::SettingsPortal::FDOConfKeys</class>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>ReadAll</name>
@@ -214,6 +301,10 @@
             <anchor>SettingChanged</anchor>
             <arglist>(const QString &amp;ns, const QString &amp;key, const QVariant &amp;value)</arglist>
         </member>
+    </compound>
+    <compound kind="class">
+        <name>Amber::SettingsPortal::FDOConfKeys</name>
+        <filename>amber-settingsportal-fdoconfkeys.html</filename>
     </compound>
     <compound kind="class">
         <name>Amber::WallpaperPortal</name>

@@ -11,10 +11,20 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Lipstick 1.0
 
+/*! \qmltype ConfirmationDialog
+    \brief XDG Desktop Access UI
+    \ingroup uitypes
+*/
+
 SystemDialog { id: dialog
 
+    /*! \qmlsignal ConfirmationDialog::done(int result) */
     signal done(int result)
 
+    /*! \qmlproperty var ConfirmationDialog::dialogInfo
+        \internal
+        Configures the content of the dialog
+    */
     property var dialogInfo: {
         "name": "",
         "subtitle": "",
@@ -23,8 +33,18 @@ SystemDialog { id: dialog
         "denyLabel": "",
         "iconHint": ""
     }
+    /*! \qmlproperty var ConfirmationDialog::options
+     *
+        \sa Amber::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+    */
+    property var options
+
+    /*! \c true if the dialog is currently shown.
+        \internal
+    */
     property bool windowVisible: visibility != Window.Hidden
                                  && visibility != Window.Minimized
+
     /*! Raises/shows the widow when called.
        \internal
     */
@@ -46,7 +66,6 @@ SystemDialog { id: dialog
         }
     }
 
-    property int result: 2 // neither confirm nor deny
     title: dialogInfo.name
     contentHeight: contentColumn.height
 

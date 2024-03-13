@@ -46,27 +46,27 @@
 */
 
 /*! \class Amber::AccessPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Access
+    \brief Backend interface of the Access Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 /*! \class Amber::EmailPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Email
+    \brief Backend interface of the Email Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 /*! \class Amber::FileChooserPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.FileChooser
+    \brief Backend interface of the FileChooser Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 /*! \class Amber::ScreenshotPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Screenshot
+    \brief Backend interface of the Screenshot Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 /*! \class Amber::SettingsPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Settings
+    \brief Backend interface of the Settings Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 
@@ -76,7 +76,7 @@
     See \l{SettingsPortalNamespaces}{Supported Namespaces} for details.
 */
 /*! \class Amber::WallpaperPortal
-    \brief Implementation of \c org.freedesktop.impl.portal.Wallpaper
+    \brief Backend interface of the Wallpaper Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */

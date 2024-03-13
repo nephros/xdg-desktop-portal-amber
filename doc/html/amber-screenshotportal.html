@@ -100,7 +100,7 @@
 <!-- $$$Screenshot[overload1]$$$ScreenshotconstQDBusObjectPath&constQString&constQString&constQVariantMap&QVariantMap& -->
 <h3 class="fn" id="Screenshot"><a name="Screenshot"></a><code>[slot] </code><span class="type">uint</span> ScreenshotPortal::<span class="name">Screenshot</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, <span class="type">QVariantMap</span> &amp;<i>results</i>)</h3>
 <p>Takes a screenshot and returns its file location. The output location will be QStandardPaths::PicturesLocation, and the screenshot is saved in PNG format. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>, and <i>results</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible <i>options</i>.</p>
-<p><b>See also </b>org.nemomobile.lipstick.saveScreenshot.</p>
+<p>To take the screenshot, <code>org.nemomobile.lipstick.saveScreenshot</code> is called via D-Bus.</p>
 <!-- @@@Screenshot -->
 </div>
 </div>

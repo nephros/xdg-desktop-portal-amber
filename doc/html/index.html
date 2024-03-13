@@ -23,12 +23,48 @@
 <!-- $$$index.html-description -->
 <div class="descr"> <a name="details"></a>
 <a name="uidoc"></a><p>A backend implementation of <a href="http://github.com/flatpak/xdg-desktop-portal">XDG Desktop Portals</a> for Sailfish OS.</p>
+<a name="implementation-status"></a>
+<h3 >Implementation Status</h3>
+<p>For an overview of the status of the project, see the <a href="https://github.com/nephros/xdg-desktop-portal-amber/blob/poc/doc/SailfishOS_Iface_Table.md">Interface Table</a> in the source repository.</p>
 <a name="building"></a>
 <h3 >Building</h3>
+<p>Since this is intended to be used on Sailfish OS only, building is SFOS-specific. The source repo is set up to be used with the <code>tar_git</code> service on <a href="https://build.sailfishos.org">Community OBS</a>. Just create your project and package, and add the following <code>_service</code> file:</p>
+<pre class="cpp"> &lt;services&gt;
+   &lt;service name=&quot;tar_git&quot;&gt;
+   &lt;param name=&quot;url&quot;&gt;https://github.com/nephros/xdg-desktop-portal-amber.git&lt;/param&gt;
+   &lt;param name=&quot;branch&quot;&gt;&lt;/param&gt;
+   &lt;param name=&quot;revision&quot;&gt;&lt;/param&gt;
+   &lt;param name=&quot;token&quot;/&gt;
+   &lt;param name=&quot;debian&quot;&gt;N&lt;/param&gt;
+   &lt;param name=&quot;dumb&quot;&gt;N&lt;/param&gt;
+ &lt;/service&gt;
+ &lt;/services&gt;</pre>
+<p>If you don't have OBS, you will probably have to modify the <code>.spec</code> file in the <code>rpm/</code> subdirectory.</p>
+<p>Generally you will need the following dependencies:</p>
+<ul>
+<li><code>pkgconfig</code></li>
+<li><code>pkgconfig(systemd)</code></li>
+<li><code>pkgconfig(dbus-1)</code></li>
+<li><code>pkgconfig(Qt5Core)</code></li>
+<li><code>pkgconfig(Qt5Gui)</code></li>
+<li><code>pkgconfig(Qt5DBus)</code></li>
+<li><code>pkgconfig(mlite5)</code></li>
+<li><code>cmake</code></li>
+</ul>
+<p>To build the UI, you will also need</p>
+<ul>
+<li><code>pkgconfig(Qt5Quick)</code></li>
+<li><code>pkgconfig(sailfishapp)</code></li>
+<li><code>qmake</code></li>
+</ul>
+<p>Then run something like</p>
+<pre class="cpp"> cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -DINCLUDE_INSTALL_DIR:PATH=/usr/include -DLIB_INSTALL_DIR:PATH=lib -DSYSCONF_INSTALL_DIR:PATH=/etc -DSHARE_INSTALL_PREFIX:PATH=/usr/share -DCMAKE_SKIP_RPATH:BOOL=ON -DBUILD_SHARED_LIBS:BOOL=ON
+ makea/usr/bin/make -O -j6 V=1 VERBOSE=1</pre>
 <a name="installing"></a>
 <h3 >Installing</h3>
 <a name="testing"></a>
 <h3 >Testing</h3>
+<p>For brief instructions on how to install and test, see the <a href="https://github.com/nephros/xdg-desktop-portal-amber/blob/poc/doc/README_Testing.md">Testing README</a> in the source repository.</p>
 <a name="reference"></a>
 <h2 id="reference">Reference</h2>
 <p>C++ Classes:</p>

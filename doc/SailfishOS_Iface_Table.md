@@ -6,16 +6,16 @@ This tble lists the interfaces provided by xdg-desktop-portal without any backen
 
 Not strictly relevant to the Amber backend implementation, but given here for completeness.
 
-| Frontend interface                         | Description                  | tested | working | SFOS Capability |
-| ------------------------------------------ | ---------------------------- | :----: | :-----: | : ------------: |
-| org.freedesktop.portal.Device              | Asks for access to cam/mic   | no     |         | yes             |
-| org.freedesktop.portal.GameMode            | com.feralinteractive.GameMode| no     |         | no              |
-| org.freedesktop.portal.MemoryMonitor       | low system memory            | no     |         | yes             |
-| org.freedesktop.portal.NetworkMonitor      | network status information   | no     |         | yes             |
-| org.freedesktop.portal.PowerProfileMonitor | lookup power saving mode     | yes    |   no    | yes             |
-| org.freedesktop.portal.ProxyResolver       | Looks up http proxy          | no     |         | yes             |
-| org.freedesktop.portal.Realtime            | org.freedesktop.RealtimeKit1 | yes    |   no    | no              |
-| org.freedesktop.portal.Trash               | send files to the trashcan   | no     |         | no              |
+| Frontend interface                         | Description                   | tested | working | SFOS Capability |
+| ------------------------------------------ | ----------------------------  | :----: | :-----: | :-------------: |
+| org.freedesktop.portal.Device              | Asks for access to cam/mic    | no     |         | yes             |
+| org.freedesktop.portal.GameMode            | com.feralinteractive.GameMode | no     |         | no              |
+| org.freedesktop.portal.MemoryMonitor       | low system memory             | no     |         | yes             |
+| org.freedesktop.portal.NetworkMonitor      | network status information    | no     |         | yes             |
+| org.freedesktop.portal.PowerProfileMonitor | lookup power saving mode      | yes    |   no    | yes             |
+| org.freedesktop.portal.ProxyResolver       | Looks up http proxy           | no     |         | yes             |
+| org.freedesktop.portal.Realtime            | org.freedesktop.RealtimeKit1  | yes    |   no    | no              |
+| org.freedesktop.portal.Trash               | send files to the trashcan    | no     |         | no              |
 
 **Notes:**
 The spec sais something like this for most of these:
@@ -35,7 +35,7 @@ Legend:
 ### Required or builtin
 
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation |
-| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | : -----------------: |
+| ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | :------------------: |
 |  Request          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
 |  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
 |  Permission Store | store permissions of apps       |  somewhat       | DConf, SJail   |                 |            |                      |

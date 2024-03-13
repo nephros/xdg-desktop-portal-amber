@@ -1,5 +1,29 @@
 ## XDG Desktop Portal interface lookup table
 
+### XDP frontend services
+
+This tble lists the interfaces provided by xdg-desktop-portal without any backend implementations
+
+Not strictly relevant to the Amber backend implementation, but given here for completeness.
+
+| Frontend interface                         | Description                  | tested | working | SFOS Capability |
+| ------------------------------------------ | ---------------------------- | :----: | :-----: | : ------------: |
+| org.freedesktop.portal.Device              | Asks for access to cam/mic   | no     |         | yes             |
+| org.freedesktop.portal.GameMode            | com.feralinteractive.GameMode| no     |         | no              |
+| org.freedesktop.portal.MemoryMonitor       | low system memory            | no     |         | yes             |
+| org.freedesktop.portal.NetworkMonitor      | network status information   | no     |         | yes             |
+| org.freedesktop.portal.PowerProfileMonitor | lookup power saving mode     | yes    |   no    | yes             |
+| org.freedesktop.portal.ProxyResolver       | Looks up http proxy          | no     |         | yes             |
+| org.freedesktop.portal.Realtime            | org.freedesktop.RealtimeKit1 | yes    |   no    | no              |
+| org.freedesktop.portal.Trash               | send files to the trashcan   | no     |         | no              |
+
+**Notes:**
+The spec sais something like this for most of these:
+> It is not a portal in the strict sense, since it does not involve user
+> interaction. Applications are expected to use this interface indirectly, via
+> a library API such as the GLib XXXMonitor interface.
+
+
 Legend:
 
  - SFOS capability: SFOS has a matching or similar function
@@ -87,15 +111,15 @@ letting both the Browser, and other users of *FileChooser* use it.
 
 ### May be provided/Undecided:
 
-| Backend Name      | Description                          | SFOS capability | SFOS interface | est. complexity | Usefulness |
-| ----------------- | ------------------------------------ | :-------------: | -------------- | :-------------: | :--------: |
-|  Account          | obtaining user information           |  yes            | Settings, Secrets |              |            |
-|  Dynamic Launcher | app installation                     |  yes            | DBus           |                 |            |
-|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |          | +++        |
-|  Input Capture    | Capture input                        |  ???            |                |                 |            |
-|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++       | +++        |
-|  Secret           | retrieve an app secret               |  yes            | Qt/QML         |                 | +          |
-|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML  |   ++            | +          |
+| Backend Name      | Description                          | SFOS capability | SFOS interface    | est. complexity | Usefulness |
+| ----------------- | ------------------------------------ | :-------------: | --------------    | :-------------: | :--------: |
+|  Account          | obtaining user information           |  yes            | Settings, Secrets |                 |            |
+|  Dynamic Launcher | .desktop file installation           |  yes            |                   |                 | +          |
+|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |             | +++        |
+|  Input Capture    | Capture input                        |  ???            |                   |                 |            |
+|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++          | +++        |
+|  Secret           | retrieve an app secret               |  yes            | Qt/QML            |                 | +          |
+|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML     |   ++            | +          |
 
 **Notes:**
 Settings: While this is not very useful through the default
@@ -103,6 +127,10 @@ Settings: While this is not very useful through the default
 namespaces.  
 This means we could implement e.g. the namespace from KDE/Plasma/Kirigami, allowing such apps to access SFOS Theme colors etc.
 Doing that could avoid or assist having to implement a custom theme for Kirigami or QQuickControls.
+
+DynamicLauncher: This describes "installing" (i.e. creating) local .desktop
+files, e.g. to launch a web address. Implemented in Sailfish Browser. May be
+useful.
 
 ### Out-of-Scope/Not Feasible/Not useful
 

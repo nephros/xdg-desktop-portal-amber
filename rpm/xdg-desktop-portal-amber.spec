@@ -53,15 +53,6 @@ License: Apache-2.0
 %description qml
 %{summary}.
 
-
-%package devel
-Summary:    Header files and library symbolic links for %{name}
-Requires:   %{name} = %{version}-%{release}
-
-%description devel
-%{summary}.
-
-
 %package doc
 Summary:    Documentation for %{name}
 License:    GFDL
@@ -117,10 +108,6 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %{_datadir}/%{name}-ui/qml/*.qml
 %{_datadir}/applications/xdg-desktop-portal-amber-ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
-
-%files devel
-%defattr(-,root,root,-)
-#%%{_datadir}/pkgconfig/*pc
 
 %files doc
 %defattr(-,root,root,-)

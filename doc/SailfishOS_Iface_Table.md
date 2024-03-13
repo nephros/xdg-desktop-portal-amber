@@ -111,15 +111,15 @@ letting both the Browser, and other users of *FileChooser* use it.
 
 ### May be provided/Undecided:
 
-| Backend Name      | Description                          | SFOS capability | SFOS interface    | est. complexity | Usefulness |
-| ----------------- | ------------------------------------ | :-------------: | --------------    | :-------------: | :--------: |
-|  Account          | obtaining user information           |  yes            | Settings, Secrets |                 |            |
-|  Dynamic Launcher | .desktop file installation           |  yes            |                   |                 | +          |
-|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |             | +++        |
-|  Input Capture    | Capture input                        |  ???            |                   |                 |            |
-|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail | +++          | +++        |
-|  Secret           | retrieve an app secret               |  yes            | Qt/QML            |                 | +          |
-|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML     |   ++            | +          |
+| Backend Name      | Description                          | SFOS capability | SFOS interface        | est. complexity | Usefulness |
+| ----------------- | ------------------------------------ | :-------------: | --------------------- | :-------------: | :--------: |
+|  Account          | basic user information               |  yes            | SailfishUserManager   | +               | +          |
+|  Dynamic Launcher | .desktop file installation           |  yes            |                       |                 | +          |
+|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |                 | +++        |
+|  Input Capture    | Capture input                        |  ???            |                       |                 |            |
+|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail  | +++             | +++        |
+|  Secret           | retrieve an app secret               |  yes            | Qt/QML                |                 | +          |
+|  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML         | ++              | +          |
 
 **Notes:**
 Settings: While this is not very useful through the default

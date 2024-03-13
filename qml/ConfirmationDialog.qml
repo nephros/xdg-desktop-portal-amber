@@ -15,14 +15,14 @@ SystemDialog { id: dialog
 
     signal done(int result)
 
-    property var dialogInfo: ({
+    property var dialogInfo: {
         "name": "",
         "subtitle": "",
         "body": "",
         "acceptLabel": "",
         "denyLabel": "",
         "iconHint": ""
-    })
+    }
 
     property int result: 2 // neither confirm nor deny
     title: dialogInfo.name
@@ -36,7 +36,8 @@ SystemDialog { id: dialog
             id: header
 
             title: dialogInfo.name
-            description: dialogInfo.appname
+            // TODO
+            //description: dialogInfo.appname
         }
 
         Label {
@@ -61,30 +62,28 @@ SystemDialog { id: dialog
         }
         SystemDialogTextButton {
             id: cancelButton
-            width: page.width / 2
+            width: dialog.width / 2
             //
             //% "Cancel"
-            text: qsTrId("components-he-dialog_cancel")
+            text: dialogInfo.denyLabel ? dialogInfo.denyLabel : qsTrId("components-he-dialog_cancel")
 
             onClicked: {
-                page.done(1)
-                page.lower()
+                dialog.done(1)
+                dialog.lower()
             }
         }
 
         SystemDialogTextButton {
             id: confirmButton
             anchors.right: parent.right
-            width: page.width / 2
-
-            enabled: (page.selectedFile.length > 0)
+            width: dialog.width / 2
 
             //% "Accept"
-            text: qsTrId("components-he-dialog_accept")
+            text: dialogInfo.acceptLabel ? dialogInfo.acceptLabel : qsTrId("components-he-dialog_accept")
 
             onClicked: {
-                page.done(0)
-                page.lower()
+                dialog.done(0)
+                dialog.lower()
             }
         }
 

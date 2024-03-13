@@ -25,6 +25,12 @@ import Nemo.DBus 2.0
 ApplicationWindow { id: root
 
     cover: null
+    /*! \qmlproperty ConfirmationDialog xdg-desktop-portal-amber-ui::_confirmationDialog
+       Holds the instance of the picker dialog launched.
+       \sa FilePickerDialog
+       \internal
+    */
+    property ConfirmationDialog _confirmationDialog
     /*! \qmlproperty FilePickerDialog xdg-desktop-portal-amber-ui::_filePickerDialog
        Holds the instance of the picker dialog launched.
        \sa FilePickerDialog
@@ -36,6 +42,21 @@ ApplicationWindow { id: root
         \sa Nemo::DBus
         \internal
     */
+    /*! \qmlmethod iconHintToUrl(hint)
+        Maps XDP icon hints to an url of an available icon from Silica.
+    */
+    function iconHintToUrl(hint) {
+        var url="image://theme/icon-m-question"
+        switch (hint) {
+            case "applets-screenshooter-symbolic": url="image://theme/icon-m-share-gallery"; break
+            case "audio-input-microphone-symbolic": url="image://theme/icon-m-mic"; break
+            case "audio-speakers-symbolic": url="image://theme/icon-m-speaker"; break
+            case "camera-web-symbolic": url="image://theme/icon-m-camera"; break
+            case "find-location-symbolic": url="image://theme/icon-m-location"; break
+            case "preferences-desktop-wallpaper-symbolic": url="image://theme/icon-m-ambience"; break
+        }
+        return url;
+    }
     property DBusInterface _request
     DBusAdaptor {
         service: "org.freedesktop.impl.portal.desktop.amber.ui"
@@ -43,11 +64,22 @@ ApplicationWindow { id: root
         path: "/org/freedesktop/impl/portal/desktop/amber/ui"
         xml: [
              '<interface name="org.freedesktop.impl.portal.desktop.amber.ui">',
+             '<method name="confirmationDialog">',
+             '   <arg type="s" name="handle" direction="in"/>',
+             '   <arg type="s" name="title" direction="in"/>',
+             '   <arg type="s" name="subtitle" direction="in"/>',
+             '   <arg type="s" name="body" direction="in"/>',
+             '   <arg type="s" name="options" direction="in"/>',
+             '</method>',
              '<method name="openFilePicker">',
              '   <arg type="s" name="handle" direction="in"/>',
              '   <arg type="s" name="title" direction="in"/>',
              '   <arg type="s" name="options" direction="in"/>',
              '</method>',
+             '<signal name="confirmationDone">',
+             '    <arg type="i" name="response" direction="out"/>',
+             '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
+             '  </signal>',
              '<signal name="pickerDone">',
              '    <arg type="i" name="response" direction="out"/>',
              '    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="uint"/>',
@@ -60,6 +92,53 @@ ApplicationWindow { id: root
              '  </signal>',
              '</interface>',
         ].join('\n')
+
+        function confirmationDialog(handle, title, subtitle, body, options) {
+            console.log("Was asked for a confirmation dialog, using options", options)
+            var dialogOptions = {}
+            var dialogInfo = {}
+            try {
+                dialogOptions = JSON.parse(options)
+            } catch (e) {
+                console.log("Parsing options failed:", e)
+            }
+            var dialogInfo = {
+                "title": "",
+                "subtitle": "",
+                "body": "",
+                "acceptLabel": "",
+                "denyLabel": "",
+                "iconHint": ""
+            }
+            dialogInfo.title     = title
+            dialogInfo.subtitle  = subtitle ? subtitle : "" 
+            dialogInfo.body      = body     ? body : "" 
+
+            dialogInfo.acceptLabel   = dialogOptions.grant_label ? dialogOptions.grant_label : "" 
+            dialogInfo.denyLabel     = dialogOptions.deny_label  ? dialogOptions.deny_label : "" 
+            dialogInfo.iconHint      = root.iconHintToUrl(dialogOptions.icon)
+
+            // create dialog
+            if (!_confirmationDialog) {
+                var comp = Qt.createComponent(Qt.resolvedUrl("ConfirmationDialog.qml"))
+                if (comp.status == Component.Error) {
+                    console.log("ConfirmationDialog.qml error:", comp.errorString())
+                    emitSignal("confirmationDone", [ 2 ]) // code 2 is "other" on org.freedesktop.portal.Request::Response
+                    _request.destroy()
+                    return
+                }
+                _confirmationDialog = comp.createObject(root, dialogInfo )
+                console.log("ConfirmationDialog.qml created.")
+                _confirmationDialog.done.connect(function(result) {
+                    console.log("ConfirmationDialog done:", result)
+                    emitSignal("confirmationDone", [ result ])
+                    _confirmationDialog.destroy()
+                    //_request.destroy()
+                })
+            }
+            console.log("Activating.")
+            root._finishPicker()
+        }
 
         function openFilePicker(handle, title, options) {
             console.log("Was asked for a file open dialog, using options", options)
@@ -140,6 +219,16 @@ ApplicationWindow { id: root
         if (_filePickerDialog) {
             if (_filePickerDialog.windowVisible) {
                 _filePickerDialog.lower()
+            }
+            return true
+        }
+        return false
+    }
+
+    function _finishDialog() {
+        if (_confirmationDialog) {
+            if (_confirmationDialog.windowVisible) {
+                _confirmationDialog.lower()
             }
             return true
         }

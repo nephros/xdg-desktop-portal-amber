@@ -20,14 +20,14 @@ int main(int argc, char **argv) {
     QQuickView* view = SailfishApp::createView();
     view->setSource(SailfishApp::pathToMainQml());
 
-    app->setOrganizationName(QStringLiteral("org.freedesktop.portal.desktop.amber"));
+    app->setOrganizationName(QStringLiteral("org.freedesktop.portal.desktop.sailfish"));
     app->setApplicationName(QStringLiteral("ui"));
     //app->setApplicationVersion(QStringLiteral(APP_VERSION));
 
-    if (!QDBusConnection::sessionBus().registerObject("/org/freedesktop/impl/portal/desktop/amber/ui", view))
+    if (!QDBusConnection::sessionBus().registerObject("/org/freedesktop/impl/portal/desktop/sailfish/ui", view))
         qWarning() << "Could not register D-Bus object.";
 
-    if (!QDBusConnection::sessionBus().registerService("org.freedesktop.impl.portal.desktop.amber.ui"))
+    if (!QDBusConnection::sessionBus().registerService("org.freedesktop.impl.portal.desktop.sailfish.ui"))
         qWarning() << "Could not register D-Bus service.";
 
     if(!prestart)

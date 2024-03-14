@@ -16,8 +16,8 @@ dbus-user.call org.freedesktop.portal.FileChooser.SaveFile
 # Allow showing UI:
 include /etc/sailjail/permissions/AppLaunch.permission
 
-dbus-user.talk org.freedesktop.impl.portal.desktop.amber.ui
-dbus-user.call org.freedesktop.impl.portal.desktop.amber.ui.openFilePicker
+dbus-user.talk org.freedesktop.impl.portal.desktop.sailfish.ui
+dbus-user.call org.freedesktop.impl.portal.desktop.sailfish.ui.openFilePicker
 
 # Allow retrieving files via Document portal
 include /etc/sailjail/permissions/XDGPortalDocument.permission

@@ -1,4 +1,4 @@
-Name:       xdg-desktop-portal-amber
+Name:       xdg-desktop-portal-sailfish
 Summary:    XDG Desktop Portal for Sailfish OS
 Version:    1.0.0
 Release:    0
@@ -18,6 +18,10 @@ BuildRequires:  cmake
 Requires:   %{name}-sailfishos-config
 Requires:   xdg-desktop-portal
 
+# PoC legacy, to be removed in due time:
+Obsoletes: xdg-desktop-portal-amber <= %{version}
+Conflicts: xdg-desktop-portal-amber
+
 %description
 %{summary}.
 %if "%{?vendor}" == "chum"
@@ -33,19 +37,25 @@ Links:
 %endif
 
 
-%package sailfishos-config
+%package config
 Summary: User session environment configuration for %{name}
 License: CC-BY-SA-4.0
 BuildArch: noarch
+# PoC legacy, to be removed in due time:
+Obsoletes: xdg-desktop-portal-amber-sailfishos-config <= %{version}
+Conflicts: xdg-desktop-portal-amber-sailfishos-config
 
-%description sailfishos-config
+%description config
 %{summary}.
 
-%package qml
+%package ui
 Summary: UI components for %{name}
 License: Apache-2.0
+# PoC legacy, to be removed in due time:
+Obsoletes: xdg-desktop-portal-amber-qml <= %{version}
+Conflicts: xdg-desktop-portal-amber-qml
 
-%description qml
+%description ui
 %{summary}.
 
 %prep
@@ -66,23 +76,24 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %files
 %defattr(-,root,root,-)
 # must be privileged to show Dialogs via Access and windowprompt:
-%attr(2755,root,privileged) %{_libexecdir}/xdg-desktop-portal-amber
+%attr(2755,root,privileged) %{_libexecdir}/xdg-desktop-portal-sailfish
 %{_datadir}/dbus-1/services/*.service
-%exclude %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
+%exclude %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.sailfish.ui.service
 %{_userunitdir}/%{name}.service
-%{_datadir}/xdg-desktop-portal/portals/amber.portal
+%{_datadir}/xdg-desktop-portal/portals/sailfish.portal
 # what is this installed for??
 %exclude %{_datadir}/applications/*.desktop
 
-%files sailfishos-config
-%{_userunitdir}/xdg-desktop-portal-pre.service
-%config %{_localstatedir}/lib/environment/amber/*.conf
+%files config
+%config %{_localstatedir}/lib/environment/sailfish/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
+# overrides
+%config %{_userunitdir}/*.service.d/*.conf
 
-%files qml
+%files ui
 %{_bindir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
-%{_datadir}/applications/*.desktop
-%{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.amber.ui.service
+%{_datadir}/applications/xdg-desktop-portal-sailfish-ui.desktop
+%{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.sailfish.ui.service
 

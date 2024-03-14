@@ -9,13 +9,13 @@
  *   Peter G. <sailfish@nephros.org>
  */
 
-#ifndef XDG_DESKTOP_PORTAL_AMBER_ACCESS_H
-#define XDG_DESKTOP_PORTAL_AMBER_ACCESS_H
+#ifndef XDG_DESKTOP_PORTAL_SAILFISH_ACCESS_H
+#define XDG_DESKTOP_PORTAL_SAILFISH_ACCESS_H
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
 
-namespace Amber {
+namespace Sailfish {
 class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -36,4 +36,4 @@ public Q_SLOTS:
                       QVariantMap &results);
 };
 }
-#endif // XDG_DESKTOP_PORTAL_AMBER_ACCESS_H
+#endif // XDG_DESKTOP_PORTAL_SAILFISH_ACCESS_H

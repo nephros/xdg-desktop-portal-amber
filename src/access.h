@@ -14,9 +14,22 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
+#include <Sailfish>
 
 namespace Sailfish {
 namespace XDP {
+class AccessMDMPlugin : public AccessPolicyPlugin
+{
+    Q_OBJECT
+public:
+    explicit AccessMDMPlugin(QObject *parent);
+    ~AccessMDMPlugin() override;
+
+    QVariant AccessPolicyPlugin::keyValue(const QString &key) override;
+    void AccessPolicyPlugin::setKeyValue(const QString &key, const QVariant &value) override;
+signals:
+    void AccessPolicyPlugin::keyValueChanged(const QString &key, const QVariant &value) override;
+};
 class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -51,6 +64,7 @@ public Q_SLOTS:
 private:
     bool m_responseHandled;
     DialogResponse m_callResponseCode;
+    AccessMDMPlugin m_plugin;
 };
 }
 }

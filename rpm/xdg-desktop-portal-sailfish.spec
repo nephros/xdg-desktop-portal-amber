@@ -16,6 +16,7 @@ BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(sailfishusermanager)
 BuildRequires:  pkgconfig(sailfishmdm)
+BuildRequires:  pkgconfig(sailfishpolicy)
 BuildRequires:  cmake
 BuildRequires:  sailfish-svg2png
 Requires(post): systemd

@@ -19,7 +19,7 @@ Requires:   %{name}-sailfishos-config
 Requires:   xdg-desktop-portal
 
 # PoC legacy, to be removed in due time:
-Obsoletes: xdg-desktop-portal-amber
+Obsoletes: xdg-desktop-portal-amber <= %{version}
 Conflicts: xdg-desktop-portal-amber
 
 %description
@@ -42,7 +42,7 @@ Summary: User session environment configuration for %{name}
 License: CC-BY-SA-4.0
 BuildArch: noarch
 # PoC legacy, to be removed in due time:
-Obsoletes: xdg-desktop-portal-amber-sailfishos-config
+Obsoletes: xdg-desktop-portal-amber-sailfishos-config <= %{version}
 Conflicts: xdg-desktop-portal-amber-sailfishos-config
 
 %description config
@@ -52,7 +52,7 @@ Conflicts: xdg-desktop-portal-amber-sailfishos-config
 Summary: UI components for %{name}
 License: Apache-2.0
 # PoC legacy, to be removed in due time:
-Obsoletes: xdg-desktop-portal-amber-qml
+Obsoletes: xdg-desktop-portal-amber-qml <= %{version}
 Conflicts: xdg-desktop-portal-amber-qml
 
 %description ui

@@ -81,7 +81,7 @@
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 
-namespace Amber
+namespace Sailfish
 {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)

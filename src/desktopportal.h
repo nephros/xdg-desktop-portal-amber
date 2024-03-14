@@ -42,7 +42,7 @@
 #include "settings.h"
 #include "wallpaper.h"
 
-namespace Amber
+namespace Sailfish
 {
     class DesktopPortal : public QObject, public QDBusContext
     {

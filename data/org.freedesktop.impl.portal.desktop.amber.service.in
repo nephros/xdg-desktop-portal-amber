@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.impl.portal.desktop.amber
-Exec=/bin/sh -c '@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-amber'

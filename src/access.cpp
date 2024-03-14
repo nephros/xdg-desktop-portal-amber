@@ -21,7 +21,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
+Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
 
 /*! \enum Amber::AccessPortal::DialogResponse
 
@@ -35,11 +35,11 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalAmberAccess, "xdp-amber-access")
         Something else has happened (e.g. a timeout)
 */
 
-namespace Amber {
+namespace Sailfish {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmberAccess) << "Desktop portal service: Access";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "Desktop portal service: Access";
     m_responseHandled = false;
 }
 
@@ -71,21 +71,21 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 QVariantMap &results
                                 )
 {
-    qCDebug(XdgDesktopPortalAmberAccess) << "AccessDialog called with parameters:";
-    qCDebug(XdgDesktopPortalAmberAccess) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberAccess) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberAccess) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberAccess) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmberAccess) << "    subtitle: " << subtitle;
-    qCDebug(XdgDesktopPortalAmberAccess) << "    body: " << body;
-    qCDebug(XdgDesktopPortalAmberAccess) << "    options: " << options;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "AccessDialog called with parameters:";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    title: " << title;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    subtitle: " << subtitle;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    body: " << body;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "    options: " << options;
 
     if (options.contains(QStringLiteral("choices")) || options.contains(QStringLiteral("modal"))) {
             qCDebug(XdgDesktopPortalAmberAccess) << "Some Access dialog options are not supported.";
     }
 
     /*
-    qCDebug(XdgDesktopPortalAmberAccess) << "Asking Lipstick daemon to show a dialog";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.windowprompt"),
                     QStringLiteral("/com/jolla/windowprompt"),
@@ -233,4 +233,4 @@ void AccessPortal::waitForDialogResponse()
     }
     qCDebug(XdgDesktopPortalAmberAccess) << "OK, Dialog done.";
 }
-} // namespace Amber
+} // namespace Sailfish

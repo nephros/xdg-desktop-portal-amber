@@ -5,8 +5,8 @@
  *   Peter G. <sailfish@nephros.org>
 */
 
-#ifndef XDG_DESKTOP_PORTAL_AMBER_SETTINGS_H
-#define XDG_DESKTOP_PORTAL_AMBER_SETTINGS_H
+#ifndef XDG_DESKTOP_PORTAL_SAILFISH_SETTINGS_H
+#define XDG_DESKTOP_PORTAL_SAILFISH_SETTINGS_H
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusVariant>
@@ -15,7 +15,7 @@
 #include <mlite5/MGConfItem>
 #include <mlite5/MDConfGroup>
 
-namespace Amber {
+namespace Sailfish {
 class SettingsPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -78,4 +78,4 @@ private:
 
 };
 }
-#endif // XDG_DESKTOP_PORTAL_AMBER_SETTINGS_H
+#endif // XDG_DESKTOP_PORTAL_SAILFISH_SETTINGS_H

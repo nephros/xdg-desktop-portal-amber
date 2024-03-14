@@ -4,7 +4,7 @@
 
 This tble lists the interfaces provided by xdg-desktop-portal without any backend implementations
 
-Not strictly relevant to the Amber backend implementation, but given here for completeness.
+Not strictly relevant to the backend implementation, but given here for completeness.
 
 | Frontend interface                         | Description                   | tested | working | SFOS Capability |
 | ------------------------------------------ | ----------------------------  | :----: | :-----: | :-------------: |
@@ -34,7 +34,7 @@ Legend:
 
 ### Required or builtin
 
-| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation |
+| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | backend implementation |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | :------------------: |
 |  Request          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
 |  Session          | shared, internal to portals     |      no         |     no         |     ++          | required   |                      |
@@ -42,9 +42,11 @@ Legend:
 
 **Notes:**
 Permission store is similar to SailfishOS MDM policy framework.
+There is a GVDB based implementation available from the Flatpak portal.
+Eventually a native variant should be designed.
 
 ### Should be provided:
-| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation status    |
+| Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | backend implementation status    |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | :----------------------------: |
 |  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |  required  |  partial, Jolla changes needed |
 |  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |   +++           |  ++++      |  not started                   |
@@ -115,7 +117,7 @@ letting both the Browser, and other users of *FileChooser* use it.
 | ----------------- | ------------------------------------ | :-------------: | --------------------- | :-------------: | :--------: |
 |  Account          | basic user information               |  yes            | SailfishUserManager   | +               | +          |
 |  Dynamic Launcher | .desktop file installation           |  yes            |                       |                 | +          |
-|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks, Amber, MCE |                 | +++        |
+|  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks,  MCE       |                 | +++        |
 |  Input Capture    | Capture input                        |  ???            |                       |                 |            |
 |  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail  | +++             | +++        |
 |  Secret           | retrieve an app secret               |  yes            | Qt/QML                |                 | +          |

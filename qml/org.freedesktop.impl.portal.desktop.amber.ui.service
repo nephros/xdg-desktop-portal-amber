@@ -1,5 +1,0 @@
-[D-BUS Service]
-Interface=/org/freedesktop/impl/portal/desktop/amber/ui
-Name=org.freedesktop.impl.portal.desktop.amber.ui
-#Exec=/usr/bin/invoker --type=silica-qt5 -A -- /usr/bin/xdg-desktop-portal-amber-ui --prestart
-Exec=/usr/bin/xdg-desktop-portal-amber-ui --prestart

@@ -6,13 +6,13 @@
  *   Peter G. <sailfish@nephros.org>
  */
 
-#ifndef XDG_DESKTOP_PORTAL_AMBER_EMAIL_H
-#define XDG_DESKTOP_PORTAL_AMBER_EMAIL_H
+#ifndef XDG_DESKTOP_PORTAL_SAILFISH_EMAIL_H
+#define XDG_DESKTOP_PORTAL_SAILFISH_EMAIL_H
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
 
-namespace Amber {
+namespace Sailfish {
 class EmailPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -30,4 +30,4 @@ public Q_SLOTS:
                       QVariantMap &results);
 };
 }
-#endif // XDG_DESKTOP_PORTAL_AMBER_EMAIL_H
+#endif // XDG_DESKTOP_PORTAL_SAILFISH_EMAIL_H

@@ -70,11 +70,11 @@ ApplicationWindow { id: root
     */
     property DBusInterface _request
     DBusAdaptor {
-        service: "org.freedesktop.impl.portal.desktop.amber.ui"
-        iface: "org.freedesktop.impl.portal.desktop.amber.ui"
-        path: "/org/freedesktop/impl/portal/desktop/amber/ui"
+        service: "org.freedesktop.impl.portal.desktop.sailfish.ui"
+        iface: "org.freedesktop.impl.portal.desktop.sailfish.ui"
+        path: "/org/freedesktop/impl/portal/desktop/sailfish/ui"
         xml: [
-             '<interface name="org.freedesktop.impl.portal.desktop.amber.ui">',
+             '<interface name="org.freedesktop.impl.portal.desktop.sailfish.ui">',
              '<method name="confirmationDialog">',
              '   <arg type="s" name="handle" direction="in"/>',
              '   <arg type="s" name="title" direction="in"/>',
@@ -251,7 +251,7 @@ ApplicationWindow { id: root
 
     Component { id: requestInterface
         DBusInterface {
-            service: "org.freedesktop.impl.portal.desktop.amber"
+            service: "org.freedesktop.impl.portal.desktop.sailfish"
             iface: "org.freedesktop.impl.portal.Request"
             signalsEnabled: true
             function close() {

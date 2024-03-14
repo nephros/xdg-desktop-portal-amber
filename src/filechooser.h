@@ -6,13 +6,13 @@
  *   Peter G. <sailfish@nephros.org>
  */
 
-#ifndef XDG_DESKTOP_PORTAL_AMBER_FILECHOOSER_H
-#define XDG_DESKTOP_PORTAL_AMBER_FILECHOOSER_H
+#ifndef XDG_DESKTOP_PORTAL_SAILFISH_FILECHOOSER_H
+#define XDG_DESKTOP_PORTAL_SAILFISH_FILECHOOSER_H
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
 
-namespace Amber {
+namespace Sailfish {
 class FileChooserPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -68,4 +68,4 @@ private:
 
 };
 }
-#endif // XDG_DESKTOP_PORTAL_AMBER_FILECHOOSER_H
+#endif // XDG_DESKTOP_PORTAL_SAILFISH_FILECHOOSER_H

@@ -9,13 +9,13 @@
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberEmail, "xdp-amber-email")
+Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishEmail, "xdp-sailfish-email")
 
-namespace Amber {
+namespace Sailfish {
 EmailPortal::EmailPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalAmberEmail) << "Desktop portal service: Email";
+    qCDebug(XdgDesktopPortalSailfishEmail) << "Desktop portal service: Email";
 }
 
 EmailPortal::~EmailPortal()
@@ -37,13 +37,13 @@ uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
                                   const QVariantMap &options,
                                   QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalAmberEmail) << "Email called with parameters:";
-    qCDebug(XdgDesktopPortalAmberEmail) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberEmail) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberEmail) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberEmail) << "    options: " << options;
+    qCDebug(XdgDesktopPortalSailfishEmail) << "Email called with parameters:";
+    qCDebug(XdgDesktopPortalSailfishEmail) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalSailfishEmail) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalSailfishEmail) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalSailfishEmail) << "    options: " << options;
 
-    qCDebug(XdgDesktopPortalAmberEmail) << "Opening Email composer";
+    qCDebug(XdgDesktopPortalSailfishEmail) << "Opening Email composer";
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.email.ui"),
                     QStringLiteral("/com/jolla/email/ui"),
@@ -95,7 +95,7 @@ uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
     }
     if (options.contains(QStringLiteral("attachments"))) { // as array of urls
         // probably needs ShareAction or so.
-        qCDebug(XdgDesktopPortalAmberEmail) << "The attachment option is not supported";
+        qCDebug(XdgDesktopPortalSailfishEmail) << "The attachment option is not supported";
     }
     args.append(subject);
     args.append(to);
@@ -107,10 +107,10 @@ uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-        qCDebug(XdgDesktopPortalAmberEmail) << "Success";
+        qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
         return 0;
     }
-    qCDebug(XdgDesktopPortalAmberEmail) << "Email failed:" << pcall.error().name() << pcall.error().message();
+    qCDebug(XdgDesktopPortalSailfishEmail) << "Email failed:" << pcall.error().name() << pcall.error().message();
     return 1;
 }
-} // namespace Amber
+} // namespace Sailfish

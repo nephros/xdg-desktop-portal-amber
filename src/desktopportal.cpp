@@ -39,6 +39,7 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
+/*! \namespace Sailfish */
 /*! \namespace Sailfish::XDP
     \brief Contains backend implementations of the XDG Desktop Portal specification for Sailfish OS.
 

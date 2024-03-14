@@ -1,8 +1,0 @@
-[Unit]
-Description=Portal service environment for Sailfish OS
-WantedBy=graphical-session-pre.target
-
-[Service]
-EnvironmentFile=-/var/lib/environment/amber/*.conf
-ExecStart=/bin/true
-Slice=session.slice

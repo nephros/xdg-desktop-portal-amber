@@ -20,15 +20,15 @@
 #include <QLoggingCategory>
 #include <QThread>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmberFileChooser, "xdp-amber-filechooser")
+Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishFileChooser, "xdp-sailfish-filechooser")
 
-namespace Amber {
+namespace Sailfish {
 FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qDBusRegisterMetaType<QMap<QString, QVariantList>>();
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Desktop portal service: FileChooser";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Desktop portal service: FileChooser";
     m_responseHandled = false;
 }
 
@@ -43,12 +43,12 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &title,
                                 const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.OpenFile called with parameters:";
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.OpenFile called with parameters:";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
 
     // TODO choices
     //Q_UNUSED(results);
@@ -61,12 +61,12 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QObject *pHandle = new QObject(this);
     QDBusConnection::sessionBus().registerObject(handle.path(), pHandle, QDBusConnection::ExportScriptableContents);
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Trying to show a dialog";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
+                    QStringLiteral("/org.freedesktop.impl.portal.desktop.sailfish/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("openFilePicker")
                     );
 
@@ -95,21 +95,21 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     waitForPickerResponse();
 
     if (m_callResponseCode != PickerResponse::Other) {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "Success";
+        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Success";
     } else {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser failed";
+        qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser failed";
     }
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
     if (!obj) {
-        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage reply;
@@ -129,7 +129,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         }
     });
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Returning:" << reply.arguments();
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Returning:" << reply.arguments();
     QDBusConnection::sessionBus().send(reply);
 
     pHandle->deleteLater();
@@ -142,33 +142,33 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &title,
                       const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFiles called with parameters:";
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.SaveFiles called with parameters:";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
     /*
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
+            qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
     if (!obj) {
-        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage message = q_ptr->message();
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "This method is not implemented";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
     QDBusConnection::sessionBus().send(reply);
 
@@ -180,15 +180,15 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &title,
                       const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser.SaveFile called with parameters:";
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "    options: " << options;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.SaveFile called with parameters:";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
     /*
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalAmberFileChooser) << "FileChooser dialog options not supported.";
+            qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
 
@@ -197,19 +197,19 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalAmberFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage message = q_ptr->message();
 
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "This method is not implemented";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
     QDBusConnection::sessionBus().send(reply);
 }
 
 void FileChooserPortal::handlePickerError()
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response Error.";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Picker Response Error.";
     m_callResult = QStringList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
@@ -218,7 +218,7 @@ void FileChooserPortal::handlePickerResponse(
                         const int &code,
                         const QVariantList &result)
 {
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "Picker Response received:" << code << result;
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Picker Response received:" << code << result;
     foreach(QVariant v, result) {
       m_callResult << v.toString();
     }
@@ -229,18 +229,18 @@ void FileChooserPortal::handlePickerResponse(
 void FileChooserPortal::setupPickerResponse()
 {
     if(!QDBusConnection::sessionBus().connect(
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
+                    QStringLiteral("/org.freedesktop.impl.portal.desktop.sailfish/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("pickerDone"),
                     QStringLiteral("iav"),
                     this,
                     SLOT(handlePickerResponse(int, QVariantList))
                     ))
     {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "Could not set up signal listener";
+        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Could not set up signal listener";
     } else {
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "Successfully set up signal listener";
+        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Successfully set up signal listener";
     }
 }
 void FileChooserPortal::waitForPickerResponse()
@@ -249,8 +249,8 @@ void FileChooserPortal::waitForPickerResponse()
     while (!m_responseHandled) {
         QCoreApplication::processEvents();
         QThread::msleep(250);
-        qCDebug(XdgDesktopPortalAmberFileChooser) << "Waiting for Picker...";
+        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Waiting for Picker...";
     }
-    qCDebug(XdgDesktopPortalAmberFileChooser) << "OK, Picker done.";
+    qCDebug(XdgDesktopPortalSailfishFileChooser) << "OK, Picker done.";
 }
-} // namespace Amber
+} // namespace Sailfish

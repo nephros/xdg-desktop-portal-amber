@@ -10,7 +10,7 @@
 #include <qobjectdefs.h>
 #include <QDBusInterface>
 
-namespace Amber {
+namespace Sailfish {
     class ScreenshotPortal : public QDBusAbstractAdaptor
     {
         Q_OBJECT

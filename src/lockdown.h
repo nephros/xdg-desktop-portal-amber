@@ -12,7 +12,7 @@
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
 
-namespace Amber {
+namespace Sailfish {
 class LockdownPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT

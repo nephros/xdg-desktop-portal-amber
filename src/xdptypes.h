@@ -13,7 +13,7 @@
 #include <QMap>
 #include <QString>
 
-namespace Amber {
+namespace Sailfish {
 
 using XDPResultPart = QMap<QString, QDBusVariant>;
 // a{sa{sv}}
@@ -24,5 +24,5 @@ using XDPResultMap =  QMap<QString, XDPResultPart>;
 //using Shortcuts = QList<Shortcut>;
 }
 
-Q_DECLARE_METATYPE(Amber::XDPResultPart);
-Q_DECLARE_METATYPE(Amber::XDPResultMap);
+Q_DECLARE_METATYPE(Sailfish::XDPResultPart);
+Q_DECLARE_METATYPE(Sailfish::XDPResultMap);

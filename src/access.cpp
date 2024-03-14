@@ -23,7 +23,7 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
 
-/*! \enum Amber::AccessPortal::DialogResponse
+/*! \enum Sailfish::AccessPortal::DialogResponse
 
     Possible return values of a dialog interaction. The values correspond to the \a response poperties of the calls in this class.
 
@@ -48,7 +48,7 @@ AccessPortal::~AccessPortal()
 }
 
 
-/*! \fn Amber::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
+/*! \fn Sailfish::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
     Presents the user with a prompt they can accept or deny, and several other options.
 
     \a title, \a subtitle, and \a body can be used to configure the dialog appearance.
@@ -81,7 +81,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalSailfishAccess) << "    options: " << options;
 
     if (options.contains(QStringLiteral("choices")) || options.contains(QStringLiteral("modal"))) {
-            qCDebug(XdgDesktopPortalAmberAccess) << "Some Access dialog options are not supported.";
+            qCDebug(XdgDesktopPortalSailfishAccess) << "Some Access dialog options are not supported.";
     }
 
     /*
@@ -112,12 +112,12 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     </method>
     */
 
-    qCDebug(XdgDesktopPortalAmberAccess) << "Trying to show a dialog";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/sailfish/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("confirmationDialog")
                     );
 
@@ -147,9 +147,9 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     waitForDialogResponse();
 
     if (m_callResponseCode != DialogResponse::Other) {
-        qCDebug(XdgDesktopPortalAmberAccess) << "Success";
+        qCDebug(XdgDesktopPortalSailfishAccess) << "Success";
     } else {
-        qCDebug(XdgDesktopPortalAmberAccess) << "Dialog failed";
+        qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog failed";
     }
 
     // Just respond with empty list
@@ -164,7 +164,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     results.insert("choices", QVariant::fromValue(choices));
     return (uint)m_callResponseCode;
 }
-/*! \fn void Amber::AccessPortal::handleDialogError()
+/*! \fn void Sailfish::AccessPortal::handleDialogError()
 
     Receives the results from the Dialog.
 
@@ -173,26 +173,26 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
 */
 void AccessPortal::handleDialogError()
 {
-    qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response Error.";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog Response Error.";
     m_callResponseCode = DialogResponse::Other;
     m_responseHandled = true;
 }
-/*! \fn void Amber::AccessPortal::handleDialogResponse( const int &code)
+/*! \fn void Sailfish::AccessPortal::handleDialogResponse( const int &code)
 
     Receives the results from the Dialog. \a code corresponds to the
     dialog response options.
 
-    \sa uidoc, Amber::AccessPortal::DialogResponse, Nemo.DBus
+    \sa uidoc, Sailfish::AccessPortal::DialogResponse, Nemo.DBus
     \internal
 */
 void AccessPortal::handleDialogResponse( const int &code )
 {
-    qCDebug(XdgDesktopPortalAmberAccess) << "Dialog Response received:" << code;
+    qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog Response received:" << code;
     m_callResponseCode = static_cast<DialogResponse>(code);
     m_responseHandled = true;
 }
 
-/*! \fn void Amber::AccessPortal::setupDialogResponse()
+/*! \fn void Sailfish::AccessPortal::setupDialogResponse()
 
     After the GUI has been launched, listens for the \c dialogDone signal, and
     calls AccessPortal::handleDialogResponse with the response.
@@ -203,21 +203,21 @@ void AccessPortal::handleDialogResponse( const int &code )
 void AccessPortal::setupDialogResponse()
 {
     if(!QDBusConnection::sessionBus().connect(
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
-                    QStringLiteral("/org/freedesktop/impl/portal/desktop/amber/ui"),
-                    QStringLiteral("org.freedesktop.impl.portal.desktop.amber.ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/sailfish/ui"),
+                    QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("confirmationDone"),
                     QStringLiteral("i"),
                     this,
                     SLOT(handleDialogResponse(int))
                     ))
     {
-        qCDebug(XdgDesktopPortalAmberAccess) << "Could not set up signal listener";
+        qCDebug(XdgDesktopPortalSailfishAccess) << "Could not set up signal listener";
     } else {
-        qCDebug(XdgDesktopPortalAmberAccess) << "Successfully set up signal listener";
+        qCDebug(XdgDesktopPortalSailfishAccess) << "Successfully set up signal listener";
     }
 }
-/*! \fn void Amber::AccessPortal::waitForDialogResponse()
+/*! \fn void Sailfish::AccessPortal::waitForDialogResponse()
     Since launching the GUI via D-Bus is asynchronous (or rather, returns
     immediately), we have to wait for a Done signal to arrive from the application.
 
@@ -229,8 +229,8 @@ void AccessPortal::waitForDialogResponse()
     while (!m_responseHandled) {
         QCoreApplication::processEvents();
         QThread::msleep(250);
-        qCDebug(XdgDesktopPortalAmberAccess) << "Waiting for Dialog...";
+        qCDebug(XdgDesktopPortalSailfishAccess) << "Waiting for Dialog...";
     }
-    qCDebug(XdgDesktopPortalAmberAccess) << "OK, Dialog done.";
+    qCDebug(XdgDesktopPortalSailfishAccess) << "OK, Dialog done.";
 }
 } // namespace Sailfish

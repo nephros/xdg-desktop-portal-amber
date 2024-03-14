@@ -22,10 +22,10 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishFileChooser, "xdp-sailfish-filechooser")
 
-/*! \property Amber::FileChooserPortal::version
+/*! \property Sailfish::FileChooserPortal::version
     \brief Contains the backend implementation version
 */
-/*! \enum Amber::FileChooserPortal::PickerResponse
+/*! \enum Sailfish::FileChooserPortal::PickerResponse
 
     Possible return values of a dialog interaction. The values correspond to the \a response poperties of the calls in this class.
 
@@ -52,7 +52,7 @@ FileChooserPortal::~FileChooserPortal()
 }
 
 
-/*!  \fn void Amber::FileChooserPortal::OpenFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::FileChooserPortal::OpenFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
@@ -154,7 +154,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
 }
 
-/*!  \fn void Amber::FileChooserPortal::SaveFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::FileChooserPortal::SaveFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
@@ -200,7 +200,7 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
 
 }
 
-/*!  \fn void Amber::FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
@@ -241,7 +241,7 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     QDBusConnection::sessionBus().send(reply);
 }
 
-/*! \fn void Amber::FileChooserPortal::handlePickerError()
+/*! \fn void Sailfish::FileChooserPortal::handlePickerError()
 
     Receives the results from the picker Dialog.
 
@@ -255,7 +255,7 @@ void FileChooserPortal::handlePickerError()
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
 }
-/*! \fn void Amber::FileChooserPortal::handlePickerResponse( const int &code, const QVariantList &result)
+/*! \fn void Sailfish::FileChooserPortal::handlePickerResponse( const int &code, const QVariantList &result)
 
     Receives the results from the picker Dialog. \a code corresponds to the
     dialog response options, \a result ia an array of string variants listing the
@@ -265,7 +265,7 @@ void FileChooserPortal::handlePickerError()
     prefers to marshal most things as Variants. If you use the results in a DBus
     reply, make sure to transform it into e.g. a simple QStringList before sending.
 
-    \sa uidoc, Amber::FileChooserPortal::PickerResponse, Nemo.DBus
+    \sa uidoc, Sailfish::FileChooserPortal::PickerResponse, Nemo.DBus
     \internal
 */
 void FileChooserPortal::handlePickerResponse(
@@ -280,7 +280,7 @@ void FileChooserPortal::handlePickerResponse(
     m_responseHandled = true;
 }
 
-/*! \fn void Amber::FileChooserPortal::setupPickerResponse()
+/*! \fn void Sailfish::FileChooserPortal::setupPickerResponse()
 
     After the GUI has been launched, listens for the \c pickerDone signal, and
     calls FileChooserPortal::handlePickerResponse with the response.
@@ -305,7 +305,7 @@ void FileChooserPortal::setupPickerResponse()
         qCDebug(XdgDesktopPortalSailfishFileChooser) << "Successfully set up signal listener";
     }
 }
-/*! \fn void Amber::FileChooserPortal::waitForPickerResponse()
+/*! \fn void Sailfish::FileChooserPortal::waitForPickerResponse()
     Since launching the GUI via D-Bus is asynchronous (or rather, returns
     immediately), we have to wait for a Done signal to arrive from the application.
 

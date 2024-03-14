@@ -22,7 +22,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishSettings, "xdp-sailfish-settings")
 /*! \property Sailfish::SettingsPortal::version
     \brief Contains the backend implementation version
 */
-/*! \enum Amber::SettingsPortal::FDOColorScheme
+/*! \enum Sailfish::SettingsPortal::FDOColorScheme
 
    Possible values for \c org.freedesktop.appearance \c color-scheme
     \value None
@@ -117,7 +117,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
 SettingsPortal::~SettingsPortal()
 {
 }
-/*! \fn Amber::SettingsPortal::ReadAll(const QStringList &nss)
+/*! \fn Sailfish::SettingsPortal::ReadAll(const QStringList &nss)
 
     Implements \c org.freedesktop.impl.portal.Settings.ReadAll
 
@@ -159,7 +159,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
             }
             );
         } else if (*i == NAMESPACE_SAILFISHOS) {
-            qCDebug(XdgDesktopPortalAmberSettings) << "Ahoy Sailor!";
+            qCDebug(XdgDesktopPortalSailfishSettings) << "Ahoy Sailor!";
             result.insert(NAMESPACE_SAILFISHOS, {
                 {
                         { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
@@ -183,11 +183,11 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     } else {
         reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Namespace."));
     }
-//    qCDebug(XdgDesktopPortalAmberSettings) << "Sending:" << result;
+//    qCDebug(XdgDesktopPortalSailfishSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);
 }
 
-/*! \fn QDBusVariant Amber::SettingsPortal::Read(const QString &ns, const QString &key)
+/*! \fn QDBusVariant Sailfish::SettingsPortal::Read(const QString &ns, const QString &key)
     Reads and returns a single value, specified by \a key, from namespace \a ns
 */
 QDBusVariant SettingsPortal::Read(const QString &ns,
@@ -211,7 +211,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
-/*! \fn void Amber::SettingsPortal::SettingChanged(const QString &ns, const QString &key, const QVariant &value)
+/*! \fn void Sailfish::SettingsPortal::SettingChanged(const QString &ns, const QString &key, const QVariant &value)
 
     Emitted when any of the supported values have changed.
     \a ns, \a key, \a value are namespace, key within that namespace, and value that has changed.
@@ -221,7 +221,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
 
     \sa SettingsPortalNamespaces
 */
-/*! \fn void Amber::SettingsPortal::valueChanged(const QString &what)
+/*! \fn void Sailfish::SettingsPortal::valueChanged(const QString &what)
     Slot to receive change signals, and do something about that.
 
     \sa SettingsPortal::SettingChanged
@@ -257,7 +257,7 @@ void SettingsPortal::readAccentColor()
     }
 }
 
-/*! \fn void Amber::SettingsPortal::ambienceChanged(const int &i)
+/*! \fn void Sailfish::SettingsPortal::ambienceChanged(const int &i)
     Slot to receive change signals from ambienced, and do something about that.
 
     \sa com.jolla.ambienced.contentChanged
@@ -265,7 +265,7 @@ void SettingsPortal::readAccentColor()
 */
 void SettingsPortal::ambienceChanged(const int &i)
 {
-    qCDebug(XdgDesktopPortalAmberSettings) << "Ambience change signalled, reloading";
+    qCDebug(XdgDesktopPortalSailfishSettings) << "Ambience change signalled, reloading";
     emit SettingChanged(NAMESPACE_SAILFISHOS, QStringLiteral("ambience"), QVariant(i));
     update();
     emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.accent,   getAccentColor());

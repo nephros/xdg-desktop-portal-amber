@@ -39,33 +39,33 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
-/*! \namespace Amber
+/*! \namespace Sailfish
     \brief Contains backend implementations of the XDG Desktop Portal specification for Sailfish OS.
 
     See \l {XDG Desktop Portal Specification} for details.
 */
 
-/*! \class Amber::AccessPortal
+/*! \class Sailfish::AccessPortal
     \brief Backend interface of the Access Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Amber::EmailPortal
+/*! \class Sailfish::EmailPortal
     \brief Backend interface of the Email Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Amber::FileChooserPortal
+/*! \class Sailfish::FileChooserPortal
     \brief Backend interface of the FileChooser Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Amber::ScreenshotPortal
+/*! \class Sailfish::ScreenshotPortal
     \brief Backend interface of the Screenshot Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Amber::SettingsPortal
+/*! \class Sailfish::SettingsPortal
     \brief Backend interface of the Settings Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
@@ -75,7 +75,7 @@
 
     See \l{SettingsPortalNamespaces}{Supported Namespaces} for details.
 */
-/*! \class Amber::WallpaperPortal
+/*! \class Sailfish::WallpaperPortal
     \brief Backend interface of the Wallpaper Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.

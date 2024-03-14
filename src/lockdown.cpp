@@ -31,7 +31,7 @@ LockdownPortal::LockdownPortal(QObject *parent)
     connect(m_access, locationSettingsEnabledChanged, this, locationSettingsEnabledChanged);
 }
 
-bool LockdownPortal::getMute() const
+bool LockdownPortal::muted() const
 {
     QDBusMessage msg = QDBusMessage::createMethodCall(
             QStringLiteral("com.nokia.profiled"),
@@ -47,7 +47,7 @@ bool LockdownPortal::getMute() const
     }
 }
 
-void LockdownPortal::setMute(const bool &silent) const
+void LockdownPortal::mute(const bool &silent) const
 {
     QDBusMessage msg = QDBusMessage::createMethodCall(
             QStringLiteral("com.nokia.profiled"),

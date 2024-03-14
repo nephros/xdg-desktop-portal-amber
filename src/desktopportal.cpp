@@ -38,8 +38,8 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
-namespace Sailfish
-{
+namespace Sailfish {
+namespace XDP {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
         , m_access(new AccessPortal(this))
@@ -57,5 +57,6 @@ namespace Sailfish
     DesktopPortal::~DesktopPortal()
     {
     }
+}
 }
 

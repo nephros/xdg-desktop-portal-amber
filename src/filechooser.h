@@ -13,6 +13,7 @@
 #include <QDBusObjectPath>
 
 namespace Sailfish {
+namespace XDP {
 class FileChooserPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -67,5 +68,6 @@ private:
     QStringList m_callResult;
 
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_FILECHOOSER_H

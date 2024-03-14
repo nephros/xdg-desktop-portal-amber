@@ -16,6 +16,7 @@
 #include <QDBusObjectPath>
 
 namespace Sailfish {
+namespace XDP {
 class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -35,5 +36,6 @@ public Q_SLOTS:
                       const QVariantMap &options,
                       QVariantMap &results);
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_ACCESS_H

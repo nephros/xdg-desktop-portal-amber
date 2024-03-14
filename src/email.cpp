@@ -12,6 +12,7 @@
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishEmail, "xdp-sailfish-email")
 
 namespace Sailfish {
+namespace XDP {
 EmailPortal::EmailPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -104,4 +105,5 @@ uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalSailfishEmail) << "Email failed:" << pcall.error().name() << pcall.error().message();
     return 1;
 }
+} // namespace XDP
 } // namespace Sailfish

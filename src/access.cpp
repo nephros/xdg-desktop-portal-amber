@@ -20,6 +20,7 @@
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
 
 namespace Sailfish {
+namespace XDP {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -93,4 +94,5 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalSailfishAccess) << "Access failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
 }
+} // namespace XDP
 } // namespace Sailfish

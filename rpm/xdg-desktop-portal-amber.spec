@@ -79,6 +79,8 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %config %{_localstatedir}/lib/environment/amber/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
+# overrides
+%config %{_userunitdir}/*.service.d/*.conf
 
 %files qml
 %{_bindir}/%{name}-ui

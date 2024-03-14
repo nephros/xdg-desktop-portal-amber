@@ -23,7 +23,7 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
 
-/*! \enum Sailfish::AccessPortal::DialogResponse
+/*! \enum Sailfish::XDP:AccessPortal::DialogResponse
 
     Possible return values of a dialog interaction. The values correspond to the \a response poperties of the calls in this class.
 
@@ -49,7 +49,7 @@ AccessPortal::~AccessPortal()
 }
 
 
-/*! \fn Sailfish::AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
+/*! \fn Sailfish::XDP:AccessPortal::AccessDialog(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QString &subtitle, const QString &body, const QVariantMap &options, QVariantMap &results)
     Presents the user with a prompt they can accept or deny, and several other options.
 
     \a title, \a subtitle, and \a body can be used to configure the dialog appearance.
@@ -165,7 +165,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     results.insert("choices", QVariant::fromValue(choices));
     return (uint)m_callResponseCode;
 }
-/*! \fn void Sailfish::AccessPortal::handleDialogError()
+/*! \fn void Sailfish::XDP:AccessPortal::handleDialogError()
 
     Receives the results from the Dialog.
 
@@ -178,12 +178,12 @@ void AccessPortal::handleDialogError()
     m_callResponseCode = DialogResponse::Other;
     m_responseHandled = true;
 }
-/*! \fn void Sailfish::AccessPortal::handleDialogResponse( const int &code)
+/*! \fn void Sailfish::XDP:AccessPortal::handleDialogResponse( const int &code)
 
     Receives the results from the Dialog. \a code corresponds to the
     dialog response options.
 
-    \sa uidoc, Sailfish::AccessPortal::DialogResponse, Nemo.DBus
+    \sa uidoc, Sailfish::XDP:AccessPortal::DialogResponse, Nemo.DBus
     \internal
 */
 void AccessPortal::handleDialogResponse( const int &code )
@@ -193,7 +193,7 @@ void AccessPortal::handleDialogResponse( const int &code )
     m_responseHandled = true;
 }
 
-/*! \fn void Sailfish::AccessPortal::setupDialogResponse()
+/*! \fn void Sailfish::XDP:AccessPortal::setupDialogResponse()
 
     After the GUI has been launched, listens for the \c dialogDone signal, and
     calls AccessPortal::handleDialogResponse with the response.
@@ -218,7 +218,7 @@ void AccessPortal::setupDialogResponse()
         qCDebug(XdgDesktopPortalSailfishAccess) << "Successfully set up signal listener";
     }
 }
-/*! \fn void Sailfish::AccessPortal::waitForDialogResponse()
+/*! \fn void Sailfish::XDP:AccessPortal::waitForDialogResponse()
     Since launching the GUI via D-Bus is asynchronous (or rather, returns
     immediately), we have to wait for a Done signal to arrive from the application.
 

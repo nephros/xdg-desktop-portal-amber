@@ -23,7 +23,7 @@ EmailPortal::~EmailPortal()
 {
 }
 
-/*! \fn uint Sailfish::EmailPortal::ComposeEmail(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
+/*! \fn uint Sailfish::XDP::EmailPortal::ComposeEmail(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
 
      Opens the EMail application to create a new email.
 

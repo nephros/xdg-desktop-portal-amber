@@ -22,7 +22,7 @@ import Sailfish.Lipstick 1.0
     ConfirmationDialog::dialogInfo and  ConfirmationDialog::options properties
 
     This is used as UI for the \l
-    {Sailfish::AccessPortal::AccessDialog}{AccessDialog} method of the \c
+    {Sailfish::XDP::AccessPortal::AccessDialog}{AccessDialog} method of the \c
     org.freedesktop.impl.portal.Access Portal.
 
 */

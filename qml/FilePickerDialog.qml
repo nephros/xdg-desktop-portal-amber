@@ -26,7 +26,7 @@ import Nemo.Thumbnailer 1.0
     This is the UI for the interactive methods of the \c
     org.freedesktop.impl.portal.FileChooser Portal
 
-    \sa Sailfish::FileChooserPortal
+    \sa Sailfish::XDP::FileChooserPortal
 
 */
 
@@ -37,7 +37,7 @@ SystemDialog {
     property string title
     /*! \qmlproperty var FilePickerDialog::options
      *
-        \sa Sailfish::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+        \sa Sailfish::XDP::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
 
         \list
         \li accept_label (s)

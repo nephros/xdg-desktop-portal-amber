@@ -45,27 +45,27 @@
     See \l {XDG Desktop Portal Specification} for details.
 */
 
-/*! \class Sailfish::AccessPortal
+/*! \class Sailfish::XDP::AccessPortal
     \brief Backend interface of the Access Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Sailfish::EmailPortal
+/*! \class Sailfish::XDP::EmailPortal
     \brief Backend interface of the Email Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Sailfish::FileChooserPortal
+/*! \class Sailfish::XDP::FileChooserPortal
     \brief Backend interface of the FileChooser Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Sailfish::ScreenshotPortal
+/*! \class Sailfish::XDP::ScreenshotPortal
     \brief Backend interface of the Screenshot Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
-/*! \class Sailfish::SettingsPortal
+/*! \class Sailfish::XDP::SettingsPortal
     \brief Backend interface of the Settings Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
@@ -75,7 +75,7 @@
 
     See \l{SettingsPortalNamespaces}{Supported Namespaces} for details.
 */
-/*! \class Sailfish::WallpaperPortal
+/*! \class Sailfish::XDP::WallpaperPortal
     \brief Backend interface of the Wallpaper Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.

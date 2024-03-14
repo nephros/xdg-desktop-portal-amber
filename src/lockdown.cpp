@@ -16,6 +16,7 @@ const char* PROFILE_MUTED_NAME = "silent";
 const char* PROFILE_UNMUTED_NAME = "general";
 
 namespace Sailfish {
+namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -63,4 +64,5 @@ void LockdownPortal::setMute(const bool &silent) const
     QDBusConnection::sessionBus().call(msg, QDBus::NoBlock);
 }
 
+}
 }

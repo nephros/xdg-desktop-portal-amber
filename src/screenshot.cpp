@@ -72,7 +72,7 @@ ScreenshotPortal::ScreenshotPortal(QObject *parent)
     qCDebug(XdgDesktopPortalSailfishScreenshot) << "Desktop portal service: ColorPicker";
 }
 
-/*! \fn uint Sailfish::ScreenshotPortal::PickColor(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
+/*! \fn uint Sailfish::XDP::ScreenshotPortal::PickColor(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, and \a results.
      See the \l{XDG Desktop Portal Specification} for possible \a options.
 
@@ -113,7 +113,7 @@ uint ScreenshotPortal::PickColor(const QDBusObjectPath &handle,
     return 0;
 }
 
-/*! \fn uint Sailfish::ScreenshotPortal::Screenshot(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
+/*! \fn uint Sailfish::XDP::ScreenshotPortal::Screenshot(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
     Takes a screenshot and returns its file location. The output location will be QStandardPaths::PicturesLocation, and the screenshot is saved in PNG format.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, and \a results.
      See the \l{XDG Desktop Portal Specification} for possible \a options.

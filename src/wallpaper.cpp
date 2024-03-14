@@ -13,7 +13,7 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishWallpaper, "xdp-sailfish-wallpaper")
 
-/*! \property Sailfish::WallpaperPortal::version
+/*! \property Sailfish::XDP::WallpaperPortal::version
     \brief Contains the backend implementation version
 */
 
@@ -25,7 +25,7 @@ WallpaperPortal::WallpaperPortal(QObject *parent)
     qCDebug(XdgDesktopPortalSailfishWallpaper) << "Desktop portal service: Wallpaper";
 }
 
-/*!  \fn uint Sailfish::WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &uri, const QVariantMap &options, uint &result)
+/*!  \fn uint Sailfish::XDP::WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &uri, const QVariantMap &options, uint &result)
 
      \brief Creates an Ambience from the image given by \a uri
 

@@ -22,7 +22,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishSettings, "xdp-sailfish-settings")
 /*! \property Sailfish::XDP::SettingsPortal::version
     \brief Contains the backend implementation version
 */
-/*! \enum Sailfish::SettingsPortal::FDOColorScheme
+/*! \enum Sailfish::XDP::SettingsPortal::FDOColorScheme
 
    Possible values for \c org.freedesktop.appearance \c color-scheme
     \value None
@@ -118,7 +118,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
 SettingsPortal::~SettingsPortal()
 {
 }
-/*! \fn Sailfish::SettingsPortal::ReadAll(const QStringList &nss)
+/*! \fn Sailfish::XDP::SettingsPortal::ReadAll(const QStringList &nss)
 
     Implements \c org.freedesktop.impl.portal.Settings.ReadAll
 
@@ -188,7 +188,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     QDBusConnection::sessionBus().send(reply);
 }
 
-/*! \fn QDBusVariant Sailfish::SettingsPortal::Read(const QString &ns, const QString &key)
+/*! \fn QDBusVariant Sailfish::XDP::SettingsPortal::Read(const QString &ns, const QString &key)
     Reads and returns a single value, specified by \a key, from namespace \a ns
 */
 QDBusVariant SettingsPortal::Read(const QString &ns,
@@ -212,7 +212,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 
-/*! \fn void Sailfish::SettingsPortal::SettingChanged(const QString &ns, const QString &key, const QVariant &value)
+/*! \fn void Sailfish::XDP::SettingsPortal::SettingChanged(const QString &ns, const QString &key, const QVariant &value)
 
     Emitted when any of the supported values have changed.
     \a ns, \a key, \a value are namespace, key within that namespace, and value that has changed.
@@ -222,7 +222,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
 
     \sa SettingsPortalNamespaces
 */
-/*! \fn void Sailfish::SettingsPortal::valueChanged(const QString &what)
+/*! \fn void Sailfish::XDP::SettingsPortal::valueChanged(const QString &what)
     Slot to receive change signals, and do something about that.
 
     \sa SettingsPortal::SettingChanged
@@ -258,7 +258,7 @@ void SettingsPortal::readAccentColor()
     }
 }
 
-/*! \fn void Sailfish::SettingsPortal::ambienceChanged(const int &i)
+/*! \fn void Sailfish::XDP::SettingsPortal::ambienceChanged(const int &i)
     Slot to receive change signals from ambienced, and do something about that.
 
     \sa com.jolla.ambienced.contentChanged

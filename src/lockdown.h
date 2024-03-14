@@ -11,7 +11,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
-#include <accesspolicy.h>
+#include <policyvalue.h>
 
 namespace Sailfish {
 namespace XDP {
@@ -22,25 +22,27 @@ class LockdownPortal : public QDBusAbstractAdaptor
     // note: the XDP spec uses hyphens as property names. They are not allowed
     // in C++ identifiers, and deprecated for D-Bus names.
     // soo, underscores.
+
+    // not supported, always false (enabled)
     Q_PROPERTY(bool disable_printing READ printingDisabled CONSTANT)
     Q_PROPERTY(bool disable_save_to_disk READ saveDisabled CONSTANT)
     Q_PROPERTY(bool disable_application_handlers READ apphandlersDisabled CONSTANT)
     // supported
     Q_PROPERTY(bool disable_sound_output READ getMute WRITE setMute )
-    // directly from MDM:
+    // directly via MDM:
     Q_PROPERTY(bool disable_camera
                     MEMBER cameraEnabled
                     READ cameraEnabled
-                    NOTIFY cameraEnabledChanged
+                    WRITE setCameraEnabled
               )
     Q_PROPERTY(bool disable_microphone
                     MEMBER microphoneEnabled
                     READ microphoneEnabled
-                    NOTIFY microphoneEnabledChanged
+                    WRITE setMicrophoneEnabled
               )
     Q_PROPERTY(bool disable_location
-                    MEMBER locationSettingsEnabled
-                    NOTIFY locationSettingsEnabledChanged
+                    READ locationSettingsEnabled
+                    WRITE setLocationSettingsEnabled
               )
 
 public:
@@ -54,14 +56,19 @@ public Q_SLOTS:
 
     bool getMute() const;
     void setMute(const bool &silent) const;
+    bool cameraEnabled()           { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::CameraEnabled).toBool(); };
+    bool microphoneEnabled()       { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::MicrophoneEnabled).toBool(); };
+    bool locationSettingsEnabled() { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::LocationSettingsEnabled).toBool(); };
+    void setLocationSettingsEnabled(const bool &enable) {
+        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::LocationSettingsEnabled, QVariant(enable));
+    };
+    void setMicrophoneEnabled(const bool &enable) {
+        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::MicrophoneEnabled, QVariant(enable));
+    };
+    void setCameraEnabled(const bool &enable) {
+        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::CameraEnabled, QVariant(enable));
+    };
 
-signals:
-    void cameraEnabledChanged();
-    void microphoneEnabledChanged();
-    void locationSettingsEnabledChanged();
-
-private:
-    AccessPolicy m_access;
 };
 }
 }

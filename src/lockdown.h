@@ -11,7 +11,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
-#include <policyvalue.h>
+#include <accesspolicy.h>
 
 namespace Sailfish {
 namespace XDP {
@@ -23,54 +23,44 @@ class LockdownPortal : public QDBusAbstractAdaptor
     // in C++ identifiers, and deprecated for D-Bus names.
     // soo, underscores.
 
-    // not supported, always false (enabled)
-    Q_PROPERTY(bool disable_printing READ printingDisabled WRITE discard)
-    Q_PROPERTY(bool disable_save_to_disk READ saveDisabled WRITE discard)
-    Q_PROPERTY(bool disable_application_handlers READ apphandlersDisabled WRITE discard)
+    // not supported, always false (enabled), discard writes
+    Q_PROPERTY(bool disable_printing        READ disable_printing WRITE discard)
+    Q_PROPERTY(bool disable_save_to_disk    READ disable_save_to_disk WRITE discard)
+    Q_PROPERTY(bool disable_application_handlers READ disable_application_handlers WRITE discard)
     // supported
     Q_PROPERTY(bool disable_sound_output READ muted WRITE mute )
     // directly via MDM:
-    Q_PROPERTY(bool disable_camera
-                    MEMBER cameraEnabled
-                    READ cameraEnabled
-                    WRITE setCameraEnabled
-              )
-    Q_PROPERTY(bool disable_microphone
-                    MEMBER microphoneEnabled
-                    READ microphoneEnabled
-                    WRITE setMicrophoneEnabled
-              )
-    Q_PROPERTY(bool disable_location
-                    READ locationSettingsEnabled
-                    WRITE setLocationSettingsEnabled
-              )
+    Q_PROPERTY(bool disable_camera      READ disable_camera      WRITE setCameraDisabled)
+    Q_PROPERTY(bool disable_microphone  READ disable_microphone  WRITE setMicrophoneDisabled)
+    Q_PROPERTY(bool disable_location    READ disable_location    WRITE setLocationSettingsDisabled)
 
 public:
     explicit LockdownPortal(QObject *parent);
     //~LockdownPortal() override;
 
+public Q_SLOTS:
+     void cameraDisabledChanged() {};
+     void microphoneDisabledChanged() {};
+     void locationSettingsDisabledChanged() {};
+
 private:
     bool discard(const bool &dummy) const { return false; };
-    bool printingDisabled() const    { return false; };
-    bool saveDisabled() const        { return false; };
-    bool apphandlersDisabled() const { return false; };
+    bool disable_printing() const         { return false; };
+    bool disable_save_to_disk() const     { return false; };
+    bool disable_application_handlers() const { return false; };
 
     bool muted() const;
     void mute(const bool &silent) const;
 
-    bool cameraEnabled()           { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::CameraEnabled).toBool(); };
-    bool microphoneEnabled()       { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::MicrophoneEnabled).toBool(); };
-    bool locationSettingsEnabled() { return !Sailfish::PolicyValue::keyValue(Sailfish::PolicyValue::LocationSettingsEnabled).toBool(); };
-    void setLocationSettingsEnabled(const bool &enable) {
-        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::LocationSettingsEnabled, QVariant(enable));
-    };
-    void setMicrophoneEnabled(const bool &enable) {
-        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::MicrophoneEnabled, QVariant(enable));
-    };
-    void setCameraEnabled(const bool &enable) {
-        Sailfish::PolicyValue::setKeyValue(Sailfish::PolicyValue::CameraEnabled, QVariant(enable));
-    };
+    bool disable_camera() const;
+    bool disable_microphone() const;
+    bool disable_location() const;
 
+    void setLocationSettingsDisabled(const bool &enable) const;
+    void setMicrophoneDisabled(const bool &enable) const;
+    void setCameraDisabled(const bool &enable) const;
+
+    AccessPolicy* m_policy;
 };
 }
 }

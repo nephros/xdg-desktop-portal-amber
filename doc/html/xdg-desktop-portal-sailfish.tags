@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tagfile>
     <compound kind="namespace">
-        <name>Amber</name>
-        <filename>amber.html</filename>
-        <class>Amber::AccessPortal</class>
-        <class>Amber::DesktopPortal</class>
-        <class>Amber::EmailPortal</class>
-        <class>Amber::FileChooserPortal</class>
-        <class>Amber::LockdownPortal</class>
-        <class>Amber::ScreenshotPortal</class>
-        <class>Amber::SettingsPortal</class>
-        <class>Amber::WallpaperPortal</class>
+        <name>Sailfish</name>
+        <filename>sailfish.html</filename>
+        <class>Sailfish::AccessPortal</class>
+        <class>Sailfish::DesktopPortal</class>
+        <class>Sailfish::EmailPortal</class>
+        <class>Sailfish::FileChooserPortal</class>
+        <class>Sailfish::LockdownPortal</class>
+        <class>Sailfish::ScreenshotPortal</class>
+        <class>Sailfish::SettingsPortal</class>
+        <class>Sailfish::WallpaperPortal</class>
     </compound>
     <compound kind="class">
-        <name>Amber::AccessPortal</name>
-        <filename>amber-accessportal.html</filename>
+        <name>Sailfish::AccessPortal</name>
+        <filename>sailfish-accessportal.html</filename>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>AccessPortal</name>
-            <anchorfile>amber-accessportal.html</anchorfile>
+            <anchorfile>sailfish-accessportal.html</anchorfile>
             <anchor>AccessPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
@@ -42,53 +42,53 @@
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>AccessDialog</name>
-            <anchorfile>amber-accessportal.html</anchorfile>
+            <anchorfile>sailfish-accessportal.html</anchorfile>
             <anchor>AccessDialog</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QString &amp;subtitle, const QString &amp;body, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::DesktopPortal</name>
-        <filename>amber-desktopportal.html</filename>
+        <name>Sailfish::DesktopPortal</name>
+        <filename>sailfish-desktopportal.html</filename>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>DesktopPortal</name>
-            <anchorfile>amber-desktopportal.html</anchorfile>
+            <anchorfile>sailfish-desktopportal.html</anchorfile>
             <anchor>DesktopPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::EmailPortal</name>
-        <filename>amber-emailportal.html</filename>
+        <name>Sailfish::EmailPortal</name>
+        <filename>sailfish-emailportal.html</filename>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>EmailPortal</name>
-            <anchorfile>amber-emailportal.html</anchorfile>
+            <anchorfile>sailfish-emailportal.html</anchorfile>
             <anchor>EmailPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>ComposeEmail</name>
-            <anchorfile>amber-emailportal.html</anchorfile>
+            <anchorfile>sailfish-emailportal.html</anchorfile>
             <anchor>ComposeEmail</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::FileChooserPortal</name>
-        <filename>amber-filechooserportal.html</filename>
+        <name>Sailfish::FileChooserPortal</name>
+        <filename>sailfish-filechooserportal.html</filename>
         <member kind="property" type="uint">
             <name>version</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>FileChooserPortal</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>FileChooserPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
@@ -112,153 +112,153 @@
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>version</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist>() const</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>OpenFile</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>OpenFile</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>SaveFile</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>SaveFile</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>SaveFiles</name>
-            <anchorfile>amber-filechooserportal.html</anchorfile>
+            <anchorfile>sailfish-filechooserportal.html</anchorfile>
             <anchor>SaveFiles</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::LockdownPortal</name>
-        <filename>amber-lockdownportal.html</filename>
+        <name>Sailfish::LockdownPortal</name>
+        <filename>sailfish-lockdownportal.html</filename>
         <member kind="property" type="bool">
             <name>disable_location</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_location-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="property" type="bool">
             <name>disable_sound_output</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_sound_output-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>LockdownPortal</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>LockdownPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>bool</type>
             <name>getGPS</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_location-prop</anchor>
             <arglist>() const</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>setGPS</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_location-prop</anchor>
             <arglist>(const bool &amp;off) const</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>bool</type>
             <name>getMute</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_sound_output-prop</anchor>
             <arglist>() const</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>setMute</name>
-            <anchorfile>amber-lockdownportal.html</anchorfile>
+            <anchorfile>sailfish-lockdownportal.html</anchorfile>
             <anchor>disable_sound_output-prop</anchor>
             <arglist>(const bool &amp;silent) const</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::ScreenshotPortal</name>
-        <filename>amber-screenshotportal.html</filename>
+        <name>Sailfish::ScreenshotPortal</name>
+        <filename>sailfish-screenshotportal.html</filename>
         <member kind="property" type="uint">
             <name>version</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>version</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist>() const</arglist>
         </member>
-        <class>Amber::ScreenshotPortal::ColorRGB</class>
+        <class>Sailfish::ScreenshotPortal::ColorRGB</class>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>ScreenshotPortal</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>ScreenshotPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>~ScreenshotPortal</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>dtor.ScreenshotPortal</anchor>
             <arglist>() = default</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>PickColor</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>PickColor</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>Screenshot</name>
-            <anchorfile>amber-screenshotportal.html</anchorfile>
+            <anchorfile>sailfish-screenshotportal.html</anchorfile>
             <anchor>Screenshot</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::ScreenshotPortal::ColorRGB</name>
-        <filename>amber-screenshotportal-colorrgb.html</filename>
+        <name>Sailfish::ScreenshotPortal::ColorRGB</name>
+        <filename>sailfish-screenshotportal-colorrgb.html</filename>
     </compound>
     <compound kind="class">
-        <name>Amber::SettingsPortal</name>
-        <filename>amber-settingsportal.html</filename>
+        <name>Sailfish::SettingsPortal</name>
+        <filename>sailfish-settingsportal.html</filename>
         <member kind="property" type="uint">
             <name>version</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>SettingsPortal</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>SettingsPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>version</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist>() const</arglist>
         </member>
@@ -279,81 +279,81 @@
             <anchor>FDOColorScheme-enum</anchor>
             <arglist></arglist>
         </member>
-        <class>Amber::SettingsPortal::FDOConfKeys</class>
+        <class>Sailfish::SettingsPortal::FDOConfKeys</class>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>ReadAll</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>ReadAll</anchor>
             <arglist>(const QStringList &amp;nss)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>QDBusVariant</type>
             <name>Read</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>Read</anchor>
             <arglist>(const QString &amp;ns, const QString &amp;key)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>
             <name>SettingChanged</name>
-            <anchorfile>amber-settingsportal.html</anchorfile>
+            <anchorfile>sailfish-settingsportal.html</anchorfile>
             <anchor>SettingChanged</anchor>
             <arglist>(const QString &amp;ns, const QString &amp;key, const QVariant &amp;value)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>Amber::SettingsPortal::FDOConfKeys</name>
-        <filename>amber-settingsportal-fdoconfkeys.html</filename>
+        <name>Sailfish::SettingsPortal::FDOConfKeys</name>
+        <filename>sailfish-settingsportal-fdoconfkeys.html</filename>
     </compound>
     <compound kind="class">
-        <name>Amber::WallpaperPortal</name>
-        <filename>amber-wallpaperportal.html</filename>
+        <name>Sailfish::WallpaperPortal</name>
+        <filename>sailfish-wallpaperportal.html</filename>
         <member kind="property" type="uint">
             <name>version</name>
-            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchorfile>sailfish-wallpaperportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist></arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>WallpaperPortal</name>
-            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchorfile>sailfish-wallpaperportal.html</anchorfile>
             <anchor>WallpaperPortal</anchor>
             <arglist>(QObject *parent)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type></type>
             <name>~WallpaperPortal</name>
-            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchorfile>sailfish-wallpaperportal.html</anchorfile>
             <anchor>dtor.WallpaperPortal</anchor>
             <arglist>() = default</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>version</name>
-            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchorfile>sailfish-wallpaperportal.html</anchorfile>
             <anchor>version-prop</anchor>
             <arglist>() const</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>uint</type>
             <name>SetWallpaperURI</name>
-            <anchorfile>amber-wallpaperportal.html</anchorfile>
+            <anchorfile>sailfish-wallpaperportal.html</anchorfile>
             <anchor>SetWallpaperURI</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;uri, const QVariantMap &amp;options, uint &amp;result)</arglist>
         </member>
     </compound>
     <compound kind="class">
-        <name>org.freedesktop.impl.portal.desktop.amber.ui.ConfirmationDialog</name>
-        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-confirmationdialog.html</filename>
+        <name>org.freedesktop.impl.portal.desktop.sailfish.ui.ConfirmationDialog</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html</filename>
     </compound>
     <compound kind="class">
-        <name>org.freedesktop.impl.portal.desktop.amber.ui.FilePickerDialog</name>
-        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-filepickerdialog.html</filename>
+        <name>org.freedesktop.impl.portal.desktop.sailfish.ui.FilePickerDialog</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html</filename>
     </compound>
     <compound kind="class">
-        <name>org.freedesktop.impl.portal.desktop.amber.ui.xdg-desktop-portal-amber-ui</name>
-        <filename>qml-org-freedesktop-impl-portal-desktop-amber-ui-xdg-desktop-portal-amber-ui.html</filename>
+        <name>org.freedesktop.impl.portal.desktop.sailfish.ui.xdg-desktop-portal-sailfish-ui</name>
+        <filename>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui.html</filename>
     </compound>
 </tagfile>

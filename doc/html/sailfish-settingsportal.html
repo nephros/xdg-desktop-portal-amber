@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- desktopportal.cpp -->
-  <title>SettingsPortal Class | XDG Desktop Portal Amber 1.0</title>
+  <title>SettingsPortal Class | XDG Desktop Portal Backend for Sailfish OS 1.0</title>
   <link rel="stylesheet" type="text/css" href="style/offline.css" />
 </head>
 <body>
@@ -14,7 +14,7 @@
   <div class="breadcrumb">
     <ul>
       <!--  Breadcrumbs go here -->
-<li><a href="index.html">XDG Desktop Portal Amber</a></li>
+<li><a href="index.html">XDG Desktop Portal Backend for Sailfish OS</a></li>
 <li>SettingsPortal</li>
     </ul>
   </div>
@@ -34,42 +34,42 @@
 </div>
 <div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">SettingsPortal Class</h1>
-<span class="small-subtitle">(<a href="amber-settingsportal.html">Amber::SettingsPortal</a>)<br/></span>
+<span class="small-subtitle">(<a href="sailfish-settingsportal.html">Sailfish::SettingsPortal</a>)<br/></span>
 <!-- $$$SettingsPortal-brief -->
 <p>Backend interface of the Settings Portal <a href="#details">More...</a></p>
 <!-- @@@SettingsPortal -->
 <div class="table"><table class="alignedsummary">
 <tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;SettingsPortal&gt;</span>
 </td></tr></table></div><ul>
-<li><a href="amber-settingsportal-members.html">List of all members, including inherited members</a></li>
+<li><a href="sailfish-settingsportal-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="public-types"></a>
 <h2 id="public-types">Public Types</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal-fdoconfkeys.html">FDOConfKeys</a></b></td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#FDOColorScheme-enum">FDOColorScheme</a></b> { None, Dark, Light }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal-fdoconfkeys.html">FDOConfKeys</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#FDOColorScheme-enum">FDOColorScheme</a></b> { None, Dark, Light }</td></tr>
 </table></div>
 <a name="properties"></a>
 <h2 id="properties">Properties</h2>
 <ul>
-<li class="fn"><b><a href="amber-settingsportal.html#version-prop">version</a></b> : const uint</li>
+<li class="fn"><b><a href="sailfish-settingsportal.html#version-prop">version</a></b> : const uint</li>
 </ul>
 <a name="public-functions"></a>
 <h2 id="public-functions">Public Functions</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#SettingsPortal">SettingsPortal</a></b>(QObject *<i>parent</i>)</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#version-prop">version</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#SettingsPortal">SettingsPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#version-prop">version</a></b>() const</td></tr>
 </table></div>
 <a name="public-slots"></a>
 <h2 id="public-slots">Public Slots</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>)</td></tr>
 </table></div>
 <a name="signals"></a>
 <h2 id="signals">Signals</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="amber-settingsportal.html#SettingChanged">SettingChanged</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>, const QVariant &amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#SettingChanged">SettingChanged</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>, const QVariant &amp;<i>value</i>)</td></tr>
 </table></div>
 <a name="details"></a>
 <!-- $$$SettingsPortal-description -->
@@ -87,9 +87,9 @@
 <h3 class="fn" id="FDOColorScheme-enum"><a name="FDOColorScheme-enum"></a>enum SettingsPortal::<span class="name">FDOColorScheme</span></h3>
 <p>Possible values for <code>org.freedesktop.appearance</code> <code>color-scheme</code></p>
 <div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
-<tr><td class="topAlign"><code>Amber::SettingsPortal::None</code></td><td class="topAlign tblval"><code>-1</code></td><td class="topAlign">No preference</td></tr>
-<tr><td class="topAlign"><code>Amber::SettingsPortal::Dark</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Prefer dark appearance</td></tr>
-<tr><td class="topAlign"><code>Amber::SettingsPortal::Light</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Prefer light appearance</td></tr>
+<tr><td class="topAlign"><code>Sailfish::SettingsPortal::None</code></td><td class="topAlign tblval"><code>-1</code></td><td class="topAlign">No preference</td></tr>
+<tr><td class="topAlign"><code>Sailfish::SettingsPortal::Dark</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Prefer dark appearance</td></tr>
+<tr><td class="topAlign"><code>Sailfish::SettingsPortal::Light</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Prefer light appearance</td></tr>
 </table></div>
 <!-- @@@FDOColorScheme -->
 </div>

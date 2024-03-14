@@ -40,35 +40,35 @@
 
 #include "desktopportal.h"
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalAmber, "xdp-amber")
+Q_LOGGING_CATEGORY(XdgDesktopPortalSailfish, "xdp-sailfish")
 
-const char* dbusName   = "org.freedesktop.impl.portal.desktop.amber";
+const char* dbusName   = "org.freedesktop.impl.portal.desktop.sailfish";
 const char* dbusObject = "/org/freedesktop/portal/desktop";
 
 int main(int argc, char *argv[])
 {
     QCoreApplication app{argc, argv};
-    app.setApplicationName(QStringLiteral("xdg-desktop-portal-amber"));
+    app.setApplicationName(QStringLiteral("xdg-desktop-portal-sailfish"));
 
     // determine GID, check prvileged group:
     struct group *grp = getgrnam("privileged"); /* don't free, see getgrnam() for details */
     if ( getgid() != grp->gr_gid ) {
-        qCWarning(XdgDesktopPortalAmber) << "Not running privileged, some features will not work.";
+        qCWarning(XdgDesktopPortalSailfish) << "Not running privileged, some features will not work.";
     }
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
 
-    qCDebug(XdgDesktopPortalAmber) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
+    qCDebug(XdgDesktopPortalSailfish) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
     if (sessionBus.registerService(dbusName)) {
-        const auto desktopPortal = new Amber::DesktopPortal{&app};
-        qCDebug(XdgDesktopPortalAmber) << "Desktop portal bus registered successfully";
+        const auto desktopPortal = new Sailfish::DesktopPortal{&app};
+        qCDebug(XdgDesktopPortalSailfish) << "Desktop portal bus registered successfully";
         if (sessionBus.registerObject(dbusObject, desktopPortal, QDBusConnection::ExportAdaptors)) {
-            qCDebug(XdgDesktopPortalAmber) << "Desktop portal object registered successfully";
+            qCDebug(XdgDesktopPortalSailfish) << "Desktop portal object registered successfully";
         } else {
-            qCDebug(XdgDesktopPortalAmber) << "Failed to register object";
+            qCDebug(XdgDesktopPortalSailfish) << "Failed to register object";
         }
     } else {
-        qCDebug(XdgDesktopPortalAmber) << "Failed to register service.";
+        qCDebug(XdgDesktopPortalSailfish) << "Failed to register service.";
         return 1;
     }
 

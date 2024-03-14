@@ -38,7 +38,7 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
-namespace Amber
+namespace Sailfish
 {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)

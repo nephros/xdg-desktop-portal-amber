@@ -28,6 +28,6 @@ Name[sl]=Portal
 Name[sv]=Portal
 Name[uk]=Портал
 Name[zh_CN]=系统门户
-Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-amber
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-sailfish
 NoDisplay=true
 Icon=applications-other

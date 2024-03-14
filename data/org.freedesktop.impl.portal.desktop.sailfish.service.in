@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.freedesktop.impl.portal.desktop.sailfish
+Exec=/bin/sh -c '@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-sailfish'

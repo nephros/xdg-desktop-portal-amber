@@ -9,17 +9,17 @@ Curently, these steps are necessary for testing:
       -  validate-icon: Do not install
       -  tests: optional, not tested ;)
 
-2. Install `xdg-desktop-portal-amber` [link](https://build.sailfishos.org/package/show/home:nephros:devel:portals/xdg-desktop-portal-amber), including the subpackages:
-	- xdg-desktop-portal-amber
-	- xdg-desktop-portal-amber-qml
-	- xdg-desktop-portal-amber-sailfishos-config
+2. Install `xdg-desktop-portal-sailfish` [link](https://build.sailfishos.org/package/show/home:nephros:devel:portals/xdg-desktop-portal-sailfish), including the subpackages:
+	- xdg-desktop-portal-sailfish
+	- xdg-desktop-portal-sailfish-qml
+	- xdg-desktop-portal-sailfish-sailfishos-config
 
 These packages provide:
 
 	- xdg-desktop-portal: the Portals frontend services by Flatpak
-	- xdg-desktop-portal-amber: Portal backend implementation services
-	- xdg-desktop-portal-amber-qml: UI component for e.g. the FileChooser dialogs
-	- xdg-desktop-portal-amber-sailfishos-config: Any config files needed to glue everything together.
+	- xdg-desktop-portal-sailfish: Portal backend implementation services
+	- xdg-desktop-portal-sailfish-qml: UI component for e.g. the FileChooser dialogs
+	- xdg-desktop-portal-sailfish-sailfishos-config: Any config files needed to glue everything together.
 
 ### Running
 
@@ -28,15 +28,15 @@ For testing, it is recommended to stop the systemd services and run the binaries
 
   - Service: `xdg-desktop-portal`: the Flatpak main Portals daemon
     - to run manually: `/usr/libexec/xdg-desktop-portal -rv`
-  - Service: `xdg-desktop-portal-amber`: the SailfishOS implementation
-    - to run manually: `/usr/libexec/xdg-desktop-portal-amber`
-  - Helper UI application: `/usr/bin/xdg-desktop-portal-amber-ui`
+  - Service: `xdg-desktop-portal-sailfish`: the SailfishOS implementation
+    - to run manually: `/usr/libexec/xdg-desktop-portal-sailfish`
+  - Helper UI application: `/usr/bin/xdg-desktop-portal-sailfish-ui`
     - do not run manually (this is launched vis DBus), but in case something does not work, kill a running process of this and try again.
 
 There are several important environment variables in play. The most important
 is `XDG_CURRENT_DESKTOP=Lipstick`. This must be set to "Lipstick" and must be
 set in the env of `xdg-desktop-portal` (so the main service).
-The package `xdg-desktop-portal-amber-sailfishos-config` does ship a config
+The package `xdg-desktop-portal-sailfish-sailfishos-config` does ship a config
 file adding this variable, but this does not yet function reliably.
 
 To test interaction of applications coming from KDE/Plasma, like Kirigami apps
@@ -49,7 +49,7 @@ available from Chum, such applications must have the variable
 
 1. run `busctl --user  introspect org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop` (or equivalent).
 You should see several services available on the bus: 
-These come from the Flatpak service and not from Amber, and seeing them means the main portal service is running correctly.
+These come from the Flatpak service and not from the backend implementation, and seeing them means the main portal service is running correctly.
 
 Example output snippet:
 
@@ -83,13 +83,13 @@ org.freedesktop.portal.PowerProfileMonitor interface -         -            -
 org.freedesktop.portal.ProxyResolver       interface -         -            -
 ```
 
-1. If amber is configured, running and recognized correctly, you should see at least the following services in addition:
+1. If the backend is configured, running and recognized correctly, you should see at least the following services in addition:
    - `org.freedesktop.portal.FileChooser`
    - `org.freedesktop.portal.Email`
    - `org.freedesktop.portal.Wallpaper`
 
 If not, check that: `XDG_CURRENT_DESKTOP` variable is set and available to the
-xdg-desktop-portal service. Also, that xdg-desktop-portal-amber service/binary
+xdg-desktop-portal service. Also, that xdg-desktop-portal-sailfish service/binary
 is running.
 
 
@@ -151,9 +151,9 @@ For command-line debugging, you can to something like these:
 
 Launch the picker UI only:
  ```
- gdbus call --session --dest org.freedesktop.impl.portal.desktop.amber.ui \
-     --object-path /org/freedesktop/impl/portal/desktop/amber/ui \
-	 --method org.freedesktop.impl.portal.desktop.amber.ui.openFilePicker
+ gdbus call --session --dest org.freedesktop.impl.portal.desktop.sailfish.ui \
+     --object-path /org/freedesktop/impl/portal/desktop/sailfish/ui \
+	 --method org.freedesktop.impl.portal.desktop.sailfish.ui.openFilePicker
 ``` 
 
 

@@ -17,12 +17,12 @@ include_directories(
     ${MLITE_INCLUDE_DIRS}
 )
 
-add_executable(xdg-desktop-portal-amber ${SRCS})
+add_executable(xdg-desktop-portal-sailfish ${SRCS})
 
-set_property(TARGET xdg-desktop-portal-amber PROPERTY CXX_STANDARD 14)
-set_property(TARGET xdg-desktop-portal-amber PROPERTY CXX_STANDARD_REQUIRED on)
+set_property(TARGET xdg-desktop-portal-sailfish PROPERTY CXX_STANDARD 14)
+set_property(TARGET xdg-desktop-portal-sailfish PROPERTY CXX_STANDARD_REQUIRED on)
 
-target_link_libraries(xdg-desktop-portal-amber
+target_link_libraries(xdg-desktop-portal-sailfish
     Qt5::Core
     Qt5::Gui
     Qt5::DBus
@@ -30,4 +30,4 @@ target_link_libraries(xdg-desktop-portal-amber
 
 )
 
-install(TARGETS xdg-desktop-portal-amber DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})
+install(TARGETS xdg-desktop-portal-sailfish DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})

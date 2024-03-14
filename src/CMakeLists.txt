@@ -1,6 +1,7 @@
 set(SRCS
     desktopportal.cpp
     access.cpp
+    account.cpp
     email.cpp
     filechooser.cpp
     lockdown.cpp

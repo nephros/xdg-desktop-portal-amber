@@ -32,6 +32,7 @@
 
 #include "desktopportal.h"
 #include "access.h"
+#include "account.h"
 #include "email.h"
 #include "filechooser.h"
 #include "lockdown.h"
@@ -50,6 +51,12 @@
 /*! \class Sailfish::XDP::AccessPortal
     \inmodule XDGDesktopPortalSailfish
     \brief Backend interface of the Access Portal
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+*/
+/*! \class Sailfish::XDP::AccountPortal
+    \inmodule XDGDesktopPortalSailfish
+    \brief Backend interface of the Account Portal
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
@@ -94,6 +101,7 @@ namespace XDP {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
         , m_access(new AccessPortal(this))
+        , m_account(new AccountPortal(this))
         , m_email(new EmailPortal(this))
         , m_filechooser(new FileChooserPortal(this))
         , m_lockdown(new LockdownPortal(this))

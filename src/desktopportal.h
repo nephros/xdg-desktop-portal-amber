@@ -35,6 +35,7 @@
 #include <QDBusContext>
 #include <QObject>
 #include "access.h"
+#include "account.h"
 #include "email.h"
 #include "filechooser.h"
 #include "lockdown.h"
@@ -53,6 +54,7 @@ namespace XDP {
 
     private:
         AccessPortal *const m_access;
+        AccountPortal *const m_account;
         EmailPortal *const m_email = nullptr;
         FileChooserPortal *const m_filechooser = nullptr;
         LockdownPortal *const m_lockdown = nullptr;

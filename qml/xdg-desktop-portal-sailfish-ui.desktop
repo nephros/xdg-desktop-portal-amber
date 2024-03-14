@@ -4,7 +4,7 @@ Name=XDG Desktop File Chooser
 Exec=/usr/bin/xdg-desktop-portal-sailfish-ui
 X-Maemo-Service=org.freedesktop.impl.portal.desktop.sailfish.ui
 X-Maemo-Method=org.freedesktop.impl.portal.desktop.sailfish.ui.openFilePicker
-X-Maemo-Object-Path=/org.freedesktop.impl.portal.desktop.sailfish/ui
+X-Maemo-Object-Path=/org/freedesktop/impl/portal/desktop/sailfish/ui
 NoDisplay=true
 X-DBusActivatable=true
 

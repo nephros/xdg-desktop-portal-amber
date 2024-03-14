@@ -230,7 +230,7 @@ void FileChooserPortal::setupPickerResponse()
 {
     if(!QDBusConnection::sessionBus().connect(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
-                    QStringLiteral("/org.freedesktop.impl.portal.desktop.sailfish/ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/sailfish/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("pickerDone"),
                     QStringLiteral("iav"),

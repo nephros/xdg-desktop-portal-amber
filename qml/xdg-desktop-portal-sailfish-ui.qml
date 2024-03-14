@@ -22,7 +22,7 @@ ApplicationWindow { id: root
     DBusAdaptor {
         service: "org.freedesktop.impl.portal.desktop.sailfish.ui"
         iface: "org.freedesktop.impl.portal.desktop.sailfish.ui"
-        path: "/org.freedesktop.impl.portal.desktop.sailfish/ui"
+        path: "/org/freedesktop/impl/portal/desktop/sailfish/ui"
         xml: [
              '<interface name="org.freedesktop.impl.portal.desktop.sailfish.ui">',
              '<method name="openFilePicker">',

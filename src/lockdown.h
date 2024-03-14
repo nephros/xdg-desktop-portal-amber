@@ -25,7 +25,8 @@ class LockdownPortal : public QDBusAbstractAdaptor, public Sailfish::AccessPolic
     Q_PROPERTY(bool disable_printing MEMBER m_printing)
     Q_PROPERTY(bool disable_save_to_disk MEMBER m_save)
     Q_PROPERTY(bool disable_application_handlers MEMBER m_apphandlers)
-    Q_PROPERTY(bool disable_sound_output MEMBER m_sound)
+    // supported
+    Q_PROPERTY(bool disable_sound_output READ getMute WRITE setMute )
     // directly from MDM:
     Q_PROPERTY(bool disable_camera
                     MEMBER cameraEnabled
@@ -36,11 +37,11 @@ class LockdownPortal : public QDBusAbstractAdaptor, public Sailfish::AccessPolic
                     MEMBER microphoneEnabled
                     READ microphoneEnabled
                     NOTIFY microphoneEnabledChanged
-                    )
+              )
     Q_PROPERTY(bool disable_location
                     MEMBER locationSettingsEnabled
                     NOTIFY locationSettingsEnabledChanged
-                    )
+              )
 
 public:
     explicit LockdownPortal(QObject *parent);

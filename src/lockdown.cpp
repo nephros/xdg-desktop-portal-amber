@@ -31,12 +31,6 @@ LockdownPortal::LockdownPortal(QObject *parent)
     connect(m_access, locationSettingsEnabledChanged, this, locationSettingsEnabledChanged);
 }
 
-bool LockdownPortal::getGPS() const
-{
-}
-void LockdownPortal::setGPS(const bool &off) const
-{
-}
 bool LockdownPortal::getMute() const
 {
     QDBusMessage msg = QDBusMessage::createMethodCall(

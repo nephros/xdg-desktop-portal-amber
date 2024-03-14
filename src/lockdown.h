@@ -52,6 +52,9 @@ public Q_SLOTS:
     bool saveDisabled() const { return false; };
     bool apphandlersDisabled() const { return false; };
 
+    bool getMute() const;
+    void setMute(const bool &silent) const;
+
 signals:
     void cameraEnabledChanged();
     void microphoneEnabledChanged();

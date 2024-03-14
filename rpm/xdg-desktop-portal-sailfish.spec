@@ -116,7 +116,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %config %{_userunitdir}/*.service.d/*.conf
 
 %files ui
-%{_bindir}/%{name}-ui
+%{_libexecdir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
 %{_datadir}/applications/xdg-desktop-portal-sailfish-ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.sailfish.ui.service

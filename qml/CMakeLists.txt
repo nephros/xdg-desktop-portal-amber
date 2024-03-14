@@ -1,3 +1,6 @@
+configure_file(xdg-desktop-portal-sailfish-ui.desktop.in xdg-desktop-portal-sailfish-ui.desktop @ONLY)
+configure_file(org.freedesktop.impl.portal.desktop.sailfish.ui.service.in org.freedesktop.impl.portal.desktop.sailfish.ui.service @ONLY)
+
 set(SRCS
     app.cpp
 )
@@ -33,10 +36,10 @@ set(QMLFILES
     ConfirmationDialog.qml
     xdg-desktop-portal-sailfish-ui.qml
 )
-install(TARGETS xdg-desktop-portal-sailfish-ui DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
+install(TARGETS xdg-desktop-portal-sailfish-ui DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})
 
 install(FILES ${QMLFILES} DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
 #install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
 #install(FILES xdg-desktop-portal-sailfish-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
-install(FILES xdg-desktop-portal-sailfish-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
-install(FILES org.freedesktop.impl.portal.desktop.sailfish.ui.service DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/dbus-1/services")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-sailfish-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.sailfish.ui.service DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/dbus-1/services")

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=XDG Desktop File Chooser
-Exec=/usr/bin/xdg-desktop-portal-sailfish-ui
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-sailfish-ui
 X-Maemo-Service=org.freedesktop.impl.portal.desktop.sailfish.ui
 X-Maemo-Method=org.freedesktop.impl.portal.desktop.sailfish.ui.openFilePicker
 X-Maemo-Object-Path=/org/freedesktop/impl/portal/desktop/sailfish/ui
@@ -12,4 +12,4 @@ X-DBusActivatable=true
 Permissions=UserDirs;RemovableMedia;MediaIndexing
 OrganizationName=org.freedesktop.portal.desktop.sailfish
 ApplicationName=ui
-ExecDBus=/usr/bin/xdg-desktop-portal-sailfish-ui --prestart
+ExecDBus=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-sailfish-ui --prestart

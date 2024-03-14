@@ -2,4 +2,5 @@
 Interface=/org/freedesktop/impl/portal/desktop/sailfish/ui
 Name=org.freedesktop.impl.portal.desktop.sailfish.ui
 #Exec=/usr/bin/invoker --type=silica-qt5 -A -- /usr/bin/xdg-desktop-portal-sailfish-ui --prestart
-Exec=/usr/bin/xdg-desktop-portal-sailfish-ui --prestart
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-sailfish-ui --prestart
+

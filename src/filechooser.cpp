@@ -65,7 +65,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
-                    QStringLiteral("/org.freedesktop.impl.portal.desktop.sailfish/ui"),
+                    QStringLiteral("/org/freedesktop/impl/portal/desktop/sailfish/ui"),
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
                     QStringLiteral("openFilePicker")
                     );

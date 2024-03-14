@@ -13,6 +13,7 @@
 #include <QDBusObjectPath>
 
 namespace Sailfish {
+namespace XDP {
 class LockdownPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -34,5 +35,6 @@ public Q_SLOTS:
     void setMute(const bool &silent) const;
 
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H

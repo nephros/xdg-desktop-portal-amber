@@ -20,10 +20,10 @@ gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/f
 gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.FileChooser.OpenFile "0" "Choose a file (this is a test)" '{ "directory": <false>, "modal": <false>, "multiple": <false> }'
 ;;
 7) # UI: just the file dialog
-gdbus call --session --dest org.freedesktop.impl.portal.desktop.amber.ui --object-path /org/freedesktop/impl/portal/desktop/amber/ui --method org.freedesktop.impl.portal.desktop.amber.ui.openFilePicker
+gdbus call --session --dest org.freedesktop.impl.portal.desktop.sailfish.ui --object-path /org/freedesktop/impl/portal/desktop/sailfish/ui --method org.freedesktop.impl.portal.desktop.sailfish.ui.openFilePicker
 ;;
 8) # UI: confirmation dialog
-busctl --user call org.freedesktop.impl.portal.desktop.amber.ui /org/freedesktop/impl/portal/desktop/amber/ui org.freedesktop.impl.portal.desktop.amber.ui confirmationDialog sssss "/org/freedesktop/impl/portal/handle/foo/1" "My Title" "My Subtitle" "My dialog body" '{ "deny_label": "Deny", "grant_label": "Allow" }'
+busctl --user call org.freedesktop.impl.portal.desktop.sailfish.ui /org/freedesktop/impl/portal/desktop/sailfish/ui org.freedesktop.impl.portal.desktop.sailfish.ui confirmationDialog sssss "/org/freedesktop/impl/portal/handle/foo/1" "My Title" "My Subtitle" "My dialog body" '{ "deny_label": "Deny", "grant_label": "Allow" }'
 ;;
 9) # Settings portal
 gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Settings.ReadAll "['org.freedesktop.appearance']"

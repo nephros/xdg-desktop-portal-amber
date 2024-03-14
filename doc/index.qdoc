@@ -1,6 +1,6 @@
 /*!
-\qmlmodule org.freedesktop.impl.portal.desktop.amber.ui 1.0
-\title org.freedesktop.impl.portal.desktop.amber.ui QML Types
+\qmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui 1.0
+\title org.freedesktop.impl.portal.desktop.sailfish.ui QML Types
 
 This module includes the following types:
 
@@ -8,7 +8,7 @@ This module includes the following types:
 
 /*!
 \page index.html
-\title XDG Desktop Portal Amber
+\title XDG Desktop Portal Backend for Sailfish OS
 
 A backend implementation of \l{http://github.com/flatpak/xdg-desktop-portal}{XDG Desktop Portals} for Sailfish OS.
 
@@ -28,7 +28,7 @@ C++ Classes:
 
 QML Types:
 
-\generatelist{qmltypesbymodule org.freedesktop.impl.portal.desktop.amber.ui}
+\generatelist{qmltypesbymodule org.freedesktop.impl.portal.desktop.sailfish.ui}
 
 */
 

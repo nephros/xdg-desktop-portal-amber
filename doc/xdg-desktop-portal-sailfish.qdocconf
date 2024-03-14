@@ -1,0 +1,39 @@
+project         = xdg-desktop-portal-sailfish
+description     = XDG Desktop Portal Backend for Sailfish OS Reference Documentation
+versionsym      =
+version         = 1.0.0
+url             = $BASE_URL/xdg-desktop-portal-sailfish
+
+sourcedirs += $$PWD/../src $$PWD/../doc $$PWD/../qml
+headerdirs += $$PWD/../src
+
+qhp.projects = XDGDesktopPortalSailfish
+
+outputformats = HTML
+outputdir = $$PWD/html
+base = file:$$PWD/html
+tagfile = $$PWD/html/xdg-desktop-portal-sailfish.tags
+
+qhp.XDGDesktopPortalSailfish.file = xdg-desktop-portal-sailfish.qhp
+qhp.XDGDesktopPortalSailfish.namespace = org.freedesktop.impl.portal.desktop.sailfish.ui.1.0
+qhp.XDGDesktopPortalSailfish.virtualFolder = xdg-desktop-portal-sailfish
+qhp.XDGDesktopPortalSailfish.indexTitle = XDG Desktop Portal Backend QML UI
+qhp.XDGDesktopPortalSailfish.indexRoot =
+
+# qhp.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish-ui 1.0
+#
+# qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.name = org.freedesktop.impl.portal.desktop.sailfish.ui 1.0
+# qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish 1.0
+
+HTML.footer += \
+    "<div class=\"footer\">\n" \
+    "  <p><acronym title=\"Copyright\">&copy;</acronym> 2024 Sailfish OS Community.</p>\n" \
+    "  <p>All other trademarks are property of their respective owners.</p>\n" \
+    "  <p>\n" \
+    "    This document may be used under the terms of the " \
+    "    <a href=\"http://www.gnu.org/licenses/fdl.html\">GNU Free Documentation License version 1.3</a>" \
+    "    as published by the Free Software Foundation." \
+    "  </p>\n" \
+    "</div>\n"
+
+navigation.homepage = "XDG Desktop Portal Backend for Sailfish OS"

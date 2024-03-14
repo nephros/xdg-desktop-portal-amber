@@ -7,12 +7,17 @@ url             = $BASE_URL/xdg-desktop-portal-sailfish
 sourcedirs += $$PWD/../src $$PWD/../doc $$PWD/../qml
 headerdirs += $$PWD/../src
 
-qhp.projects = XDGDesktopPortalSailfish
 
 outputformats = HTML
 outputdir = $$PWD/html
 base = file:$$PWD/html
 tagfile = $$PWD/html/xdg-desktop-portal-sailfish.tags
+
+
+outputprefixes = QML
+outputprefixes.QML = qml-xdg-desktop-portal-sailfish-
+
+qhp.projects = XDGDesktopPortalSailfish
 
 qhp.XDGDesktopPortalSailfish.file = xdg-desktop-portal-sailfish.qhp
 qhp.XDGDesktopPortalSailfish.namespace = org.freedesktop.impl.portal.desktop.sailfish.ui.1.0

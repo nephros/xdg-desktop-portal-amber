@@ -16,7 +16,7 @@ import Nemo.Thumbnailer 1.0
 
 /*! \qmltype FilePickerDialog
     \brief XDG Desktop File Picker
-    \inqmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
+    \inqmlmodule Sailfish.XDP.Portals.UI
     \ingroup uitypes
 
     Presents a system-level dialog incorporating a file picker.

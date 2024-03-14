@@ -13,14 +13,18 @@ import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0
 
-/*! \qmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
+/*! \qmlmodule Sailfish.XDP.Portals.UI 1.0
     \brief XDG Desktop Portal Backend QML UI
+
+    This module includes the following types:«
+
+    \generatelist{qmltypesbymodule Sailfish.XDP.Portals.UI}
 */
 
 /*! \qmltype xdg-desktop-portal-sailfish-ui
     \brief XDG Desktop UI Manager
     \ingroup uitypes
-    \inqmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
+    \inqmlmodule Sailfish.XDP.Portals.UI
 
     This application manages the display of various UI dialogs for the XDG Desktop Portal Backend.
 

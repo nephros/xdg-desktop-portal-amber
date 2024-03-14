@@ -85,7 +85,6 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %exclude %{_datadir}/applications/*.desktop
 
 %files config
-%{_userunitdir}/xdg-desktop-portal-pre.service
 %config %{_localstatedir}/lib/environment/sailfish/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission

@@ -6,8 +6,8 @@
  *   Peter G. <sailfish@nephros.org>
  */
 
-#ifndef XDG_DESKTOP_PORTAL_AMBER_LOCKDOWN_H
-#define XDG_DESKTOP_PORTAL_AMBER_LOCKDOWN_H
+#ifndef XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H
+#define XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
@@ -35,4 +35,4 @@ public Q_SLOTS:
 
 };
 }
-#endif // XDG_DESKTOP_PORTAL_AMBER_LOCKDOWN_H
+#endif // XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H

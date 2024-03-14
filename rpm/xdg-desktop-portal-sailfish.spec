@@ -106,7 +106,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %{_userunitdir}/%{name}.service
 %{_datadir}/xdg-desktop-portal/portals/sailfish.portal
 # what is this installed for??
-%{_datadir}/applications/org.freedesktop.impl.portal.desktop.amber.desktop
+%{_datadir}/applications/org.freedesktop.impl.portal.desktop.sailfish.desktop
 
 %files config
 %config %{_localstatedir}/lib/environment/sailfish/*.conf

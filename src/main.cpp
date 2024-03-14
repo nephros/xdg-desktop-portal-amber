@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 
     qCDebug(XdgDesktopPortalSailfish) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
     if (sessionBus.registerService(dbusName)) {
-        const auto desktopPortal = new Sailfish::DesktopPortal{&app};
+        const auto desktopPortal = new Sailfish::XDP::DesktopPortal{&app};
         qCDebug(XdgDesktopPortalSailfish) << "Desktop portal bus registered successfully";
         if (sessionBus.registerObject(dbusObject, desktopPortal, QDBusConnection::ExportAdaptors)) {
             qCDebug(XdgDesktopPortalSailfish) << "Desktop portal object registered successfully";

@@ -11,6 +11,7 @@
 #include <QDBusInterface>
 
 namespace Sailfish {
+namespace XDP {
     class ScreenshotPortal : public QDBusAbstractAdaptor
     {
         Q_OBJECT
@@ -41,4 +42,5 @@ namespace Sailfish {
                         const QVariantMap &options,
                         QVariantMap &results);
     };
+}
 }

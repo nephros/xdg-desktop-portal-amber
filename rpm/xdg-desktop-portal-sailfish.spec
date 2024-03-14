@@ -15,6 +15,7 @@ BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(sailfishusermanager)
+BuildRequires:  pkgconfig(sailfishmdm)
 BuildRequires:  cmake
 BuildRequires:  sailfish-svg2png
 Requires(post): systemd

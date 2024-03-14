@@ -40,6 +40,19 @@ busctl --user  get-property org.freedesktop.portal.Desktop /org/freedesktop/port
 busctl --user  get-property org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location
 busctl --user call org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.DBus.Properties GetAll s "org.freedesktop.impl.portal.Lockdown"
 ;;
+12) # read camera MDM policy, bing, mute, bing
+echo camera
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_camera
+paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b true
+echo mute
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
+paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b false
+echo mute
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
+paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+;;
 
 *) # just introspect Portals
 busctl --user  introspect org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop

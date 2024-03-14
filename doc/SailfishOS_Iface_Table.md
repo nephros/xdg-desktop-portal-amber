@@ -49,6 +49,7 @@ Eventually a native variant should be designed.
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | backend implementation status    |
 | ----------------- | ---------------------------     | :-------------: | -------------- | :-------------: | :--------: | :----------------------------: |
 |  Access           | presenting an access dialog     |  yes            | Lipstick, DBus |   ++            |  required  |  partial, Jolla changes needed |
+|  Lockdown         | Disable mic, gps, sound...      |  yes            | MDM, Settings, SJail  | +++      |  +++        |  partal, AccessPolicy toggle, profiled |
 |  Notification     | send and withdraw notifications |  yes            | DBus, Qt/QML   |   +++           |  ++++      |  not started                   |
 |  Wallpaper        | set desktop wallpaper           |  yes            | DBus, DConf    |   +             |  +++       |  experimental                  |
 |  Screenshot       |                                 |  yes            | DBus           |   +             |            |  experimental                  |
@@ -119,7 +120,6 @@ letting both the Browser, and other users of *FileChooser* use it.
 |  Dynamic Launcher | .desktop file installation           |  yes            |                       |                 | +          |
 |  Inhibit          | inhibit suspending, idling, ...      |  yes            | wakelocks,  MCE       |                 | +++        |
 |  Input Capture    | Capture input                        |  ???            |                       |                 |            |
-|  Lockdown         | Disable Portals, mic, gps, sound...  |  yes            | MDM, Settings, SJail  | +++             | +++        |
 |  Secret           | retrieve an app secret               |  yes            | Qt/QML                |                 | +          |
 |  Settings         | read-only access to UI colors        |  yes            | DConf, Qt/QML         | ++              | +          |
 

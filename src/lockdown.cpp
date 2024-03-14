@@ -23,9 +23,12 @@ namespace Sailfish {
 namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
-    , AccessPolicy(parent)
+    , m_access(new AccessPolicy(parent));
 {
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
+    connect(m_access, cameraEnabledChanged, this, cameraEnabledChanged);
+    connect(m_access, microphoneEnabledChanged, this, microphoneEnabledChanged);
+    connect(m_access, locationSettingsEnabledChanged, this, locationSettingsEnabledChanged);
 }
 
 bool LockdownPortal::getGPS() const

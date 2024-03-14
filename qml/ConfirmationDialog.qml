@@ -13,7 +13,7 @@ import Sailfish.Lipstick 1.0
 
 /*! \qmltype ConfirmationDialog
     \brief XDG Desktop Access UI
-    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
+    \inqmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
     \ingroup uitypes
 
     A simple dialog presenting an \c Accept and \c Deny button under some contextual information.
@@ -22,7 +22,7 @@ import Sailfish.Lipstick 1.0
     ConfirmationDialog::dialogInfo and  ConfirmationDialog::options properties
 
     This is used as UI for the \l
-    {Amber::AccessPortal::AccessDialog}{AccessDialog} method of the \c
+    {Sailfish::AccessPortal::AccessDialog}{AccessDialog} method of the \c
     org.freedesktop.impl.portal.Access Portal.
 
 */

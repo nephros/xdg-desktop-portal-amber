@@ -31,11 +31,11 @@ target_link_libraries(xdg-desktop-portal-sailfish-ui
 set(QMLFILES
     FilePickerDialog.qml
     ConfirmationDialog.qml
-    xdg-desktop-portal-amber-ui.qml
+    xdg-desktop-portal-sailfish-ui.qml
 )
 install(TARGETS xdg-desktop-portal-sailfish-ui DESTINATION ${CMAKE_INSTALL_FULL_BINDIR})
 
-install(FILES ${QMLFILES} DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-amber-ui/qml")
+install(FILES ${QMLFILES} DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
 #install(FILES FilePickerDialog.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
 #install(FILES xdg-desktop-portal-sailfish-ui.qml DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal-sailfish-ui/qml")
 install(FILES xdg-desktop-portal-sailfish-ui.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")

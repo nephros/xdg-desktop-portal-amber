@@ -16,7 +16,7 @@ import Nemo.Thumbnailer 1.0
 
 /*! \qmltype FilePickerDialog
     \brief XDG Desktop File Picker
-    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
+    \inqmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
     \ingroup uitypes
 
     Presents a system-level dialog incorporating a file picker.
@@ -26,7 +26,7 @@ import Nemo.Thumbnailer 1.0
     This is the UI for the interactive methods of the \c
     org.freedesktop.impl.portal.FileChooser Portal
 
-    \sa Amber::FileChooserPortal
+    \sa Sailfish::FileChooserPortal
 
 */
 
@@ -37,7 +37,7 @@ SystemDialog {
     property string title
     /*! \qmlproperty var FilePickerDialog::options
      *
-        \sa Amber::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
+        \sa Sailfish::FileChooserPortal, https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.impl.portal.FileChooser.html
 
         \list
         \li accept_label (s)

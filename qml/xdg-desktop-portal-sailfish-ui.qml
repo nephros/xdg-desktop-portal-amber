@@ -13,35 +13,35 @@ import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0
 
-/*! \qmlmodule org.freedesktop.impl.portal.desktop.amber.ui
-    \brief XDG Desktop Portal Amber QML UI
+/*! \qmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
+    \brief XDG Desktop Portal Backend QML UI
 */
 
-/*! \qmltype xdg-desktop-portal-amber-ui
+/*! \qmltype xdg-desktop-portal-sailfish-ui
     \brief XDG Desktop UI Manager
     \ingroup uitypes
-    \inqmlmodule org.freedesktop.impl.portal.desktop.amber.ui
+    \inqmlmodule org.freedesktop.impl.portal.desktop.sailfish.ui
 
-    This application manages the display of various UI dialogs for XDG Desktop Portal Amber.
+    This application manages the display of various UI dialogs for the XDG Desktop Portal Backend.
 
     It can be activated using the D-Bus session bus at:
 
     \list
-    \li Service:     \c org.freedesktop.impl.portal.desktop.amber.ui
-    \li Path:        \c /org/freedesktop/impl/portal/desktop/amber/ui
-    \li Interface:   \c org.freedesktop.impl.portal.desktop.amber.ui
+    \li Service:     \c org.freedesktop.impl.portal.desktop.sailfish.ui
+    \li Path:        \c /org/freedesktop/impl/portal/desktop/sailfish/ui
+    \li Interface:   \c org.freedesktop.impl.portal.desktop.sailfish.ui
     \endlist
 */
 ApplicationWindow { id: root
 
     cover: null
-    /*! \qmlproperty ConfirmationDialog xdg-desktop-portal-amber-ui::_confirmationDialog
+    /*! \qmlproperty ConfirmationDialog xdg-desktop-portal-sailfish-ui::_confirmationDialog
        Holds the instance of the picker dialog launched.
        \sa ConfirmationDialog
        \internal
     */
     property ConfirmationDialog _confirmationDialog
-    /*! \qmlproperty FilePickerDialog xdg-desktop-portal-amber-ui::_filePickerDialog
+    /*! \qmlproperty FilePickerDialog xdg-desktop-portal-sailfish-ui::_filePickerDialog
        Holds the instance of the picker dialog launched.
        \sa FilePickerDialog
        \internal
@@ -63,7 +63,7 @@ ApplicationWindow { id: root
         }
         return url;
     }
-    /*! \qmlproperty DBusInterface xdg-desktop-portal-amber-ui::_request
+    /*! \qmlproperty DBusInterface xdg-desktop-portal-sailfish-ui::_request
         Holds the instance of the picker dialog launched.
         \sa Nemo::DBus
         \internal

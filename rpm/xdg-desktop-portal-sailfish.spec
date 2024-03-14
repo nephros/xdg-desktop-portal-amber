@@ -14,7 +14,7 @@ BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  cmake
-Requires:   %{name}-sailfishos-config
+Requires:   %{name}-config
 Requires:   xdg-desktop-portal
 
 # for documentation:

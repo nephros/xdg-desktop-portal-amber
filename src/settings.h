@@ -16,6 +16,7 @@
 #include <mlite5/MDConfGroup>
 
 namespace Sailfish {
+namespace XDP {
 class SettingsPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -77,5 +78,6 @@ private:
     MDConfGroup *m_sailfishThemeConfigGroup;
 
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_SETTINGS_H

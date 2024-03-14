@@ -13,6 +13,7 @@
 #include <QDBusObjectPath>
 
 namespace Sailfish {
+namespace XDP {
 class EmailPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -29,5 +30,6 @@ public Q_SLOTS:
                       const QVariantMap &options,
                       QVariantMap &results);
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_EMAIL_H

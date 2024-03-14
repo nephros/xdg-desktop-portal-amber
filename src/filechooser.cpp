@@ -38,6 +38,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishFileChooser, "xdp-sailfish-filechoose
 */
 
 namespace Sailfish {
+namespace XDP {
 FileChooserPortal::FileChooserPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -321,4 +322,5 @@ void FileChooserPortal::waitForPickerResponse()
     }
     qCDebug(XdgDesktopPortalSailfishFileChooser) << "OK, Picker done.";
 }
+} // namespace XDP
 } // namespace Sailfish

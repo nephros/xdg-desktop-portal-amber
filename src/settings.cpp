@@ -19,7 +19,7 @@
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishSettings, "xdp-sailfish-settings")
 
-/*! \property Sailfish::SettingsPortal::version
+/*! \property Sailfish::XDP::SettingsPortal::version
     \brief Contains the backend implementation version
 */
 /*! \enum Sailfish::SettingsPortal::FDOColorScheme
@@ -69,6 +69,7 @@ static const char* CONFIG_KDE_SCHEME_KEY     = "ColorScheme";
 
 
 namespace Sailfish {
+namespace XDP {
 enum SailfishColorScheme : uint {
       LightOnDark = 0, // dark wallpaper, light fonts
       DarkOnLight = 1, // light wallpaper, dark fonts
@@ -272,5 +273,5 @@ void SettingsPortal::ambienceChanged(const int &i)
     emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.scheme,   QVariant(getColorScheme()));
     emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.contrast, QVariant(getContrast()));
 }
-
+} // namespace XDP
 } // namespace Sailfish

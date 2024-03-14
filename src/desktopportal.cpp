@@ -39,7 +39,7 @@
 #include "screenshot.h"
 #include "wallpaper.h"
 
-/*! \namespace Sailfish
+/*! \namespace Sailfish::XDP
     \brief Contains backend implementations of the XDG Desktop Portal specification for Sailfish OS.
 
     See \l {XDG Desktop Portal Specification} for details.
@@ -81,8 +81,8 @@
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
 
-namespace Sailfish
-{
+namespace Sailfish {
+namespace XDP {
     DesktopPortal::DesktopPortal(QObject *parent)
         : QObject(parent)
         , m_access(new AccessPortal(this))
@@ -101,5 +101,6 @@ namespace Sailfish
     DesktopPortal::~DesktopPortal()
     {
     }
+}
 }
 

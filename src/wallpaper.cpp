@@ -18,6 +18,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishWallpaper, "xdp-sailfish-wallpaper")
 */
 
 namespace Sailfish {
+namespace XDP {
 WallpaperPortal::WallpaperPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -92,4 +93,5 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     result = 1;
     return 1;
 }
+} // namespace XDP
 } // namespace Sailfish

@@ -16,13 +16,13 @@
 #include <QColor>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishScreenshot, "xdp-sailfish-screenshot")
-Q_DECLARE_METATYPE(Sailfish::ScreenshotPortal::ColorRGB)
+Q_DECLARE_METATYPE(Sailfish::XDP::ScreenshotPortal::ColorRGB)
 
-/*! \property Sailfish::ScreenshotPortal::version
+/*! \property Sailfish::XDP::ScreenshotPortal::version
     \brief Contains the backend implementation version
 */
 
-QDBusArgument &operator<<(QDBusArgument &arg, const Sailfish::ScreenshotPortal::ColorRGB &color)
+QDBusArgument &operator<<(QDBusArgument &arg, const Sailfish::XDP::ScreenshotPortal::ColorRGB &color)
 {
     arg.beginStructure();
     arg << color.red << color.green << color.blue;
@@ -30,7 +30,7 @@ QDBusArgument &operator<<(QDBusArgument &arg, const Sailfish::ScreenshotPortal::
     return arg;
 }
 
-const QDBusArgument &operator>>(const QDBusArgument &arg, Sailfish::ScreenshotPortal::ColorRGB &color)
+const QDBusArgument &operator>>(const QDBusArgument &arg, Sailfish::XDP::ScreenshotPortal::ColorRGB &color)
 {
     double red, green, blue;
     arg.beginStructure();
@@ -62,6 +62,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, QColor &color)
 }
 
 namespace Sailfish {
+namespace XDP {
 ScreenshotPortal::ScreenshotPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -161,4 +162,5 @@ uint ScreenshotPortal::Screenshot(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalSailfishScreenshot) << "Screenshot failed:" << pcall.error().name() << pcall.error().message();
     return 1;
 }
+} // namespace XDP
 } // namespace Sailfish

@@ -16,6 +16,7 @@
 #include <QDBusObjectPath>
 
 namespace Sailfish {
+namespace XDP {
 class AccessPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -51,5 +52,6 @@ private:
     bool m_responseHandled;
     DialogResponse m_callResponseCode;
 };
+}
 }
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_ACCESS_H

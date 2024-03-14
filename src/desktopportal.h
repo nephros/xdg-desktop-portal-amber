@@ -42,8 +42,8 @@
 #include "settings.h"
 #include "wallpaper.h"
 
-namespace Sailfish
-{
+namespace Sailfish {
+namespace XDP {
     class DesktopPortal : public QObject, public QDBusContext
     {
         Q_OBJECT
@@ -60,4 +60,5 @@ namespace Sailfish
         SettingsPortal *const m_settings = nullptr;
         WallpaperPortal *const m_wallpaper = nullptr;
     };
+}
 }

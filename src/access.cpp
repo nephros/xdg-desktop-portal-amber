@@ -36,6 +36,7 @@ Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
 */
 
 namespace Sailfish {
+namespace XDP {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -233,4 +234,5 @@ void AccessPortal::waitForDialogResponse()
     }
     qCDebug(XdgDesktopPortalSailfishAccess) << "OK, Dialog done.";
 }
+} // namespace XDP
 } // namespace Sailfish

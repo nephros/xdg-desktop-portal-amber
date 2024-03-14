@@ -11,6 +11,7 @@
 #include <QDBusInterface>
 
 namespace Sailfish {
+namespace XDP {
     class WallpaperPortal : public QDBusAbstractAdaptor
     {
         Q_OBJECT
@@ -30,4 +31,5 @@ namespace Sailfish {
                         const QVariantMap &options,
                         uint &result);
     };
+}
 }

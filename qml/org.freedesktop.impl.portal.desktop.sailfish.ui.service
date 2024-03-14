@@ -1,5 +1,5 @@
 [D-BUS Service]
-Interface=/org/freedesktop/impl/portal/desktop/amber/ui
-Name=org.freedesktop.impl.portal.desktop.amber.ui
-#Exec=/usr/bin/invoker --type=silica-qt5 -A -- /usr/bin/xdg-desktop-portal-amber-ui --prestart
-Exec=/usr/bin/xdg-desktop-portal-amber-ui --prestart
+Interface=/org.freedesktop.impl.portal.desktop.sailfish/ui
+Name=org.freedesktop.impl.portal.desktop.sailfish.ui
+#Exec=/usr/bin/invoker --type=silica-qt5 -A -- /usr/bin/xdg-desktop-portal-sailfish-ui --prestart
+Exec=/usr/bin/xdg-desktop-portal-sailfish-ui --prestart

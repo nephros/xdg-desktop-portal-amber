@@ -15,16 +15,16 @@
 
 namespace Sailfish {
 namespace XDP {
-class LockdownPortal : public QDBusAbstractAdaptor, public Sailfish::AccessPolicy
+class LockdownPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Lockdown")
     // note: the XDP spec uses hyphens as property names. They are not allowed
     // in C++ identifiers, and deprecated for D-Bus names.
     // soo, underscores.
-    Q_PROPERTY(bool disable_printing MEMBER m_printing)
-    Q_PROPERTY(bool disable_save_to_disk MEMBER m_save)
-    Q_PROPERTY(bool disable_application_handlers MEMBER m_apphandlers)
+    Q_PROPERTY(bool disable_printing READ printingDisabled CONSTANT)
+    Q_PROPERTY(bool disable_save_to_disk READ saveDisabled CONSTANT)
+    Q_PROPERTY(bool disable_application_handlers READ apphandlersDisabled CONSTANT)
     // supported
     Q_PROPERTY(bool disable_sound_output READ getMute WRITE setMute )
     // directly from MDM:
@@ -47,10 +47,15 @@ public:
     explicit LockdownPortal(QObject *parent);
     //~LockdownPortal() override;
 
+public Q_SLOTS:
+    bool printingDisabled() const { return false; };
+    bool saveDisabled() const { return false; };
+    bool apphandlersDisabled() const { return false; };
+
 signals:
-    void cameraEnabledChanged() = default;
-    void microphoneEnabledChanged() = default;
-    void locationSettingsEnabledChanged() = default;
+    void cameraEnabledChanged();
+    void microphoneEnabledChanged();
+    void locationSettingsEnabledChanged();
 
 private:
     AccessPolicy m_access;

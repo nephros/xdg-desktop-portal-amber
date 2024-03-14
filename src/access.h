@@ -14,21 +14,21 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
-#include <accesspolicy.h>
+#include <accesspolicyplugin.h>
 
 namespace Sailfish {
 namespace XDP {
-class AccessMDMPlugin : public AccessPolicyPlugin
+class AccessMDMPlugin : public Sailfish::AccessPolicyPlugin
 {
     Q_OBJECT
 public:
-    explicit AccessMDMPlugin(QObject *parent);
-    ~AccessMDMPlugin() override;
+    explicit AccessMDMPlugin();
+    //~AccessMDMPlugin() override;
 
-    QVariant AccessPolicyPlugin::keyValue(const QString &key) override;
-    void AccessPolicyPlugin::setKeyValue(const QString &key, const QVariant &value) override;
+    virtual QVariant keyValue(const QString &key) override;
+    virtual void setKeyValue(const QString &key, const QVariant &value) override;
 signals:
-    void AccessPolicyPlugin::keyValueChanged(const QString &key, const QVariant &value) override;
+    //void keyValueChanged(const QString &key, const QVariant &value) override;
 };
 class AccessPortal : public QDBusAbstractAdaptor
 {

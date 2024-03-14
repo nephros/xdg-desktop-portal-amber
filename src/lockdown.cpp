@@ -23,6 +23,7 @@ namespace Sailfish {
 namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
+    , AccessPolicy(parent)
 {
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
 }

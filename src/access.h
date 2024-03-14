@@ -14,7 +14,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
-#include <Sailfish>
+#include <accesspolicy.h>
 
 namespace Sailfish {
 namespace XDP {

@@ -16,9 +16,9 @@
 #include <QColor>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishScreenshot, "xdp-sailfish-screenshot")
-Q_DECLARE_METATYPE(SailfishScreenshotPortal::ColorRGB)
+Q_DECLARE_METATYPE(Sailfish::ScreenshotPortal::ColorRGB)
 
-QDBusArgument &operator<<(QDBusArgument &arg, const SailfishScreenshotPortal::ColorRGB &color)
+QDBusArgument &operator<<(QDBusArgument &arg, const Sailfish::ScreenshotPortal::ColorRGB &color)
 {
     arg.beginStructure();
     arg << color.red << color.green << color.blue;
@@ -26,7 +26,7 @@ QDBusArgument &operator<<(QDBusArgument &arg, const SailfishScreenshotPortal::Co
     return arg;
 }
 
-const QDBusArgument &operator>>(const QDBusArgument &arg, SailfishScreenshotPortal::ColorRGB &color)
+const QDBusArgument &operator>>(const QDBusArgument &arg, Sailfish::ScreenshotPortal::ColorRGB &color)
 {
     double red, green, blue;
     arg.beginStructure();

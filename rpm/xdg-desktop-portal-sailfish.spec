@@ -94,6 +94,6 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %files ui
 %{_bindir}/%{name}-ui
 %{_datadir}/%{name}-ui/qml/*.qml
-%{_datadir}/applications/*.desktop
+%{_datadir}/applications/xdg-desktop-portal-sailfish-ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.sailfish.ui.service
 

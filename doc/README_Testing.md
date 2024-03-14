@@ -4,7 +4,7 @@ Curently, these steps are necessary for testing:
 
 1. Installing `xdg-desktop-portals` version **1.16** [link](https://build.sailfishos.org/package/show/home:nephros:devel:portals/xdg-desktop-portal-116)
     - Note that there are subpackages of this. They are not required for testing, and installing has been disabled for some.
-      -  permission-store: optional. It is no yet clear whether/how this shall be used.
+      -  permission-store: optional. This provides a GVDB-based backend inplmementation of the PermissionStore.
       -  rewrite-launchers: Do not install, function unclear but sounds dangerous.
       -  validate-icon: Do not install
       -  tests: optional, not tested ;)

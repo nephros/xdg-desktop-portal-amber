@@ -42,6 +42,8 @@ Legend:
 
 **Notes:**
 Permission store is similar to SailfishOS MDM policy framework.
+There is a GVDB based implementation available from the Flatpak portal.
+Eventually a native variant should be designed.
 
 ### Should be provided:
 | Backend Name      | Description                     | SFOS capability | SFOS interface | est. complexity | Usefulness | Amber implementation status    |

@@ -56,31 +56,33 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
 
     message.setDelayedReply(true);
 
-    QDBusInterface ifc (
-            QStringLiteral("org.sailfishos.usermanager"),
-            QStringLiteral("/"),
-            QStringLiteral("org.sailfishos.usermanager"),
-            );
+    QDBusInterface iface( QStringLiteral("org.sailfishos.usermanager"), QStringLiteral("/"), QStringLiteral("org.sailfishos.usermanager"));
 
-    QDBusReply<uint> ucall = ifc.call("currentUser");
+    // get user id
     uint userid;
+    QDBusReply<uint> ucall = iface.call("currentUser");
     if (ucall.isValid()) {
         qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
         userid = ucall.value();
     }
 
+    // get list of users
     QList<SailfishUserManagerEntry> userlist;
-
-    QDBusReply<QList<SailfishUserManagerEntry>> lcall = ifc.call("users");
+    QDBusReply<QList<SailfishUserManagerEntry>> lcall = iface.call("users");
     if (lcall.isValid()) {
         qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
         userlist = lcall.value();
     }
+
+    // find our user in the list:
     QString username;
     for (SailfishUserManagerEntry u : users) {
         if (u.uid == userid)
             username = u.name
     }
+
+
+    // send reply
     results.insert("id", QString(userid));
     results.insert("name", username);
     results.insert("image", QString());

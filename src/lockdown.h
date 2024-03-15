@@ -30,10 +30,11 @@ class LockdownPortal : public QDBusAbstractAdaptor
     Q_PROPERTY(bool disable_application_handlers READ disable_application_handlers WRITE discard)
     // supported
     Q_PROPERTY(bool disable_sound_output READ muted WRITE mute )
+    Q_PROPERTY(bool disable_location     READ disable_location    WRITE setLocationSettingsDisabled)
+    Q_PROPERTY(bool disable_microphone   READ disable_microphone  WRITE setMicrophoneDisabled)
     // directly via MDM:
     Q_PROPERTY(bool disable_camera      READ disable_camera      WRITE setCameraDisabled)
-    Q_PROPERTY(bool disable_microphone  READ disable_microphone  WRITE setMicrophoneDisabled)
-    Q_PROPERTY(bool disable_location    READ disable_location    WRITE setLocationSettingsDisabled)
+    //Q_PROPERTY(bool disable_location    READ disable_location    WRITE setLocationSettingsDisabled)
 
 public:
     explicit LockdownPortal(QObject *parent);
@@ -62,6 +63,7 @@ private:
     void setCameraDisabled(const bool &enable) const;
 
     void setLocationEnabled(const bool &enabled) const;
+    bool getLocationEnabled() const;
     void setMicMutePulse(const bool &muted) const;
 
     AccessPolicy* m_policy;

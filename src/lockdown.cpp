@@ -21,6 +21,11 @@ Q_LOGGING_CATEGORY(XDPortalSailfishLockdown, "xdp-sailfish-lockdown")
 const char* PROFILE_MUTED_NAME = "silent";
 const char* PROFILE_UNMUTED_NAME = "general";
 
+const QString LocationSettingsFile = QStringLiteral("/var/lib/location/location.conf");
+const QString CompatibilitySettingsFile = QStringLiteral("/etc/location/location.conf");
+const QString LocationSettingsSection = QStringLiteral("location");
+const QString LocationSettingsEnabledKey = QStringLiteral("enabled");
+
 namespace Sailfish {
 namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
@@ -29,10 +34,15 @@ LockdownPortal::LockdownPortal(QObject *parent)
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     qCDebug(XdgDesktopPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
-    QObject::connect(m_policy, SIGNAL(cameraEnabledChanged()), this, SLOT(cameraDisabledChanged()));
-    QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
-    QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
+
+    QObject::connect(m_policy, SIGNAL(cameraEnabledChanged()), this, SLOT(cameraDisabledChanged()));
+    //QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
+    //QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
+    // FIXME: signatures do not match:
+    QObject::connect(m_profiled, SIGNAL(profile_changed()), this, SLOT(locationSettingsDisabledChanged()));
+    QObject::connect(m_defaultSource, SIGNAL(MuteUpdated(bool)), this, SLOT(microphoneDisabledChanged(bool)));
+
 }
 
 bool LockdownPortal::muted() const
@@ -67,7 +77,8 @@ bool LockdownPortal::disable_microphone() const
 };
 bool LockdownPortal::disable_location() const
 {
-    return m_policy->locationSettingsEnabled();
+    return LockdownPortal::getLocationEnabled();
+    //return m_policy->locationSettingsEnabled();
 };
 
 void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
@@ -77,10 +88,14 @@ void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
 };
 void LockdownPortal::setMicrophoneDisabled(const bool &disable) const
 {
-    m_policy->setMicrophoneEnabled(!disable);
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting Microphone via Pulse, disable:" << disable;
+    setMicMutePulse(disable);
+    //qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting Microphone policy, disable:" << disable;
+    //m_policy->setMicrophoneEnabled(!disable);
 };
 void LockdownPortal::setCameraDisabled(const bool &disable) const
 {
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting Camera policy, disable:" << disable;
     m_policy->setCameraEnabled(!disable);
 };
 
@@ -122,13 +137,25 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
     }
 
 }
+bool LockdownPortal::getLocationEnabled() const
+{
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Getting Location setting from file";
+    if (!QFile(LocationSettingsFile).exists()) {
+        qWarning() << "Location settings configuration file does not exist.";
+        return false;
+    }
+    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
+    //QSettings compatFile( CompatibilitySettingsFile, QSettings::IniFormat);
+    settingsFile.beginGroup(LocationSettingsSection);
+    bool value = settingsFile.value(LocationSettingsEnabledKey).toBool();
+    settingsFile.endGroup();
+    return value;
+}
 // see also sailfishos/nemo-qml-plugin-systemsettings
 void LockdownPortal::setLocationEnabled(const bool &enabled) const
 {
-    const QString LocationSettingsFile = QStringLiteral("/var/lib/location/location.conf");
-    const QString CompatibilitySettingsFile = QStringLiteral("/etc/location/location.conf");
-    const QString LocationSettingsSection = QStringLiteral("location");
-    const QString LocationSettingsEnabledKey = QStringLiteral("enabled");
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting Location setting to enabled: :" << enabled;
+
 
     // new file would be owned by creating process uid. we cannot allow this since the access is handled with group
     if (!QFile(LocationSettingsFile).exists()) {
@@ -137,6 +164,7 @@ void LockdownPortal::setLocationEnabled(const bool &enabled) const
     }
 
     // write the values to the conf file
+    // FIXME: we should mutex or somesuuch here;
     QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
     QSettings compatFile( CompatibilitySettingsFile, QSettings::IniFormat);
     settingsFile.setFallbacksEnabled(false);

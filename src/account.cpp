@@ -62,7 +62,7 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     uint userid;
     QDBusReply<uint> ucall = iface.call("currentUser");
     if (ucall.isValid()) {
-        qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
+        qCDebug(XdgDesktopPortalSailfishAccount) << "Success";
         userid = ucall.value();
     }
 
@@ -70,7 +70,7 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     QList<SailfishUserManagerEntry> users;
     QDBusReply<QList<SailfishUserManagerEntry>> lcall = iface.call("users");
     if (lcall.isValid()) {
-        qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
+        qCDebug(XdgDesktopPortalSailfishAccount) << "Success";
         users = lcall.value();
     }
 

@@ -98,6 +98,42 @@ void LockdownPortal::setCameraDisabled(const bool &disable) const
     m_policy->setCameraEnabled(!disable);
 };
 
+void LockdownPortal::setMicMutePulse(const bool &muted) const
+{
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting mic mute:" << muted;
+    // look up the pulse server socket:
+    QDBusInterface *ifc = new QDBusInterface(
+                       "org.PulseAudio1",
+                       "/org/pulseaudio/server_lookup1",
+                       "org.freedesktop.DBus.Properties");
+
+    QDBusMessage result = ifc->call( "Get", "org.PulseAudio.ServerLookup1", "Address");
+    QList<QVariant> rargs = result.arguments();
+    if(rargs.isEmpty()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not detemine Pulse server address";
+        return;
+    }
+    // create a p2p connection:
+    QString address = rargs.first().toString();
+    QDBusConnection conn = QDBusConnection::connectToPeer(address, "XDPPulse1");
+    if (!conn.isConnected()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not connect to Pulse server";
+        return;
+    }
+    // test the connection:
+    QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
+    if (core.isNull()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not get core object from path";
+        return;
+    }
+    QDBusInterface pifc = conn->interface();
+    QDBusMessage test = pifc->call("Get", "org.PulseAudio.Core1", "Name");
+    QList<QVariant> testargs = test.arguments();
+    for (QVariant v : testargs) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Got reply" << v.toString();
+    }
+
+}
 // see also sailfishos/nemo-qml-plugin-systemsettings
 void LockdownPortal::setLocationEnabled(const bool &enabled) const
 {

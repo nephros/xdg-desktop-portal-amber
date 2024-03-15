@@ -61,6 +61,7 @@ private:
     void setCameraDisabled(const bool &enable) const;
 
     void setLocationEnabled(const bool &enabled) const;
+    void setMicMutePulse(const bool &muted) const;
 
     AccessPolicy* m_policy;
 };

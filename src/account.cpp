@@ -67,18 +67,18 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     }
 
     // get list of users
-    QList<SailfishUserManagerEntry> userlist;
+    QList<SailfishUserManagerEntry> users;
     QDBusReply<QList<SailfishUserManagerEntry>> lcall = iface.call("users");
     if (lcall.isValid()) {
         qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
-        userlist = lcall.value();
+        users = lcall.value();
     }
 
     // find our user in the list:
     QString username;
     for (SailfishUserManagerEntry u : users) {
         if (u.uid == userid)
-            username = u.name
+            username = u.name;
     }
 
 

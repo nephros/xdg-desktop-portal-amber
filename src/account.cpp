@@ -49,11 +49,12 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     qCDebug(XdgDesktopPortalSailfishAccount) << "    options: " << options;
 
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Account options not supported.";
+        qCDebug(XdgDesktopPortalSailfishAccount) << "Account options not supported.";
     }
 
     message.setDelayedReply(true);
 
+    /* Usermanager isn't actually available as a library.
     auto manager = new SailfishUserManager();
     uint userid = manager->currentUser();
     QList<SailfishUserManagerEntry>  users = manager->users();
@@ -75,6 +76,7 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
         reply = message.createErrorReply(QDBusError::Failed, QStringLiteral("Not found."));
     }
     QDBusConnection::sessionBus().send(reply);
+    */
     return 0;
 }
 } // namespace XDP

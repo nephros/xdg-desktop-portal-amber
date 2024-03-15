@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-#include "email.h"
+#include "account.h"
 
 #include <QDBusMetaType>
 #include <QDBusInterface>

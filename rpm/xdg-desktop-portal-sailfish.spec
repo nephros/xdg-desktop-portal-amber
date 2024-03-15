@@ -15,6 +15,7 @@ BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  cmake
+BuildRequires:  sailfish-svg2png
 Requires:   %{name}-config
 Requires:   xdg-desktop-portal
 
@@ -96,4 +97,6 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %{_datadir}/%{name}-ui/qml/*.qml
 %{_datadir}/applications/xdg-desktop-portal-sailfish-ui.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.sailfish.ui.service
+%{_datadir}/icons/*/*/apps/*
+
 

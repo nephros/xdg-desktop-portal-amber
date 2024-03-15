@@ -20,5 +20,6 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
 add_subdirectory(data)
 add_subdirectory(src)
 add_subdirectory(qml)
+add_subdirectory(icons)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

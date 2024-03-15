@@ -11,7 +11,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
-#include <SailfishUserManager>
+#include <sailfishusermanagerinterface.h>
 
 namespace Sailfish {
 namespace XDP {

@@ -8,7 +8,7 @@
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
-#include <SailfishUserManager>
+#include <sailfishusermanagerinterface.h>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccount, "xdp-sailfish-email")
 

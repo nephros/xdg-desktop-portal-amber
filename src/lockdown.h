@@ -60,6 +60,8 @@ private:
     void setMicrophoneDisabled(const bool &enable) const;
     void setCameraDisabled(const bool &enable) const;
 
+    void setLocationEnabled(const bool &enabled) const;
+
     AccessPolicy* m_policy;
 };
 }

@@ -11,9 +11,10 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
-#include <QUrl>
 #include <QLoggingCategory>
 #include <accesspolicy.h>
+#include <QFile>
+#include <QSettings>
 
 Q_LOGGING_CATEGORY(XDPortalSailfishLockdown, "xdp-sailfish-lockdown")
 
@@ -85,7 +86,8 @@ bool LockdownPortal::disable_location() const
 
 void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
 {
-    m_policy->setLocationSettingsEnabled(!disable);
+    //m_policy->setLocationSettingsEnabled(!disable);
+    setLocationEnabled(!disable);
 };
 void LockdownPortal::setMicrophoneDisabled(const bool &disable) const
 {
@@ -95,6 +97,39 @@ void LockdownPortal::setCameraDisabled(const bool &disable) const
 {
     m_policy->setCameraEnabled(!disable);
 };
+
+// see also sailfishos/nemo-qml-plugin-systemsettings
+void LockdownPortal::setLocationEnabled(const bool &enabled) const
+{
+    const QString LocationSettingsFile = QStringLiteral("/var/lib/location/location.conf");
+    const QString CompatibilitySettingsFile = QStringLiteral("/etc/location/location.conf");
+    const QString LocationSettingsSection = QStringLiteral("location");
+    const QString LocationSettingsEnabledKey = QStringLiteral("enabled");
+
+    // new file would be owned by creating process uid. we cannot allow this since the access is handled with group
+    if (!QFile(LocationSettingsFile).exists()) {
+        qWarning() << "Location settings configuration file does not exist. Refusing to create new.";
+        return;
+    }
+
+    // write the values to the conf file
+    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
+    QSettings compatFile( CompatibilitySettingsFile, QSettings::IniFormat);
+    settingsFile.setFallbacksEnabled(false);
+    compatFile.setFallbacksEnabled(false);
+
+    settingsFile.beginGroup(LocationSettingsSection);
+    settingsFile.setValue(LocationSettingsEnabledKey, enabled);
+    settingsFile.endGroup();
+
+    compatFile.beginGroup(LocationSettingsSection);
+    compatFile.setValue(LocationSettingsEnabledKey, enabled);
+    compatFile.endGroup();
+
+    settingsFile.sync();
+    compatFile.sync();
+
+}
 
 }
 }

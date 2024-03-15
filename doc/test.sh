@@ -43,18 +43,33 @@ busctl --user call org.freedesktop.portal.Desktop /org/freedesktop/portal/deskto
 12) # read camera MDM policy, bing, mute, bing
 echo camera
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_camera
+echo printing
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_printing
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_printing b true
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_printing
+echo location
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location
+echo location on
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location b false
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location
+sleep 1
+echo location off
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location b true
+
 paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+echo mute sound
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b true
-echo mute
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
 sleep 1
 paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+echo unmute sound
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b false
-echo mute
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
 paplay /usr/share/sounds/freedesktop/stereo/bell.oga
 ;;
-
+13) # Account read
+gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Account.GetUserInformation  "0" '{}'
+;;
 *) # just introspect Portals
 busctl --user  introspect org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop
 echo give a number a d parameters to call.

@@ -9,7 +9,7 @@
 #include <QDBusPendingReply>
 #include <QDBusMessage>
 #include <QLoggingCategory>
-//#include <sailfishusermanagerinterface.h>
+#include <sailfishusermanagerinterface.h>
 
 Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccount, "xdp-sailfish-email")
 
@@ -54,29 +54,42 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
 
     message.setDelayedReply(true);
 
-    /* Usermanager isn't actually available as a library.
-    auto manager = new SailfishUserManager();
-    uint userid = manager->currentUser();
-    QList<SailfishUserManagerEntry>  users = manager->users();
-    QString usernname;
+    QDBusInterface ifc (
+            QStringLiteral("org.sailfishos.usermanager"),
+            QStringLiteral("/"),
+            QStringLiteral("org.sailfishos.usermanager"),
+            );
+
+    QDBusReply<uint> ucall = ifc.call("currentUser");
+    uint userid;
+    if (ucall.isValid()) {
+        qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
+        userid = ucall.value();
+    }
+
+    QList<SailfishUserManagerEntry> userlist;
+
+    QDBusReply<QList<SailfishUserManagerEntry>> lcall = ifc.call("users");
+    if (lcall.isValid()) {
+        qCDebug(XdgDesktopPortalSailfishEmail) << "Success";
+        userlist = lcall.value();
+    }
+    QString username;
     for (SailfishUserManagerEntry u : users) {
         if (u.uid == userid)
             username = u.name
     }
-    manager->deleteLater();
-
     results.insert("id", QString(userid));
     results.insert("name", username);
     results.insert("image", QString());
 
-     QDBusMessage reply;
+    QDBusMessage reply;
     if (userid >= 0) {
         reply = message.createReply();
     } else {
         reply = message.createErrorReply(QDBusError::Failed, QStringLiteral("Not found."));
     }
     QDBusConnection::sessionBus().send(reply);
-    */
     return 0;
 }
 } // namespace XDP

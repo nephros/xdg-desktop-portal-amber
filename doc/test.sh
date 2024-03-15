@@ -47,6 +47,7 @@ paplay /usr/share/sounds/freedesktop/stereo/bell.oga
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b true
 echo mute
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
+sleep 1
 paplay /usr/share/sounds/freedesktop/stereo/bell.oga
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b false
 echo mute

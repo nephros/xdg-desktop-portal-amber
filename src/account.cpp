@@ -21,9 +21,11 @@ AccountPortal::AccountPortal(QObject *parent)
     qCDebug(XdgDesktopPortalSailfishAccount) << "Desktop portal service: Account";
 }
 
+/*
 AccountPortal::~AccountPortal()
 {
 }
+*/
 
 /*! \fn uint Sailfish::XDP::AccountPortal::GetUserInformation(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
 

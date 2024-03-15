@@ -122,10 +122,7 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
     }
     // test the connection:
     QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
-    if (core.isNull()) {
-        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not get core object from path";
-        return;
-    }
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Got core object" << core->objectName() << core->metaObject()->className();;
     QDBusInterface pifc = conn->interface();
     QDBusMessage test = pifc->call("Get", "org.PulseAudio.Core1", "Name");
     QList<QVariant> testargs = test.arguments();

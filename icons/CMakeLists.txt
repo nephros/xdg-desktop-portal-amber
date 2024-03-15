@@ -19,7 +19,7 @@ foreach(SIZE ${SIZES})
       ARGS -z 1.0 -s 1 1 1 ${SIZE} 1 1 1 svgs/ ${PROJECT_BINARY_DIR}/icons/${SIZE}x${SIZE}/apps
      )
     list(APPEND PNGS ${PROJECT_BINARY_DIR}/icons/${SIZE}x${SIZE}/apps/${ICON}.png)
-    install(FILES ${PROJECT_BINARY_DIR}/icons/${SIZE}x${SIZE}/apps/${ICON}.png DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/${SIZE}x${SIZE}/apps")
+    install(FILES ${PROJECT_BINARY_DIR}/icons/${SIZE}x${SIZE}/apps/${ICON}.png DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/${SIZE}x${SIZE}/apps")
   endforeach()
 endforeach()
 

@@ -13,10 +13,11 @@ set(SRCS
 
 include(FindPkgConfig)
 pkg_search_module(MLITE REQUIRED mlite mlite5)
-
+pkg_search_module(UMD REQUIRED sailfishusermanager)
 include_directories(
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
     ${MLITE_INCLUDE_DIRS}
+    ${UMD_INCLUDE_DIRS}
 )
 
 add_executable(xdg-desktop-portal-sailfish ${SRCS})
@@ -29,6 +30,7 @@ target_link_libraries(xdg-desktop-portal-sailfish
     Qt5::Gui
     Qt5::DBus
     ${MLITE_LIBRARIES}
+    ${UMD_LIBRARIES}
 
 )
 

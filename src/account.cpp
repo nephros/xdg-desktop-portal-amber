@@ -7,6 +7,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusPendingReply>
+#include <QDBusMessage>
 #include <QLoggingCategory>
 #include <sailfishusermanagerinterface.h>
 

@@ -104,38 +104,38 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
     qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting mic mute:" << muted;
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
-                       "org.PulseAudio1",
+                       "org.pulseaudio.Server",
                        "/org/pulseaudio/server_lookup1",
                        "org.freedesktop.DBus.Properties");
 
-    QDBusMessage result = ifc->call( "Get", "org.PulseAudio.ServerLookup1", "Address");
-    QList<QVariant> rargs = result.arguments();
-    if(rargs.isEmpty()) {
+    QDBusReply<QVariant> result = ifc->call( "Get", "org.PulseAudio.ServerLookup1", "Address");
+    if(!result.isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not detemine Pulse server address";
         return;
     }
     ifc->deleteLater();
     // create a p2p connection:
-    QString address = rargs.first().toString();
+    QString address = result.value().toString();
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Got address" << address;
     QDBusConnection conn = QDBusConnection::connectToPeer(address, "XDPPulse1");
     if (!conn.isConnected()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not connect to Pulse server";
         return;
     }
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "P2P Connection established";
     // test the connection:
-    QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Got core object" << core->objectName() << core->metaObject()->className();;
+    //QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
+    //qCDebug(XdgDesktopPortalSailfishLockdown) << "Got core object" << core->objectName() << core->metaObject()->className();;
     QDBusInterface *pulse = new QDBusInterface(
-                          "org.PulseAudio1",
+                          //"org.PulseAudio1",
+                          "org.pulseaudio.Server",
                           "/org/pulseaudio/core1",
-                          "org.PulseAudio.Core1",
-                         conn);
-    QDBusMessage test = pulse->call( "Get", "org.PulseAudio.Core1", "Address");
-    QList<QVariant> testargs = test.arguments();
-    for (QVariant v : testargs) {
-        qCDebug(XdgDesktopPortalSailfishLockdown) << "Got reply" << v.toString();
+                          "org.freedesktop.DBus.Properties",
+                          conn);
+    QDBusReply<QString> test = pulse->call( "Get", "org.PulseAudio.Core1", "Name");
+    if(test.isValid()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Test result" << test.value();
     }
-
 }
 bool LockdownPortal::getLocationEnabled() const
 {

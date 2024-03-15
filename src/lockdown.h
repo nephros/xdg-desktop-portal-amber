@@ -10,6 +10,7 @@
 #define XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H
 
 #include <QDBusAbstractAdaptor>
+#include <QDBusInterface>
 #include <QDBusObjectPath>
 #include <accesspolicy.h>
 
@@ -64,6 +65,7 @@ private:
     void setMicMutePulse(const bool &muted) const;
 
     AccessPolicy* m_policy;
+    QDBusInterface* m_profiled;
 };
 }
 }

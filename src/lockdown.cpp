@@ -10,7 +10,7 @@
 
 #include <QDBusMetaType>
 #include <QDBusInterface>
-#include <QDBusPendingReply>
+#include <QDBusReply>
 #include <QLoggingCategory>
 #include <accesspolicy.h>
 #include <QFile>
@@ -32,43 +32,29 @@ LockdownPortal::LockdownPortal(QObject *parent)
     QObject::connect(m_policy, SIGNAL(cameraEnabledChanged()), this, SLOT(cameraDisabledChanged()));
     QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
     QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
+    m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
 }
 
 bool LockdownPortal::muted() const
 {
-    QDBusMessage msg = QDBusMessage::createMethodCall(
-            QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("/com/nokia/profiled"),
-            QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("get_profile")
-            );
-    QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
+    QDBusReply<QString> pcall = m_profiled->call(QStringLiteral("get_profile"));
 
-    pcall.waitForFinished();
     if (pcall.isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Read profile value:" << pcall.value();
         return (pcall.value() == PROFILE_MUTED_NAME);
     }
+    // what else?
+    return false;
 }
 
 void LockdownPortal::mute(const bool &silent) const
 {
     qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting mute:" << silent;
-    QDBusMessage msg = QDBusMessage::createMethodCall(
-            QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("/com/nokia/profiled"),
-            QStringLiteral("com.nokia.profiled"),
-            QStringLiteral("set_profile")
-            );
-
-    QList<QVariant> args;
     if (silent) {
-        args.append(PROFILE_MUTED_NAME);
+         m_profiled->call(QStringLiteral("set_profile"), PROFILE_MUTED_NAME);
     } else {
-        args.append(PROFILE_UNMUTED_NAME);
+        m_profiled->call(QStringLiteral("set_profile"), PROFILE_UNMUTED_NAME);
     }
-    msg.setArguments(args);
-    QDBusConnection::sessionBus().call(msg, QDBus::NoBlock);
 }
 
 bool LockdownPortal::disable_camera() const
@@ -113,6 +99,7 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not detemine Pulse server address";
         return;
     }
+    ifc->deleteLater();
     // create a p2p connection:
     QString address = rargs.first().toString();
     QDBusConnection conn = QDBusConnection::connectToPeer(address, "XDPPulse1");
@@ -123,8 +110,12 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
     // test the connection:
     QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
     qCDebug(XdgDesktopPortalSailfishLockdown) << "Got core object" << core->objectName() << core->metaObject()->className();;
-    QDBusInterface pifc = conn->interface();
-    QDBusMessage test = pifc->call("Get", "org.PulseAudio.Core1", "Name");
+    QDBusInterface *pulse = new QDBusInterface(
+                          "org.PulseAudio1",
+                          "/org/pulseaudio/core1",
+                          "org.PulseAudio.Core1",
+                         conn);
+    QDBusMessage test = pulse->call( "Get", "org.PulseAudio.Core1", "Address");
     QList<QVariant> testargs = test.arguments();
     for (QVariant v : testargs) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Got reply" << v.toString();

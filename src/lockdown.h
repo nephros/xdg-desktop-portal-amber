@@ -53,6 +53,7 @@ private:
 
     bool muted() const;
     void mute(const bool &silent) const;
+    QDBusInterface* getPulseSource() const;
 
     bool disable_camera() const;
     bool disable_microphone() const;

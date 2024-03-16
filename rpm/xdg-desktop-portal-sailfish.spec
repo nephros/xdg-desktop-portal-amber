@@ -111,7 +111,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %{_datadir}/applications/org.freedesktop.impl.portal.desktop.sailfish.desktop
 
 %files config
-%config %{_localstatedir}/lib/environment/sailfish/*.conf
+%config %{_localstatedir}/lib/environment/nemo/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
 # overrides

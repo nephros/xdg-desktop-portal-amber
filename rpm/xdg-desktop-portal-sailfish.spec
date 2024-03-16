@@ -5,6 +5,7 @@ Release:    0
 License:    LGPLv2+ and LGPLv3+
 #URL:        https://invent.kde.org/plasma/xdg-desktop-portal-kde
 Source0:    %{name}-%{version}.tar.bz2
+BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)

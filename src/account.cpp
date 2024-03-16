@@ -11,7 +11,7 @@
 #include <QLoggingCategory>
 #include <sailfishusermanagerinterface.h>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccount, "xdp-sailfish-email")
+Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccount, "xdp-sailfish-account")
 
 namespace Sailfish {
 namespace XDP {

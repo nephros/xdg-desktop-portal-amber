@@ -6,8 +6,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.sa
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.sailfish.desktop DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-sailfish.service  DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
 
+install(FILES xdg-desktop-portal-sailfish.conf DESTINATION "${CMAKE_INSTALL_FULL_LOCALSTATEDIR}/lib/environment/nemo/")
 install(FILES sailfish.portal DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal/portals/")
-install(FILES xdg-desktop.conf DESTINATION "${CMAKE_INSTALL_FULL_LOCALSTATEDIR}/lib/environment/sailfish/")
 install(FILES lipstick-portals.conf DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal")
 
 add_subdirectory(sailjail)

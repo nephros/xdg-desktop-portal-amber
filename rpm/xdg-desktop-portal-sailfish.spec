@@ -17,6 +17,8 @@ BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  cmake
 BuildRequires:  sailfish-svg2png
+Requires(post): systemd
+Requires(postun): systemd
 Requires:   %{name}-config
 Requires:   xdg-desktop-portal
 
@@ -74,6 +76,24 @@ Conflicts: xdg-desktop-portal-amber-qml
 rm -rf %{buildroot}
 %make_install
 desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
+
+%post
+systemd-user daemon-reload ||:
+
+%postun
+systemd-user daemon-reload ||:
+
+%post config
+systemd-user daemon-reload ||:
+
+%postun config
+systemd-user daemon-reload ||:
+
+%post ui
+systemd-user daemon-reload ||:
+
+%postun ui
+systemd-user daemon-reload ||:
 
 %files
 %defattr(-,root,root,-)

@@ -77,6 +77,11 @@ rm -rf %{buildroot}
 %make_install
 desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
 
+%preun
+if [ $1 -eq 0 ]; then
+systemctl-user stop %{name}.service
+fi
+
 %post
 systemd-user daemon-reload ||:
 
@@ -110,7 +115,7 @@ systemd-user daemon-reload ||:
 %config %{_localstatedir}/lib/environment/nemo/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
-# overrides
+# overrides for the main XDP service
 %config %{_userunitdir}/*.service.d/*.conf
 
 %files ui

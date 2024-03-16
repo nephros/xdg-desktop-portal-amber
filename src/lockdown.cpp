@@ -10,6 +10,7 @@
 
 #include <QDBusMetaType>
 #include <QDBusInterface>
+#include <QDBusConnectionInterface>
 #include <QDBusReply>
 #include <QLoggingCategory>
 #include <accesspolicy.h>
@@ -126,12 +127,27 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
     // test the connection:
     //QObject *core = conn.objectRegisteredAt("/org/pulseaudio/core1");
     //qCDebug(XdgDesktopPortalSailfishLockdown) << "Got core object" << core->objectName() << core->metaObject()->className();;
+    QDBusConnectionInterface *ci = conn.interface();
+    auto services = ci->registeredServiceNames();
+    for (QString svc : services.value()) {
+            qCDebug(XdgDesktopPortalSailfishLockdown) << "P2P Service:" << svc;
+    }
+    ci->deleteLater();
     QDBusInterface *pulse = new QDBusInterface(
                           //"org.PulseAudio1",
-                          "org.pulseaudio.Server",
+                          //"org.pulseaudio.Server",
+                          "",
                           "/org/pulseaudio/core1",
                           "org.freedesktop.DBus.Properties",
                           conn);
+    if(!pulse.isValid()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up interface";
+        return;
+    }
+    QDBusReply<QVariantMap> all = pulse->call( "GetAll", "org.PulseAudio.Core1");
+    if(!all.isValid()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "GetAll failed.";
+    }
     QDBusReply<QString> test = pulse->call( "Get", "org.PulseAudio.Core1", "Name");
     if(test.isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Test result" << test.value();

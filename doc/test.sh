@@ -1,6 +1,16 @@
 #!/bin/sh
+function bing() {
+#--hint="sound-name dialog-warning" \
+notificationtool -o add -T 1500 --application=PortalTest --urgency=2 \
+	--hint="transient true" \
+	--hint="x-nemo-feedback general_warning" \
+	"$1" #"$1" "$1" "$1"
+}
 case $1 in
 
+0) # introspect impl
+busctl --user introspect org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop
+;;
 1) # Screenshot
 gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Screenshot.Screenshot "0" '{}'
 ;;
@@ -56,16 +66,25 @@ sleep 1
 echo location off
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_location b true
 
-paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone
+echo micmute on
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone b true
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone
+echo micmute off
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone b true
+busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone
+
+bing "test bing"
 echo mute sound
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b true
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
-sleep 1
-paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+bing "silent bing"
+sleep 5
 echo unmute sound
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output b false
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_sound_output
-paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+sleep 3
+bing "unmuted bing"
 ;;
 13) # Account read
 gdbus call --session  --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Account.GetUserInformation  "0" '{}'
@@ -77,3 +96,4 @@ less $0
 ;;
 
 esac
+

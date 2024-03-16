@@ -4,6 +4,7 @@ Version:    1.0.0
 Release:    0
 License:    LGPLv2+ and LGPLv3+
 Source0:    %{name}-%{version}.tar.bz2
+BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(dbus-1)
@@ -16,6 +17,8 @@ BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  pkgconfig(sailfishusermanager)
 BuildRequires:  cmake
 BuildRequires:  sailfish-svg2png
+Requires(post): systemd
+Requires(postun): systemd
 Requires:   %{name}-config
 Requires:   xdg-desktop-portal
 
@@ -99,6 +102,29 @@ install -m 644 doc/html/*.html %{buildroot}/%{_docdir}/%{name}/
 install -m 644 doc/html/%{name}.index %{buildroot}/%{_docdir}/%{name}/
 install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 
+%preun
+if [ $1 -eq 0 ]; then
+systemctl-user stop %{name}.service
+fi
+
+%post
+systemd-user daemon-reload ||:
+
+%postun
+systemd-user daemon-reload ||:
+
+%post config
+systemd-user daemon-reload ||:
+
+%postun config
+systemd-user daemon-reload ||:
+
+%post ui
+systemd-user daemon-reload ||:
+
+%postun ui
+systemd-user daemon-reload ||:
+
 %files
 %defattr(-,root,root,-)
 # must be privileged to show Dialogs via Access and windowprompt:
@@ -114,7 +140,7 @@ install -m 644 doc/%{name}.qch %{buildroot}/%{_docdir}/%{name}/
 %config %{_localstatedir}/lib/environment/nemo/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
-# overrides
+# overrides for the main XDP service
 %config %{_userunitdir}/*.service.d/*.conf
 
 %files ui

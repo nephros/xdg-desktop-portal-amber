@@ -28,6 +28,8 @@ const QString CompatibilitySettingsFile = QStringLiteral("/etc/location/location
 const QString LocationSettingsSection = QStringLiteral("location");
 const QString LocationSettingsEnabledKey = QStringLiteral("enabled");
 
+const QString peerConnName = QStringLiteral("XDPPulsePeer1");
+
 namespace Sailfish {
 namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
@@ -101,24 +103,18 @@ void LockdownPortal::setCameraDisabled(const bool &disable) const
     m_policy->setCameraEnabled(!disable);
 };
 
-void LockdownPortal::setMicMutePulse(const bool &muted) const
+/*! \fn bool LockdownPortal::connectToPulse()
+
+    Establishes a D-Buse peer-to-peer connection to PulseAudio.
+    The connection is represented by the \c m_pulse member.
+
+    Returns \c true on success, \c false otherwise.
+*/
+bool LockdownPortal::connectToPulse()
 {
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
-    QDBusInterface *device = getPulseSource();
-    if(!device->isValid()) {
-        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up interface";
-        return;
+    if ( m_pulse->isConnected()) {
+        qCWarning(XdgDesktopPortalSailfishLockdown) << "Trying to connect to Pulse Peer while connected";
     }
-    device->setProperty("Mute", QVariant(muted));
-}
-QDBusInterface* LockdownPortal::getPulseSource() const
-{
-
-    static const QString sourceName(QStringLiteral("source.primary_input"));
-    static const QString peerConnName(QStringLiteral("XDPPulsePeer1"));
-
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Looking for Pulse source";
-
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
                        QStringLiteral("org.pulseaudio.Server"),
@@ -128,33 +124,53 @@ QDBusInterface* LockdownPortal::getPulseSource() const
 
     if (!ifc->isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not look up Pulse server address";
-        return nullptr;
+        ifc->deleteLater();
+        return false;
     }
     QString address = ifc->property("Address").toString();
+    if (address.isEmpty()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not look up Pulse server address";
+        ifc->deleteLater();
+        return false;
+    }
 
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Got address" << address;
-    ifc->deleteLater();
-
-    // create a p2p connection:
-    QDBusConnection peer = QDBusConnection::connectToPeer(address, peerConnName);
-    if (!peer.isConnected()) {
+    //m_pulse = new QDBusConnection::connectToPeer(address, peerConnName);
+    m_pulse = *QDBusConnection::connectToPeer(address, peerConnName);
+    if (!m_pulse->isConnected()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not connect to Pulse server";
-        return nullptr;
+        ifc->deleteLater();
+        delete m_pulse;
+        delete m_pulse = nullptr;
+        return false;
     }
     qCDebug(XdgDesktopPortalSailfishLockdown) << "Pulse P2P Connection established";
+    return true;
+}
+
+void LockdownPortal::setMicMutePulse(const bool &muted) const
+{
+    static const QString sourceName(QStringLiteral("source.primary_input"));
+
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
+    qCDebug(XdgDesktopPortalSailfishLockdown) << "Looking for Pulse source";
+
+    if(! connectToPulse()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up Pulse peer";
+        return;
+    }
     QDBusInterface *core = new QDBusInterface(
                           QStringLiteral(""),
                           QStringLiteral("/org/pulseaudio/core1"),
                           QStringLiteral("org.PulseAudio.Core1"),
-                          peer);
+                          &m_pulse);
     if(!core->isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up interface";
-        return nullptr;
+        return;
     }
     QDBusReply<QDBusObjectPath> source = core->call( "GetSourceByName", sourceName);
     if(!source.isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could find default input";
-        return nullptr;
+        return;
     }
     QString input = source.value().path();
     qCDebug(XdgDesktopPortalSailfishLockdown) << "default input:" << input;
@@ -163,13 +179,17 @@ QDBusInterface* LockdownPortal::getPulseSource() const
                           QStringLiteral(""),
                           input,
                           QStringLiteral("org.PulseAudio.Core1.Device"),
-                          peer);
+                          &m_pulse);
     if(!device->isValid()) {
         qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up interface";
-        return nullptr;
+        return;
     }
-    QDBusConnection peer = QDBusConnection::disConnectFromPeer(peerConnName);
-    return device;
+    QDBusInterface *device = getPulseSource();
+    if(!device->isValid()) {
+        qCDebug(XdgDesktopPortalSailfishLockdown) << "Could not set up interface";
+        return;
+    }
+    device->setProperty("Mute", QVariant(muted));
 }
 
 bool LockdownPortal::getLocationEnabled() const

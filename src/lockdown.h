@@ -11,7 +11,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusInterface>
-#include <QDBusObjectPath>
+#include <QDBusConnection>
 #include <accesspolicy.h>
 
 namespace Sailfish {
@@ -58,7 +58,6 @@ private:
 
     bool muted() const;
     void mute(const bool &silent) const;
-    QDBusInterface* getPulseSource() const;
 
     bool disable_camera() const;
     bool disable_microphone() const;
@@ -71,9 +70,11 @@ private:
     void setLocationEnabled(const bool &enabled) const;
     bool getLocationEnabled() const;
     void setMicMutePulse(const bool &muted) const;
+    bool connectToPulse();
 
     AccessPolicy* m_policy;
     QDBusInterface* m_profiled;
+    QDBusConnection* m_pulse;
 };
 }
 }

@@ -20,7 +20,7 @@
 #include <QLoggingCategory>
 #include <QThread>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishFileChooser, "xdp-sailfish-filechooser")
+Q_LOGGING_CATEGORY(XDPortalSailfishFileChooser, "xdp-sailfish-filechooser")
 
 namespace Sailfish {
 namespace XDP {
@@ -29,7 +29,7 @@ FileChooserPortal::FileChooserPortal(QObject *parent)
 {
     qDBusRegisterMetaType<QMap<QString, QVariantList>>();
 
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Desktop portal service: FileChooser";
+    qCDebug(XDPortalSailfishFileChooser) << "Desktop portal service: FileChooser";
     m_responseHandled = false;
 }
 
@@ -44,12 +44,12 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &title,
                                 const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.OpenFile called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
+    qCDebug(XDPortalSailfishFileChooser) << "FileChooser.OpenFile called with parameters:";
+    qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XDPortalSailfishFileChooser) << "    options: " << options;
 
     // TODO choices
     //Q_UNUSED(results);
@@ -62,7 +62,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     QObject *pHandle = new QObject(this);
     QDBusConnection::sessionBus().registerObject(handle.path(), pHandle, QDBusConnection::ExportScriptableContents);
 
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Trying to show a dialog";
+    qCDebug(XDPortalSailfishFileChooser) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
@@ -96,21 +96,21 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     waitForPickerResponse();
 
     if (m_callResponseCode != PickerResponse::Other) {
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Success";
+        qCDebug(XDPortalSailfishFileChooser) << "Success";
     } else {
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser failed";
+        qCDebug(XDPortalSailfishFileChooser) << "FileChooser failed";
     }
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
     if (!obj) {
-        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage reply;
@@ -130,7 +130,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         }
     });
 
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Returning:" << reply.arguments();
+    qCDebug(XDPortalSailfishFileChooser) << "Returning:" << reply.arguments();
     QDBusConnection::sessionBus().send(reply);
 
     pHandle->deleteLater();
@@ -143,33 +143,33 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &title,
                       const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.SaveFiles called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
+    qCDebug(XDPortalSailfishFileChooser) << "FileChooser.SaveFiles called with parameters:";
+    qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XDPortalSailfishFileChooser) << "    options: " << options;
     /*
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
+            qCDebug(XDPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
     if (!obj) {
-        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage message = q_ptr->message();
 
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "This method is not implemented";
+    qCDebug(XDPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
     QDBusConnection::sessionBus().send(reply);
 
@@ -181,15 +181,15 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &title,
                       const QVariantMap &options)
 {
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser.SaveFile called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    title: " << title;
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "    options: " << options;
+    qCDebug(XDPortalSailfishFileChooser) << "FileChooser.SaveFile called with parameters:";
+    qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishFileChooser) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishFileChooser) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishFileChooser) << "    title: " << title;
+    qCDebug(XDPortalSailfishFileChooser) << "    options: " << options;
     /*
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
+            qCDebug(XDPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
 
@@ -198,19 +198,19 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalSailfishFileChooser) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage message = q_ptr->message();
 
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "This method is not implemented";
+    qCDebug(XDPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
     QDBusConnection::sessionBus().send(reply);
 }
 
 void FileChooserPortal::handlePickerError()
 {
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Picker Response Error.";
+    qCDebug(XDPortalSailfishFileChooser) << "Picker Response Error.";
     m_callResult = QStringList();
     m_callResponseCode = PickerResponse::Other;
     m_responseHandled = true;
@@ -219,7 +219,7 @@ void FileChooserPortal::handlePickerResponse(
                         const int &code,
                         const QVariantList &result)
 {
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "Picker Response received:" << code << result;
+    qCDebug(XDPortalSailfishFileChooser) << "Picker Response received:" << code << result;
     foreach(QVariant v, result) {
       m_callResult << v.toString();
     }
@@ -239,9 +239,9 @@ void FileChooserPortal::setupPickerResponse()
                     SLOT(handlePickerResponse(int, QVariantList))
                     ))
     {
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Could not set up signal listener";
+        qCDebug(XDPortalSailfishFileChooser) << "Could not set up signal listener";
     } else {
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Successfully set up signal listener";
+        qCDebug(XDPortalSailfishFileChooser) << "Successfully set up signal listener";
     }
 }
 void FileChooserPortal::waitForPickerResponse()
@@ -250,9 +250,9 @@ void FileChooserPortal::waitForPickerResponse()
     while (!m_responseHandled) {
         QCoreApplication::processEvents();
         QThread::msleep(250);
-        qCDebug(XdgDesktopPortalSailfishFileChooser) << "Waiting for Picker...";
+        qCDebug(XDPortalSailfishFileChooser) << "Waiting for Picker...";
     }
-    qCDebug(XdgDesktopPortalSailfishFileChooser) << "OK, Picker done.";
+    qCDebug(XDPortalSailfishFileChooser) << "OK, Picker done.";
 }
 } // namespace XDP
 } // namespace Sailfish

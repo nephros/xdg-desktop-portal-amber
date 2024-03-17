@@ -17,14 +17,14 @@
 #include <QDBusPendingReply>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
+Q_LOGGING_CATEGORY(XDPortalSailfishAccess, "xdp-sailfish-access")
 
 namespace Sailfish {
 namespace XDP {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Desktop portal service: Access";
+    qCDebug(XDPortalSailfishAccess) << "Desktop portal service: Access";
 }
 
 AccessPortal::~AccessPortal()
@@ -41,19 +41,19 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 const QVariantMap &options,
                                 QVariantMap &results)
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "AccessDialog called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    title: " << title;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    subtitle: " << subtitle;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    body: " << body;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    options: " << options;
+    qCDebug(XDPortalSailfishAccess) << "AccessDialog called with parameters:";
+    qCDebug(XDPortalSailfishAccess) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishAccess) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishAccess) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishAccess) << "    title: " << title;
+    qCDebug(XDPortalSailfishAccess) << "    subtitle: " << subtitle;
+    qCDebug(XDPortalSailfishAccess) << "    body: " << body;
+    qCDebug(XDPortalSailfishAccess) << "    options: " << options;
 
     if (!options.isEmpty()) {
-            qCDebug(XdgDesktopPortalSailfishAccess) << "Access dialog options not supported.";
+            qCDebug(XDPortalSailfishAccess) << "Access dialog options not supported.";
     }
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Asking Lipstick daemon to show a dialog";
+    qCDebug(XDPortalSailfishAccess) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.windowprompt"),
                     QStringLiteral("/com/jolla/windowprompt"),
@@ -88,10 +88,10 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-            qCDebug(XdgDesktopPortalSailfishAccess) << "Success";
+            qCDebug(XDPortalSailfishAccess) << "Success";
             return 0;
     }
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Access failed:" << pcall.error().name() << pcall.error().message() ;
+    qCDebug(XDPortalSailfishAccess) << "Access failed:" << pcall.error().name() << pcall.error().message() ;
     return 1;
 }
 } // namespace XDP

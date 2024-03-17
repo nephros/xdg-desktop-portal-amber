@@ -40,7 +40,7 @@
 
 #include "desktopportal.h"
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfish, "xdp-sailfish")
+Q_LOGGING_CATEGORY(XDPortalSailfish, "xdp-sailfish")
 
 const char* dbusName   = "org.freedesktop.impl.portal.desktop.sailfish";
 const char* dbusObject = "/org/freedesktop/portal/desktop";
@@ -53,22 +53,22 @@ int main(int argc, char *argv[])
     // determine GID, check prvileged group:
     struct group *grp = getgrnam("privileged"); /* don't free, see getgrnam() for details */
     if ( getgid() != grp->gr_gid ) {
-        qCWarning(XdgDesktopPortalSailfish) << "Not running privileged, some features will not work.";
+        qCWarning(XDPortalSailfish) << "Not running privileged, some features will not work.";
     }
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
 
-    qCDebug(XdgDesktopPortalSailfish) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
+    qCDebug(XDPortalSailfish) << "Attempting to register Desktop portal:" << dbusName << dbusObject;
     if (sessionBus.registerService(dbusName)) {
         const auto desktopPortal = new Sailfish::XDP::DesktopPortal{&app};
-        qCDebug(XdgDesktopPortalSailfish) << "Desktop portal bus registered successfully";
+        qCDebug(XDPortalSailfish) << "Desktop portal bus registered successfully";
         if (sessionBus.registerObject(dbusObject, desktopPortal, QDBusConnection::ExportAdaptors)) {
-            qCDebug(XdgDesktopPortalSailfish) << "Desktop portal object registered successfully";
+            qCDebug(XDPortalSailfish) << "Desktop portal object registered successfully";
         } else {
-            qCDebug(XdgDesktopPortalSailfish) << "Failed to register object";
+            qCDebug(XDPortalSailfish) << "Failed to register object";
         }
     } else {
-        qCDebug(XdgDesktopPortalSailfish) << "Failed to register service.";
+        qCDebug(XDPortalSailfish) << "Failed to register service.";
         return 1;
     }
 

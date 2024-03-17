@@ -11,14 +11,14 @@
 #include <QUrl>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishWallpaper, "xdp-sailfish-wallpaper")
+Q_LOGGING_CATEGORY(XDPortalSailfishWallpaper, "xdp-sailfish-wallpaper")
 
 namespace Sailfish {
 namespace XDP {
 WallpaperPortal::WallpaperPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "Desktop portal service: Wallpaper";
+    qCDebug(XDPortalSailfishWallpaper) << "Desktop portal service: Wallpaper";
 }
 
 uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
@@ -28,16 +28,16 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
                                   const QVariantMap &options,
                                   uint &result)
 {
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "Wallpaper called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "    uri: " << uri;
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "    options: " << options;
+    qCDebug(XDPortalSailfishWallpaper) << "Wallpaper called with parameters:";
+    qCDebug(XDPortalSailfishWallpaper) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishWallpaper) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishWallpaper) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishWallpaper) << "    uri: " << uri;
+    qCDebug(XDPortalSailfishWallpaper) << "    options: " << options;
 
     if (options.contains(QStringLiteral("set-on"))) { // background, lockscreen or both.
         if (!options.value(QStringLiteral("set-on")).toString().compare(QStringLiteral("background"), Qt::CaseInsensitive)) {
-            qCDebug(XdgDesktopPortalSailfishWallpaper) << "Setting wallpaper for Lock Screen is not supported.";
+            qCDebug(XDPortalSailfishWallpaper) << "Setting wallpaper for Lock Screen is not supported.";
         }
         if (options.value(QStringLiteral("set-on")).toString().compare(QStringLiteral("lockscreen"), Qt::CaseInsensitive)) {
             return 1;
@@ -47,14 +47,14 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     QDBusMessage msg;
     if (options.contains(QStringLiteral("show-preview"))) {
         if (options.value(QStringLiteral("show-preview")).toBool()) {
-            qCDebug(XdgDesktopPortalSailfishWallpaper) << "Was asked to show a preview, opening Gallery to create an Ambience";
+            qCDebug(XDPortalSailfishWallpaper) << "Was asked to show a preview, opening Gallery to create an Ambience";
             msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.gallery"),
                     QStringLiteral("/com/jolla/gallery/ui"),
                     QStringLiteral("com.jolla.gallery.ui"),
                     QStringLiteral("openFile"));
         } else {
-            qCDebug(XdgDesktopPortalSailfishWallpaper) << "Asking Ambience daemon to set wallpaper";
+            qCDebug(XDPortalSailfishWallpaper) << "Asking Ambience daemon to set wallpaper";
             msg = QDBusMessage::createMethodCall(
                     QStringLiteral("com.jolla.ambienced"),
                     QStringLiteral("/com/jolla/ambienced"),
@@ -70,11 +70,11 @@ uint WallpaperPortal::SetWallpaperURI(const QDBusObjectPath &handle,
     QDBusPendingReply<QString> pcall = QDBusConnection::sessionBus().call(msg);
     pcall.waitForFinished();
     if (pcall.isValid()) {
-        qCDebug(XdgDesktopPortalSailfishWallpaper) << "Success";
+        qCDebug(XDPortalSailfishWallpaper) << "Success";
         result = 0;
         return 0;
     }
-    qCDebug(XdgDesktopPortalSailfishWallpaper) << "Wallpaper failed:" << pcall.error().name() << pcall.error().message();
+    qCDebug(XDPortalSailfishWallpaper) << "Wallpaper failed:" << pcall.error().name() << pcall.error().message();
     result = 1;
     return 1;
 }

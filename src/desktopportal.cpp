@@ -66,6 +66,26 @@
 
     See \l {XDG Desktop Portal Backend Specification} for details.
 */
+/*! \class Sailfish::XDP::LockdownPortal
+    \inmodule XDGDesktopPortalSailfish
+    \brief Backend interface of the Lockdown Portal
+
+    See \l {XDG Desktop Portal Backend Specification} for details.
+
+    \note While the specification of all those properties is simple, the
+    implementatio of the various methods uses widely different technologies to
+    enable or disable a feature:
+
+    \list
+    \li Printing, Save To Disk, and Application Handlers: not supported at all, setting them has no effect.
+    \li Location: reads and writes the \c location.conf init files, like Nemo QML Plugin Systemsettings
+    \li Microphone: uses a DBus connection to PulseAudio to mute the default source
+    \li Sound Output: uses Profile Daemon to set a silent or default profile
+    \li Camera: uses Sailfish MDM Access Policies to enable or disable the use of the camera.
+    \endlist
+
+    \sa Sailfish::AccessPolicy, com.nokia.profiled, Nemo::Systemsettings
+*/
 /*! \class Sailfish::XDP::FileChooserPortal
     \inmodule XDGDesktopPortalSailfish
     \brief Backend interface of the FileChooser Portal

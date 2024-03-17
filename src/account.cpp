@@ -11,14 +11,14 @@
 #include <QLoggingCategory>
 #include <sailfishusermanagerinterface.h>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccount, "xdp-sailfish-account")
+Q_LOGGING_CATEGORY(XDPortalSailfishAccount, "xdp-sailfish-account")
 
 namespace Sailfish {
 namespace XDP {
 AccountPortal::AccountPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalSailfishAccount) << "Desktop portal service: Account";
+    qCDebug(XDPortalSailfishAccount) << "Desktop portal service: Account";
 }
 
 /*
@@ -44,14 +44,14 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
                                   const QDBusMessage &message
                                   )
 {
-    qCDebug(XdgDesktopPortalSailfishAccount) << "Account called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishAccount) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishAccount) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishAccount) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishAccount) << "    options: " << options;
+    qCDebug(XDPortalSailfishAccount) << "Account called with parameters:";
+    qCDebug(XDPortalSailfishAccount) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishAccount) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishAccount) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishAccount) << "    options: " << options;
 
     if (!options.isEmpty()) {
-        qCDebug(XdgDesktopPortalSailfishAccount) << "Account options not supported.";
+        qCDebug(XDPortalSailfishAccount) << "Account options not supported.";
     }
 
     message.setDelayedReply(true);
@@ -62,7 +62,7 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     uint userid;
     QDBusReply<uint> ucall = iface.call("currentUser");
     if (ucall.isValid()) {
-        qCDebug(XdgDesktopPortalSailfishAccount) << "Success";
+        qCDebug(XDPortalSailfishAccount) << "Success";
         userid = ucall.value();
     }
 
@@ -70,7 +70,7 @@ uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
     QList<SailfishUserManagerEntry> users;
     QDBusReply<QList<SailfishUserManagerEntry>> lcall = iface.call("users");
     if (lcall.isValid()) {
-        qCDebug(XdgDesktopPortalSailfishAccount) << "Success";
+        qCDebug(XDPortalSailfishAccount) << "Success";
         users = lcall.value();
     }
 

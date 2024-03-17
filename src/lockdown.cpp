@@ -10,7 +10,7 @@
 #include <QUrl>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishLockdown, "xdp-sailfish-lockdown")
+Q_LOGGING_CATEGORY(XDPortalSailfishLockdown, "xdp-sailfish-lockdown")
 
 const char* PROFILE_MUTED_NAME = "silent";
 const char* PROFILE_UNMUTED_NAME = "general";
@@ -20,7 +20,7 @@ namespace XDP {
 LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Desktop portal service: Lockdown";
+    qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
 }
 
 bool LockdownPortal::getGPS() const

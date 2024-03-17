@@ -86,7 +86,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     }
 
     /*
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Asking Lipstick daemon to show a dialog";
+    qCDebug(XDPortalSailfishAccess) << "Asking Lipstick daemon to show a dialog";
     // TODO: windowprompt should have a dedicated prompt for Portal reqests. For now, use showInfoWindow
     QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("com.jolla.windowprompt"),
                     QStringLiteral("/com/jolla/windowprompt"),
@@ -113,7 +113,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     </method>
     */
 
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Trying to show a dialog";
+    qCDebug(XDPortalSailfishAccess) << "Trying to show a dialog";
 
     QDBusMessage msg = QDBusMessage::createMethodCall(
                     QStringLiteral("org.freedesktop.impl.portal.desktop.sailfish.ui"),
@@ -148,9 +148,9 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
     waitForDialogResponse();
 
     if (m_callResponseCode != DialogResponse::Other) {
-        qCDebug(XdgDesktopPortalSailfishAccess) << "Success";
+        qCDebug(XDPortalSailfishAccess) << "Success";
     } else {
-        qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog failed";
+        qCDebug(XDPortalSailfishAccess) << "Dialog failed";
     }
 
     // Just respond with empty list
@@ -174,7 +174,7 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
 */
 void AccessPortal::handleDialogError()
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog Response Error.";
+    qCDebug(XDPortalSailfishAccess) << "Dialog Response Error.";
     m_callResponseCode = DialogResponse::Other;
     m_responseHandled = true;
 }
@@ -188,7 +188,7 @@ void AccessPortal::handleDialogError()
 */
 void AccessPortal::handleDialogResponse( const int &code )
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Dialog Response received:" << code;
+    qCDebug(XDPortalSailfishAccess) << "Dialog Response received:" << code;
     m_callResponseCode = static_cast<DialogResponse>(code);
     m_responseHandled = true;
 }
@@ -213,9 +213,9 @@ void AccessPortal::setupDialogResponse()
                     SLOT(handleDialogResponse(int))
                     ))
     {
-        qCDebug(XdgDesktopPortalSailfishAccess) << "Could not set up signal listener";
+        qCDebug(XDPortalSailfishAccess) << "Could not set up signal listener";
     } else {
-        qCDebug(XdgDesktopPortalSailfishAccess) << "Successfully set up signal listener";
+        qCDebug(XDPortalSailfishAccess) << "Successfully set up signal listener";
     }
 }
 /*! \fn void Sailfish::XDP::AccessPortal::waitForDialogResponse()
@@ -230,9 +230,9 @@ void AccessPortal::waitForDialogResponse()
     while (!m_responseHandled) {
         QCoreApplication::processEvents();
         QThread::msleep(250);
-        qCDebug(XdgDesktopPortalSailfishAccess) << "Waiting for Dialog...";
+        qCDebug(XDPortalSailfishAccess) << "Waiting for Dialog...";
     }
-    qCDebug(XdgDesktopPortalSailfishAccess) << "OK, Dialog done.";
+    qCDebug(XDPortalSailfishAccess) << "OK, Dialog done.";
 }
 } // namespace XDP
 } // namespace Sailfish

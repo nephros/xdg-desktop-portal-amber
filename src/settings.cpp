@@ -184,7 +184,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
     } else {
         reply = message.createErrorReply(QDBusError::InvalidArgs, QStringLiteral("Unknown Namespace."));
     }
-//    qCDebug(XdgDesktopPortalSailfishSettings) << "Sending:" << result;
+//    qCDebug(XDPortalSailfishSettings) << "Sending:" << result;
     QDBusConnection::sessionBus().send(reply);
 }
 
@@ -266,7 +266,7 @@ void SettingsPortal::readAccentColor()
 */
 void SettingsPortal::ambienceChanged(const int &i)
 {
-    qCDebug(XdgDesktopPortalSailfishSettings) << "Ambience change signalled, reloading";
+    qCDebug(XDPortalSailfishSettings) << "Ambience change signalled, reloading";
     emit SettingChanged(NAMESPACE_SAILFISHOS, QStringLiteral("ambience"), QVariant(i));
     update();
     emit SettingChanged(NAMESPACE_FDO, FDOSettingsKey.accent,   getAccentColor());

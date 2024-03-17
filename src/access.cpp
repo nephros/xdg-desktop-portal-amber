@@ -21,7 +21,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishAccess, "xdp-sailfish-access")
+Q_LOGGING_CATEGORY(XDPortalSailfishAccess, "xdp-sailfish-access")
 
 /*! \enum Sailfish::XDP::AccessPortal::DialogResponse
 
@@ -40,7 +40,7 @@ namespace XDP {
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "Desktop portal service: Access";
+    qCDebug(XDPortalSailfishAccess) << "Desktop portal service: Access";
     m_responseHandled = false;
 }
 
@@ -72,17 +72,17 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
                                 QVariantMap &results
                                 )
 {
-    qCDebug(XdgDesktopPortalSailfishAccess) << "AccessDialog called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    handle: " << handle.path();
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    app_id: " << app_id;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    parent_window: " << parent_window;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    title: " << title;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    subtitle: " << subtitle;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    body: " << body;
-    qCDebug(XdgDesktopPortalSailfishAccess) << "    options: " << options;
+    qCDebug(XDPortalSailfishAccess) << "AccessDialog called with parameters:";
+    qCDebug(XDPortalSailfishAccess) << "    handle: " << handle.path();
+    qCDebug(XDPortalSailfishAccess) << "    app_id: " << app_id;
+    qCDebug(XDPortalSailfishAccess) << "    parent_window: " << parent_window;
+    qCDebug(XDPortalSailfishAccess) << "    title: " << title;
+    qCDebug(XDPortalSailfishAccess) << "    subtitle: " << subtitle;
+    qCDebug(XDPortalSailfishAccess) << "    body: " << body;
+    qCDebug(XDPortalSailfishAccess) << "    options: " << options;
 
     if (options.contains(QStringLiteral("choices")) || options.contains(QStringLiteral("modal"))) {
-            qCDebug(XdgDesktopPortalSailfishAccess) << "Some Access dialog options are not supported.";
+            qCDebug(XDPortalSailfishAccess) << "Some Access dialog options are not supported.";
     }
 
     /*

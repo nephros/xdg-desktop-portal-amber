@@ -17,7 +17,7 @@
 #include <mlite5/MGConfItem>
 #include <mlite5/MDConfGroup>
 
-Q_LOGGING_CATEGORY(XdgDesktopPortalSailfishSettings, "xdp-sailfish-settings")
+Q_LOGGING_CATEGORY(XDPortalSailfishSettings, "xdp-sailfish-settings")
 
 /*! \property Sailfish::XDP::SettingsPortal::version
     \brief Contains the backend implementation version
@@ -88,7 +88,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
     , m_accentColorConfig(new MGConfItem(SailfishDconf.value("highlight_key"), this))
     , m_sailfishThemeConfigGroup(new MDConfGroup(SailfishDconf.value("theme_group"), this))
 {
-    qCDebug(XdgDesktopPortalSailfishSettings) << "Desktop portal service: Settings";
+    qCDebug(XDPortalSailfishSettings) << "Desktop portal service: Settings";
 
     qDBusRegisterMetaType<XDPResultMap>();
     qDBusRegisterMetaType<XDPResultPart>();
@@ -126,19 +126,19 @@ SettingsPortal::~SettingsPortal()
 */
 void SettingsPortal::ReadAll(const QStringList &nss)
 {
-    qCDebug(XdgDesktopPortalSailfishSettings) << "Settings called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishSettings) << "    namespaces: " << nss;
+    qCDebug(XDPortalSailfishSettings) << "Settings called with parameters:";
+    qCDebug(XDPortalSailfishSettings) << "    namespaces: " << nss;
 
     // ugly hack copied over from KDE:
     QObject *obj = QObject::parent();
     if (!obj) {
-        qCWarning(XdgDesktopPortalSailfishSettings) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishSettings) << "Failed to get dbus context for reply";
         return;
     }
     void *ptr = obj->qt_metacast("QDBusContext");
     QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
     if (!q_ptr) {
-        qCWarning(XdgDesktopPortalSailfishSettings) << "Failed to get dbus context for reply";
+        qCWarning(XDPortalSailfishSettings) << "Failed to get dbus context for reply";
         return;
     }
     QDBusMessage reply;
@@ -160,7 +160,7 @@ void SettingsPortal::ReadAll(const QStringList &nss)
             }
             );
         } else if (*i == NAMESPACE_SAILFISHOS) {
-            qCDebug(XdgDesktopPortalSailfishSettings) << "Ahoy Sailor!";
+            qCDebug(XDPortalSailfishSettings) << "Ahoy Sailor!";
             result.insert(NAMESPACE_SAILFISHOS, {
                 {
                         { SailfishConfKey.scheme, QDBusVariant(getColorScheme()) },
@@ -194,9 +194,9 @@ void SettingsPortal::ReadAll(const QStringList &nss)
 QDBusVariant SettingsPortal::Read(const QString &ns,
                               const QString &key)
 {
-    qCDebug(XdgDesktopPortalSailfishSettings) << "Settings called with parameters:";
-    qCDebug(XdgDesktopPortalSailfishSettings) << "    namespace: " << ns;
-    qCDebug(XdgDesktopPortalSailfishSettings) << "          key: " << key;
+    qCDebug(XDPortalSailfishSettings) << "Settings called with parameters:";
+    qCDebug(XDPortalSailfishSettings) << "    namespace: " << ns;
+    qCDebug(XDPortalSailfishSettings) << "          key: " << key;
 
     // TODO
     Q_UNUSED(ns);
@@ -208,7 +208,7 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
     } else if (key == FDOSettingsKey.accent) {
         return QDBusVariant(getAccentColor());
     }
-    qCDebug(XdgDesktopPortalSailfishSettings) << "Unsupported key: " << key;
+    qCDebug(XDPortalSailfishSettings) << "Unsupported key: " << key;
     return QDBusVariant(QVariant()); // QVariant() constructs an invalid variant
 }
 

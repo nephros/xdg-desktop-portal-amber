@@ -25,9 +25,9 @@ class LockdownPortal : public QDBusAbstractAdaptor
     // soo, underscores.
 
     // not supported, always false (enabled), discard writes
-    Q_PROPERTY(bool disable_printing        READ disable_printing WRITE discard)
-    Q_PROPERTY(bool disable_save_to_disk    READ disable_save_to_disk WRITE discard)
-    Q_PROPERTY(bool disable_application_handlers READ disable_application_handlers WRITE discard)
+    Q_PROPERTY(bool disable_printing             MEMBER printing_dummy )
+    Q_PROPERTY(bool disable_save_to_disk         MEMBER save_dummy )
+    Q_PROPERTY(bool disable_application_handlers MEMBER handlers_dummy )
     // supported
     Q_PROPERTY(bool disable_sound_output READ muted WRITE mute )
     Q_PROPERTY(bool disable_location     READ disable_location    WRITE setLocationSettingsDisabled)
@@ -46,10 +46,15 @@ public Q_SLOTS:
      void locationSettingsDisabledChanged() {};
 
 private:
+     /*
     bool discard(const bool &dummy) const { return false; };
     bool disable_printing() const         { return false; };
     bool disable_save_to_disk() const     { return false; };
     bool disable_application_handlers() const { return false; };
+    */
+    bool printing_dummy = false;
+    bool save_dummy     = false;
+    bool handlers_dummy = false;
 
     bool muted() const;
     void mute(const bool &silent) const;

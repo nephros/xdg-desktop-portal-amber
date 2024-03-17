@@ -89,7 +89,7 @@ void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
     //m_policy->setLocationSettingsEnabled(!disable);
     setLocationEnabled(!disable);
 };
-void LockdownPortal::setMicrophoneDisabled(const bool &disable) const
+void LockdownPortal::setMicrophoneDisabled(const bool &disable)
 {
     qCDebug(XDPortalSailfishLockdown) << "Setting Microphone via Pulse, disable:" << disable;
     setMicMutePulse(disable);
@@ -134,7 +134,7 @@ bool LockdownPortal::connectToPulse()
     }
 
     //m_pulse = new QDBusConnection::connectToPeer(address, peerConnName);
-    m_pulse = *QDBusConnection::connectToPeer(address, peerConnName);
+    *m_pulse = QDBusConnection::connectToPeer(address, peerConnName);
     if (!m_pulse->isConnected()) {
         qCDebug(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();
@@ -146,14 +146,14 @@ bool LockdownPortal::connectToPulse()
     return true;
 }
 
-void LockdownPortal::setMicMutePulse(const bool &muted) const
+void LockdownPortal::setMicMutePulse(const bool &muted)
 {
     static const QString sourceName(QStringLiteral("source.primary_input"));
 
     qCDebug(XDPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
     qCDebug(XDPortalSailfishLockdown) << "Looking for Pulse source";
 
-    if(! connectToPulse()) {
+    if(!connectToPulse()) {
         qCDebug(XDPortalSailfishLockdown) << "Could not set up Pulse peer";
         return;
     }
@@ -161,7 +161,7 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
                           QStringLiteral(""),
                           QStringLiteral("/org/pulseaudio/core1"),
                           QStringLiteral("org.PulseAudio.Core1"),
-                          &m_pulse);
+                          *m_pulse);
     if(!core->isValid()) {
         qCDebug(XDPortalSailfishLockdown) << "Could not set up interface";
         return;
@@ -178,12 +178,11 @@ void LockdownPortal::setMicMutePulse(const bool &muted) const
                           QStringLiteral(""),
                           input,
                           QStringLiteral("org.PulseAudio.Core1.Device"),
-                          &m_pulse);
+                          *m_pulse);
     if(!device->isValid()) {
         qCDebug(XDPortalSailfishLockdown) << "Could not set up interface";
         return;
     }
-    QDBusInterface *device = getPulseSource();
     if(!device->isValid()) {
         qCDebug(XDPortalSailfishLockdown) << "Could not set up interface";
         return;

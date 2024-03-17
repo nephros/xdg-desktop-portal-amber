@@ -64,12 +64,12 @@ private:
     bool disable_location() const;
 
     void setLocationSettingsDisabled(const bool &enable) const;
-    void setMicrophoneDisabled(const bool &enable) const;
+    void setMicrophoneDisabled(const bool &enable);
     void setCameraDisabled(const bool &enable) const;
 
     void setLocationEnabled(const bool &enabled) const;
     bool getLocationEnabled() const;
-    void setMicMutePulse(const bool &muted) const;
+    void setMicMutePulse(const bool &muted);
     bool connectToPulse();
 
     AccessPolicy* m_policy;

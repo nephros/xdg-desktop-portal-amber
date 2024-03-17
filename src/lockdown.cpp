@@ -139,7 +139,7 @@ bool LockdownPortal::connectToPulse()
         qCDebug(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();
         delete m_pulse;
-        delete m_pulse = nullptr;
+        m_pulse = nullptr;
         return false;
     }
     qCDebug(XDPortalSailfishLockdown) << "Pulse P2P Connection established";

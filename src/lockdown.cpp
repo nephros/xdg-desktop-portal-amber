@@ -36,7 +36,6 @@ LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
-    qCDebug(XdgDesktopPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
 

@@ -1,5 +1,5 @@
 set(SRCS
-    app.cpp
+    xdg-desktop-portal-sailfish-ui.cpp
 )
 add_executable(xdg-desktop-portal-sailfish-ui ${SRCS})
 

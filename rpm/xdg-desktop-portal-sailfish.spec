@@ -17,6 +17,8 @@ BuildRequires:  pkgconfig(mlite5)
 BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  cmake
 BuildRequires:  sailfish-svg2png
+Requires(post): systemd
+Requires(postun): systemd
 Requires:   %{name}-config
 Requires:   xdg-desktop-portal
 
@@ -75,6 +77,29 @@ rm -rf %{buildroot}
 %make_install
 desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*.desktop
 
+%preun
+if [ $1 -eq 0 ]; then
+systemctl-user stop %{name}.service
+fi
+
+%post
+systemctl-user daemon-reload ||:
+
+%postun
+systemctl-user daemon-reload ||:
+
+%post config
+systemctl-user daemon-reload ||:
+
+%postun config
+systemctl-user daemon-reload ||:
+
+%post ui
+systemctl-user daemon-reload ||:
+
+%postun ui
+systemctl-user daemon-reload ||:
+
 %files
 %defattr(-,root,root,-)
 # must be privileged to show Dialogs via Access and windowprompt:
@@ -90,7 +115,7 @@ desktop-file-install --delete-original --dir %{buildroot}%{_datadir}/application
 %config %{_localstatedir}/lib/environment/nemo/*.conf
 %config %{_datadir}/xdg-desktop-portal/*-portals.conf
 %config %{_sysconfdir}/sailjail/permissions/XDGPortal*.permission
-# overrides
+# overrides for the main XDP service
 %config %{_userunitdir}/*.service.d/*.conf
 
 %files ui

@@ -27,7 +27,7 @@ AccountPortal::~AccountPortal()
 }
 */
 
-/*! \fn uint Sailfish::XDP::AccountPortal::GetUserInformation(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results)
+/*! \fn uint Sailfish::XDP::AccountPortal::GetUserInformation(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QVariantMap &options, QVariantMap &results, const QDBusMessage &message)
 
      Retrieves basic user information
 

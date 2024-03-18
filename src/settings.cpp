@@ -121,7 +121,7 @@ SettingsPortal::SettingsPortal(QObject *parent)
 SettingsPortal::~SettingsPortal()
 {
 }
-/*! \fn Sailfish::XDP::SettingsPortal::ReadAll(const QStringList &nss)
+/*! \fn void Sailfish::XDP::SettingsPortal::ReadAll(const QStringList &nss, const QDBusMessage &message)
 
     Implements \c org.freedesktop.impl.portal.Settings.ReadAll
 

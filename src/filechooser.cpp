@@ -52,7 +52,7 @@ FileChooserPortal::~FileChooserPortal()
 }
 
 
-/*!  \fn void Sailfish::XDP::FileChooserPortal::OpenFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::XDP::FileChooserPortal::OpenFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options, const QDBusMessage &message)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
@@ -141,7 +141,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
 
 }
 
-/*!  \fn void Sailfish::XDP::FileChooserPortal::SaveFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::XDP::FileChooserPortal::SaveFile(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options, const QDBusMessage &message)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
@@ -173,7 +173,7 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
 
 }
 
-/*!  \fn void Sailfish::XDP::FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options)
+/*!  \fn void Sailfish::XDP::FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &app_id, const QString &parent_window, const QString &title, const QVariantMap &options, const QDBusMessage &message)
 
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.

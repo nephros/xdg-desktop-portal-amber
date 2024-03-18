@@ -39,7 +39,6 @@ LockdownPortal::LockdownPortal(QObject *parent)
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
-    m_pulse =  QDBusConnection(this);
     if(!setupDefaultSource()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up pulse source interface.";
     };
@@ -166,7 +165,7 @@ void LockdownPortal::setMicrophoneDisabled(const bool &disable)
     setMicMutePulse(disable);
     //m_policy->setMicrophoneEnabled(!disable);
 };
-bool LockdownPortal::getMicMutePulse()
+bool LockdownPortal::getMicMutePulse() const
 {
     return m_defaultSource->property("Mute").toBool();
 }
@@ -177,20 +176,24 @@ void LockdownPortal::setMicMutePulse(const bool &muted)
     m_defaultSource->setProperty("Mute", QVariant(muted));
 }
 
-/*! \fn bool LockdownPortal::connectToPulse()
 
-    Establishes a D-Buse peer-to-peer connection to PulseAudio.
-    The connection is represented by the \c m_pulse member.
+/*! \fn bool LockdownPortal::setupDefaultSource()
+
+    Looks up the PulseAudio default Source via D-Bus, and sets up a QDBusInterface for accessing it.
+    The interface is represented by the \c m_defaultSource member.
 
     Returns \c true on success, \c false otherwise.
 */
-bool LockdownPortal::connectToPulse()
+bool LockdownPortal::setupDefaultSource()
 {
     /* FIXME:
-    if ( m_pulse->isConnected()) {
-        qCWarning(XDPortalSailfishLockdown) << "Trying to connect to Pulse Peer while connected";
+    if (m_defaultSource->isValid()) {
+        qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
+        return true;
     }
     */
+    static const QString sourceName(QStringLiteral("source.primary_input"));
+
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
                        QStringLiteral("org.pulseaudio.Server"),
@@ -210,43 +213,19 @@ bool LockdownPortal::connectToPulse()
         return false;
     }
 
-    m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
-    if (!m_pulse.isConnected()) {
+    QDBusConnection pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
+    if (!pulse.isConnected()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();
         return false;
     }
     qCInfo(XDPortalSailfishLockdown) << "Pulse P2P Connection established";
-    return true;
-}
 
-/*! \fn bool LockdownPortal::setupDefaultSource()
-
-    Looks up the PulseAudio default Source via D-Bus, and sets up a QDBusInterface for accessing it.
-    The interface is represented by the \c m_defaultSource member.
-
-    Returns \c true on success, \c false otherwise.
-*/
-bool LockdownPortal::setupDefaultSource()
-{
-    /* FIXME:
-    if (m_defaultSource->isValid()) {
-        qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
-        return true;
-    }
-    */
-    static const QString sourceName(QStringLiteral("source.primary_input"));
-
-
-    if(!connectToPulse()) {
-        qCCritical(XDPortalSailfishLockdown) << "Could not set up Pulse peer";
-        return false;
-    }
     QDBusInterface *core = new QDBusInterface(
                           QStringLiteral(""),
                           QStringLiteral("/org/pulseaudio/core1"),
                           QStringLiteral("org.PulseAudio.Core1"),
-                          m_pulse);
+                          pulse);
     if(!core->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
         return false;
@@ -263,7 +242,7 @@ bool LockdownPortal::setupDefaultSource()
                           QStringLiteral(""),
                           input,
                           QStringLiteral("org.PulseAudio.Core1.Device"),
-                          m_pulse);
+                          pulse);
     if(!m_defaultSource->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Device interface";
         return false;

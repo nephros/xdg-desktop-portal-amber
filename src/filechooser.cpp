@@ -12,8 +12,7 @@
 #include <QCoreApplication>
 #include <QDBusMetaType>
 #include <QDBusInterface>
-#include <QDBusPendingReply>
-#include <QDBusContext>
+#include <QDBusMessage>
 #include <QDBusVariant>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -63,7 +62,8 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &app_id,
                                 const QString &parent_window,
                                 const QString &title,
-                                const QVariantMap &options)
+                                const QVariantMap &options,
+                                const QDBusMessage &message)
 {
     qCDebug(XDPortalSailfishFileChooser) << "FileChooser.OpenFile called with parameters:";
     qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
@@ -119,24 +119,10 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         qCDebug(XDPortalSailfishFileChooser) << "FileChooser failed";
     }
 
-    // ugly hack copied over from KDE:
-    QObject *obj = QObject::parent();
-    if (!obj) {
-        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
-        return;
-    }
-    void *ptr = obj->qt_metacast("QDBusContext");
-    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
-    if (!q_ptr) {
-        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
-        return;
-    }
-    QDBusMessage reply;
-    QDBusMessage message = q_ptr->message();
 
-    reply.setDelayedReply(true);
     //“(ua{sv})”
-    reply = message.createReply(QVariant());
+    QDBusMessage reply = message.createReply(QVariant());
+    reply.setDelayedReply(true);
     // TODO: more properties in results map, like current_filter, choices, etc
     // uris (as)
     // choices (a(ss))
@@ -167,7 +153,8 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options)
+                      const QVariantMap &options,
+                      const QDBusMessage &message)
 {
     qCDebug(XDPortalSailfishFileChooser) << "FileChooser.SaveFiles called with parameters:";
     qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
@@ -180,21 +167,6 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
             qCDebug(XDPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
-
-    // ugly hack copied over from KDE:
-    QObject *obj = QObject::parent();
-    if (!obj) {
-        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
-        return;
-    }
-    void *ptr = obj->qt_metacast("QDBusContext");
-    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
-    if (!q_ptr) {
-        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
-        return;
-    }
-    QDBusMessage message = q_ptr->message();
-
     qCDebug(XDPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));
     QDBusConnection::sessionBus().send(reply);
@@ -213,7 +185,8 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options)
+                      const QVariantMap &options,
+                      const QDBusMessage &message)
 {
     qCDebug(XDPortalSailfishFileChooser) << "FileChooser.SaveFile called with parameters:";
     qCDebug(XDPortalSailfishFileChooser) << "    handle: " << handle.path();
@@ -226,16 +199,6 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
             qCDebug(XDPortalSailfishFileChooser) << "FileChooser dialog options not supported.";
     }
     */
-
-    // ugly hack copied over from KDE:
-    QObject *obj = QObject::parent();
-    void *ptr = obj->qt_metacast("QDBusContext");
-    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
-    if (!q_ptr) {
-        qCWarning(XDPortalSailfishFileChooser) << "Failed to get dbus context for reply";
-        return;
-    }
-    QDBusMessage message = q_ptr->message();
 
     qCDebug(XDPortalSailfishFileChooser) << "This method is not implemented";
     QDBusMessage reply = message.createErrorReply(QDBusError::NotSupported, QStringLiteral("This method is not imlemented"));

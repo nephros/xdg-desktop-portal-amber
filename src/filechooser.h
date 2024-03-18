@@ -11,6 +11,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusObjectPath>
+#include <QDBusMessage>
 
 namespace Sailfish {
 namespace XDP {
@@ -40,19 +41,22 @@ public Q_SLOTS:
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options
+                      const QVariantMap &options,
+                      const QDBusMessage &message
                       );
     void SaveFile(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options
+                      const QVariantMap &options,
+                      const QDBusMessage &message
                       );
     void SaveFiles(const QDBusObjectPath &handle,
                       const QString &app_id,
                       const QString &parent_window,
                       const QString &title,
-                      const QVariantMap &options
+                      const QVariantMap &options,
+                      const QDBusMessage &message
                       );
     void handlePickerError();
     void handlePickerResponse(

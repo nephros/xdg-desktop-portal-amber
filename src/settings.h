@@ -10,6 +10,7 @@
 
 #include <QDBusAbstractAdaptor>
 #include <QDBusVariant>
+#include <QDBusMessage>
 #include <QStringList>
 
 #include <mlite5/MGConfItem>
@@ -44,7 +45,7 @@ public:
     const FDOConfKeys FDOSettingsKey = {"accent-color", "color-scheme", "contrast"};
 
 public Q_SLOTS:
-    void ReadAll(const QStringList &nss);
+    void ReadAll(const QStringList &nss, const QDBusMessage &message);
     QDBusVariant Read(const QString &ns, const QString &key);
     void valueChanged(const QString &key);
     void ambienceChanged(const int &i);

@@ -10,6 +10,7 @@
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 #include <QDBusContext>
+#include <QDBusMessage>
 #include <QDBusVariant>
 #include <QColor>
 #include <QLoggingCategory>
@@ -124,25 +125,12 @@ SettingsPortal::~SettingsPortal()
 
     \a nss specifies the a list of namespaces. See the class description for supported namespaces.
 */
-void SettingsPortal::ReadAll(const QStringList &nss)
+void SettingsPortal::ReadAll(const QStringList &nss, const QDBusMessage &message)
 {
     qCDebug(XDPortalSailfishSettings) << "Settings called with parameters:";
     qCDebug(XDPortalSailfishSettings) << "    namespaces: " << nss;
 
-    // ugly hack copied over from KDE:
-    QObject *obj = QObject::parent();
-    if (!obj) {
-        qCWarning(XDPortalSailfishSettings) << "Failed to get dbus context for reply";
-        return;
-    }
-    void *ptr = obj->qt_metacast("QDBusContext");
-    QDBusContext *q_ptr = reinterpret_cast<QDBusContext *>(ptr);
-    if (!q_ptr) {
-        qCWarning(XDPortalSailfishSettings) << "Failed to get dbus context for reply";
-        return;
-    }
     QDBusMessage reply;
-    QDBusMessage message = q_ptr->message();
     XDPResultMap result;
 
     for (auto i = nss.begin(), end = nss.end(); i != end; ++i) {

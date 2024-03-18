@@ -71,7 +71,7 @@ echo micmute on
 busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone b true
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone
 echo micmute off
-busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone b true
+busctl --user set-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone b false
 busctl --user get-property  org.freedesktop.impl.portal.desktop.sailfish /org/freedesktop/portal/desktop org.freedesktop.impl.portal.Lockdown disable_microphone
 
 bing "test bing"

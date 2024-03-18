@@ -60,7 +60,7 @@ private:
     void setSilent(const bool &silent) const;
 
     bool disable_camera() const;
-    bool disable_microphone() const;
+    bool disable_microphone();
     bool disable_location() const;
 
     void setLocationSettingsDisabled(const bool &enable) const;

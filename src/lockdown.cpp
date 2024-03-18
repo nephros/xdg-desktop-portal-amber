@@ -152,7 +152,7 @@ void LockdownPortal::setLocationEnabled(const bool &enabled) const
 /************************************/
 /***** Microphone               *****/
 /************************************/
-bool LockdownPortal::disable_microphone() const
+bool LockdownPortal::disable_microphone()
 {
     qCDebug(XDPortalSailfishLockdown) << "Reading Mic setting";
     return getMicMutePulse();

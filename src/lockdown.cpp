@@ -28,7 +28,7 @@ const QString CompatibilitySettingsFile = QStringLiteral("/etc/location/location
 const QString LocationSettingsSection = QStringLiteral("location");
 const QString LocationSettingsEnabledKey = QStringLiteral("enabled");
 
-const QString peerConnName = QStringLiteral("XDPPulsePeer1");
+const QString pulsePeerConnName = QStringLiteral("XDPPulsePeer1");
 
 namespace Sailfish {
 namespace XDP {
@@ -136,8 +136,8 @@ bool LockdownPortal::connectToPulse()
         return false;
     }
 
-    //m_pulse = new QDBusConnection::connectToPeer(address, peerConnName);
-    *m_pulse = QDBusConnection::connectToPeer(address, peerConnName);
+    //m_pulse = new QDBusConnection::connectToPeer(address, pulsePeerConnName);
+    *m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
     if (!m_pulse->isConnected()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();

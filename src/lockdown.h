@@ -21,19 +21,18 @@ class LockdownPortal : public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.freedesktop.impl.portal.Lockdown")
     // note: the XDP spec uses hyphens as property names. They are not allowed
     // in C++ identifiers, and deprecated for D-Bus names.
-    // soo, underscores.
+    // Soo, underscores.
 
     // not supported, always false (enabled), discard writes
     Q_PROPERTY(bool disable_printing             MEMBER printing_dummy )
     Q_PROPERTY(bool disable_save_to_disk         MEMBER save_dummy )
     Q_PROPERTY(bool disable_application_handlers MEMBER handlers_dummy )
     // supported
-    Q_PROPERTY(bool disable_sound_output READ isSilent WRITE setSilent )
+    Q_PROPERTY(bool disable_sound_output READ isSilent            WRITE setSilent )
     Q_PROPERTY(bool disable_location     READ disable_location    WRITE setLocationSettingsDisabled)
     Q_PROPERTY(bool disable_microphone   READ disable_microphone  WRITE setMicrophoneDisabled)
     // directly via MDM:
-    Q_PROPERTY(bool disable_camera      READ disable_camera      WRITE setCameraDisabled)
-    //Q_PROPERTY(bool disable_location    READ disable_location    WRITE setLocationSettingsDisabled)
+    Q_PROPERTY(bool disable_camera       READ disable_camera      WRITE setCameraDisabled)
 
 public:
     explicit LockdownPortal(QObject *parent);
@@ -45,12 +44,6 @@ public Q_SLOTS:
      void locationSettingsDisabledChanged() {};
 
 private:
-     /*
-    bool discard(const bool &dummy) const { return false; };
-    bool disable_printing() const         { return false; };
-    bool disable_save_to_disk() const     { return false; };
-    bool disable_application_handlers() const { return false; };
-    */
     bool printing_dummy = false;
     bool save_dummy     = false;
     bool handlers_dummy = false;
@@ -68,8 +61,7 @@ private:
 
     void setLocationEnabled(const bool &enabled) const;
     bool getLocationEnabled() const;
-    void setMicMutePulse(const bool &muted);
-    bool getMicMutePulse() const ;
+
     bool setupDefaultSource();
 
     AccessPolicy* m_policy;

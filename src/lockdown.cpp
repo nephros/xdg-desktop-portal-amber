@@ -82,12 +82,12 @@ void LockdownPortal::setSilent(const bool &silent) const
 /************************************/
 bool LockdownPortal::disable_camera() const
 {
-    qCDebug(XDPortalSailfishLockdown) << "Reading Camera setting";
+    qCDebug(XDPortalSailfishLockdown) << "Read: Camera setting";
     return m_policy->cameraEnabled();
 };
 void LockdownPortal::setCameraDisabled(const bool &disable) const
 {
-    qCDebug(XDPortalSailfishLockdown) << "Setting Camera setting, disable:" << disable;
+    qCDebug(XDPortalSailfishLockdown) << "Set: Camera disable:" << disable;
     m_policy->setCameraEnabled(!disable);
 };
 
@@ -96,13 +96,13 @@ void LockdownPortal::setCameraDisabled(const bool &disable) const
 /************************************/
 bool LockdownPortal::disable_location() const
 {
-    qCDebug(XDPortalSailfishLockdown) << "Reading Location setting";
+    qCDebug(XDPortalSailfishLockdown) << "Read: Location setting";
     return LockdownPortal::getLocationEnabled();
     //return m_policy->locationSettingsEnabled();
 };
 void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
 {
-    qCDebug(XDPortalSailfishLockdown) << "Setting Location setting, disable:" << disable;
+    qCDebug(XDPortalSailfishLockdown) << "Set: Location disable:" << disable;
     //m_policy->setLocationSettingsEnabled(!disable);
     setLocationEnabled(!disable);
 };
@@ -123,7 +123,6 @@ bool LockdownPortal::getLocationEnabled() const
 void LockdownPortal::setLocationEnabled(const bool &enabled) const
 {
     qCDebug(XDPortalSailfishLockdown) << "Setting Location setting to enabled: :" << enabled;
-
 
     if (!QFile(LocationSettingsFile).exists()) {
         qWarning() << "Location settings configuration file does not exist. Refusing to create new.";
@@ -155,27 +154,16 @@ void LockdownPortal::setLocationEnabled(const bool &enabled) const
 /************************************/
 bool LockdownPortal::disable_microphone()
 {
-    qCDebug(XDPortalSailfishLockdown) << "Reading Mic setting";
-    return getMicMutePulse();
+    qCDebug(XDPortalSailfishLockdown) << "Read: Microphone setting";
+    return m_defaultSource->property("Mute").toBool();
     //return m_policy->microphoneEnabled();
 };
 void LockdownPortal::setMicrophoneDisabled(const bool &disable)
 {
-    qCDebug(XDPortalSailfishLockdown) << "Setting Microphone setting, disable:" << disable;
-    setMicMutePulse(disable);
+    qCDebug(XDPortalSailfishLockdown) << "Set: Microphone disable:" << disable;
+    m_defaultSource->setProperty("Mute", QVariant(disable));
     //m_policy->setMicrophoneEnabled(!disable);
 };
-bool LockdownPortal::getMicMutePulse() const
-{
-    return m_defaultSource->property("Mute").toBool();
-}
-
-void LockdownPortal::setMicMutePulse(const bool &muted)
-{
-    qCDebug(XDPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
-    m_defaultSource->setProperty("Mute", QVariant(muted));
-}
-
 
 /*! \fn bool LockdownPortal::setupDefaultSource()
 
@@ -186,20 +174,15 @@ void LockdownPortal::setMicMutePulse(const bool &muted)
 */
 bool LockdownPortal::setupDefaultSource()
 {
-    /* FIXME:
-    if (m_defaultSource->isValid()) {
-        qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
-        return true;
-    }
-    */
+
     static const QString sourceName(QStringLiteral("source.primary_input"));
 
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
-                       QStringLiteral("org.pulseaudio.Server"),
-                       QStringLiteral("/org/pulseaudio/server_lookup1"),
-                       QStringLiteral("org.PulseAudio.ServerLookup1")
-                       );
+                          QStringLiteral("org.pulseaudio.Server"),
+                          QStringLiteral("/org/pulseaudio/server_lookup1"),
+                          QStringLiteral("org.PulseAudio.ServerLookup1")
+                          );
 
     if (!ifc->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not look up Pulse server address";
@@ -212,7 +195,7 @@ bool LockdownPortal::setupDefaultSource()
         ifc->deleteLater();
         return false;
     }
-
+    // Create a peer-to-peer connection to the server
     QDBusConnection pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
     if (!pulse.isConnected()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
@@ -221,11 +204,12 @@ bool LockdownPortal::setupDefaultSource()
     }
     qCInfo(XDPortalSailfishLockdown) << "Pulse P2P Connection established";
 
+    // Use Core control interface to look up source
     QDBusInterface *core = new QDBusInterface(
-                          QStringLiteral(""),
-                          QStringLiteral("/org/pulseaudio/core1"),
-                          QStringLiteral("org.PulseAudio.Core1"),
-                          pulse);
+                           QStringLiteral(""),
+                           QStringLiteral("/org/pulseaudio/core1"),
+                           QStringLiteral("org.PulseAudio.Core1"),
+                           pulse);
     if(!core->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
         return false;
@@ -238,16 +222,19 @@ bool LockdownPortal::setupDefaultSource()
     QString input = source.value().path();
     qCDebug(XDPortalSailfishLockdown) << "default input:" << input;
     core->deleteLater();
+
+    // Using the device path, set up the Device interface
     m_defaultSource = new QDBusInterface(
-                          QStringLiteral(""),
-                          input,
-                          QStringLiteral("org.PulseAudio.Core1.Device"),
-                          pulse);
+                      QStringLiteral(""),
+                      input,
+                      QStringLiteral("org.PulseAudio.Core1.Device"),
+                      pulse);
     if(!m_defaultSource->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Device interface";
         return false;
     }
     return true;
 }
+
 }
 }

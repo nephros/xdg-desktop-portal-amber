@@ -11,6 +11,7 @@
 #include <QDBusMetaType>
 #include <QDBusInterface>
 #include <QDBusConnectionInterface>
+#include <QDBusConnection>
 #include <QDBusReply>
 #include <QDBusObjectPath>
 #include <QLoggingCategory>
@@ -38,6 +39,7 @@ LockdownPortal::LockdownPortal(QObject *parent)
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
+    m_pulse =  QDBusConnection(this);
     if(!setupDefaultSource()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up pulse source interface.";
     };
@@ -208,14 +210,10 @@ bool LockdownPortal::connectToPulse()
         return false;
     }
 
-    //m_pulse = new QDBusConnection::connectToPeer(address, pulsePeerConnName);
-    //*m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
-    m_pulse->connectToPeer(address, pulsePeerConnName);
-    if (!m_pulse->isConnected()) {
+    m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
+    if (!m_pulse.isConnected()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();
-        delete m_pulse;
-        m_pulse = nullptr;
         return false;
     }
     qCInfo(XDPortalSailfishLockdown) << "Pulse P2P Connection established";
@@ -248,7 +246,7 @@ bool LockdownPortal::setupDefaultSource()
                           QStringLiteral(""),
                           QStringLiteral("/org/pulseaudio/core1"),
                           QStringLiteral("org.PulseAudio.Core1"),
-                          *m_pulse);
+                          m_pulse);
     if(!core->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
         return false;
@@ -265,7 +263,7 @@ bool LockdownPortal::setupDefaultSource()
                           QStringLiteral(""),
                           input,
                           QStringLiteral("org.PulseAudio.Core1.Device"),
-                          *m_pulse);
+                          m_pulse);
     if(!m_defaultSource->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Device interface";
         return false;

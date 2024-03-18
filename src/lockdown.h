@@ -76,7 +76,7 @@ private:
 
     AccessPolicy* m_policy;
     QDBusInterface* m_profiled;
-    QDBusConnection* m_pulse;
+    QDBusConnection m_pulse;
     QDBusInterface* m_defaultSource;
 };
 }

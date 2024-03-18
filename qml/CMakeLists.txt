@@ -2,7 +2,7 @@ configure_file(xdg-desktop-portal-sailfish-ui.desktop.in xdg-desktop-portal-sail
 configure_file(org.freedesktop.impl.portal.desktop.sailfish.ui.service.in org.freedesktop.impl.portal.desktop.sailfish.ui.service @ONLY)
 
 set(SRCS
-    app.cpp
+    xdg-desktop-portal-sailfish-ui.cpp
 )
 add_executable(xdg-desktop-portal-sailfish-ui ${SRCS})
 

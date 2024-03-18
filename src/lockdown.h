@@ -29,7 +29,7 @@ class LockdownPortal : public QDBusAbstractAdaptor
     Q_PROPERTY(bool disable_save_to_disk         MEMBER save_dummy )
     Q_PROPERTY(bool disable_application_handlers MEMBER handlers_dummy )
     // supported
-    Q_PROPERTY(bool disable_sound_output READ muted WRITE mute )
+    Q_PROPERTY(bool disable_sound_output READ isSilent WRITE setSilent )
     Q_PROPERTY(bool disable_location     READ disable_location    WRITE setLocationSettingsDisabled)
     Q_PROPERTY(bool disable_microphone   READ disable_microphone  WRITE setMicrophoneDisabled)
     // directly via MDM:
@@ -56,8 +56,8 @@ private:
     bool save_dummy     = false;
     bool handlers_dummy = false;
 
-    bool muted() const;
-    void mute(const bool &silent) const;
+    bool isSilent() const;
+    void setSilent(const bool &silent) const;
 
     bool disable_camera() const;
     bool disable_microphone() const;
@@ -70,11 +70,14 @@ private:
     void setLocationEnabled(const bool &enabled) const;
     bool getLocationEnabled() const;
     void setMicMutePulse(const bool &muted);
+    bool getMicMutePulse();
     bool connectToPulse();
+    bool setupDefaultSource();
 
     AccessPolicy* m_policy;
     QDBusInterface* m_profiled;
     QDBusConnection* m_pulse;
+    QDBusInterface* m_defaultSource;
 };
 }
 }

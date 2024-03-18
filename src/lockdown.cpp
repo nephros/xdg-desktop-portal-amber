@@ -38,6 +38,9 @@ LockdownPortal::LockdownPortal(QObject *parent)
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
+    if(!setupDefaultSource()) {
+        qCCritical(XDPortalSailfishLockdown) << "Could not set up pulse source interface.";
+    };
 
     QObject::connect(m_policy, SIGNAL(cameraEnabledChanged()), this, SLOT(cameraDisabledChanged()));
     //QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
@@ -48,7 +51,10 @@ LockdownPortal::LockdownPortal(QObject *parent)
 
 }
 
-bool LockdownPortal::muted() const
+/*******************************************/
+/***** Sound Output / Profile / Silent *****/
+/*******************************************/
+bool LockdownPortal::isSilent() const
 {
     QDBusReply<QString> pcall = m_profiled->call(QStringLiteral("get_profile"));
 
@@ -60,7 +66,7 @@ bool LockdownPortal::muted() const
     return false;
 }
 
-void LockdownPortal::mute(const bool &silent) const
+void LockdownPortal::setSilent(const bool &silent) const
 {
     qCDebug(XDPortalSailfishLockdown) << "Setting mute:" << silent;
     if (silent) {
@@ -70,28 +76,87 @@ void LockdownPortal::mute(const bool &silent) const
     }
 }
 
+/************************************/
+/***** Camera                   *****/
+/************************************/
 bool LockdownPortal::disable_camera() const
 {
     qCDebug(XDPortalSailfishLockdown) << "Reading Camera setting";
     return m_policy->cameraEnabled();
 };
-bool LockdownPortal::disable_microphone() const
+void LockdownPortal::setCameraDisabled(const bool &disable) const
 {
-    qCDebug(XDPortalSailfishLockdown) << "Reading Mic setting";
-    return m_policy->microphoneEnabled();
+    qCDebug(XDPortalSailfishLockdown) << "Setting Camera setting, disable:" << disable;
+    m_policy->setCameraEnabled(!disable);
 };
+
+/************************************/
+/***** Location                 *****/
+/************************************/
 bool LockdownPortal::disable_location() const
 {
     qCDebug(XDPortalSailfishLockdown) << "Reading Location setting";
     return LockdownPortal::getLocationEnabled();
     //return m_policy->locationSettingsEnabled();
 };
-
 void LockdownPortal::setLocationSettingsDisabled(const bool &disable) const
 {
     qCDebug(XDPortalSailfishLockdown) << "Setting Location setting, disable:" << disable;
     //m_policy->setLocationSettingsEnabled(!disable);
     setLocationEnabled(!disable);
+};
+bool LockdownPortal::getLocationEnabled() const
+{
+    qCDebug(XDPortalSailfishLockdown) << "Getting Location setting from file";
+    if (!QFile(LocationSettingsFile).exists()) {
+        qWarning() << "Location settings configuration file does not exist.";
+        return false;
+    }
+    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
+    settingsFile.beginGroup(LocationSettingsSection);
+    bool value = settingsFile.value(LocationSettingsEnabledKey).toBool();
+    settingsFile.endGroup();
+    return value;
+}
+// see also sailfishos/nemo-qml-plugin-systemsettings
+void LockdownPortal::setLocationEnabled(const bool &enabled) const
+{
+    qCDebug(XDPortalSailfishLockdown) << "Setting Location setting to enabled: :" << enabled;
+
+
+    if (!QFile(LocationSettingsFile).exists()) {
+        qWarning() << "Location settings configuration file does not exist. Refusing to create new.";
+        return;
+    }
+
+    // write the values to the conf file
+    // FIXME: we should mutex or somesuuch here;
+    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
+    QSettings compatFile( CompatibilitySettingsFile, QSettings::IniFormat);
+    settingsFile.setFallbacksEnabled(false);
+    compatFile.setFallbacksEnabled(false);
+
+    settingsFile.beginGroup(LocationSettingsSection);
+    settingsFile.setValue(LocationSettingsEnabledKey, enabled);
+    settingsFile.endGroup();
+
+    compatFile.beginGroup(LocationSettingsSection);
+    compatFile.setValue(LocationSettingsEnabledKey, enabled);
+    compatFile.endGroup();
+
+    settingsFile.sync();
+    compatFile.sync();
+
+}
+
+/************************************/
+/***** Microphone               *****/
+/************************************/
+bool LockdownPortal::disable_microphone() const
+{
+    qCDebug(XDPortalSailfishLockdown) << "Reading Mic setting";
+    return getMicMutePulse();
+    //return m_policy->microphoneEnabled();
 };
 void LockdownPortal::setMicrophoneDisabled(const bool &disable)
 {
@@ -99,11 +164,16 @@ void LockdownPortal::setMicrophoneDisabled(const bool &disable)
     setMicMutePulse(disable);
     //m_policy->setMicrophoneEnabled(!disable);
 };
-void LockdownPortal::setCameraDisabled(const bool &disable) const
+bool LockdownPortal::getMicMutePulse()
 {
-    qCDebug(XDPortalSailfishLockdown) << "Setting Camera setting, disable:" << disable;
-    m_policy->setCameraEnabled(!disable);
-};
+    return m_defaultSource->property("Mute").toBool();
+}
+
+void LockdownPortal::setMicMutePulse(const bool &muted)
+{
+    qCDebug(XDPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
+    m_defaultSource->setProperty("Mute", QVariant(muted));
+}
 
 /*! \fn bool LockdownPortal::connectToPulse()
 
@@ -149,15 +219,25 @@ bool LockdownPortal::connectToPulse()
     return true;
 }
 
-void LockdownPortal::setMicMutePulse(const bool &muted)
+/*! \fn bool LockdownPortal::setupDefaultSource()
+
+    Looks up the PulseAudio default Source via D-Bus, and sets up a QDBusInterface for accessing it.
+    The interface is represented by the \c m_defaultSource member.
+
+    Returns \c true on success, \c false otherwise.
+*/
+bool LockdownPortal::setupDefaultSource()
 {
+    if (m_defaultSource->isValid() {
+        qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
+        return true;
+    }
     static const QString sourceName(QStringLiteral("source.primary_input"));
 
-    qCDebug(XDPortalSailfishLockdown) << "Setting pulse source muted:" << muted;
 
     if(!connectToPulse()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Pulse peer";
-        return;
+        return false;
     }
     QDBusInterface *core = new QDBusInterface(
                           QStringLiteral(""),
@@ -166,71 +246,26 @@ void LockdownPortal::setMicMutePulse(const bool &muted)
                           *m_pulse);
     if(!core->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
-        return;
+        return false;
     }
     QDBusReply<QDBusObjectPath> source = core->call( "GetSourceByName", sourceName);
     if(!source.isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could find default input";
-        return;
+        return false;
     }
     QString input = source.value().path();
     qCDebug(XDPortalSailfishLockdown) << "default input:" << input;
     core->deleteLater();
-    QDBusInterface *device = new QDBusInterface(
+    m_defaultSource = new QDBusInterface(
                           QStringLiteral(""),
                           input,
                           QStringLiteral("org.PulseAudio.Core1.Device"),
                           *m_pulse);
-    if(!device->isValid()) {
+    if(!m_defaultSource->isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Device interface";
-        return;
-    }
-    device->setProperty("Mute", QVariant(muted));
-}
-
-bool LockdownPortal::getLocationEnabled() const
-{
-    qCDebug(XDPortalSailfishLockdown) << "Getting Location setting from file";
-    if (!QFile(LocationSettingsFile).exists()) {
-        qWarning() << "Location settings configuration file does not exist.";
         return false;
     }
-    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
-    settingsFile.beginGroup(LocationSettingsSection);
-    bool value = settingsFile.value(LocationSettingsEnabledKey).toBool();
-    settingsFile.endGroup();
-    return value;
+    return true;
 }
-// see also sailfishos/nemo-qml-plugin-systemsettings
-void LockdownPortal::setLocationEnabled(const bool &enabled) const
-{
-    qCDebug(XDPortalSailfishLockdown) << "Setting Location setting to enabled: :" << enabled;
-
-
-    if (!QFile(LocationSettingsFile).exists()) {
-        qWarning() << "Location settings configuration file does not exist. Refusing to create new.";
-        return;
-    }
-
-    // write the values to the conf file
-    // FIXME: we should mutex or somesuuch here;
-    QSettings settingsFile( LocationSettingsFile, QSettings::IniFormat);
-    QSettings compatFile( CompatibilitySettingsFile, QSettings::IniFormat);
-    settingsFile.setFallbacksEnabled(false);
-    compatFile.setFallbacksEnabled(false);
-
-    settingsFile.beginGroup(LocationSettingsSection);
-    settingsFile.setValue(LocationSettingsEnabledKey, enabled);
-    settingsFile.endGroup();
-
-    compatFile.beginGroup(LocationSettingsSection);
-    compatFile.setValue(LocationSettingsEnabledKey, enabled);
-    compatFile.endGroup();
-
-    settingsFile.sync();
-    compatFile.sync();
-
-}
-
 }
 }

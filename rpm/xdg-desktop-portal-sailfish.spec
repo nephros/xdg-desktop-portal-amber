@@ -108,22 +108,22 @@ systemctl-user stop %{name}.service
 fi
 
 %post
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %postun
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %post config
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %postun config
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %post ui
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %postun ui
-systemd-user daemon-reload ||:
+systemctl-user daemon-reload ||:
 
 %files
 %defattr(-,root,root,-)

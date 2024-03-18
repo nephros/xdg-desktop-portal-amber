@@ -228,7 +228,7 @@ bool LockdownPortal::connectToPulse()
 */
 bool LockdownPortal::setupDefaultSource()
 {
-    if (m_defaultSource->isValid() {
+    if (m_defaultSource->isValid()) {
         qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
         return true;
     }

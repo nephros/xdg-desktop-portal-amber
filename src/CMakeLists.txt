@@ -6,7 +6,7 @@ set(SRCS
     screenshot.cpp
     settings.cpp
     wallpaper.cpp
-    main.cpp
+    xdg-desktop-portal-sailfish.cpp
 )
 
 include(FindPkgConfig)

@@ -209,7 +209,8 @@ bool LockdownPortal::connectToPulse()
     }
 
     //m_pulse = new QDBusConnection::connectToPeer(address, pulsePeerConnName);
-    *m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
+    //*m_pulse = QDBusConnection::connectToPeer(address, pulsePeerConnName);
+    m_pulse->connectToPeer(address, pulsePeerConnName);
     if (!m_pulse->isConnected()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not connect to Pulse server";
         ifc->deleteLater();

@@ -184,9 +184,11 @@ void LockdownPortal::setMicMutePulse(const bool &muted)
 */
 bool LockdownPortal::connectToPulse()
 {
+    /* FIXME:
     if ( m_pulse->isConnected()) {
         qCWarning(XDPortalSailfishLockdown) << "Trying to connect to Pulse Peer while connected";
     }
+    */
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
                        QStringLiteral("org.pulseaudio.Server"),
@@ -228,10 +230,12 @@ bool LockdownPortal::connectToPulse()
 */
 bool LockdownPortal::setupDefaultSource()
 {
+    /* FIXME:
     if (m_defaultSource->isValid()) {
         qCWarning(XDPortalSailfishLockdown) << "Pulse source already set.";
         return true;
     }
+    */
     static const QString sourceName(QStringLiteral("source.primary_input"));
 
 

@@ -33,10 +33,6 @@ QML Types:
 /*! \externalpage https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html
     \title XDG Desktop Portal Backend Specification
 */
-/*! \externalpage https://sailfishos.org/develop/docs/nemo-qml-plugin-dbus/
-    \title Nemo QML Plugin D-Bus
-    \target Nemo.DBus
-*/
 /*! \externalpage https://build.sailfishos.org
     \title Community OBS
 */

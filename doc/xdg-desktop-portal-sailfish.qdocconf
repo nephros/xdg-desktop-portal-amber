@@ -7,6 +7,7 @@ url             = $BASE_URL/xdg-desktop-portal-sailfish
 sourcedirs += $$PWD/../src $$PWD/../doc $$PWD/../qml
 headerdirs += $$PWD/../src
 
+depends = nemo-qml-plugin-dbus user-managerd
 
 outputformats = HTML
 outputdir = $$PWD/html

@@ -165,7 +165,7 @@ void LockdownPortal::setMicrophoneDisabled(const bool &disable)
     //m_policy->setMicrophoneEnabled(!disable);
 };
 
-/*! \fn bool LockdownPortal::setupDefaultSource()
+/* \fn bool LockdownPortal::setupDefaultSource()
 
     Looks up the PulseAudio default Source via D-Bus, and sets up a QDBusInterface for accessing it.
     The interface is represented by the \c m_defaultSource member.

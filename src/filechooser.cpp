@@ -212,7 +212,6 @@ void FileChooserPortal::SaveFiles(const QDBusObjectPath &handle,
 
     Receives the results from the picker Dialog.
 
-    \sa uidoc
     \internal
 */
 void FileChooserPortal::handlePickerError()
@@ -228,13 +227,11 @@ void FileChooserPortal::handlePickerError()
     dialog response options, \a result ia an array of string variants listing the
     selected file(s) or directories.
 
-    \a message is used to send the reply
-
     \note \a result is a QVariantList mainly because the Nemo.DBus plugin
     prefers to marshal most things as Variants. If you use the results in a DBus
     reply, make sure to transform it into e.g. a simple QStringList before sending.
 
-    \sa uidoc, Sailfish::XDP::FileChooserPortal::PickerResponse, Nemo.DBus
+    \sa Sailfish::XDP::FileChooserPortal::PickerResponse, [nemo-qml-plugin-dbus]{Nemo QML Plugin DBus}
     \internal
 */
 void FileChooserPortal::handlePickerResponse(
@@ -254,7 +251,7 @@ void FileChooserPortal::handlePickerResponse(
     After the GUI has been launched, listens for the \c pickerDone signal, and
     calls FileChooserPortal::handlePickerResponse with the response.
 
-    \sa uidoc, handlePickerResponse
+    \sa handlePickerResponse
     \internal
 */
 void FileChooserPortal::setupPickerResponse()

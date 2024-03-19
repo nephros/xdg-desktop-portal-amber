@@ -13,47 +13,55 @@ import Sailfish.Pickers 1.0
 import Sailfish.Lipstick 1.0
 import Nemo.DBus 2.0
 
-/*! \qmlmodule Sailfish.XDP.Portals.UI 1.0
-    \brief XDG Desktop Portal Backend QML UI
+/*! \group qmltypes
+    \title UI Types
+    \target uitypes
 
-    This module includes the following types:«
-
-    \generatelist{qmltypesbymodule Sailfish.XDP.Portals.UI}
+    \generatelist{related}
 */
 
 /*! \qmltype xdg-desktop-portal-sailfish-ui
     \brief XDG Desktop UI Manager
-    \ingroup uitypes
+    \ingroup qmltypes
     \inqmlmodule Sailfish.XDP.Portals.UI
 
     This application manages the display of various UI dialogs for the XDG Desktop Portal Backend.
 
-    It can be activated using the D-Bus session bus at:
+    It listens on the D-Bus session bus at:
 
     \list
     \li Service:     \c org.freedesktop.impl.portal.desktop.sailfish.ui
     \li Path:        \c /org/freedesktop/impl/portal/desktop/sailfish/ui
     \li Interface:   \c org.freedesktop.impl.portal.desktop.sailfish.ui
     \endlist
+
+    The bus may be introspected for details about the API.
 */
 ApplicationWindow { id: root
 
     cover: null
-    /*! \qmlproperty ConfirmationDialog xdg-desktop-portal-sailfish-ui::_confirmationDialog
-       Holds the instance of the picker dialog launched.
+    /*! Holds the instance of the picker dialog launched.
        \sa ConfirmationDialog
        \internal
     */
     property ConfirmationDialog _confirmationDialog
-    /*! \qmlproperty FilePickerDialog xdg-desktop-portal-sailfish-ui::_filePickerDialog
-       Holds the instance of the picker dialog launched.
-       \sa FilePickerDialog
+    /*! Holds the instance of the picker dialog launched.
        \internal
+       \sa FilePickerDialog
     */
     property FilePickerDialog _filePickerDialog
 
-    /*! \qmlmethod iconHintToUrl(hint)
-        Maps XDP icon hints to an url of an available icon from Silica.
+    /*! Maps icon hints given by the calling application or XDP to an url of an available icon from Silica.
+
+        iconHintToUrl knows about the following hints:
+        \list
+            \li \c applets-screenshooter-symbolic
+            \li \c audio-input-microphone-symbolic
+            \li \c audio-speakers-symbolic
+            \li \c camera-web-symbolic
+            \li \c find-location-symbolic
+            \li \c preferences-desktop-wallpaper-symbolic
+        \endlist
     */
     function iconHintToUrl(hint) {
         var url="image://theme/icon-m-question"

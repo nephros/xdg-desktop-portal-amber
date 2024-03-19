@@ -169,7 +169,6 @@ uint AccessPortal::AccessDialog(const QDBusObjectPath &handle,
 
     Receives the results from the Dialog.
 
-    \sa uidoc
     \internal
 */
 void AccessPortal::handleDialogError()
@@ -183,7 +182,7 @@ void AccessPortal::handleDialogError()
     Receives the results from the Dialog. \a code corresponds to the
     dialog response options.
 
-    \sa uidoc, Sailfish::XDP::AccessPortal::DialogResponse, Nemo.DBus
+    \sa Sailfish::XDP::AccessPortal::DialogResponse, [nemo-qml-plugin-dbus]{Nemo QML Plugin DBus}
     \internal
 */
 void AccessPortal::handleDialogResponse( const int &code )
@@ -195,10 +194,10 @@ void AccessPortal::handleDialogResponse( const int &code )
 
 /*! \fn void Sailfish::XDP::AccessPortal::setupDialogResponse()
 
-    After the GUI has been launched, listens for the \c dialogDone signal, and
+    After the GUI has been launched, listens for the dialog's \c Done signal, and
     calls AccessPortal::handleDialogResponse with the response.
 
-    \sa uidoc, handleDialogResponse
+    \sa handleDialogResponse
     \internal
 */
 void AccessPortal::setupDialogResponse()

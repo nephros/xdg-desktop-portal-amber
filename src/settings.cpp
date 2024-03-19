@@ -213,8 +213,10 @@ QDBusVariant SettingsPortal::Read(const QString &ns,
 
     \sa SettingsPortalNamespaces
 */
-/*! \fn void Sailfish::XDP::SettingsPortal::valueChanged(const QString &what)
+/*! \fn void Sailfish::XDP::SettingsPortal::valueChanged(const QString &key)
     Slot to receive change signals, and do something about that.
+
+    \a key corresponds to a FDOSettingsKey value
 
     \sa SettingsPortal::SettingChanged
     \internal
@@ -250,9 +252,9 @@ void SettingsPortal::readAccentColor()
 }
 
 /*! \fn void Sailfish::XDP::SettingsPortal::ambienceChanged(const int &i)
-    Slot to receive change signals from ambienced, and do something about that.
+    Slot to receive change signals from ambienced, and do something about that \a{i}.
 
-    \sa com.jolla.ambienced.contentChanged
+    \sa [ambienced]{com.jolla.ambienced.contentChanged()}, Sailfish::Ambience
     \internal
 */
 void SettingsPortal::ambienceChanged(const int &i)

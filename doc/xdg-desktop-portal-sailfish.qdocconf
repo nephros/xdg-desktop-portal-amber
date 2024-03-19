@@ -5,6 +5,7 @@ version         = 1.0.0
 url             = $BASE_URL/xdg-desktop-portal-sailfish
 
 sourcedirs += $$PWD/../src $$PWD/../doc $$PWD/../qml
+sourcedirs += $$PWD/src
 headerdirs += $$PWD/../src
 
 depends = \

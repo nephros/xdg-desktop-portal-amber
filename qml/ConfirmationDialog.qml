@@ -14,7 +14,7 @@ import Sailfish.Lipstick 1.0
 /*! \qmltype ConfirmationDialog
     \brief XDG Desktop Access UI
     \inqmlmodule Sailfish.XDP.Portals.UI
-    \ingroup uitypes
+    \ingroup qmltypes
 
     A simple dialog presenting an \c Accept and \c Deny button under some contextual information.
 

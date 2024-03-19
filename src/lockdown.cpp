@@ -37,8 +37,10 @@ LockdownPortal::LockdownPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
+
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
+
     m_defaultSource = nullptr;
     if(!setupDefaultSource()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up pulse source interface.";
@@ -52,7 +54,7 @@ LockdownPortal::LockdownPortal(QObject *parent)
     //QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
     //QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
     // FIXME: signatures do not match:
-    QObject::connect(m_policy, SIGNAL(profile_changed()), this, SLOT(locationSettingsDisabledChanged()));
+    QObject::connect(m_profiled, SIGNAL(profile_changed), this, SLOT(profileChanged));
 
 }
 

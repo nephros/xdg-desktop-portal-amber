@@ -15,6 +15,7 @@
 
 namespace Sailfish {
 namespace XDP {
+using ProfiledProfile = QList<QList<QString>>;
 class LockdownPortal : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -28,7 +29,7 @@ class LockdownPortal : public QDBusAbstractAdaptor
     Q_PROPERTY(bool disable_save_to_disk         MEMBER save_dummy )
     Q_PROPERTY(bool disable_application_handlers MEMBER handlers_dummy )
     // supported
-    Q_PROPERTY(bool disable_sound_output READ isSilent            WRITE setSilent )
+    Q_PROPERTY(bool disable_sound_output READ isSilent            WRITE setSilent NOTIFY silentChanged)
     Q_PROPERTY(bool disable_location     READ disable_location    WRITE setLocationSettingsDisabled)
     Q_PROPERTY(bool disable_microphone   READ disable_microphone  WRITE setMicrophoneDisabled)
     // directly via MDM:
@@ -37,11 +38,15 @@ class LockdownPortal : public QDBusAbstractAdaptor
 public:
     explicit LockdownPortal(QObject *parent);
     //~LockdownPortal() override;
+    Q_SIGNAL void silentChanged();
 
 public Q_SLOTS:
      void cameraDisabledChanged() {};
      void microphoneDisabledChanged() {};
      void locationSettingsDisabledChanged() {};
+
+     // signal from profiled is profile_changed( bbsa(sss) )
+     void profileChanged(const bool, const bool, const QString, const ProfiledProfile) { emit silentChanged(); };
 
 private:
     bool printing_dummy = false;
@@ -70,4 +75,6 @@ private:
 };
 }
 }
+Q_DECLARE_METATYPE(Sailfish::XDP::ProfiledProfile);
+
 #endif // XDG_DESKTOP_PORTAL_SAILFISH_LOCKDOWN_H

@@ -34,7 +34,9 @@ AccountPortal::~AccountPortal()
      See the \l{XDG Desktop Portal Specification} for possible values of \a options.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window, \a results.
 
-     \sa Sailfish User Manager Daemon
+     \a message is used to send the reply
+
+     \sa SailfishUserManager, QDBusInterface
 */
 uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
                                   const QString &app_id,

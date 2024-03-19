@@ -57,6 +57,7 @@ FileChooserPortal::~FileChooserPortal()
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
      See the \l{XDG Desktop Portal Specification} for possible \a options.
+    \a message is used to send the reply
 */
 void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
                                 const QString &app_id,
@@ -146,6 +147,7 @@ void FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
      See the \l{XDG Desktop Portal Specification} for possible \a options.
+    \a message is used to send the reply
 
      \warning This currently does nothing.
 */
@@ -178,6 +180,7 @@ void FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
      Presents a file selection popup to the user. If \a title is given, it will be the title of the dialog window.
      See the \l{XDG Desktop Portal Backend Specification} for the meaning of \a handle, \a app_id, \a parent_window.
      See the \l{XDG Desktop Portal Specification} for possible \a options.
+     \a message is used to send the reply
 
      \warning This currently does nothing.
 */
@@ -224,6 +227,8 @@ void FileChooserPortal::handlePickerError()
     Receives the results from the picker Dialog. \a code corresponds to the
     dialog response options, \a result ia an array of string variants listing the
     selected file(s) or directories.
+
+    \a message is used to send the reply
 
     \note \a result is a QVariantList mainly because the Nemo.DBus plugin
     prefers to marshal most things as Variants. If you use the results in a DBus

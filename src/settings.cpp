@@ -126,6 +126,7 @@ SettingsPortal::~SettingsPortal()
     Implements \c org.freedesktop.impl.portal.Settings.ReadAll
 
     \a nss specifies the a list of namespaces. See the class description for supported namespaces.
+    \a message is used to send the reply
 */
 void SettingsPortal::ReadAll(const QStringList &nss, const QDBusMessage &message)
 {

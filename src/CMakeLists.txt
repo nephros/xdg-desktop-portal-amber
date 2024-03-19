@@ -37,6 +37,6 @@ target_link_libraries(xdg-desktop-portal-sailfish
 )
 #target_compile_options(xdg-desktop-portal-sailfish -Wextra -Wpedantic)
 #target_compile_options(xdg-desktop-portal-sailfish -Werror)
-target_compile_options(xdg-desktop-portal-sailfish -Wextra)
+target_compile_options(xdg-desktop-portal-sailfish PUBLIC "-Wextra")
 
 install(TARGETS xdg-desktop-portal-sailfish DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})

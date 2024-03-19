@@ -11,4 +11,5 @@ install(FILES sailfish.portal DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg
 install(FILES lipstick-portals.conf DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/xdg-desktop-portal")
 
 add_subdirectory(sailjail)
+add_subdirectory(collectd)
 add_subdirectory(systemd-overrides)

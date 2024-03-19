@@ -59,6 +59,15 @@ Conflicts: xdg-desktop-portal-amber-sailfishos-config
 %description config
 %{summary}.
 
+%package tools
+Summary: Tools for %{name}
+License: CC-BY-SA-4.0
+BuildArch: noarch
+Requires: collectd
+
+%description tools
+%{summary}.
+
 %package ui
 Summary: UI components for %{name}
 License: Apache-2.0
@@ -135,6 +144,9 @@ systemctl-user daemon-reload ||:
 %{_datadir}/xdg-desktop-portal/portals/sailfish.portal
 # what is this installed for??
 %{_datadir}/applications/org.freedesktop.impl.portal.desktop.sailfish.desktop
+
+%files tools
+%config %{_sysconfdir}/collectd.d/*.conf
 
 %files config
 %config %{_localstatedir}/lib/environment/nemo/*.conf

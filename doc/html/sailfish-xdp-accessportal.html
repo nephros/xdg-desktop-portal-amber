@@ -55,6 +55,10 @@
 <h2 id="public-slots">Public Slots</h2>
 <div class="table"><table class="alignedsummary">
 <tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accessportal.html#AccessDialog">AccessDialog</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QString &amp;<i>subtitle</i>, const QString &amp;<i>body</i>, const QVariantMap &amp;<i>options</i>, QVariantMap &amp;<i>results</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accessportal.html#handleDialogError">handleDialogError</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accessportal.html#handleDialogResponse">handleDialogResponse</a></b>(const int &amp;<i>code</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accessportal.html#setupDialogResponse">setupDialogResponse</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accessportal.html#waitForDialogResponse">waitForDialogResponse</a></b>()</td></tr>
 </table></div>
 <a name="details"></a>
 <!-- $$$AccessPortal-description -->
@@ -88,6 +92,24 @@
 <p>See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible values of <i>options</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>, <i>results</i>.</p>
 <p><b>Warning:</b> The implementation of triggering the UI is incomplete. It serves as proof-of-concept only. Specifically, some options like <code>modal</code>, or <code>choices</code> are not handled.</p>
 <!-- @@@AccessDialog -->
+<!-- $$$handleDialogError[overload1]$$$handleDialogError -->
+<h3 class="fn" id="handleDialogError"><a name="handleDialogError"></a><code>[slot] </code><span class="type">void</span> AccessPortal::<span class="name">handleDialogError</span>()</h3>
+<p>Receives the results from the Dialog.</p>
+<!-- @@@handleDialogError -->
+<!-- $$$handleDialogResponse[overload1]$$$handleDialogResponseconstint& -->
+<h3 class="fn" id="handleDialogResponse"><a name="handleDialogResponse"></a><code>[slot] </code><span class="type">void</span> AccessPortal::<span class="name">handleDialogResponse</span>(const <span class="type">int</span> &amp;<i>code</i>)</h3>
+<p>Receives the results from the Dialog. <i>code</i> corresponds to the dialog response options.</p>
+<p><b>See also </b><a href="sailfish-xdp-accessportal.html#DialogResponse-enum">Sailfish::XDP::AccessPortal::DialogResponse</a> and [nemo-qml-plugin-dbus]{Nemo QML Plugin DBus}.</p>
+<!-- @@@handleDialogResponse -->
+<!-- $$$setupDialogResponse[overload1]$$$setupDialogResponse -->
+<h3 class="fn" id="setupDialogResponse"><a name="setupDialogResponse"></a><code>[slot] </code><span class="type">void</span> AccessPortal::<span class="name">setupDialogResponse</span>()</h3>
+<p>After the GUI has been launched, listens for the dialog's <code>Done</code> signal, and calls <a href="sailfish-xdp-accessportal.html#handleDialogResponse">AccessPortal::handleDialogResponse</a> with the response.</p>
+<p><b>See also </b><a href="sailfish-xdp-accessportal.html#handleDialogResponse">handleDialogResponse</a>.</p>
+<!-- @@@setupDialogResponse -->
+<!-- $$$waitForDialogResponse[overload1]$$$waitForDialogResponse -->
+<h3 class="fn" id="waitForDialogResponse"><a name="waitForDialogResponse"></a><code>[slot] </code><span class="type">void</span> AccessPortal::<span class="name">waitForDialogResponse</span>()</h3>
+<p>Since launching the GUI via D-Bus is asynchronous (or rather, returns immediately), we have to wait for a Done signal to arrive from the application.</p>
+<!-- @@@waitForDialogResponse -->
 </div>
 </div>
 <div class="footer">

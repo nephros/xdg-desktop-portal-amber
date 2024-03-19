@@ -63,7 +63,11 @@
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#OpenFile">OpenFile</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#SaveFile">SaveFile</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#SaveFiles">SaveFiles</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#handlePickerError">handlePickerError</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#handlePickerResponse">handlePickerResponse</a></b>(const int &amp;<i>code</i>, const QVariantList &amp;<i>result</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#setupPickerResponse">setupPickerResponse</a></b>()</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#version-prop">version</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#waitForPickerResponse">waitForPickerResponse</a></b>()</td></tr>
 </table></div>
 <a name="details"></a>
 <!-- $$$FileChooserPortal-description -->
@@ -115,6 +119,24 @@
 <p>Presents a file selection popup to the user. If <i>title</i> is given, it will be the title of the dialog window. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible <i>options</i>. <i>message</i> is used to send the reply</p>
 <p><b>Warning:</b> This currently does nothing.</p>
 <!-- @@@SaveFiles -->
+<!-- $$$handlePickerError[overload1]$$$handlePickerError -->
+<h3 class="fn" id="handlePickerError"><a name="handlePickerError"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">handlePickerError</span>()</h3>
+<p>Receives the results from the picker Dialog.</p>
+<!-- @@@handlePickerError -->
+<!-- $$$handlePickerResponse[overload1]$$$handlePickerResponseconstint&constQVariantList& -->
+<h3 class="fn" id="handlePickerResponse"><a name="handlePickerResponse"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">handlePickerResponse</span>(const <span class="type">int</span> &amp;<i>code</i>, const <span class="type">QVariantList</span> &amp;<i>result</i>)</h3>
+<p>Receives the results from the picker Dialog. <i>code</i> corresponds to the dialog response options, <i>result</i> ia an array of string variants listing the selected file(s) or directories.</p>
+<p><b>Note: </b><i>result</i> is a QVariantList mainly because the Nemo.DBus plugin prefers to marshal most things as Variants. If you use the results in a DBus reply, make sure to transform it into e.g&#x2e; a simple QStringList before sending.</p><p><b>See also </b><a href="sailfish-xdp-filechooserportal.html#PickerResponse-enum">Sailfish::XDP::FileChooserPortal::PickerResponse</a> and [nemo-qml-plugin-dbus]{Nemo QML Plugin DBus}.</p>
+<!-- @@@handlePickerResponse -->
+<!-- $$$setupPickerResponse[overload1]$$$setupPickerResponse -->
+<h3 class="fn" id="setupPickerResponse"><a name="setupPickerResponse"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">setupPickerResponse</span>()</h3>
+<p>After the GUI has been launched, listens for the <code>pickerDone</code> signal, and calls <a href="sailfish-xdp-filechooserportal.html#handlePickerResponse">FileChooserPortal::handlePickerResponse</a> with the response.</p>
+<p><b>See also </b><a href="sailfish-xdp-filechooserportal.html#handlePickerResponse">handlePickerResponse</a>.</p>
+<!-- @@@setupPickerResponse -->
+<!-- $$$waitForPickerResponse[overload1]$$$waitForPickerResponse -->
+<h3 class="fn" id="waitForPickerResponse"><a name="waitForPickerResponse"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">waitForPickerResponse</span>()</h3>
+<p>Since launching the GUI via D-Bus is asynchronous (or rather, returns immediately), we have to wait for a Done signal to arrive from the application.</p>
+<!-- @@@waitForPickerResponse -->
 </div>
 </div>
 <div class="footer">

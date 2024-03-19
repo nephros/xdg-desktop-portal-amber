@@ -47,12 +47,13 @@
 <h2 id="details">Detailed Description</h2>
 </p>
 <p>This application manages the display of various UI dialogs for the XDG Desktop Portal Backend.</p>
-<p>It can be activated using the D-Bus session bus at:</p>
+<p>It listens on the D-Bus session bus at:</p>
 <ul>
 <li>Service: <code>org.freedesktop.impl.portal.desktop.sailfish.ui</code></li>
 <li>Path: <code>/org/freedesktop/impl/portal/desktop/sailfish/ui</code></li>
 <li>Interface: <code>org.freedesktop.impl.portal.desktop.sailfish.ui</code></li>
 </ul>
+<p>The bus may be introspected for details about the API.</p>
 <!-- @@@xdg-desktop-portal-sailfish-ui -->
 <h2>Method Documentation</h2>
 <!-- $$$iconHintToUrl -->
@@ -62,7 +63,16 @@
 <td class="tblQmlFuncNode"><p>
 <a name="iconHintToUrl-method"></a><span class="name">iconHintToUrl</span>(<i>hint</i>)</p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>Maps XDP icon hints to an url of an available icon from Silica.</p>
+</div><div class="qmldoc"><p>Maps icon hints given by the calling application or XDP to an url of an available icon from Silica.</p>
+<p>iconHintToUrl knows about the following hints:</p>
+<ul>
+<li><code>applets-screenshooter-symbolic</code></li>
+<li><code>audio-input-microphone-symbolic</code></li>
+<li><code>audio-speakers-symbolic</code></li>
+<li><code>camera-web-symbolic</code></li>
+<li><code>find-location-symbolic</code></li>
+<li><code>preferences-desktop-wallpaper-symbolic</code></li>
+</ul>
 </div></div><!-- @@@iconHintToUrl -->
 <br/>
 </div>

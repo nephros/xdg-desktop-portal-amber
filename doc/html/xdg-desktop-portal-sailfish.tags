@@ -8,7 +8,6 @@
     <compound kind="namespace">
         <name>Sailfish::XDP</name>
         <filename>sailfish-xdp.html</filename>
-        <class>Sailfish::XDP::AccessMDMPlugin</class>
         <class>Sailfish::XDP::AccessPortal</class>
         <class>Sailfish::XDP::AccountPortal</class>
         <class>Sailfish::XDP::DesktopPortal</class>
@@ -18,17 +17,6 @@
         <class>Sailfish::XDP::ScreenshotPortal</class>
         <class>Sailfish::XDP::SettingsPortal</class>
         <class>Sailfish::XDP::WallpaperPortal</class>
-    </compound>
-    <compound kind="class">
-        <name>Sailfish::XDP::AccessMDMPlugin</name>
-        <filename>sailfish-xdp-accessmdmplugin.html</filename>
-        <member kind="function" protection="public" virtualness="non" static="no">
-            <type></type>
-            <name>AccessMDMPlugin</name>
-            <anchorfile>sailfish-xdp-accessmdmplugin.html</anchorfile>
-            <anchor>AccessMDMPlugin</anchor>
-            <arglist>()</arglist>
-        </member>
     </compound>
     <compound kind="class">
         <name>Sailfish::XDP::AccessPortal</name>
@@ -63,6 +51,34 @@
             <anchorfile>sailfish-xdp-accessportal.html</anchorfile>
             <anchor>AccessDialog</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QString &amp;subtitle, const QString &amp;body, const QVariantMap &amp;options, QVariantMap &amp;results)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>handleDialogError</name>
+            <anchorfile>sailfish-xdp-accessportal.html</anchorfile>
+            <anchor>handleDialogError</anchor>
+            <arglist>()</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>handleDialogResponse</name>
+            <anchorfile>sailfish-xdp-accessportal.html</anchorfile>
+            <anchor>handleDialogResponse</anchor>
+            <arglist>(const int &amp;code)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>waitForDialogResponse</name>
+            <anchorfile>sailfish-xdp-accessportal.html</anchorfile>
+            <anchor>waitForDialogResponse</anchor>
+            <arglist>()</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>setupDialogResponse</name>
+            <anchorfile>sailfish-xdp-accessportal.html</anchorfile>
+            <anchor>setupDialogResponse</anchor>
+            <arglist>()</arglist>
         </member>
     </compound>
     <compound kind="class">
@@ -172,6 +188,34 @@
             <anchorfile>sailfish-xdp-filechooserportal.html</anchorfile>
             <anchor>SaveFiles</anchor>
             <arglist>(const QDBusObjectPath &amp;handle, const QString &amp;app_id, const QString &amp;parent_window, const QString &amp;title, const QVariantMap &amp;options, const QDBusMessage &amp;message)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>handlePickerError</name>
+            <anchorfile>sailfish-xdp-filechooserportal.html</anchorfile>
+            <anchor>handlePickerError</anchor>
+            <arglist>()</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>handlePickerResponse</name>
+            <anchorfile>sailfish-xdp-filechooserportal.html</anchorfile>
+            <anchor>handlePickerResponse</anchor>
+            <arglist>(const int &amp;code, const QVariantList &amp;result)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>waitForPickerResponse</name>
+            <anchorfile>sailfish-xdp-filechooserportal.html</anchorfile>
+            <anchor>waitForPickerResponse</anchor>
+            <arglist>()</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>setupPickerResponse</name>
+            <anchorfile>sailfish-xdp-filechooserportal.html</anchorfile>
+            <anchor>setupPickerResponse</anchor>
+            <arglist>()</arglist>
         </member>
     </compound>
     <compound kind="class">
@@ -352,6 +396,20 @@
             <anchorfile>sailfish-xdp-settingsportal.html</anchorfile>
             <anchor>Read</anchor>
             <arglist>(const QString &amp;ns, const QString &amp;key)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>valueChanged</name>
+            <anchorfile>sailfish-xdp-settingsportal.html</anchorfile>
+            <anchor>valueChanged</anchor>
+            <arglist>(const QString &amp;key)</arglist>
+        </member>
+        <member kind="function" protection="public" virtualness="non" static="no">
+            <type>void</type>
+            <name>ambienceChanged</name>
+            <anchorfile>sailfish-xdp-settingsportal.html</anchorfile>
+            <anchor>ambienceChanged</anchor>
+            <arglist>(const int &amp;i)</arglist>
         </member>
         <member kind="function" protection="public" virtualness="non" static="no">
             <type>void</type>

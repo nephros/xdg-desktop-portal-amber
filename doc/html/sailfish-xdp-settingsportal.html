@@ -65,6 +65,8 @@
 <div class="table"><table class="alignedsummary">
 <tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#ambienceChanged">ambienceChanged</a></b>(const int &amp;<i>i</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#valueChanged">valueChanged</a></b>(const QString &amp;<i>key</i>)</td></tr>
 </table></div>
 <a name="signals"></a>
 <h2 id="signals">Signals</h2>
@@ -123,6 +125,17 @@
 <p>Emitted when any of the supported values have changed. <i>ns</i>, <i>key</i>, <i>value</i> are namespace, key within that namespace, and value that has changed.</p>
 <p><b>Note: </b>emitting this signal is mandaroty for the XDP namespace. It may or may not be emitted in the same way for other namespaces.</p><p><b>See also </b><a href="settings-namespaces.html#settingsportalnamespaces">SettingsPortalNamespaces</a>.</p>
 <!-- @@@SettingChanged -->
+<!-- $$$ambienceChanged[overload1]$$$ambienceChangedconstint& -->
+<h3 class="fn" id="ambienceChanged"><a name="ambienceChanged"></a><code>[slot] </code><span class="type">void</span> SettingsPortal::<span class="name">ambienceChanged</span>(const <span class="type">int</span> &amp;<i>i</i>)</h3>
+<p>Slot to receive change signals from ambienced, and do something about that <i>i</i>.</p>
+<p><b>See also </b>[ambienced]{com.jolla.ambienced.contentChanged()} and Sailfish::Ambience.</p>
+<!-- @@@ambienceChanged -->
+<!-- $$$valueChanged[overload1]$$$valueChangedconstQString& -->
+<h3 class="fn" id="valueChanged"><a name="valueChanged"></a><code>[slot] </code><span class="type">void</span> SettingsPortal::<span class="name">valueChanged</span>(const <span class="type">QString</span> &amp;<i>key</i>)</h3>
+<p>Slot to receive change signals, and do something about that.</p>
+<p><i>key</i> corresponds to a <a href="sailfish-xdp-settingsportal.html#FDOSettingsKey-var">FDOSettingsKey</a> value</p>
+<p><b>See also </b><a href="sailfish-xdp-settingsportal.html#SettingChanged">SettingsPortal::SettingChanged</a>.</p>
+<!-- @@@valueChanged -->
 </div>
 </div>
 <div class="footer">

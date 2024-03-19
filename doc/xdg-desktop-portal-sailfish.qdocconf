@@ -11,7 +11,9 @@ depends = \
     qtdoc \
     qtdbus \
     nemo-qml-plugin-dbus \
-    user-managerd
+    nemo-qml-plugin-systemsettings \
+    user-managerd \
+    libprofile
 
 outputformats = HTML
 outputdir = $$PWD/html

@@ -84,7 +84,7 @@
     \li Camera: uses Sailfish MDM Access Policies to enable or disable the use of the camera.
     \endlist
 
-    \sa Sailfish::AccessPolicy, com.nokia.profiled, Nemo::Systemsettings
+    \sa [sailfish-policy]{AccessPolicy}, [libprofile]{com.nokia.profiled}, [nemo-qml-plugin-systemsettings]{Nemo QML Plugin Systemsettings}
 */
 /*! \class Sailfish::XDP::FileChooserPortal
     \inmodule XDGDesktopPortalSailfish

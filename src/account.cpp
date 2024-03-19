@@ -36,7 +36,7 @@ AccountPortal::~AccountPortal()
 
      \a message is used to send the reply
 
-     \sa SailfishUserManager, QDBusInterface
+     \sa [user-managerd]{SailfishUserManager}, Qt::QDBusInterface
 */
 uint AccountPortal::GetUserInformation(const QDBusObjectPath &handle,
                                   const QString &app_id,

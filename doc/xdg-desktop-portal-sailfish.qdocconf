@@ -7,13 +7,16 @@ url             = $BASE_URL/xdg-desktop-portal-sailfish
 sourcedirs += $$PWD/../src $$PWD/../doc $$PWD/../qml
 headerdirs += $$PWD/../src
 
-depends = nemo-qml-plugin-dbus user-managerd
+depends = \
+    qtdoc \
+    qtdbus \
+    nemo-qml-plugin-dbus \
+    user-managerd
 
 outputformats = HTML
 outputdir = $$PWD/html
 base = file:$$PWD/html
 tagfile = $$PWD/html/xdg-desktop-portal-sailfish.tags
-
 
 outputprefixes = QML
 outputprefixes.QML = qml-xdg-desktop-portal-sailfish-
@@ -21,15 +24,20 @@ outputprefixes.QML = qml-xdg-desktop-portal-sailfish-
 qhp.projects = XDGDesktopPortalSailfish
 
 qhp.XDGDesktopPortalSailfish.file = xdg-desktop-portal-sailfish.qhp
-qhp.XDGDesktopPortalSailfish.namespace = org.freedesktop.impl.portal.desktop.sailfish.ui.1.0
+qhp.XDGDesktopPortalSailfish.namespace = org.freedesktop.impl.portal.desktop.sailfish.1.0
 qhp.XDGDesktopPortalSailfish.virtualFolder = xdg-desktop-portal-sailfish
-qhp.XDGDesktopPortalSailfish.indexTitle = XDG Desktop Portal Backend QML UI
+qhp.XDGDesktopPortalSailfish.indexTitle = XDG Desktop Portal Backend
 qhp.XDGDesktopPortalSailfish.indexRoot =
 
-# qhp.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish-ui 1.0
-#
-# qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.name = org.freedesktop.impl.portal.desktop.sailfish.ui 1.0
-# qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish 1.0
+qhp.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish 1.0
+
+qhp.XDGDesktopPortalSailfish.subprojects = qmltypes
+qhp.XDGDesktopPortalSailfish.subprojects.qmltypes.title = XDG Desktop Portal Backend QML UI
+qhp.XDGDesktopPortalSailfish.subprojects.qmltypes.indextitle = qmlclass
+qhp.XDGDesktopPortalSailfish.subprojects.qmltypes.sortpages = true
+
+qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.name = org.freedesktop.impl.portal.desktop.sailfish 1.0
+qhp.XDGDesktopPortalSailfish.customFilters.XDGDesktopPortalSailfish.filterAttributes = xdg-desktop-portal-sailfish 1.0
 
 HTML.footer += \
     "<div class=\"footer\">\n" \

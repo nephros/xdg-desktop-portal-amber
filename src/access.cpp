@@ -37,16 +37,6 @@ Q_LOGGING_CATEGORY(XDPortalSailfishAccess, "xdp-sailfish-access")
 
 namespace Sailfish {
 namespace XDP {
-AccessMDMPlugin::AccessMDMPlugin()
-    : Sailfish::AccessPolicyPlugin()
-{
-}
-
-QVariant AccessMDMPlugin::keyValue(const QString &key)
-{}
-void AccessMDMPlugin::setKeyValue(const QString &key, const QVariant &value)
-{}
-
 AccessPortal::AccessPortal(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {

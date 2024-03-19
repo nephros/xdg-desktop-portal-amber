@@ -35,5 +35,8 @@ target_link_libraries(xdg-desktop-portal-sailfish
     ${MLITE_LIBRARIES}
     ${MDMPOLICY_LIBRARIES}
 )
+#target_compile_options(xdg-desktop-portal-sailfish -Wextra -Wpedantic)
+#target_compile_options(xdg-desktop-portal-sailfish -Werror)
+target_compile_options(xdg-desktop-portal-sailfish -Wextra)
 
 install(TARGETS xdg-desktop-portal-sailfish DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR})

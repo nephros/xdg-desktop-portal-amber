@@ -39,8 +39,13 @@ LockdownPortal::LockdownPortal(QObject *parent)
     qCDebug(XDPortalSailfishLockdown) << "Desktop portal service: Lockdown";
     m_policy = new AccessPolicy(this);
     m_profiled = new QDBusInterface( QStringLiteral("com.nokia.profiled"), QStringLiteral("/com/nokia/profiled"), QStringLiteral("com.nokia.profiled"));
+    m_defaultSource = nullptr;
     if(!setupDefaultSource()) {
         qCCritical(XDPortalSailfishLockdown) << "Could not set up pulse source interface.";
+    } else {
+        if ( m_defaultSource != nullptr) {
+            QObject::connect(m_defaultSource, SIGNAL(MuteUpdated(bool)), this, SLOT(microphoneDisabledChanged(bool)));
+        }
     };
 
     QObject::connect(m_policy, SIGNAL(cameraEnabledChanged()), this, SLOT(cameraDisabledChanged()));
@@ -48,7 +53,6 @@ LockdownPortal::LockdownPortal(QObject *parent)
     //QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
     // FIXME: signatures do not match:
     QObject::connect(m_policy, SIGNAL(profile_changed()), this, SLOT(locationSettingsDisabledChanged()));
-    QObject::connect(m_defaultSource, SIGNAL(MuteUpdated(bool)), this, SLOT(microphoneDisabledChanged(bool)));
 
 }
 
@@ -176,6 +180,7 @@ bool LockdownPortal::setupDefaultSource()
 {
 
     static const QString sourceName(QStringLiteral("source.primary_input"));
+    static const QString fallbackSourceName(QStringLiteral("source.null"));
 
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
@@ -214,9 +219,14 @@ bool LockdownPortal::setupDefaultSource()
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
         return false;
     }
-    QDBusReply<QDBusObjectPath> source = core->call( "GetSourceByName", sourceName);
+    QDBusReply<QDBusObjectPath> source;
+    source = core->call( "GetSourceByName", sourceName);
     if(!source.isValid()) {
         qCCritical(XDPortalSailfishLockdown) << "Could find default input";
+    }
+    source = core->call( "GetSourceByName", fallbackSourceName);
+    if(!source.isValid()) {
+        qCCritical(XDPortalSailfishLockdown) << "Could find fallback input";
         return false;
     }
     QString input = source.value().path();

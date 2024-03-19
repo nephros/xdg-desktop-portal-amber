@@ -179,8 +179,13 @@ void LockdownPortal::setMicrophoneDisabled(const bool &disable)
 bool LockdownPortal::setupDefaultSource()
 {
 
-    static const QString sourceName(QStringLiteral("source.primary_input"));
-    static const QString fallbackSourceName(QStringLiteral("source.null"));
+    // FIXME: these appear to be device- or adaptation-dependent.
+    static const QStringList sourceNames = {
+            QStringLiteral("default-source"),   // named by user
+            QStringLiteral("source.primary_input"), // Xperia10III
+            QStringLiteral("source.droid"),         // Xperia10
+            QStringLiteral("source.null")
+            };
 
     // look up the pulse server socket:
     QDBusInterface *ifc = new QDBusInterface(
@@ -219,17 +224,34 @@ bool LockdownPortal::setupDefaultSource()
         qCCritical(XDPortalSailfishLockdown) << "Could not set up Core interface";
         return false;
     }
+    // TODO: should we just iterate all sources and find the active one instead?
+    // if yes:
+    //  - get the org.PulseAudio.Core1.Device interface on the object path
+    //  - get the State property
+    //  - if State != 2 (Suspended)
+    //  - if State == 0 (Running)
+    //  - if State == 1 (Idle)
+    // ... or should we just mute all the devices unconditionally?
+    // Try to find the object path of a valid source by name:
     QDBusReply<QDBusObjectPath> source;
-    source = core->call( "GetSourceByName", sourceName);
-    if(!source.isValid()) {
-        qCCritical(XDPortalSailfishLockdown) << "Could find default input";
+    QString input;
+    for (QString sourceName : sourceNames) {
+        source = core->call("GetSourceByName", sourceName);
+        if(!source.isValid()) {
+            qCDebug(XDPortalSailfishLockdown) << "Could not find find default input" << sourceName;
+        } else {
+            input = source.value().path();
+            break;
+        }
     }
-    source = core->call( "GetSourceByName", fallbackSourceName);
     if(!source.isValid()) {
-        qCCritical(XDPortalSailfishLockdown) << "Could find fallback input";
+        qCCritical(XDPortalSailfishLockdown) << "Could not find any valid source, trying builtin fallback.";
+        input = core->property("FallbackSource").toString();
+    }
+    if(input.isEmpty()) {
+        qCCritical(XDPortalSailfishLockdown) << "Could not find any valid input source.";
         return false;
     }
-    QString input = source.value().path();
     qCDebug(XDPortalSailfishLockdown) << "default input:" << input;
     core->deleteLater();
 

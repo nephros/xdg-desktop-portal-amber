@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- desktopportal.cpp -->
+  <title>FileChooserPortal Class | XDG Desktop Portal Backend for Sailfish OS 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li><a href="index.html">XDG Desktop Portal Backend for Sailfish OS</a></li>
+<li>FileChooserPortal</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-types">Public Types</a></li>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">FileChooserPortal Class</h1>
+<span class="small-subtitle">(<a href="sailfish-xdp-filechooserportal.html">Sailfish::XDP::FileChooserPortal</a>)<br/></span>
+<!-- $$$FileChooserPortal-brief -->
+<p>Backend interface of the FileChooser Portal <a href="#details">More...</a></p>
+<!-- @@@FileChooserPortal -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;FileChooserPortal&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="sailfish-xdp-filechooserportal-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h2 id="public-types">Public Types</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#PickerResponse-enum">PickerResponse</a></b> { Accepted, Cancelled, Other }</td></tr>
+</table></div>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><a href="sailfish-xdp-filechooserportal.html#version-prop">version</a></b> : const uint</li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#FileChooserPortal">FileChooserPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#OpenFile">OpenFile</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#SaveFile">SaveFile</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#SaveFiles">SaveFiles</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QString &amp;<i>title</i>, const QVariantMap &amp;<i>options</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-filechooserportal.html#version-prop">version</a></b>() const</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$FileChooserPortal-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Backend interface of the FileChooser Portal</p>
+<p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
+</div>
+<!-- @@@FileChooserPortal -->
+<div class="types">
+<h2>Member Type Documentation</h2>
+<!-- $$$PickerResponse$$$Accepted$$$Cancelled$$$Other -->
+<h3 class="fn" id="PickerResponse-enum"><a name="PickerResponse-enum"></a>enum FileChooserPortal::<span class="name">PickerResponse</span></h3>
+<p>Possible return values of a dialog interaction. The values correspond to the <i>response</i> poperties of the calls in this class.</p>
+<div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::FileChooserPortal::Accepted</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">The dialog has been accepted</td></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::FileChooserPortal::Cancelled</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">The dialog has been cancelled</td></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::FileChooserPortal::Other</code></td><td class="topAlign tblval"><code>2</code></td><td class="topAlign">Something else has happened (e.g&#x2e; a timeout)</td></tr>
+</table></div>
+<!-- @@@PickerResponse -->
+</div>
+<div class="prop">
+<h2>Property Documentation</h2>
+<!-- $$$version-prop$$$version -->
+<h3 class="fn" id="version-prop"><a name="version-prop"></a><span class="name">version</span> : const <span class="type">uint</span></h3>
+<p>This property contains the backend implementation version.</p>
+<p><b>Access functions:</b></p>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft topAlign rightAlign"> uint </td><td class="memItemRight bottomAlign"><span class="name"><b>version</b></span>() const</td></tr>
+</table></div>
+<!-- @@@version -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$FileChooserPortal[overload1]$$$FileChooserPortalQObject* -->
+<h3 class="fn" id="FileChooserPortal"><a name="FileChooserPortal"></a>FileChooserPortal::<span class="name">FileChooserPortal</span>(<span class="type">QObject</span> *<i>parent</i>)</h3>
+<p>Default constructs an instance of FileChooserPortal.</p><!-- @@@FileChooserPortal -->
+<!-- $$$OpenFile[overload1]$$$OpenFileconstQDBusObjectPath&constQString&constQString&constQString&constQVariantMap&constQDBusMessage& -->
+<h3 class="fn" id="OpenFile"><a name="OpenFile"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">OpenFile</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QString</span> &amp;<i>title</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, const <span class="type">QDBusMessage</span> &amp;<i>message</i>)</h3>
+<p>Presents a file selection popup to the user. If <i>title</i> is given, it will be the title of the dialog window. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible <i>options</i>. <i>message</i> is used to send the reply</p>
+<!-- @@@OpenFile -->
+<!-- $$$SaveFile[overload1]$$$SaveFileconstQDBusObjectPath&constQString&constQString&constQString&constQVariantMap&constQDBusMessage& -->
+<h3 class="fn" id="SaveFile"><a name="SaveFile"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">SaveFile</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QString</span> &amp;<i>title</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, const <span class="type">QDBusMessage</span> &amp;<i>message</i>)</h3>
+<p>Presents a file selection popup to the user. If <i>title</i> is given, it will be the title of the dialog window. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible <i>options</i>. <i>message</i> is used to send the reply</p>
+<p><b>Warning:</b> This currently does nothing.</p>
+<!-- @@@SaveFile -->
+<!-- $$$SaveFiles[overload1]$$$SaveFilesconstQDBusObjectPath&constQString&constQString&constQString&constQVariantMap&constQDBusMessage& -->
+<h3 class="fn" id="SaveFiles"><a name="SaveFiles"></a><code>[slot] </code><span class="type">void</span> FileChooserPortal::<span class="name">SaveFiles</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QString</span> &amp;<i>title</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, const <span class="type">QDBusMessage</span> &amp;<i>message</i>)</h3>
+<p>Presents a file selection popup to the user. If <i>title</i> is given, it will be the title of the dialog window. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible <i>options</i>. <i>message</i> is used to send the reply</p>
+<p><b>Warning:</b> This currently does nothing.</p>
+<!-- @@@SaveFiles -->
+</div>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>'Jolla' and 'Sailfish' are trademarks or registered trademarks of Jollyboys Ltd.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

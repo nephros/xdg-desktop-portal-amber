@@ -7,131 +7,144 @@
             <section ref="index.html" title="XDG Desktop Portal Backend QML UI">
                 <section ref="" title="">
                     <section ref="https-build-sailfishos-org.html" title="Community OBS"/>
+                    <section ref="qml-xdg-desktop-portal-sailfish-confirmationdialog.html" title="ConfirmationDialog Type Reference">
+                        <section ref="qml-xdg-desktop-portal-sailfish-confirmationdialog-members.html" title="List of all members"/>
+                    </section>
                     <section ref="https-dbus-freedesktop-org-doc-dbus-daemon-1.html" title="D-Bus Documentation"/>
+                    <section ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html" title="FilePickerDialog Type Reference">
+                        <section ref="qml-xdg-desktop-portal-sailfish-filepickerdialog-members.html" title="List of all members"/>
+                    </section>
                     <section ref="https-sailfishos-org-develop-docs-nemo-qml-plugin-dbus.html" title="Nemo QML Plugin D-Bus"/>
                     <section ref="sailfish.html" title="Sailfish"/>
-                    <section ref="sailfish-accessportal.html" title="Sailfish::AccessPortal Class Reference">
-                        <section ref="sailfish-accessportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp.html" title="XDP"/>
+                    <section ref="sailfish-xdp-accessmdmplugin.html" title="XDP::AccessMDMPlugin Class Reference">
+                        <section ref="sailfish-xdp-accessmdmplugin-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-desktopportal.html" title="Sailfish::DesktopPortal Class Reference">
-                        <section ref="sailfish-desktopportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-accessportal.html" title="XDP::AccessPortal Class Reference">
+                        <section ref="sailfish-xdp-accessportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-emailportal.html" title="Sailfish::EmailPortal Class Reference">
-                        <section ref="sailfish-emailportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-accountportal.html" title="XDP::AccountPortal Class Reference">
+                        <section ref="sailfish-xdp-accountportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-filechooserportal.html" title="Sailfish::FileChooserPortal Class Reference">
-                        <section ref="sailfish-filechooserportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-desktopportal.html" title="XDP::DesktopPortal Class Reference">
+                        <section ref="sailfish-xdp-desktopportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-lockdownportal.html" title="Sailfish::LockdownPortal Class Reference">
-                        <section ref="sailfish-lockdownportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-emailportal.html" title="XDP::EmailPortal Class Reference">
+                        <section ref="sailfish-xdp-emailportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-screenshotportal.html" title="Sailfish::ScreenshotPortal Class Reference">
-                        <section ref="sailfish-screenshotportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-filechooserportal.html" title="XDP::FileChooserPortal Class Reference">
+                        <section ref="sailfish-xdp-filechooserportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-screenshotportal-colorrgb.html" title="ScreenshotPortal::ColorRGB Class Reference">
-                        <section ref="sailfish-screenshotportal-colorrgb-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-lockdownportal.html" title="XDP::LockdownPortal Class Reference">
+                        <section ref="sailfish-xdp-lockdownportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-settingsportal.html" title="Sailfish::SettingsPortal Class Reference">
-                        <section ref="sailfish-settingsportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-screenshotportal.html" title="XDP::ScreenshotPortal Class Reference">
+                        <section ref="sailfish-xdp-screenshotportal-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-settingsportal-fdoconfkeys.html" title="SettingsPortal::FDOConfKeys Class Reference">
-                        <section ref="sailfish-settingsportal-fdoconfkeys-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-screenshotportal-colorrgb.html" title="ScreenshotPortal::ColorRGB Class Reference">
+                        <section ref="sailfish-xdp-screenshotportal-colorrgb-members.html" title="List of all members"/>
                     </section>
-                    <section ref="sailfish-wallpaperportal.html" title="Sailfish::WallpaperPortal Class Reference">
-                        <section ref="sailfish-wallpaperportal-members.html" title="List of all members"/>
+                    <section ref="sailfish-xdp-settingsportal.html" title="XDP::SettingsPortal Class Reference">
+                        <section ref="sailfish-xdp-settingsportal-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="sailfish-xdp-settingsportal-fdoconfkeys.html" title="SettingsPortal::FDOConfKeys Class Reference">
+                        <section ref="sailfish-xdp-settingsportal-fdoconfkeys-members.html" title="List of all members"/>
+                    </section>
+                    <section ref="sailfish-xdp-wallpaperportal.html" title="XDP::WallpaperPortal Class Reference">
+                        <section ref="sailfish-xdp-wallpaperportal-members.html" title="List of all members"/>
                     </section>
                     <section ref="settings-namespaces.html" title="Settings Namespaces"/>
                     <section ref="https-flatpak-github-io-xdg-desktop-portal-docs-impl-dbus-interfaces.html" title="XDG Desktop Portal Backend Specification"/>
                     <section ref="index.html" title="XDG Desktop Portal Backend for Sailfish OS"/>
                     <section ref="https-flatpak-github-io-xdg-desktop-portal-docs.html" title="XDG Desktop Portal Specification"/>
-                    <section ref="org-freedesktop-impl-portal-desktop-sailfish-ui-qmlmodule.html" title="org.freedesktop.impl.portal.desktop.sailfish.ui QML Types"/>
-                    <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html" title="ConfirmationDialog Type Reference">
-                        <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog-members.html" title="List of all members"/>
-                    </section>
-                    <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html" title="FilePickerDialog Type Reference">
-                        <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog-members.html" title="List of all members"/>
-                    </section>
-                    <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui.html" title="xdg-desktop-portal-sailfish-ui Type Reference">
-                        <section ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui-members.html" title="List of all members"/>
+                    <section ref="qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui.html" title="xdg-desktop-portal-sailfish-ui Type Reference">
+                        <section ref="qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui-members.html" title="List of all members"/>
                     </section>
                 </section>
             </section>
         </toc>
         <keywords>
-            <keyword name="AccessDialog" id="AccessPortal::AccessDialog" ref="sailfish-accessportal.html#AccessDialog"/>
-            <keyword name="AccessPortal" id="Sailfish::AccessPortal" ref="sailfish-accessportal.html"/>
-            <keyword name="AccessPortal::Accepted" id="AccessPortal::Accepted" ref="sailfish-accessportal.html#DialogResponse-enum"/>
-            <keyword name="AccessPortal::Cancelled" id="AccessPortal::Cancelled" ref="sailfish-accessportal.html#DialogResponse-enum"/>
-            <keyword name="AccessPortal::DialogResponse" id="AccessPortal::DialogResponse" ref="sailfish-accessportal.html#DialogResponse-enum"/>
-            <keyword name="AccessPortal::Other" id="AccessPortal::Other" ref="sailfish-accessportal.html#DialogResponse-enum"/>
-            <keyword name="ColorRGB" id="ScreenshotPortal::ColorRGB" ref="sailfish-screenshotportal-colorrgb.html"/>
-            <keyword name="ComposeEmail" id="EmailPortal::ComposeEmail" ref="sailfish-emailportal.html#ComposeEmail"/>
-            <keyword name="ConfirmationDialog" id="QML.ConfirmationDialog" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html"/>
-            <keyword name="DesktopPortal" id="Sailfish::DesktopPortal" ref="sailfish-desktopportal.html"/>
-            <keyword name="EmailPortal" id="Sailfish::EmailPortal" ref="sailfish-emailportal.html"/>
-            <keyword name="FDOConfKeys" id="SettingsPortal::FDOConfKeys" ref="sailfish-settingsportal-fdoconfkeys.html"/>
-            <keyword name="FDOSettingsKey" id="SettingsPortal::FDOSettingsKey" ref="sailfish-settingsportal.html#FDOSettingsKey-var"/>
-            <keyword name="FileChooserPortal" id="Sailfish::FileChooserPortal" ref="sailfish-filechooserportal.html"/>
-            <keyword name="FileChooserPortal::Accepted" id="FileChooserPortal::Accepted" ref="sailfish-filechooserportal.html#PickerResponse-enum"/>
-            <keyword name="FileChooserPortal::Cancelled" id="FileChooserPortal::Cancelled" ref="sailfish-filechooserportal.html#PickerResponse-enum"/>
-            <keyword name="FileChooserPortal::Other" id="FileChooserPortal::Other" ref="sailfish-filechooserportal.html#PickerResponse-enum"/>
-            <keyword name="FileChooserPortal::PickerResponse" id="FileChooserPortal::PickerResponse" ref="sailfish-filechooserportal.html#PickerResponse-enum"/>
-            <keyword name="FilePickerDialog" id="QML.FilePickerDialog" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html"/>
-            <keyword name="LockdownPortal" id="Sailfish::LockdownPortal" ref="sailfish-lockdownportal.html"/>
-            <keyword name="OpenFile" id="FileChooserPortal::OpenFile" ref="sailfish-filechooserportal.html#OpenFile"/>
-            <keyword name="PickColor" id="ScreenshotPortal::PickColor" ref="sailfish-screenshotportal.html#PickColor"/>
-            <keyword name="Read" id="SettingsPortal::Read" ref="sailfish-settingsportal.html#Read"/>
-            <keyword name="ReadAll" id="SettingsPortal::ReadAll" ref="sailfish-settingsportal.html#ReadAll"/>
+            <keyword name="AccessDialog" id="AccessPortal::AccessDialog" ref="sailfish-xdp-accessportal.html#AccessDialog"/>
+            <keyword name="AccessMDMPlugin" id="XDP::AccessMDMPlugin" ref="sailfish-xdp-accessmdmplugin.html"/>
+            <keyword name="AccessPortal" id="XDP::AccessPortal" ref="sailfish-xdp-accessportal.html"/>
+            <keyword name="AccessPortal::Accepted" id="AccessPortal::Accepted" ref="sailfish-xdp-accessportal.html#DialogResponse-enum"/>
+            <keyword name="AccessPortal::Cancelled" id="AccessPortal::Cancelled" ref="sailfish-xdp-accessportal.html#DialogResponse-enum"/>
+            <keyword name="AccessPortal::DialogResponse" id="AccessPortal::DialogResponse" ref="sailfish-xdp-accessportal.html#DialogResponse-enum"/>
+            <keyword name="AccessPortal::Other" id="AccessPortal::Other" ref="sailfish-xdp-accessportal.html#DialogResponse-enum"/>
+            <keyword name="AccountPortal" id="XDP::AccountPortal" ref="sailfish-xdp-accountportal.html"/>
+            <keyword name="ColorRGB" id="ScreenshotPortal::ColorRGB" ref="sailfish-xdp-screenshotportal-colorrgb.html"/>
+            <keyword name="ComposeEmail" id="EmailPortal::ComposeEmail" ref="sailfish-xdp-emailportal.html#ComposeEmail"/>
+            <keyword name="ConfirmationDialog" id="QML.ConfirmationDialog" ref="qml-xdg-desktop-portal-sailfish-confirmationdialog.html"/>
+            <keyword name="DesktopPortal" id="XDP::DesktopPortal" ref="sailfish-xdp-desktopportal.html"/>
+            <keyword name="EmailPortal" id="XDP::EmailPortal" ref="sailfish-xdp-emailportal.html"/>
+            <keyword name="FDOConfKeys" id="SettingsPortal::FDOConfKeys" ref="sailfish-xdp-settingsportal-fdoconfkeys.html"/>
+            <keyword name="FDOSettingsKey" id="SettingsPortal::FDOSettingsKey" ref="sailfish-xdp-settingsportal.html#FDOSettingsKey-var"/>
+            <keyword name="FileChooserPortal" id="XDP::FileChooserPortal" ref="sailfish-xdp-filechooserportal.html"/>
+            <keyword name="FileChooserPortal::Accepted" id="FileChooserPortal::Accepted" ref="sailfish-xdp-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::Cancelled" id="FileChooserPortal::Cancelled" ref="sailfish-xdp-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::Other" id="FileChooserPortal::Other" ref="sailfish-xdp-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FileChooserPortal::PickerResponse" id="FileChooserPortal::PickerResponse" ref="sailfish-xdp-filechooserportal.html#PickerResponse-enum"/>
+            <keyword name="FilePickerDialog" id="QML.FilePickerDialog" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html"/>
+            <keyword name="GetUserInformation" id="AccountPortal::GetUserInformation" ref="sailfish-xdp-accountportal.html#GetUserInformation"/>
+            <keyword name="LockdownPortal" id="XDP::LockdownPortal" ref="sailfish-xdp-lockdownportal.html"/>
+            <keyword name="OpenFile" id="FileChooserPortal::OpenFile" ref="sailfish-xdp-filechooserportal.html#OpenFile"/>
+            <keyword name="PickColor" id="ScreenshotPortal::PickColor" ref="sailfish-xdp-screenshotportal.html#PickColor"/>
+            <keyword name="Read" id="SettingsPortal::Read" ref="sailfish-xdp-settingsportal.html#Read"/>
+            <keyword name="ReadAll" id="SettingsPortal::ReadAll" ref="sailfish-xdp-settingsportal.html#ReadAll"/>
             <keyword name="Sailfish" id="Sailfish" ref="sailfish.html"/>
-            <keyword name="SaveFile" id="FileChooserPortal::SaveFile" ref="sailfish-filechooserportal.html#SaveFile"/>
-            <keyword name="SaveFiles" id="FileChooserPortal::SaveFiles" ref="sailfish-filechooserportal.html#SaveFiles"/>
-            <keyword name="Screenshot" id="ScreenshotPortal::Screenshot" ref="sailfish-screenshotportal.html#Screenshot"/>
-            <keyword name="ScreenshotPortal" id="Sailfish::ScreenshotPortal" ref="sailfish-screenshotportal.html"/>
-            <keyword name="SetWallpaperURI" id="WallpaperPortal::SetWallpaperURI" ref="sailfish-wallpaperportal.html#SetWallpaperURI"/>
-            <keyword name="SettingChanged" id="SettingsPortal::SettingChanged" ref="sailfish-settingsportal.html#SettingChanged"/>
+            <keyword name="SaveFile" id="FileChooserPortal::SaveFile" ref="sailfish-xdp-filechooserportal.html#SaveFile"/>
+            <keyword name="SaveFiles" id="FileChooserPortal::SaveFiles" ref="sailfish-xdp-filechooserportal.html#SaveFiles"/>
+            <keyword name="Screenshot" id="ScreenshotPortal::Screenshot" ref="sailfish-xdp-screenshotportal.html#Screenshot"/>
+            <keyword name="ScreenshotPortal" id="XDP::ScreenshotPortal" ref="sailfish-xdp-screenshotportal.html"/>
+            <keyword name="SetWallpaperURI" id="WallpaperPortal::SetWallpaperURI" ref="sailfish-xdp-wallpaperportal.html#SetWallpaperURI"/>
+            <keyword name="SettingChanged" id="SettingsPortal::SettingChanged" ref="sailfish-xdp-settingsportal.html#SettingChanged"/>
             <keyword name="Settings Namespaces" id="Settings Namespaces" ref="settings-namespaces.html"/>
-            <keyword name="SettingsPortal" id="Sailfish::SettingsPortal" ref="sailfish-settingsportal.html"/>
-            <keyword name="SettingsPortal::Dark" id="SettingsPortal::Dark" ref="sailfish-settingsportal.html#FDOColorScheme-enum"/>
-            <keyword name="SettingsPortal::FDOColorScheme" id="SettingsPortal::FDOColorScheme" ref="sailfish-settingsportal.html#FDOColorScheme-enum"/>
-            <keyword name="SettingsPortal::Light" id="SettingsPortal::Light" ref="sailfish-settingsportal.html#FDOColorScheme-enum"/>
-            <keyword name="SettingsPortal::None" id="SettingsPortal::None" ref="sailfish-settingsportal.html#FDOColorScheme-enum"/>
-            <keyword name="SupportedNameSpaces" id="SettingsPortal::SupportedNameSpaces" ref="sailfish-settingsportal.html#SupportedNameSpaces-var"/>
-            <keyword name="WallpaperPortal" id="Sailfish::WallpaperPortal" ref="sailfish-wallpaperportal.html"/>
+            <keyword name="SettingsPortal" id="XDP::SettingsPortal" ref="sailfish-xdp-settingsportal.html"/>
+            <keyword name="SettingsPortal::Dark" id="SettingsPortal::Dark" ref="sailfish-xdp-settingsportal.html#FDOColorScheme-enum"/>
+            <keyword name="SettingsPortal::FDOColorScheme" id="SettingsPortal::FDOColorScheme" ref="sailfish-xdp-settingsportal.html#FDOColorScheme-enum"/>
+            <keyword name="SettingsPortal::Light" id="SettingsPortal::Light" ref="sailfish-xdp-settingsportal.html#FDOColorScheme-enum"/>
+            <keyword name="SettingsPortal::None" id="SettingsPortal::None" ref="sailfish-xdp-settingsportal.html#FDOColorScheme-enum"/>
+            <keyword name="SupportedNameSpaces" id="SettingsPortal::SupportedNameSpaces" ref="sailfish-xdp-settingsportal.html#SupportedNameSpaces-var"/>
+            <keyword name="WallpaperPortal" id="XDP::WallpaperPortal" ref="sailfish-xdp-wallpaperportal.html"/>
             <keyword name="XDG Desktop Portal Backend for Sailfish OS" id="XDG Desktop Portal Backend for Sailfish OS" ref="index.html"/>
-            <keyword name="accent" id="FDOConfKeys::accent" ref="sailfish-settingsportal-fdoconfkeys.html#accent-var"/>
-            <keyword name="blue" id="ColorRGB::blue" ref="sailfish-screenshotportal-colorrgb.html#blue-var"/>
-            <keyword name="contrast" id="FDOConfKeys::contrast" ref="sailfish-settingsportal-fdoconfkeys.html#contrast-var"/>
-            <keyword name="disable_location" id="LockdownPortal::disable_location" ref="sailfish-lockdownportal.html#disable_location-prop"/>
-            <keyword name="disable_sound_output" id="LockdownPortal::disable_sound_output" ref="sailfish-lockdownportal.html#disable_sound_output-prop"/>
-            <keyword name="done" id="ConfirmationDialog::done" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html#done-signal"/>
-            <keyword name="done" id="FilePickerDialog::done" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#done-signal"/>
-            <keyword name="getGPS" id="LockdownPortal::getGPS" ref="sailfish-lockdownportal.html#disable_location-prop"/>
-            <keyword name="getMute" id="LockdownPortal::getMute" ref="sailfish-lockdownportal.html#disable_sound_output-prop"/>
-            <keyword name="green" id="ColorRGB::green" ref="sailfish-screenshotportal-colorrgb.html#green-var"/>
-            <keyword name="iconHintToUrl" id="xdg-desktop-portal-sailfish-ui::iconHintToUrl" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui.html#iconHintToUrl-method"/>
-            <keyword name="model" id="FilePickerDialog::model" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#model-prop"/>
-            <keyword name="options" id="ConfirmationDialog::options" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html#options-prop"/>
-            <keyword name="options" id="FilePickerDialog::options" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#options-prop"/>
-            <keyword name="org.freedesktop.impl.portal.desktop.sailfish.ui" id="org.freedesktop.impl.portal.desktop.sailfish.ui" ref="org-freedesktop-impl-portal-desktop-sailfish-ui-qmlmodule.html"/>
-            <keyword name="red" id="ColorRGB::red" ref="sailfish-screenshotportal-colorrgb.html#red-var"/>
-            <keyword name="scheme" id="FDOConfKeys::scheme" ref="sailfish-settingsportal-fdoconfkeys.html#scheme-var"/>
-            <keyword name="selectedFile" id="FilePickerDialog::selectedFile" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#selectedFile-prop"/>
-            <keyword name="setGPS" id="LockdownPortal::setGPS" ref="sailfish-lockdownportal.html#disable_location-prop"/>
-            <keyword name="setMute" id="LockdownPortal::setMute" ref="sailfish-lockdownportal.html#disable_sound_output-prop"/>
-            <keyword name="title" id="FilePickerDialog::title" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#title-prop"/>
-            <keyword name="version" id="FileChooserPortal::version" ref="sailfish-filechooserportal.html#version-prop"/>
-            <keyword name="version" id="FileChooserPortal::version" ref="sailfish-filechooserportal.html#version-prop"/>
-            <keyword name="version" id="ScreenshotPortal::version" ref="sailfish-screenshotportal.html#version-prop"/>
-            <keyword name="version" id="ScreenshotPortal::version" ref="sailfish-screenshotportal.html#version-prop"/>
-            <keyword name="version" id="SettingsPortal::version" ref="sailfish-settingsportal.html#version-prop"/>
-            <keyword name="version" id="SettingsPortal::version" ref="sailfish-settingsportal.html#version-prop"/>
-            <keyword name="version" id="WallpaperPortal::version" ref="sailfish-wallpaperportal.html#version-prop"/>
-            <keyword name="version" id="WallpaperPortal::version" ref="sailfish-wallpaperportal.html#version-prop"/>
-            <keyword name="wantDirectory" id="FilePickerDialog::wantDirectory" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#wantDirectory-prop"/>
-            <keyword name="wantMulti" id="FilePickerDialog::wantMulti" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html#wantMulti-prop"/>
-            <keyword name="xdg-desktop-portal-sailfish-ui" id="QML.xdg-desktop-portal-sailfish-ui" ref="qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui.html"/>
-            <keyword name="~ScreenshotPortal" id="ScreenshotPortal::~ScreenshotPortal" ref="sailfish-screenshotportal.html#dtor.ScreenshotPortal"/>
-            <keyword name="~WallpaperPortal" id="WallpaperPortal::~WallpaperPortal" ref="sailfish-wallpaperportal.html#dtor.WallpaperPortal"/>
+            <keyword name="XDP" id="Sailfish::XDP" ref="sailfish-xdp.html"/>
+            <keyword name="accent" id="FDOConfKeys::accent" ref="sailfish-xdp-settingsportal-fdoconfkeys.html#accent-var"/>
+            <keyword name="blue" id="ColorRGB::blue" ref="sailfish-xdp-screenshotportal-colorrgb.html#blue-var"/>
+            <keyword name="cameraDisabledChanged" id="LockdownPortal::cameraDisabledChanged" ref="sailfish-xdp-lockdownportal.html#cameraDisabledChanged"/>
+            <keyword name="contrast" id="FDOConfKeys::contrast" ref="sailfish-xdp-settingsportal-fdoconfkeys.html#contrast-var"/>
+            <keyword name="disable_application_handlers" id="LockdownPortal::disable_application_handlers" ref="sailfish-xdp-lockdownportal.html#disable_application_handlers-prop"/>
+            <keyword name="disable_camera" id="LockdownPortal::disable_camera" ref="sailfish-xdp-lockdownportal.html#disable_camera-prop"/>
+            <keyword name="disable_location" id="LockdownPortal::disable_location" ref="sailfish-xdp-lockdownportal.html#disable_location-prop"/>
+            <keyword name="disable_microphone" id="LockdownPortal::disable_microphone" ref="sailfish-xdp-lockdownportal.html#disable_microphone-prop"/>
+            <keyword name="disable_printing" id="LockdownPortal::disable_printing" ref="sailfish-xdp-lockdownportal.html#disable_printing-prop"/>
+            <keyword name="disable_save_to_disk" id="LockdownPortal::disable_save_to_disk" ref="sailfish-xdp-lockdownportal.html#disable_save_to_disk-prop"/>
+            <keyword name="disable_sound_output" id="LockdownPortal::disable_sound_output" ref="sailfish-xdp-lockdownportal.html#disable_sound_output-prop"/>
+            <keyword name="done" id="ConfirmationDialog::done" ref="qml-xdg-desktop-portal-sailfish-confirmationdialog.html#done-signal"/>
+            <keyword name="done" id="FilePickerDialog::done" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#done-signal"/>
+            <keyword name="green" id="ColorRGB::green" ref="sailfish-xdp-screenshotportal-colorrgb.html#green-var"/>
+            <keyword name="iconHintToUrl" id="xdg-desktop-portal-sailfish-ui::iconHintToUrl" ref="qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui.html#iconHintToUrl-method"/>
+            <keyword name="locationSettingsDisabledChanged" id="LockdownPortal::locationSettingsDisabledChanged" ref="sailfish-xdp-lockdownportal.html#locationSettingsDisabledChanged"/>
+            <keyword name="microphoneDisabledChanged" id="LockdownPortal::microphoneDisabledChanged" ref="sailfish-xdp-lockdownportal.html#microphoneDisabledChanged"/>
+            <keyword name="model" id="FilePickerDialog::model" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#model-prop"/>
+            <keyword name="options" id="ConfirmationDialog::options" ref="qml-xdg-desktop-portal-sailfish-confirmationdialog.html#options-prop"/>
+            <keyword name="options" id="FilePickerDialog::options" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#options-prop"/>
+            <keyword name="red" id="ColorRGB::red" ref="sailfish-xdp-screenshotportal-colorrgb.html#red-var"/>
+            <keyword name="scheme" id="FDOConfKeys::scheme" ref="sailfish-xdp-settingsportal-fdoconfkeys.html#scheme-var"/>
+            <keyword name="selectedFile" id="FilePickerDialog::selectedFile" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#selectedFile-prop"/>
+            <keyword name="title" id="FilePickerDialog::title" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#title-prop"/>
+            <keyword name="version" id="FileChooserPortal::version" ref="sailfish-xdp-filechooserportal.html#version-prop"/>
+            <keyword name="version" id="FileChooserPortal::version" ref="sailfish-xdp-filechooserportal.html#version-prop"/>
+            <keyword name="version" id="ScreenshotPortal::version" ref="sailfish-xdp-screenshotportal.html#version-prop"/>
+            <keyword name="version" id="ScreenshotPortal::version" ref="sailfish-xdp-screenshotportal.html#version-prop"/>
+            <keyword name="version" id="SettingsPortal::version" ref="sailfish-xdp-settingsportal.html#version-prop"/>
+            <keyword name="version" id="SettingsPortal::version" ref="sailfish-xdp-settingsportal.html#version-prop"/>
+            <keyword name="version" id="WallpaperPortal::version" ref="sailfish-xdp-wallpaperportal.html#version-prop"/>
+            <keyword name="version" id="WallpaperPortal::version" ref="sailfish-xdp-wallpaperportal.html#version-prop"/>
+            <keyword name="wantDirectory" id="FilePickerDialog::wantDirectory" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#wantDirectory-prop"/>
+            <keyword name="wantMulti" id="FilePickerDialog::wantMulti" ref="qml-xdg-desktop-portal-sailfish-filepickerdialog.html#wantMulti-prop"/>
+            <keyword name="xdg-desktop-portal-sailfish-ui" id="QML.xdg-desktop-portal-sailfish-ui" ref="qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui.html"/>
+            <keyword name="~ScreenshotPortal" id="ScreenshotPortal::~ScreenshotPortal" ref="sailfish-xdp-screenshotportal.html#dtor.ScreenshotPortal"/>
+            <keyword name="~WallpaperPortal" id="WallpaperPortal::~WallpaperPortal" ref="sailfish-xdp-wallpaperportal.html#dtor.WallpaperPortal"/>
         </keywords>
         <files>
             <file>images/breadcrumb.png</file>
@@ -140,33 +153,37 @@
             <file>images/bullet_sq.png</file>
             <file>images/bullet_up.png</file>
             <file>index.html</file>
-            <file>org-freedesktop-impl-portal-desktop-sailfish-ui-qmlmodule.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog-members.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-confirmationdialog.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog-members.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-filepickerdialog.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui-members.html</file>
-            <file>qml-org-freedesktop-impl-portal-desktop-sailfish-ui-xdg-desktop-portal-sailfish-ui.html</file>
-            <file>sailfish-accessportal-members.html</file>
-            <file>sailfish-accessportal.html</file>
-            <file>sailfish-desktopportal-members.html</file>
-            <file>sailfish-desktopportal.html</file>
-            <file>sailfish-emailportal-members.html</file>
-            <file>sailfish-emailportal.html</file>
-            <file>sailfish-filechooserportal-members.html</file>
-            <file>sailfish-filechooserportal.html</file>
-            <file>sailfish-lockdownportal-members.html</file>
-            <file>sailfish-lockdownportal.html</file>
-            <file>sailfish-screenshotportal-colorrgb-members.html</file>
-            <file>sailfish-screenshotportal-colorrgb.html</file>
-            <file>sailfish-screenshotportal-members.html</file>
-            <file>sailfish-screenshotportal.html</file>
-            <file>sailfish-settingsportal-fdoconfkeys-members.html</file>
-            <file>sailfish-settingsportal-fdoconfkeys.html</file>
-            <file>sailfish-settingsportal-members.html</file>
-            <file>sailfish-settingsportal.html</file>
-            <file>sailfish-wallpaperportal-members.html</file>
-            <file>sailfish-wallpaperportal.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-confirmationdialog-members.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-confirmationdialog.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-filepickerdialog-members.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-filepickerdialog.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui-members.html</file>
+            <file>qml-xdg-desktop-portal-sailfish-xdg-desktop-portal-sailfish-ui.html</file>
+            <file>sailfish-xdp-accessmdmplugin-members.html</file>
+            <file>sailfish-xdp-accessmdmplugin.html</file>
+            <file>sailfish-xdp-accessportal-members.html</file>
+            <file>sailfish-xdp-accessportal.html</file>
+            <file>sailfish-xdp-accountportal-members.html</file>
+            <file>sailfish-xdp-accountportal.html</file>
+            <file>sailfish-xdp-desktopportal-members.html</file>
+            <file>sailfish-xdp-desktopportal.html</file>
+            <file>sailfish-xdp-emailportal-members.html</file>
+            <file>sailfish-xdp-emailportal.html</file>
+            <file>sailfish-xdp-filechooserportal-members.html</file>
+            <file>sailfish-xdp-filechooserportal.html</file>
+            <file>sailfish-xdp-lockdownportal-members.html</file>
+            <file>sailfish-xdp-lockdownportal.html</file>
+            <file>sailfish-xdp-screenshotportal-colorrgb-members.html</file>
+            <file>sailfish-xdp-screenshotportal-colorrgb.html</file>
+            <file>sailfish-xdp-screenshotportal-members.html</file>
+            <file>sailfish-xdp-screenshotportal.html</file>
+            <file>sailfish-xdp-settingsportal-fdoconfkeys-members.html</file>
+            <file>sailfish-xdp-settingsportal-fdoconfkeys.html</file>
+            <file>sailfish-xdp-settingsportal-members.html</file>
+            <file>sailfish-xdp-settingsportal.html</file>
+            <file>sailfish-xdp-wallpaperportal-members.html</file>
+            <file>sailfish-xdp-wallpaperportal.html</file>
+            <file>sailfish-xdp.html</file>
             <file>sailfish.html</file>
             <file>settings-namespaces.html</file>
             <file>style/offline.css</file>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- desktopportal.cpp -->
+  <title>LockdownPortal Class | XDG Desktop Portal Backend for Sailfish OS 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li><a href="index.html">XDG Desktop Portal Backend for Sailfish OS</a></li>
+<li>LockdownPortal</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">LockdownPortal Class</h1>
+<span class="small-subtitle">(<a href="sailfish-xdp-lockdownportal.html">Sailfish::XDP::LockdownPortal</a>)<br/></span>
+<!-- $$$LockdownPortal-brief -->
+<p>Backend interface of the Lockdown Portal <a href="#details">More...</a></p>
+<!-- @@@LockdownPortal -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;LockdownPortal&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="sailfish-xdp-lockdownportal-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<div class="table"><table class="propsummary">
+<tr><td class="topAlign"><ul>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_application_handlers-prop">disable_application_handlers</a></b> : const bool</li>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_camera-prop">disable_camera</a></b> : const bool</li>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_location-prop">disable_location</a></b> : const bool</li>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_microphone-prop">disable_microphone</a></b> : const bool</li>
+</ul></td><td class="topAlign"><ul>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_printing-prop">disable_printing</a></b> : const bool</li>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_save_to_disk-prop">disable_save_to_disk</a></b> : const bool</li>
+<li class="fn"><b><a href="sailfish-xdp-lockdownportal.html#disable_sound_output-prop">disable_sound_output</a></b> : const bool</li>
+</ul>
+</td></tr>
+</table></div>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-lockdownportal.html#LockdownPortal">LockdownPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-lockdownportal.html#cameraDisabledChanged">cameraDisabledChanged</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-lockdownportal.html#locationSettingsDisabledChanged">locationSettingsDisabledChanged</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-lockdownportal.html#microphoneDisabledChanged">microphoneDisabledChanged</a></b>()</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$LockdownPortal-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Backend interface of the Lockdown Portal</p>
+<p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
+<p><b>Note: </b>While the specification of all those properties is simple, the implementatio of the various methods uses widely different technologies to enable or disable a feature:</p><ul>
+<li>Printing, Save To Disk, and Application Handlers: not supported at all, setting them has no effect.</li>
+<li>Location: reads and writes the <code>location.conf</code> init files, like Nemo QML Plugin Systemsettings</li>
+<li>Microphone: uses a DBus connection to PulseAudio to mute the default source</li>
+<li>Sound Output: uses Profile Daemon to set a silent or default profile</li>
+<li>Camera: uses Sailfish MDM Access Policies to enable or disable the use of the camera.</li>
+</ul>
+</div>
+<p><b>See also </b>Sailfish::AccessPolicy, com.nokia.profiled, and Nemo::Systemsettings.</p>
+<!-- @@@LockdownPortal -->
+<div class="prop">
+<h2>Property Documentation</h2>
+<!-- $$$disable_application_handlers-prop -->
+<h3 class="fn" id="disable_application_handlers-prop"><a name="disable_application_handlers-prop"></a><span class="name">disable_application_handlers</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_application_handlers -->
+<!-- $$$disable_camera-prop -->
+<h3 class="fn" id="disable_camera-prop"><a name="disable_camera-prop"></a><span class="name">disable_camera</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_camera -->
+<!-- $$$disable_location-prop -->
+<h3 class="fn" id="disable_location-prop"><a name="disable_location-prop"></a><span class="name">disable_location</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_location -->
+<!-- $$$disable_microphone-prop -->
+<h3 class="fn" id="disable_microphone-prop"><a name="disable_microphone-prop"></a><span class="name">disable_microphone</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_microphone -->
+<!-- $$$disable_printing-prop -->
+<h3 class="fn" id="disable_printing-prop"><a name="disable_printing-prop"></a><span class="name">disable_printing</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_printing -->
+<!-- $$$disable_save_to_disk-prop -->
+<h3 class="fn" id="disable_save_to_disk-prop"><a name="disable_save_to_disk-prop"></a><span class="name">disable_save_to_disk</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_save_to_disk -->
+<!-- $$$disable_sound_output-prop -->
+<h3 class="fn" id="disable_sound_output-prop"><a name="disable_sound_output-prop"></a><span class="name">disable_sound_output</span> : const <span class="type">bool</span></h3>
+<!-- @@@disable_sound_output -->
+</div>
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$LockdownPortal[overload1]$$$LockdownPortalQObject* -->
+<h3 class="fn" id="LockdownPortal"><a name="LockdownPortal"></a>LockdownPortal::<span class="name">LockdownPortal</span>(<span class="type">QObject</span> *<i>parent</i>)</h3>
+<p>Default constructs an instance of LockdownPortal.</p><!-- @@@LockdownPortal -->
+<!-- $$$cameraDisabledChanged[overload1]$$$cameraDisabledChanged -->
+<h3 class="fn" id="cameraDisabledChanged"><a name="cameraDisabledChanged"></a><code>[slot] </code><span class="type">void</span> LockdownPortal::<span class="name">cameraDisabledChanged</span>()</h3>
+<!-- @@@cameraDisabledChanged -->
+<!-- $$$locationSettingsDisabledChanged[overload1]$$$locationSettingsDisabledChanged -->
+<h3 class="fn" id="locationSettingsDisabledChanged"><a name="locationSettingsDisabledChanged"></a><code>[slot] </code><span class="type">void</span> LockdownPortal::<span class="name">locationSettingsDisabledChanged</span>()</h3>
+<!-- @@@locationSettingsDisabledChanged -->
+<!-- $$$microphoneDisabledChanged[overload1]$$$microphoneDisabledChanged -->
+<h3 class="fn" id="microphoneDisabledChanged"><a name="microphoneDisabledChanged"></a><code>[slot] </code><span class="type">void</span> LockdownPortal::<span class="name">microphoneDisabledChanged</span>()</h3>
+<!-- @@@microphoneDisabledChanged -->
+</div>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>'Jolla' and 'Sailfish' are trademarks or registered trademarks of Jollyboys Ltd.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

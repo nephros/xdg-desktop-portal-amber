@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- desktopportal.cpp -->
+  <title>AccountPortal Class | XDG Desktop Portal Backend for Sailfish OS 1.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="content">
+  </div>
+  <div class="breadcrumb">
+    <ul>
+      <!--  Breadcrumbs go here -->
+<li><a href="index.html">XDG Desktop Portal Backend for Sailfish OS</a></li>
+<li>AccountPortal</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">AccountPortal Class</h1>
+<span class="small-subtitle">(<a href="sailfish-xdp-accountportal.html">Sailfish::XDP::AccountPortal</a>)<br/></span>
+<!-- $$$AccountPortal-brief -->
+<p>Backend interface of the Account Portal <a href="#details">More...</a></p>
+<!-- @@@AccountPortal -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;AccountPortal&gt;</span>
+</td></tr></table></div><ul>
+<li><a href="sailfish-xdp-accountportal-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accountportal.html#AccountPortal">AccountPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-accountportal.html#GetUserInformation">GetUserInformation</a></b>(const QDBusObjectPath &amp;<i>handle</i>, const QString &amp;<i>app_id</i>, const QString &amp;<i>parent_window</i>, const QVariantMap &amp;<i>options</i>, QVariantMap &amp;<i>results</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$AccountPortal-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>Backend interface of the Account Portal</p>
+<p>See <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for details.</p>
+</div>
+<!-- @@@AccountPortal -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$AccountPortal[overload1]$$$AccountPortalQObject* -->
+<h3 class="fn" id="AccountPortal"><a name="AccountPortal"></a>AccountPortal::<span class="name">AccountPortal</span>(<span class="type">QObject</span> *<i>parent</i>)</h3>
+<p>Default constructs an instance of AccountPortal.</p><!-- @@@AccountPortal -->
+<!-- $$$GetUserInformation[overload1]$$$GetUserInformationconstQDBusObjectPath&constQString&constQString&constQVariantMap&QVariantMap&constQDBusMessage& -->
+<h3 class="fn" id="GetUserInformation"><a name="GetUserInformation"></a><code>[slot] </code><span class="type">uint</span> AccountPortal::<span class="name">GetUserInformation</span>(const <span class="type">QDBusObjectPath</span> &amp;<i>handle</i>, const <span class="type">QString</span> &amp;<i>app_id</i>, const <span class="type">QString</span> &amp;<i>parent_window</i>, const <span class="type">QVariantMap</span> &amp;<i>options</i>, <span class="type">QVariantMap</span> &amp;<i>results</i>, const <span class="type">QDBusMessage</span> &amp;<i>message</i>)</h3>
+<p>Retrieves basic user information</p>
+<p>See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/">XDG Desktop Portal Specification</a> for possible values of <i>options</i>. See the <a href="https://flatpak.github.io/xdg-desktop-portal/docs/impl-dbus-interfaces.html">XDG Desktop Portal Backend Specification</a> for the meaning of <i>handle</i>, <i>app_id</i>, <i>parent_window</i>, <i>results</i>.</p>
+<p><i>message</i> is used to send the reply</p>
+<p><b>See also </b>SailfishUserManager and QDBusInterface.</p>
+<!-- @@@GetUserInformation -->
+</div>
+</div>
+<div class="footer">
+  <p><acronym title="Copyright">&copy;</acronym> 2024 Sailfish OS Community.</p>
+  <p>'Jolla' and 'Sailfish' are trademarks or registered trademarks of Jollyboys Ltd.</p>
+  <p>All other trademarks are property of their respective owners.</p>
+  <p>
+    This document may be used under the terms of the      <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation License version 1.3</a>     as published by the Free Software Foundation.   </p>
+</div>
+</body>
+</html>

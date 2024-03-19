@@ -34,42 +34,42 @@
 </div>
 <div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">SettingsPortal Class</h1>
-<span class="small-subtitle">(<a href="sailfish-settingsportal.html">Sailfish::SettingsPortal</a>)<br/></span>
+<span class="small-subtitle">(<a href="sailfish-xdp-settingsportal.html">Sailfish::XDP::SettingsPortal</a>)<br/></span>
 <!-- $$$SettingsPortal-brief -->
 <p>Backend interface of the Settings Portal <a href="#details">More...</a></p>
 <!-- @@@SettingsPortal -->
 <div class="table"><table class="alignedsummary">
 <tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign">  <span class="preprocessor">#include &lt;SettingsPortal&gt;</span>
 </td></tr></table></div><ul>
-<li><a href="sailfish-settingsportal-members.html">List of all members, including inherited members</a></li>
+<li><a href="sailfish-xdp-settingsportal-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="public-types"></a>
 <h2 id="public-types">Public Types</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal-fdoconfkeys.html">FDOConfKeys</a></b></td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#FDOColorScheme-enum">FDOColorScheme</a></b> { None, Dark, Light }</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> class </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal-fdoconfkeys.html">FDOConfKeys</a></b></td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> enum </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#FDOColorScheme-enum">FDOColorScheme</a></b> { None, Dark, Light }</td></tr>
 </table></div>
 <a name="properties"></a>
 <h2 id="properties">Properties</h2>
 <ul>
-<li class="fn"><b><a href="sailfish-settingsportal.html#version-prop">version</a></b> : const uint</li>
+<li class="fn"><b><a href="sailfish-xdp-settingsportal.html#version-prop">version</a></b> : const uint</li>
 </ul>
 <a name="public-functions"></a>
 <h2 id="public-functions">Public Functions</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#SettingsPortal">SettingsPortal</a></b>(QObject *<i>parent</i>)</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#version-prop">version</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#SettingsPortal">SettingsPortal</a></b>(QObject *<i>parent</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> uint </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#version-prop">version</a></b>() const</td></tr>
 </table></div>
 <a name="public-slots"></a>
 <h2 id="public-slots">Public Slots</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
-<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QDBusVariant </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#Read">Read</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#ReadAll">ReadAll</a></b>(const QStringList &amp;<i>nss</i>, const QDBusMessage &amp;<i>message</i>)</td></tr>
 </table></div>
 <a name="signals"></a>
 <h2 id="signals">Signals</h2>
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-settingsportal.html#SettingChanged">SettingChanged</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>, const QVariant &amp;<i>value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="sailfish-xdp-settingsportal.html#SettingChanged">SettingChanged</a></b>(const QString &amp;<i>ns</i>, const QString &amp;<i>key</i>, const QVariant &amp;<i>value</i>)</td></tr>
 </table></div>
 <a name="details"></a>
 <!-- $$$SettingsPortal-description -->
@@ -87,9 +87,9 @@
 <h3 class="fn" id="FDOColorScheme-enum"><a name="FDOColorScheme-enum"></a>enum SettingsPortal::<span class="name">FDOColorScheme</span></h3>
 <p>Possible values for <code>org.freedesktop.appearance</code> <code>color-scheme</code></p>
 <div class="table"><table class="valuelist"><tr valign="top" class="odd"><th class="tblConst">Constant</th><th class="tblval">Value</th><th class="tbldscr">Description</th></tr>
-<tr><td class="topAlign"><code>Sailfish::SettingsPortal::None</code></td><td class="topAlign tblval"><code>-1</code></td><td class="topAlign">No preference</td></tr>
-<tr><td class="topAlign"><code>Sailfish::SettingsPortal::Dark</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Prefer dark appearance</td></tr>
-<tr><td class="topAlign"><code>Sailfish::SettingsPortal::Light</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Prefer light appearance</td></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::SettingsPortal::None</code></td><td class="topAlign tblval"><code>-1</code></td><td class="topAlign">No preference</td></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::SettingsPortal::Dark</code></td><td class="topAlign tblval"><code>0</code></td><td class="topAlign">Prefer dark appearance</td></tr>
+<tr><td class="topAlign"><code>Sailfish::XDP::SettingsPortal::Light</code></td><td class="topAlign tblval"><code>1</code></td><td class="topAlign">Prefer light appearance</td></tr>
 </table></div>
 <!-- @@@FDOColorScheme -->
 </div>
@@ -113,10 +113,10 @@
 <h3 class="fn" id="Read"><a name="Read"></a><code>[slot] </code><span class="type">QDBusVariant</span> SettingsPortal::<span class="name">Read</span>(const <span class="type">QString</span> &amp;<i>ns</i>, const <span class="type">QString</span> &amp;<i>key</i>)</h3>
 <p>Reads and returns a single value, specified by <i>key</i>, from namespace <i>ns</i></p>
 <!-- @@@Read -->
-<!-- $$$ReadAll[overload1]$$$ReadAllconstQStringList& -->
-<h3 class="fn" id="ReadAll"><a name="ReadAll"></a><code>[slot] </code><span class="type">void</span> SettingsPortal::<span class="name">ReadAll</span>(const <span class="type">QStringList</span> &amp;<i>nss</i>)</h3>
+<!-- $$$ReadAll[overload1]$$$ReadAllconstQStringList&constQDBusMessage& -->
+<h3 class="fn" id="ReadAll"><a name="ReadAll"></a><code>[slot] </code><span class="type">void</span> SettingsPortal::<span class="name">ReadAll</span>(const <span class="type">QStringList</span> &amp;<i>nss</i>, const <span class="type">QDBusMessage</span> &amp;<i>message</i>)</h3>
 <p>Implements <code>org.freedesktop.impl.portal.Settings.ReadAll</code></p>
-<p><i>nss</i> specifies the a list of namespaces. See the class description for supported namespaces.</p>
+<p><i>nss</i> specifies the a list of namespaces. See the class description for supported namespaces. <i>message</i> is used to send the reply</p>
 <!-- @@@ReadAll -->
 <!-- $$$SettingChanged[overload1]$$$SettingChangedconstQString&constQString&constQVariant& -->
 <h3 class="fn" id="SettingChanged"><a name="SettingChanged"></a><code>[signal] </code><span class="type">void</span> SettingsPortal::<span class="name">SettingChanged</span>(const <span class="type">QString</span> &amp;<i>ns</i>, const <span class="type">QString</span> &amp;<i>key</i>, const <span class="type">QVariant</span> &amp;<i>value</i>)</h3>

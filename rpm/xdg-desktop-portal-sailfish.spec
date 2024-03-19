@@ -31,8 +31,9 @@ BuildRequires:  sailfish-qdoc-template
 # depends in from qdocconf:
 BuildRequires:  user-managerd-doc
 BuildRequires:  nemo-qml-plugin-dbus-qt5-doc
-BuildRequires:  nemo-qml-plugin-systemsettings-doc
-BuildRequires:  libprofile-doc
+# not available:
+#BuildRequires:  nemo-qml-plugin-systemsettings-doc
+#BuildRequires:  libprofile-doc
 
 # PoC legacy, to be removed in due time:
 Obsoletes: xdg-desktop-portal-amber <= %{version}

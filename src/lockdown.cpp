@@ -54,7 +54,7 @@ LockdownPortal::LockdownPortal(QObject *parent)
     //QObject::connect(m_policy, SIGNAL(microphoneEnabledChanged()), this, SLOT(microphoneDisabledChanged()));
     //QObject::connect(m_policy, SIGNAL(locationSettingsEnabledChanged()), this, SLOT(locationSettingsDisabledChanged()));
     // FIXME: signatures do not match:
-    QObject::connect(m_profiled, SIGNAL(profile_changed), this, SLOT(profileChanged));
+    QObject::connect(m_profiled, SIGNAL(profile_changed()), this, SLOT(profileChanged()));
 
 }
 

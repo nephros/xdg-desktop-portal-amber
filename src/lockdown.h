@@ -42,7 +42,7 @@ public:
 
 public Q_SLOTS:
      void cameraDisabledChanged() {};
-     void microphoneDisabledChanged() {};
+     void microphoneDisabledChanged(const bool) {};
      void locationSettingsDisabledChanged() {};
 
      // signal from profiled is profile_changed( bbsa(sss) )

@@ -113,9 +113,13 @@ uint EmailPortal::ComposeEmail(const QDBusObjectPath &handle,
     pcall.waitForFinished();
     if (pcall.isValid()) {
         qCDebug(XDPortalSailfishEmail) << "Success";
+        // return something in results just so signature is correct
+        results.insert("success", QVariant(true));
         return 0;
     }
     qCDebug(XDPortalSailfishEmail) << "Email failed:" << pcall.error().name() << pcall.error().message();
+    // return something in results just so signature is correct
+    results.insert("success", QVariant(false));
     return 1;
 }
 } // namespace XDP
